@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>反函数 | Superao的博客</title>
+  <title>模板进阶 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="仿函数1.产生原因2.本质">
-<meta name="keywords" content="C++ 技术">
+  <meta name="description" content="#关于模板的那些事 1.模板参数2.模板的特化3.模板的分离编译问题4.模板的类型萃取## *1.模板参数* #### 1.类型模板参数    ---    #include &amp;lt;iostream&amp;gt;    using namespace std;          template&amp;lt;class T&amp;gt;    T&amp;amp; fun(T&amp;amp; a)       {     re">
+<meta name="keywords" content="c++模板">
 <meta property="og:type" content="article">
-<meta property="og:title" content="反函数">
-<meta property="og:url" content="http://yoursite.com/2019/07/20/反函数/index.html">
+<meta property="og:title" content="模板进阶">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/模板进阶/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="仿函数1.产生原因2.本质">
+<meta property="og:description" content="#关于模板的那些事 1.模板参数2.模板的特化3.模板的分离编译问题4.模板的类型萃取## *1.模板参数* #### 1.类型模板参数    ---    #include &amp;lt;iostream&amp;gt;    using namespace std;          template&amp;lt;class T&amp;gt;    T&amp;amp; fun(T&amp;amp; a)       {     re">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-07-21T02:21:56.130Z">
+<meta property="og:updated_time" content="2019-07-23T07:49:48.922Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="反函数">
-<meta name="twitter:description" content="仿函数1.产生原因2.本质">
+<meta name="twitter:title" content="模板进阶">
+<meta name="twitter:description" content="#关于模板的那些事 1.模板参数2.模板的特化3.模板的分离编译问题4.模板的类型萃取## *1.模板参数* #### 1.类型模板参数    ---    #include &amp;lt;iostream&amp;gt;    using namespace std;          template&amp;lt;class T&amp;gt;    T&amp;amp; fun(T&amp;amp; a)       {     re">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -151,27 +151,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-反函数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-模板进阶" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      反函数
+      模板进阶
     </h1>
   
 
         
-        <a href="/2019/07/20/反函数/" class="archive-article-date">
-  	<time datetime="2019-07-21T02:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+        <a href="/2019/07/23/模板进阶/" class="archive-article-date">
+  	<time datetime="2019-07-23T07:41:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h4><h2 id="1-产生原因"><a href="#1-产生原因" class="headerlink" title="1.产生原因"></a>1.产生原因</h2><h2 id="2-本质"><a href="#2-本质" class="headerlink" title="2.本质"></a>2.本质</h2>
+        <p>#关于模板的那些事</p>
+<h3 id="1-模板参数"><a href="#1-模板参数" class="headerlink" title="1.模板参数"></a>1.模板参数</h3><h3 id="2-模板的特化"><a href="#2-模板的特化" class="headerlink" title="2.模板的特化"></a>2.模板的特化</h3><h3 id="3-模板的分离编译问题"><a href="#3-模板的分离编译问题" class="headerlink" title="3.模板的分离编译问题"></a>3.模板的分离编译问题</h3><h3 id="4-模板的类型萃取"><a href="#4-模板的类型萃取" class="headerlink" title="4.模板的类型萃取"></a>4.模板的类型萃取</h3><pre><code>## *1.模板参数*
+#### 1.类型模板参数
+   ---
+   #include &lt;iostream&gt;
+   using namespace std;  
+       template&lt;class T&gt;
+   T&amp; fun(T&amp; a)
+      {
+    return a;
+   }</code></pre>
       
 
       
@@ -210,7 +220,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">c++模板</a>
         		</li>
       		
 		</ul>
@@ -266,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/20/反函数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/07/23/模板进阶/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,7 +319,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#仿函数"><span class="toc-number">1.</span> <span class="toc-text">仿函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-产生原因"><span class="toc-number"></span> <span class="toc-text">1.产生原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-本质"><span class="toc-number"></span> <span class="toc-text">2.本质</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-模板参数"><span class="toc-number">1.</span> <span class="toc-text">1.模板参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-模板的特化"><span class="toc-number">2.</span> <span class="toc-text">2.模板的特化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-模板的分离编译问题"><span class="toc-number">3.</span> <span class="toc-text">3.模板的分离编译问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-模板的类型萃取"><span class="toc-number">4.</span> <span class="toc-text">4.模板的类型萃取</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -323,7 +333,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="反函数" data-title="反函数" data-url="http://yoursite.com/2019/07/20/反函数/"></div>
+	<div class="ds-thread" data-thread-key="模板进阶" data-title="模板进阶" data-url="http://yoursite.com/2019/07/23/模板进阶/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -437,7 +447,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 技术</a>
+                <a href="javascript:void(0)" class="js-tag color1">c++模板</a>
               </li>
             
             <div class="clearfix"></div>

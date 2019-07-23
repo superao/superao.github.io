@@ -152,27 +152,37 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-反函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-模板进阶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/20/反函数/">反函数</a>
+      <a class="article-title" href="/2019/07/23/模板进阶/">模板进阶</a>
     </h1>
   
 
         
-        <a href="/2019/07/20/反函数/" class="archive-article-date">
-  	<time datetime="2019-07-21T02:19:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+        <a href="/2019/07/23/模板进阶/" class="archive-article-date">
+  	<time datetime="2019-07-23T07:41:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h4><h2 id="1-产生原因"><a href="#1-产生原因" class="headerlink" title="1.产生原因"></a>1.产生原因</h2><h2 id="2-本质"><a href="#2-本质" class="headerlink" title="2.本质"></a>2.本质</h2>
+        <p>#关于模板的那些事</p>
+<h3 id="1-模板参数"><a href="#1-模板参数" class="headerlink" title="1.模板参数"></a>1.模板参数</h3><h3 id="2-模板的特化"><a href="#2-模板的特化" class="headerlink" title="2.模板的特化"></a>2.模板的特化</h3><h3 id="3-模板的分离编译问题"><a href="#3-模板的分离编译问题" class="headerlink" title="3.模板的分离编译问题"></a>3.模板的分离编译问题</h3><h3 id="4-模板的类型萃取"><a href="#4-模板的类型萃取" class="headerlink" title="4.模板的类型萃取"></a>4.模板的类型萃取</h3><pre><code>## *1.模板参数*
+#### 1.类型模板参数
+   ---
+   #include &lt;iostream&gt;
+   using namespace std;  
+       template&lt;class T&gt;
+   T&amp; fun(T&amp; a)
+      {
+    return a;
+   }</code></pre>
       
 
       
@@ -185,7 +195,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 技术</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">c++模板</a>
         		</li>
       		
 		</ul>
@@ -195,7 +205,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/20/反函数/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/07/23/模板进阶/">展开全文 >></a>
         </p>
       
 
@@ -463,7 +473,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 技术</a>
+                <a href="javascript:void(0)" class="js-tag color1">c++模板</a>
               </li>
             
             <div class="clearfix"></div>
