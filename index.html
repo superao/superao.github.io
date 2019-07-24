@@ -164,10 +164,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="hello-markdown"><a href="#hello-markdown" class="headerlink" title="hello_markdown"></a>hello_markdown</h1><h2 id="markdown语法笔记整理"><a href="#markdown语法笔记整理" class="headerlink" title="markdown语法笔记整理"></a>markdown语法笔记整理</h2><h3 id="1-字体介绍"><a href="#1-字体介绍" class="headerlink" title="1.字体介绍"></a>1.字体介绍</h3><h4 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h4><p>  一级标题: “#”<br>  二级标题: “##”<br>  三级标题: “###”<br>  四级标题: “####”</p>
-<h4 id="2-字体"><a href="#2-字体" class="headerlink" title="2.字体"></a>2.字体</h4><p>  <em>斜体</em>: “<em>字</em> 或 <em>字</em>“<br>  <strong>粗体</strong>: “<strong>字</strong>“<br>  <strong><em>加粗斜体</em></strong>: “<strong><em>字</em></strong>“</p>
-<h4 id="3-删除线"><a href="#3-删除线" class="headerlink" title="3.删除线"></a>3.删除线</h4><p>  <del>删除线</del>: “<del>删除线</del>“</p>
-<h4 id="4-超链接"><a href="#4-超链接" class="headerlink" title="4.超链接"></a>4.超链接</h4><p>  <a href="https://github.com/superao" target="_blank" rel="noopener">github</a>: “[信息] (URL)”<br>  <a href="https://github.com/superao" target="_blank" rel="noopener">https://github.com/superao</a>: “<url>“</url></p>
+        <h1 id="hello-markdown"><a href="#hello-markdown" class="headerlink" title="hello_markdown"></a>hello_markdown</h1><h2 id="markdown语法笔记整理"><a href="#markdown语法笔记整理" class="headerlink" title="markdown语法笔记整理"></a>markdown语法笔记整理</h2><h4 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h4><p>  一级标题: “# 字”<br>  二级标题: “## 字”<br>  三级标题: “### 字”<br>  四级标题: “#### 字”<br>  注意:这里符号与字之间是有空格的</p>
+<h4 id="2-字体"><a href="#2-字体" class="headerlink" title="2.字体"></a>2.字体</h4><p>  <em>斜体</em>: “* 字 * 或 _ 字 _”<br>  <strong>粗体</strong>: “** 字 <strong>“<br>  *</strong>加粗斜体<strong><em>: “</em></strong> 字 ***”<br>  注意:为了清楚可见，符号与字之间是没有空格的</p>
+<h4 id="3-删除线"><a href="#3-删除线" class="headerlink" title="3.删除线"></a>3.删除线</h4><p>  <del>删除线</del>: “<del>~ 删除线 ~</del>“<br>  注意:为了清楚可见，符号与字之间是没有空格的</p>
+<h4 id="4-超链接"><a href="#4-超链接" class="headerlink" title="4.超链接"></a>4.超链接</h4><p>  <a href="https://github.com/superao" target="_blank" rel="noopener">github</a>: “[信息] (URL)”<br>  <a href="https://github.com/superao" target="_blank" rel="noopener">https://github.com/superao</a>: “&lt; URL &gt;”<br>  注意:为了清楚可见，符号与括号，括号与字之间是没有空格的</p>
 <h4 id="5-列表"><a href="#5-列表" class="headerlink" title="5.列表"></a>5.列表</h4><ul>
 <li>无序列表 :”* 文字”</li>
 </ul>
@@ -180,10 +180,26 @@
 <ol>
 <li>有序列表 :”1. 文字”</li>
 <li>有序列表 :”2. 文字”</li>
-<li>有序列表 :”3. 文字”</li>
+<li>有序列表 :”3. 文字”<br>注意:这里符号与字之间是有空格的</li>
 </ol>
-<h4 id="6-插入图片"><a href="#6-插入图片" class="headerlink" title="6.插入图片"></a>6.插入图片</h4><p>  步骤: 先将图片上传到七牛云云服务上，然后回去到外部链接，最后再将外部链接加入到所需要插入的地方，如果需要描述图片信息的话，语法如下: “<img src="/.com//RUL" alt="图片描述信息">“</p>
-<h4 id="7-列表"><a href="#7-列表" class="headerlink" title="7.列表"></a>7.列表</h4><p>  | 表头 | 表头 | 表头 | 表头 |<br>  | “-“ | “:-“ | “:-:” | “-:” |<br>  | 默认左对齐 | 左对齐 | 居中对齐 | 右对齐 |</p>
+<h4 id="6-插入图片"><a href="#6-插入图片" class="headerlink" title="6.插入图片"></a>6.插入图片</h4><p>  步骤: 先将图片上传到七牛云云服务上，然后回去到外部链接，最后再将外部链接加入到所需要插入的地方，如果需要描述图片信息的话，语法如下: “ ! [图片描述信息] (RUL) “<br>  注意:为了清楚可见，符号与括号，括号与括号之间是没有空格的</p>
+<h4 id="7-列表"><a href="#7-列表" class="headerlink" title="7.列表"></a>7.列表</h4><table>
+<thead>
+<tr>
+<th>表头</th>
+<th align="left">表头</th>
+<th align="center">表头</th>
+<th align="right">表头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认左对齐</td>
+<td align="left">左对齐</td>
+<td align="center">居中对齐</td>
+<td align="right">右对齐</td>
+</tr>
+</tbody></table>
+<p>  写法如下:<br>    | 表头 | 表头 | 表头 | 表头 |<br>    | “-“ | “:-“ | “:-:” | “-:” |<br>    | 默认左对齐 | 左对齐 | 居中对齐 | 右对齐 |</p>
 
       
 
