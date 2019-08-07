@@ -8,21 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>重载，重定义，重写 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==1// 代码 + 编译代码（Linux）">
+  <meta name="description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重载，重定义，重写">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/重载，重定义，重写/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==1// 代码 + 编译代码（Linux）">
+<meta property="og:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
 <meta property="og:locale" content="中文">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190806165754749.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019080618014972.png">
-<meta property="og:updated_time" content="2019-08-07T08:42:47.185Z">
+<meta property="og:updated_time" content="2019-08-07T09:23:48.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重载，重定义，重写">
-<meta name="twitter:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==1// 代码 + 编译代码（Linux）">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190806165754749.png">
+<meta name="twitter:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -169,11 +170,11 @@
         <h1 id="重载，重定义，重写"><a href="#重载，重定义，重写" class="headerlink" title="重载，重定义，重写"></a>重载，重定义，重写</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。</p>
 <h2 id="1-重载："><a href="#1-重载：" class="headerlink" title="1. 重载："></a>1. 重载：</h2><p><strong>重载：</strong> 函数名相同，功能类似的几个函数构成重载。</p>
 <ul>
-<li>构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码 + 编译代码（Linux）</span></span><br></pre></td></tr></table></figure>
+<li>构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b + c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  add(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">  add(<span class="number">1.222</span>, <span class="number">32.43</span>);</span><br><span class="line">  add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p><strong>底层实现：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++ 对函数名修饰规则与 C 语言相比有区别，在函数名修饰规则中加入了参数修饰，从而底层起到了对函数名的区分，这样在符号表中找函数地址的时候就会出现不同，从而实现了重载。</p>
+<p><img src="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>底层实现：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++ 对函数名修饰规则与 C 语言相比有区别，在函数名修饰规则中加入了参数修饰，从而底层起到了对函数名的区分，这样在符号表中找函数地址的时候就会出现不同，从而实现了重载。</p>
 <h2 id="2-重定义（隐藏）"><a href="#2-重定义（隐藏）" class="headerlink" title="2.重定义（隐藏）"></a>2.重定义（隐藏）</h2><p><strong>隐藏：</strong> 继承类中，子类隐藏了父类的函数，使子类对象无法调用子类中继承过来的父类同名函数。</p>
 <ul>
 <li>构成条件：==不同作用域（子类/父类），函数名相同==</li>
