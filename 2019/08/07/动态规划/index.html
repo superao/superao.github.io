@@ -6,26 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Superao的博客</title>
+  <title>动态规划 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 菱形继承：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++是一种支持多继承的语言，对于多继承来说即有好处又有坏处，它的 好处就是可以让某些类更好的体现出它们之间的关系。比如：研究生即是一名助教，又是一名学生，我们想要表达这样的关系，就需要设计出学生类，老师类，再设计研究生类来继承它，因此多继承就可以很好的表达这种关系；当然这也是它的 缺点">
+  <meta name="description" content="技术改变世界，阅读塑造人生">
 <meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/多继承---菱形继承/index.html">
+<meta property="og:title" content="动态规划">
+<meta property="og:url" content="http://yoursite.com/2019/08/07/动态规划/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="1. 菱形继承：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++是一种支持多继承的语言，对于多继承来说即有好处又有坏处，它的 好处就是可以让某些类更好的体现出它们之间的关系。比如：研究生即是一名助教，又是一名学生，我们想要表达这样的关系，就需要设计出学生类，老师类，再设计研究生类来继承它，因此多继承就可以很好的表达这种关系；当然这也是它的 缺点">
+<meta property="og:description" content="技术改变世界，阅读塑造人生">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190801222221877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190801222228378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190801232053719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190802000729797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190802002628912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-07T08:16:38.000Z">
+<meta property="og:updated_time" content="2019-08-07T08:52:41.244Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="1. 菱形继承：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++是一种支持多继承的语言，对于多继承来说即有好处又有坏处，它的 好处就是可以让某些类更好的体现出它们之间的关系。比如：研究生即是一名助教，又是一名学生，我们想要表达这样的关系，就需要设计出学生类，老师类，再设计研究生类来继承它，因此多继承就可以很好的表达这种关系；当然这也是它的 缺点">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190801222221877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="动态规划">
+<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -149,27 +143,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-多继承---菱形继承" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-动态规划" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      动态规划
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/动态规划/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:52:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-菱形继承："><a href="#1-菱形继承：" class="headerlink" title="1. 菱形继承："></a>1. 菱形继承：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++是一种支持多继承的语言，对于多继承来说即有好处又有坏处，它的 <strong><em>好处就是可以让某些类更好的体现出它们之间的关系</em></strong>。比如：研究生即是一名助教，又是一名学生，我们想要表达这样的关系，就需要设计出学生类，老师类，再设计研究生类来继承它，因此多继承就可以很好的表达这种关系；当然这也是它的 <strong><em>缺点</em></strong>，这样的话 <strong><em>很容易造成数据冗余，以及数据访问二义性。</em></strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Message(<span class="built_in">string</span> name = <span class="string">"peter"</span>) :_name(name) &#123;&#125;</span><br><span class="line">	<span class="built_in">string</span> _name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> Message</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Student(<span class="keyword">int</span> sid = <span class="number">10</span>) :_sid(id) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _sid;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Teacher</span> :</span> <span class="keyword">public</span> Message</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Teacher(<span class="keyword">int</span> tid = <span class="number">100</span>) :_tid(tid) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _tid;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graduate</span> :</span> <span class="keyword">public</span> Student, <span class="keyword">public</span> Teacher</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Graduate(<span class="keyword">int</span> wage = <span class="number">1000</span>) :_wage(wage) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _wage;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Graduate g;</span><br><span class="line">	<span class="comment">// cout &lt;&lt; g._name &lt;&lt; endl;   // 访问不明确</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.Student::_name &lt;&lt; <span class="built_in">endl</span>;   <span class="comment">// 输出 "Student"</span></span><br><span class="line">	<span class="comment">// cout &lt;&lt; g._name &lt;&lt; endl;   // 访问不明确</span></span><br><span class="line">	g.::Student::_name = <span class="string">"hello"</span>;       </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.Student::_name &lt;&lt; <span class="built_in">endl</span>;   <span class="comment">// 输出 "hello"</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; g.Teacher::_name &lt;&lt; <span class="built_in">endl</span>;   <span class="comment">// 输出 "peter"</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h6 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h6><ul>
-<li>从这个栗子就可以看出来存在访问二义性，数据冗余等重大问题，这个不仅仅是C++的问题，这是所有支持多继承语言都会遇到的问题，我们称这种继承为菱形继承。</li>
-</ul>
-<p>图示：<br><img src="https://img-blog.csdnimg.cn/20190801222221877.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><img src="https://img-blog.csdnimg.cn/20190801222228378.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>最后，我们为了研究清楚底层的实现，我们利用下面简化的代码来观察一下底层数据是如何存放的。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	A(<span class="keyword">int</span> a = <span class="number">1</span>) : _a(a) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _a;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	B(<span class="keyword">int</span> b = <span class="number">2</span>) : _b(b) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	C(<span class="keyword">int</span> c = <span class="number">3</span>) : _c(c) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span> :</span> <span class="keyword">public</span> B, <span class="keyword">public</span> C</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	D(<span class="keyword">int</span> d = <span class="number">4</span>) : _d(d) &#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> _d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D d;</span><br><span class="line">	<span class="comment">// d.C::_a = 100;  // 下面输出还是 1 ,而不是我们所期望的 100</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; d.B::_a &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>调用内存，观看数据的存储，理解C++对象模型<br><img src="https://img-blog.csdnimg.cn/20190801232053719.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们从内存简化模型可以看出来A类部分在数据中储存了两份，这样才导致了问题发生的根本原因。</p>
-<h2 id="2-虚拟继承"><a href="#2-虚拟继承" class="headerlink" title="2.虚拟继承"></a>2.虚拟继承</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;虚拟继承是 C++ 用来解决菱形继承问题所提出来的一种解决方案，可以有效的解决掉访问二义性，数据冗余等相关问题。</p>
-<p>修改上述代码，改变继承方式：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">virtual</span> <span class="keyword">public</span> A</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">virtual</span> <span class="keyword">public</span> A</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	D d;</span><br><span class="line">	</span><br><span class="line">	d.C::_a = <span class="number">100</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; d.B::_a &lt;&lt; <span class="built_in">endl</span>;  <span class="comment">// 输出结果为 100，符合预期。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们再次来观看一下内存情况，看看底层是如何解决这个问题的。<br><img src="https://img-blog.csdnimg.cn/20190802000729797.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们在分析了之后发现了每个对象中都存有一个指针，该指针利用自身位置及自身的偏移量共同指向同一块地方，从而共享一块内存，解决之前菱形继承所存在的问题。<br>图示：<br><img src="https://img-blog.csdnimg.cn/20190802002628912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当两个对象共同使用同一块区域的时候，就不会发生数据冗余，访问二义性问题，因为都是一块区域，我们把对象中存放的指针称之为 “ 虚基表指针 “ ，将它们所指的地方（表）称为 “ 虚基表 “</p>
-
+        
       
 
       
@@ -253,7 +247,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/多继承---菱形继承/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/动态规划/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -267,18 +261,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/C_C++的类型转换/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/07/派生类的默认成员函数/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2019/08/07/重载，重定义，重写/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">重载，重定义，重写</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -305,7 +290,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-菱形继承："><span class="toc-number">1.</span> <span class="toc-text">1. 菱形继承：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#分析："><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">分析：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-虚拟继承"><span class="toc-number">2.</span> <span class="toc-text">2.虚拟继承</span></a></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -319,7 +304,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="多继承---菱形继承" data-title="" data-url="http://yoursite.com/2019/08/07/多继承---菱形继承/"></div>
+	<div class="ds-thread" data-thread-key="动态规划" data-title="动态规划" data-url="http://yoursite.com/2019/08/07/动态规划/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -429,7 +414,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">markdown语法</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
             
             <div class="clearfix"></div>

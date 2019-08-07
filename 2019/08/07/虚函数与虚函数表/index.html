@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Superao的博客</title>
+  <title>虚函数与虚函数表 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="虚函数与虚函数表再议&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。 声明：32位系统，VS2013下编译。1. 单继承下的虚函">
-<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+<meta name="keywords" content="C++ 多态">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Superao的博客">
+<meta property="og:title" content="虚函数与虚函数表">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/虚函数与虚函数表/index.html">
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="虚函数与虚函数表再议&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。 声明：32位系统，VS2013下编译。1. 单继承下的虚函">
@@ -20,9 +20,9 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729170530165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729160339209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_7">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729171223112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-07T08:17:20.000Z">
+<meta property="og:updated_time" content="2019-08-07T08:43:57.009Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
+<meta name="twitter:title" content="虚函数与虚函数表">
 <meta name="twitter:description" content="虚函数与虚函数表再议&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。 声明：32位系统，VS2013下编译。1. 单继承下的虚函">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190729151614278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
@@ -151,6 +151,21 @@
             <article id="post-虚函数与虚函数表" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      虚函数与虚函数表
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="虚函数与虚函数表再议"><a href="#虚函数与虚函数表再议" class="headerlink" title="虚函数与虚函数表再议"></a>虚函数与虚函数表再议</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。</p>
@@ -196,6 +211,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -260,18 +286,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/继承/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/07/隐式类型转化-整形提升/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          (no title)
+          隐式类型转化---整形提升
         
       </div>
     </a>
   
   
-    <a href="/2019/08/07/重载，重定义，重写/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
+    <a href="/2019/08/07/派生类的默认成员函数/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">派生类的默认成员函数</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -312,7 +338,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="虚函数与虚函数表" data-title="" data-url="http://yoursite.com/2019/08/07/虚函数与虚函数表/"></div>
+	<div class="ds-thread" data-thread-key="虚函数与虚函数表" data-title="虚函数与虚函数表" data-url="http://yoursite.com/2019/08/07/虚函数与虚函数表/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -422,7 +448,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">markdown语法</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
             
             <div class="clearfix"></div>
