@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>二叉搜索树的实现 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。 树结点1234567891011// Key 模型template &amp;lt;class K&amp;gt;class BS">
+  <meta name="description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta name="keywords" content="算法与数据结构(map set)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二叉搜索树的实现">
 <meta property="og:url" content="http://yoursite.com/2019/08/08/二叉搜索树的实现/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。 树结点1234567891011// Key 模型template &amp;lt;class K&amp;gt;class BS">
+<meta property="og:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E5%88%A0%E9%99%A4%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5%28BST%29.png">
-<meta property="og:updated_time" content="2019-08-11T02:41:53.198Z">
+<meta property="og:updated_time" content="2019-08-12T03:51:27.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉搜索树的实现">
-<meta name="twitter:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。 树结点1234567891011// Key 模型template &amp;lt;class K&amp;gt;class BS">
+<meta name="twitter:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta name="twitter:image" content="http://pv327naw3.bkt.clouddn.com/%E5%88%A0%E9%99%A4%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5%28BST%29.png">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -166,6 +166,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="二叉搜索树-BST"><a href="#二叉搜索树-BST" class="headerlink" title="二叉搜索树(BST)"></a>二叉搜索树(BST)</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学习了 <strong>map set</strong> 容器之后，我迫不及待的想要自己造轮子，由于 <strong>map set</strong> 的底层是 <strong>红黑树结构，红黑树是一颗二叉搜索树</strong> ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。</p>
+<a id="more"></a>
+
 <h2 id="树结点"><a href="#树结点" class="headerlink" title="树结点"></a>树结点</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Key 模型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">BSTreeNode</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    BSTreeNode(<span class="keyword">const</span> K&amp; key) :_key(key), _left(<span class="literal">nullptr</span>), _right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    K _key;                  <span class="comment">// 用来储存数据</span></span><br><span class="line">    BSTreeNode&lt;K&gt;* _left;    <span class="comment">// 左孩子</span></span><br><span class="line">    BSTreeNode&lt;K&gt;* _right;   <span class="comment">// 右孩子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">BSTree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="comment">// 声明类模板(BSTreeNode)的类型为 K </span></span><br><span class="line">  <span class="keyword">typedef</span> BSTreeNode&lt;K&gt; Node</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    BSTree(<span class="keyword">const</span> Node* root = <span class="literal">nullptr</span>) :_root(root) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    ~BSTree()</span><br><span class="line">    &#123;</span><br><span class="line">      Destory(_root);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Destory</span><span class="params">(Node* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// 空树直接返回</span></span><br><span class="line">      <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 先释放它的左子树</span></span><br><span class="line">      Destory(root-&gt;_left);</span><br><span class="line">      <span class="comment">// 再释放它的右子树</span></span><br><span class="line">      Destory(root-&gt;_right);</span><br><span class="line">      <span class="comment">// 再释放自己</span></span><br><span class="line">      <span class="keyword">delete</span> root;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node* _root;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -468,11 +470,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -480,11 +478,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
