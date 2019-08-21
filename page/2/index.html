@@ -144,6 +144,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/继承/">继承</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/继承/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:31:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="令人羡慕的-“-继承-”"><a href="#令人羡慕的-“-继承-”" class="headerlink" title="令人羡慕的 “ 继承 ”"></a>令人羡慕的 “ 继承 ”</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在现实生活中，我们也有继承关系。举个栗子，在古代有王位的继承，在现代虽然说没有了，但是在我们现代还是有相似的继承，子承家业，等等这种关系非常的多，作为一名程序狗，我们来聊一下我们代码中的继承是怎么样的。</p>
+<h4 id="1-继承的分类"><a href="#1-继承的分类" class="headerlink" title="1. 继承的分类"></a>1. 继承的分类</h4><p>继承分为两种：</p>
+<ol>
+<li>实现继承</li>
+</ol>
+<ul>
+<li>实现继承其实是一种 “ 代码的复用 “，它的复用是在类级别的维度上的，这种类级别的复用给我们开发人员带来了很多便利，让我们不用写很多相似成分的代码，这样不仅可以加快我们的开发速度，还可以让我们很快的分析出代码的架构。</li>
+</ul>
+<ol start="2">
+<li>接口继承    </li>
+</ol>
+<ul>
+<li>接口继承其实是将该类的成员函数全部声明为纯虚函数，我们将该类也称为 <strong><em>抽象类(文尾解释）*</em></strong>，一般情况下，我们都将该类定义为父类，子类去继承该父类，<strong><em>从而强制子类实现自己的虚函数，以便构成多态</em></strong></li>
+</ul>
+<p>注：抽象类不能实例出对象，因此上，它的作用就是为了子类重写，实现多态；同时将所有的虚函数放到一个类中也方便后期维护。</p>
+<h4 id="2-继承的作用域"><a href="#2-继承的作用域" class="headerlink" title="2. 继承的作用域"></a>2. 继承的作用域</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在继承作用域的问题中，我们不得不说成员的访问限定符，算了，我们还是直接画个图来说的更加的仔细吧<br><img src="https://img-blog.csdnimg.cn/20190731184710652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>我们从图片可以很容易总结出规律：</p>
+<ul>
+<li>private 成员，派生类是不可见的，<strong><em>不可见是指本身还是在那存放着，只是编译器在语法上规定不可访问</em></strong>，当然，我们也可以利用指针来访问，但是最好不要做这种坏事。（下面我们会有演示）</li>
+<li>其他继承方式，取决于继承方式与访问限定符谁的权限小，那么作用域就是谁。</li>
+<li>protected 是一种专门为了继承而产生的一种修饰符，它的作用是外界不可见，但是派生类是可见的一种修饰符。</li>
+<li>一般我们都是使用 Public 继承，有特殊需求则将使用其他继承。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Person(<span class="keyword">const</span> <span class="keyword">int</span> age = <span class="number">18</span>, <span class="keyword">const</span> <span class="built_in">string</span>&amp; name = <span class="string">"peter"</span>) : _age(age), _name(name) &#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _age;</span><br><span class="line">	<span class="built_in">string</span> _name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> Person</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Student(<span class="keyword">const</span> <span class="keyword">int</span>&amp; id = <span class="number">18060</span>) :_id(id), Person() &#123;&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _id;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Student s;</span><br><span class="line">	<span class="comment">// cout &lt;&lt; Person::_age &lt;&lt; endl;      编译出错 ==&gt; 不可访问</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; *(<span class="keyword">int</span>*)&amp;s &lt;&lt; <span class="built_in">endl</span>;         <span class="comment">// 强制访问</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>输出结果为：（我们最好不要做这种坏事）<br><img src="https://img-blog.csdnimg.cn/2019073120083944.png" alt="在这里插入图片描述"><br>从结果也证实了那块区域确实存在，只是编译器在语法上限制了我们的操作。</p>
+<h2 id="附：接口继承，抽象类"><a href="#附：接口继承，抽象类" class="headerlink" title="附：接口继承，抽象类"></a>附：接口继承，抽象类</h2><ul>
+<li>抽象类不能实例化出对象，如果派生类继承它，<strong><em>且没有重写虚函数，那么派生类也是不能实例化出对象</em></strong>。</li>
+<li>派生类继承抽象类必须重写虚函数，派生类才能实例化出对象，这也体现了 <strong><em>接口继承目的就是为了继承函数接口，实现多态。</em></strong></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/继承/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-多态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -636,11 +738,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -648,11 +754,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,19 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: C++ 多态 | Superao的博客</title>
+  <title>单例模式 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/tags/C-多态/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式">
+<meta property="og:url" content="http://yoursite.com/2019/08/21/单例模式/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一">
 <meta property="og:locale" content="中文">
+<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:updated_time" content="2019-08-21T11:21:18.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="单例模式">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一">
+<meta name="twitter:image" content="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -142,98 +146,225 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-单例模式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/虚函数与虚函数表/">虚函数与虚函数表</a>
+    <h1 class="article-title" itemprop="name">
+      单例模式
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/21/单例模式/" class="archive-article-date">
+  	<time datetime="2019-08-21T08:17:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一步的实现一个只能创建一个对象的类。</p>
+<a id="more"></a>
+
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 单例模式的最终目的就是为了设计出一个只能实例化出一个对象的类，这时，有很多初学者就会认为我们告诉使用者让他只实例化一个不就行了嘛，但是我们来仔细的想一下，如果使用者不小心实例化出多个对象，这时候出现问题了这锅谁背呐？仔细想一下，这个问题还是我们设计者的问题，而不应该时使用者的问题。其实我们想要设计出这样的类也是不难的，我们 <strong>只要跳过传统的构造器为使用者提供特殊的接口来示例化对象，那么这时候就强制保证了只能实例化出一个对象了</strong> 具体的实现机制有以下两种：</p>
+<ul>
+<li><strong>懒汉模型</strong>：</li>
+<li><strong>饿汉模式</strong></li>
+</ul>
+<h4 id="懒汉模式"><a href="#懒汉模式" class="headerlink" title="懒汉模式"></a>懒汉模式</h4><ul>
+<li>懒汉模式的特点就是什么时候使用，那么就什么时候创建对象，它与我们现实生活中的”懒汉”是非常相似的，不到万不得已的时候，它是不会不会干某件事情的，因此，我们称它为懒汉模式。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton1* <span class="title">Getinstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// 线程不安全</span></span><br><span class="line">      <span class="keyword">if</span>(instance == <span class="literal">nullptr</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"This is one"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        instance = <span class="keyword">new</span> Singleton1();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"This is two"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 私有传统构造器 ***</span></span><br><span class="line">    Singleton1() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"懒汉模式构造"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;;</span><br><span class="line">    <span class="comment">// 静态对象指针 ***</span></span><br><span class="line">    <span class="keyword">static</span> Singleton1* instance;</span><br><span class="line">&#125;;</span><br><span class="line">Singleton1* Singleton1::instance = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Singleton1Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Singleton1* s = Singleton1::Getinstance();</span><br><span class="line">  Singleton1* s1 = Singleton1::Getinstance();</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span> &lt;&lt;s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：<br><img src="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png" alt><br><strong>注：静态成员在类外进行初始化，静态函数通过类名 + 函数名即可调用</strong></p>
+<h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><ul>
+<li>饿汉模式的特点就是在程序还没有进入 main 函数之前，在编译时候就进行实例化，它和我们现实生活中的饿汉的特点也是非常相似的，它和我们全局变量的初始化时非常相似的。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 饿汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton2* <span class="title">Getinstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    Singleton2() &#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"饿汉模式构造"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;;</span><br><span class="line">    <span class="keyword">static</span> Singleton2* instance;</span><br><span class="line">&#125;;</span><br><span class="line">Singleton2* Singleton2::instance = <span class="keyword">new</span> Singleton2();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Singleton2Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Singleton2* s = Singleton2::Getinstance();</span><br><span class="line">  <span class="function">Singleton2* <span class="title">s1</span><span class="params">(s)</span></span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span> &lt;&lt;s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"main 开始"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  Singleton2Test();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:<br><img src="http://pv327naw3.bkt.clouddn.com/%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F.png" alt><br>注：饿汉模式对象的示例化是在程序运行之前进行的，因此，我们在函数中通过特殊的接口初始化是无效的(编译出错)，除非在new它的时候进行初始化。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于两种不同的实现方式，我们发现都可以满足要求，不管是多次构造，拷贝，赋值拷贝最后操作的还都是同一个对象，但是还有一个重要的问题就是 **饿汉模式是线程安全，因为不管多少个线程同时取，它们取的还是静态区的那个对象，而对于懒汉来说，上面的实现方式不是线程安全的，对于多个线程同时new的话，他就会出现问题。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://pv327naw3.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20190723151403.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/21/单例模式/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/多态/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/14/红黑树/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">红黑树</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/多态/">多态</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式"><span class="toc-number">1.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#懒汉模式"><span class="toc-number">1.0.1.</span> <span class="toc-text">懒汉模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#饿汉模式"><span class="toc-number">1.0.2.</span> <span class="toc-text">饿汉模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="单例模式" data-title="单例模式" data-url="http://yoursite.com/2019/08/21/单例模式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -256,9 +387,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
