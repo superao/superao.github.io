@@ -389,24 +389,9 @@
         <h1 id="搜索算法"><a href="#搜索算法" class="headerlink" title="搜索算法"></a>搜索算法</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 搜索算法是一种利用计算机高速运算的机制枚举出一种可以解决问题的方法，我们理解搜索算法可以扩充我们解题思维，我们先总结一下最常见的搜索算法:</p>
 <ul>
 <li><strong>深度优先搜索 — 一条路走到黑</strong></li>
-<li><strong>广度优先搜索 — 一石激起千层浪</strong><h2 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们通过例题来深刻的理解深度优先搜索是怎么解决问题的，我们先思考一个排列组合问题: 有三个数字 “123” ,我们将三个数字分别放到我们的三个盒子中，每个盒子最少只能放一个数字，问盒子中不同的放法是什么？我们都很清楚这是一个简单的排列组合问题，但是我们需要做的是利用计算机的思维来解决它。</li>
-<li><em>分析:*</em></li>
-<li>我们将数字按照从小到大的顺序依次排列，当我们走到第一个盒子的时候，手里有三个可用数字。</li>
-<li>我们拿出最小的数字放到我们第一个盒子中，并且给第一个数字做上标记，然后向后走。</li>
-<li>当我们走到第二个盒子的时候，手里只剩下两个可用数字了。</li>
-<li>我们依然拿出最小的数字放到我们第二个盒子中，并且做上标记，继续向后走。</li>
-<li>当我们走到第三个盒子的时候，手里只有一张可用数字了。</li>
-<li>我们将最后一张数字放到我们第三个盒子中，并且做上标记，继续向后走，走到了尽头。</li>
-<li>这时候我们的牌用完了。盒子也放满了，因此我们只需将其打印出来即可，这就是一种放法。</li>
-<li><strong>这时候刚才的放法已经一条路走到黑了，我们回退到上一步，选择另一条路继续走到黑。</strong></li>
-<li>我们回退到上一步(第三个盒子)，并且把第三个盒子的数字回收了，我们发现还是没有数字可拿，因此继续回退一步，依次类推，就可以找出所有的情况。</li>
+<li><strong>广度优先搜索 — 一石激起千层浪</strong></li>
 </ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于上述的分析，我们发现 <strong>对于每一个盒子来说它们的处理步骤都是相似的，先放入，再标记。</strong>因此上，我们可以利用 <strong>循环 + 递归</strong> 来解决相似的事情,那什么时候结束呐？我们发现当我们走完所有盒子时就会结束。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; book, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; boxs, <span class="keyword">int</span> n, <span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 走到尽头，直接打印即可</span></span><br><span class="line">  <span class="keyword">if</span>(index = n + <span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; boxs[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回退到上一步(返回到第三个盒子)</span></span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不是尽头，选择其他的放法继续一直走。</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 如果没有被使用，那么我们放入，并且进行标记</span></span><br><span class="line">    <span class="keyword">if</span>(book[i] == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">      boxs[index] = i;</span><br><span class="line">      book[i] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 以相同的步骤处理下一个盒子</span></span><br><span class="line">      DFS(book, boxs, n, index + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 回退回来之后，回收掉盒子中的数字，选择其他的放法继续一直走。</span></span><br><span class="line">      book[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 回退到上一步选择其他的放法继续一直走(从第三个返回到第二个盒子)</span></span><br><span class="line">  <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="深度优先搜索模型总结"><a href="#深度优先搜索模型总结" class="headerlink" title="深度优先搜索模型总结:"></a>深度优先搜索模型总结:</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(当前步骤的处理过程)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="number">1.</span>判断是否到达边界，而需要回退到上一步</span><br><span class="line">  <span class="number">2.</span>当前需要处理的各种逻辑，并且做上处理过的标记(作为一种情况)</span><br><span class="line">  <span class="number">3.</span>以相同的步骤处理下一个</span><br><span class="line">  <span class="number">4.</span>所有的路都处理完了回退到上一步</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        
       
 
       
@@ -1078,11 +1063,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
