@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
-<meta property="og:updated_time" content="2019-08-21T11:28:11.922Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203724166.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203709664.png">
+<meta property="og:updated_time" content="2019-08-23T12:43:21.775Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单例模式">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 单例模式是设计模式中最简单的一种设计模式，并且它的应用也是非常广泛的。那到底什么是单例模式呐？在我们日常用的软件中，我们发现有些软件的某些功能只允许开启一个，而不能开启多个相同的功能，这背后的设计其实就是蕴含了一种单例模式。单例模式指的是在一个类中，只允许实例化出一个对象，而不能产生多个对象的一种设计思想。下面我们也将一步一">
-<meta name="twitter:image" content="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203724166.png">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -179,13 +179,13 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 懒汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton1</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton1* <span class="title">Getinstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// 线程不安全</span></span><br><span class="line">      <span class="keyword">if</span>(instance == <span class="literal">nullptr</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"This is one"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        instance = <span class="keyword">new</span> Singleton1();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> </span><br><span class="line">      &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"This is two"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 私有传统构造器 ***</span></span><br><span class="line">    Singleton1() &#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"懒汉模式构造"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;;</span><br><span class="line">    <span class="comment">// 静态对象指针 ***</span></span><br><span class="line">    <span class="keyword">static</span> Singleton1* instance;</span><br><span class="line">&#125;;</span><br><span class="line">Singleton1* Singleton1::instance = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Singleton1Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Singleton1* s = Singleton1::Getinstance();</span><br><span class="line">  Singleton1* s1 = Singleton1::Getinstance();</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span> &lt;&lt;s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>输出结果：<br><img src="http://pv327naw3.bkt.clouddn.com/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F.png" alt><br><strong>注：静态成员在类外进行初始化，静态函数通过类名 + 函数名即可调用</strong></p>
+<p>输出结果：<br><img src="https://img-blog.csdnimg.cn/20190823203724166.png" alt="懒汉模式"><br><strong>注：静态成员在类外进行初始化，静态函数通过类名 + 函数名即可调用</strong></p>
 <h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><ul>
 <li>饿汉模式的特点就是在程序还没有进入 main 函数之前，在编译时候就进行实例化，它和我们现实生活中的饿汉的特点也是非常相似的，它和我们全局变量的初始化时非常相似的。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 饿汉模式</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton2</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Singleton2* <span class="title">Getinstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    Singleton2() &#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"饿汉模式构造"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;;</span><br><span class="line">    <span class="keyword">static</span> Singleton2* instance;</span><br><span class="line">&#125;;</span><br><span class="line">Singleton2* Singleton2::instance = <span class="keyword">new</span> Singleton2();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Singleton2Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Singleton2* s = Singleton2::Getinstance();</span><br><span class="line">  <span class="function">Singleton2* <span class="title">s1</span><span class="params">(s)</span></span>;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span> &lt;&lt;s1 &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">cout</span> &lt;&lt; <span class="string">"main 开始"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  Singleton2Test();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>输出结果:<br><img src="http://pv327naw3.bkt.clouddn.com/%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F.png" alt><br><strong>注：饿汉模式对象的实例化是在main函数之前进行的，因此，我们在函数中通过特殊的接口初始化是无效的(编译出错)，除非在new它的时候进行初始化。</strong></p>
+<p>输出结果:<br><img src="https://img-blog.csdnimg.cn/20190823203709664.png" alt="饿汉模式"><br><strong>注：饿汉模式对象的实例化是在main函数之前进行的，因此，我们在函数中通过特殊的接口初始化是无效的(编译出错)，除非在new它的时候进行初始化。</strong></p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于两种不同的实现方式，我们发现都可以满足要求，不管是多次构造，拷贝，赋值拷贝最后操作的还都是同一个对象，但是还有一个重要的问题就是 <strong>饿汉模式是线程安全，因为不管多少个线程同时取，它们取的还是静态区的那个对象，而对于懒汉来说，上面的实现方式不是线程安全的，对于多个线程同时new的话，他就会出现问题</strong></p>
 
       
@@ -449,10 +449,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -461,11 +457,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,6 +470,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
             
             <div class="clearfix"></div>

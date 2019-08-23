@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="搜索算法&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 搜索算法是一种利用计算机高速运算的机制枚举出一种可以解决问题的方法，我们理解搜索算法可以扩充我们解题思维，我们先总结一下最常见的搜索算法:  深度优先搜索 — 一条路走到黑 广度优先搜索 — 一石激起千层浪">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-08-23T10:04:19.163Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203647388.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-08-23T12:41:48.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搜索算法">
 <meta name="twitter:description" content="搜索算法&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 搜索算法是一种利用计算机高速运算的机制枚举出一种可以解决问题的方法，我们理解搜索算法可以扩充我们解题思维，我们先总结一下最常见的搜索算法:  深度优先搜索 — 一条路走到黑 广度优先搜索 — 一石激起千层浪">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203647388.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -188,7 +190,7 @@
 
 <h4 id="相关习题"><a href="#相关习题" class="headerlink" title="相关习题"></a>相关习题</h4><p><a href="https://leetcode-cn.com/problems/employee-importance/" target="_blank" rel="noopener">员工的重要性</a><br><a href="https://leetcode-cn.com/problems/flood-fill/" target="_blank" rel="noopener">图像渲染</a><br><a href="https://leetcode-cn.com/problems/island-perimeter/" target="_blank" rel="noopener">岛屿的周长</a></p>
 <h2 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 广度优先搜索与深度优先搜索在搜索的时候它们两者是有很大的区别的，在解决同一个问题的时候，它们两者的思想是有很大区别的，广度优先它的思想是 <strong>从某个地方开始搜索的时候不会一直沿着一种方法(路)走到尽头，在换其他方法(路)，而是每次先把所有的方法(路)一次走完(在走的时候顺便将它的下一层全部带入进来)，再去走下一次所有的方法(路)，这样的话与深度优先刚好是相反了。我们利用二叉树的层序遍历来更加深刻的理解一下广度优先是怎么走的。</strong></p>
-<p><img src alt="二叉树"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>平时我们在遍历二叉树的时候都是利用递归来遍历二叉树的，每次向左子树进行递归一直递归到 nullptr 才换到其他的路，这其实就是深度优先，这次我们是从根节点(A)开始一层一层的来遍历它，每一层的所有结点走完后，我们再来走其它层的结点(FIFO)</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190823203647388.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="二叉树"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>平时我们在遍历二叉树的时候都是利用递归来遍历二叉树的，每次向左子树进行递归一直递归到 nullptr 才换到其他的路，这其实就是深度优先，这次我们是从根节点(A)开始一层一层的来遍历它，每一层的所有结点走完后，我们再来走其它层的结点(FIFO)</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Node* root)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 创建队列用于广搜</span></span><br><span class="line">  <span class="built_in">queue</span>&lt;Node*&gt; bfs;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 队列初始化</span></span><br><span class="line">  bfs.push(root);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 搜索队列中结点所有情况</span></span><br><span class="line">  <span class="keyword">while</span>(!bfs.empty())</span><br><span class="line">  &#123;</span><br><span class="line">    Node* front = bfs.front();</span><br><span class="line">    bfs.pop();</span><br><span class="line">    <span class="comment">// ... 对结点的操作</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 搜索该结点其他可能的所有情况</span></span><br><span class="line">    <span class="keyword">if</span>(front-&gt;_left)</span><br><span class="line">    &#123;</span><br><span class="line">      bfs.push(front-&gt;_left);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(front-&gt;right)</span><br><span class="line">    &#123;</span><br><span class="line">      bfs.push(front-&gt;_right);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 搜索结束</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="广度优先模型总结"><a href="#广度优先模型总结" class="headerlink" title="广度优先模型总结"></a>广度优先模型总结</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(开始搜索的起点)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="number">1.</span>创建队列，并且用起点初始化</span><br><span class="line">  <span class="number">2.</span>搜索队列中所有情况，直到队列为空 <span class="keyword">while</span>()</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="number">1.</span>进行处理操作(做标记)，最后将队首元素弹出</span><br><span class="line"></span><br><span class="line">    <span class="number">2.</span>将所有的情况拉入队列中</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对于有些情况我们需要对搜索过的地方做标记，否则会无限的搜素下去</span></span><br><span class="line"><span class="comment">// 如下面第 4 题...</span></span><br></pre></td></tr></table></figure>
@@ -466,10 +468,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -478,11 +476,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,6 +489,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
             
             <div class="clearfix"></div>

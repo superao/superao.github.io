@@ -16,16 +16,16 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="平衡二叉搜索树(AVLTree)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E6%97%8B%E8%BD%AC%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8D%95%E6%97%8B%E6%8A%BD%E8%B1%A1%E5%9B%BE.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E5%8F%B3%E5%8D%95%E6%97%8B%E6%8A%BD%E8%B1%A1%E5%9B%BE.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8F%B3%E6%97%8B%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8F%B3%E6%97%8B%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:updated_time" content="2019-08-15T04:37:19.679Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203754697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019082320381118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203800667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203815801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203806674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-08-23T12:49:29.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡二叉搜索树">
 <meta name="twitter:description" content="平衡二叉搜索树(AVLTree)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体">
-<meta name="twitter:image" content="http://pv327naw3.bkt.clouddn.com/%E6%97%8B%E8%BD%AC%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203754697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -197,7 +197,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们在插入结点的时候有可能导致树的高度不平衡，因此，我们需要旋转来使我们的树继续达到平衡，这样就可以是我们的查找效率一直保持最优。<br>我们复现一下旋转的几种情况:<br><img src="http://pv327naw3.bkt.clouddn.com/%E6%97%8B%E8%BD%AC%E7%9A%84%E5%87%A0%E7%A7%8D%E6%83%85%E5%86%B5.png" alt="旋转的四种情况"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这些情况在我们实际中也是非常常见的，因此我们需要归纳一下它们各个部分的操作，我们又将实际场景抽象出来画了下列抽象图:<br><img src="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8D%95%E6%97%8B%E6%8A%BD%E8%B1%A1%E5%9B%BE.png" alt="左单旋"><br><img src="http://pv327naw3.bkt.clouddn.com/%E5%8F%B3%E5%8D%95%E6%97%8B%E6%8A%BD%E8%B1%A1%E5%9B%BE.png" alt="右单旋"><br><img src="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8F%B3%E6%97%8B%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png" alt="左右双旋"><br><img src="http://pv327naw3.bkt.clouddn.com/%E5%B7%A6%E5%8F%B3%E6%97%8B%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png" alt="右左双旋"><br><strong>分析</strong>:<br>  我们观察图片中的四种情况可以发现 <strong>对于不同的情况，它的 par 的平衡因子与 subL/subR 的平衡因子的组合是有一定规律的，这样的话我们可以利用不同的组合从而调用不同的旋转</strong> 但是我们不要去死记它，我们理解了平衡因子的所代表的含义，就可以明白为什么不同的组合所带来的旋转是那样子的旋转。 </p>
+<h2 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们在插入结点的时候有可能导致树的高度不平衡，因此，我们需要旋转来使我们的树继续达到平衡，这样就可以是我们的查找效率一直保持最优。<br>我们复现一下旋转的几种情况:<br><img src="https://img-blog.csdnimg.cn/20190823203754697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="旋转的四种情况"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这些情况在我们实际中也是非常常见的，因此我们需要归纳一下它们各个部分的操作，我们又将实际场景抽象出来画了下列抽象图:<br><img src="https://img-blog.csdnimg.cn/2019082320381118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="左单旋"><br><img src="https://img-blog.csdnimg.cn/20190823203800667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="右单旋"><br><img src="https://img-blog.csdnimg.cn/20190823203815801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="左右双旋"><br><img src="https://img-blog.csdnimg.cn/20190823203806674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="右左双旋"><br><strong>分析</strong>:<br>  我们观察图片中的四种情况可以发现 <strong>对于不同的情况，它的 par 的平衡因子与 subL/subR 的平衡因子的组合是有一定规律的，这样的话我们可以利用不同的组合从而调用不同的旋转</strong> 但是我们不要去死记它，我们理解了平衡因子的所代表的含义，就可以明白为什么不同的组合所带来的旋转是那样子的旋转。 </p>
 <p>树的哪边高就说明平衡因子是从哪边更新上来的，因此来确定是subR还是subL; 树的哪边高，线就往哪边延伸，从而画出抽象的符号来表示不同的旋转方式。</p>
 <ul>
 <li>2 / 1 : 表明par的右子树高，subR的右子树高，因此左单旋才能降高度达到平衡()</li>
@@ -478,10 +478,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -490,11 +486,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,6 +499,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
             
             <div class="clearfix"></div>

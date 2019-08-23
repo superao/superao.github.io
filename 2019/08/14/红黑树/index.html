@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="红黑树&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%9B%BE%E7%A4%BA.png">
-<meta property="og:image" content="http://pv327naw3.bkt.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png">
-<meta property="og:updated_time" content="2019-08-20T06:00:38.272Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203715365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-08-23T12:44:40.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="红黑树">
 <meta name="twitter:description" content="红黑树&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。">
-<meta name="twitter:image" content="http://pv327naw3.bkt.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%9B%BE%E7%A4%BA.png">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -175,7 +175,7 @@
 <li>每个结点不是黑色就是红色</li>
 <li>根节点的颜色为黑色，空结点的颜色为黑色</li>
 <li>如果一个结点为红色，那么它的两个孩子的结点必须为黑色</li>
-<li>对于某一个结点来说，从它开始到叶子结点的每条路径的黑色结点数目是相同的<br><img src="http://pv327naw3.bkt.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E5%9B%BE%E7%A4%BA.png" alt="红黑树示例"><br>我们分析示例图片发现:<ul>
+<li>对于某一个结点来说，从它开始到叶子结点的每条路径的黑色结点数目是相同的<br><img src="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="红黑树示例"><br>我们分析示例图片发现:<ul>
 <li><strong>最短路径：全黑结点的路径</strong></li>
 <li><strong>最长路径：红结点最多的路径</strong></li>
 <li>其他路径的个数位于两者之间</li>
@@ -204,7 +204,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> pair&lt;K, V&gt;&amp; kv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 创建新的结点</span></span><br><span class="line">  Node* newnode = <span class="keyword">new</span> Node(kv);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(_root == <span class="literal">nullptr</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _root = newnode;</span><br><span class="line">    _root-&gt;_col = BLACK;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Node* par = <span class="literal">nullptr</span>;</span><br><span class="line">  Node* cur = _root;</span><br><span class="line">  <span class="keyword">while</span>(cur)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(cur-&gt;_kv.first &gt; kv.first)</span><br><span class="line">    &#123;</span><br><span class="line">      par = cur;</span><br><span class="line">      cur = cur-&gt;_left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cur-&gt;_kv.first &lt; kv.first)</span><br><span class="line">    &#123;</span><br><span class="line">      par = cur;</span><br><span class="line">      cur = cur-&gt;_right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 位置找到，链接指针</span></span><br><span class="line">  cur = newnode;</span><br><span class="line">  <span class="keyword">if</span>(cur-&gt;_kv.first &lt; par-&gt;_kv.first)</span><br><span class="line">  &#123;</span><br><span class="line">    par-&gt;_left = cur;</span><br><span class="line">    cur-&gt;_parent = par;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">  &#123;</span><br><span class="line">    par-&gt;_right = cur;</span><br><span class="line">    cur-&gt;_parent = par;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 控色</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="控色"><a href="#控色" class="headerlink" title="控色"></a>控色</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果有连续的红色结点，那么我们需要调色，我们对结点的颜色控制的目标就是为了满足着色规则，这样才能达到红黑树的要求，我们大致将红黑树的调色分为以下三种：</p>
-<p><img src="http://pv327naw3.bkt.clouddn.com/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8A%BD%E8%B1%A1%E6%A8%A1%E5%9E%8B.png" alt="红黑树抽象模型"></p>
+<p><img src="https://img-blog.csdnimg.cn/20190823203715365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="红黑树抽象模型"></p>
 <ol>
 <li>cur 为红色，par 为红色，ppar 为黑色，u 为红色</li>
 <li>cur 为红色，par 为红色，ppar 为黑色，u 为黑色/不存在(cur par ppar 为斜线)</li>
@@ -500,10 +500,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -512,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -525,6 +521,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
             
             <div class="clearfix"></div>
