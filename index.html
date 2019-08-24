@@ -144,6 +144,80 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-组合与继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/24/组合与继承/">组合与继承</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/24/组合与继承/" class="archive-article-date">
+  	<time datetime="2019-08-24T10:54:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="继承与组合"><a href="#继承与组合" class="headerlink" title="继承与组合"></a>继承与组合</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/24/组合与继承/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-适配器模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -856,88 +930,6 @@
 
 
   
-    <article id="post-虚函数与虚函数表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/虚函数与虚函数表/">虚函数与虚函数表</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="虚函数与虚函数表再议"><a href="#虚函数与虚函数表再议" class="headerlink" title="虚函数与虚函数表再议"></a>虚函数与虚函数表再议</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。</p>
-<h5 id="声明：32位系统，VS2013下编译。"><a href="#声明：32位系统，VS2013下编译。" class="headerlink" title="声明：32位系统，VS2013下编译。"></a>声明：32位系统，VS2013下编译。</h5><h3 id="1-单继承下的虚函数，虚函数表"><a href="#1-单继承下的虚函数，虚函数表" class="headerlink" title="1. 单继承下的虚函数，虚函数表"></a>1. 单继承下的虚函数，虚函数表</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"A::fun1()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"A::fun2()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// 重写了虚函数 fun1()，并且新加了自己的虚函数fun3()</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"B::fun1()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun3</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"B::fun3()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将函数指针重命名为 FUN</span></span><br><span class="line"><span class="comment">// 函数指针指向某种特定类型，函数的类型由其参数及返回类型共同决定，与函数名无关</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span><span class="params">(*FUN)</span><span class="params">()</span></span>; FUN;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 我们利用虚函数表，将虚函数逐个打印出来</span></span><br><span class="line"><span class="comment">// v_fun 是一个指针数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Fun</span><span class="params">(FUN* v_fun)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; v_fun[i] != <span class="literal">nullptr</span>; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"第[%d]个虚函数的地址为：%p, 虚函数为："</span>, i, v_fun[i]);</span><br><span class="line">		v_fun[i]();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a;  <span class="comment">// 对象的前四个字节就是虚函数表的指针的地址</span></span><br><span class="line">	B b;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 在VS2013中，虚函数表指针存放在对象的前四个字节中，因此，</span></span><br><span class="line">	<span class="comment">// 我们取出对象的地址，将它转换为（int*）,即取出前四个字节，</span></span><br><span class="line">    <span class="comment">// 再进行解引用取到虚表指针，再将它转换为FUN*（函数指针数组）</span></span><br><span class="line">	FUN* pa = (FUN*)*(<span class="keyword">int</span>*)&amp;a;</span><br><span class="line">	Fun(pa);</span><br><span class="line">	FUN* pb = (FUN*)*(<span class="keyword">int</span>*)&amp;b;</span><br><span class="line">	Fun(pb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这段代码的意思是：B类单继承了A类，并且重写了fun1()函数，还增加了自己的虚函数fun3()，我们通过对象的指针找到虚表指针，然后打印出每个虚函数。<br>运行结果：<br><img src="https://img-blog.csdnimg.cn/20190729151614278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h5 id="总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。"><a href="#总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。" class="headerlink" title="总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。"></a>总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。</h5><p>注：子类没有虚表指针，子类继承了父类的虚表指针。<br><img src="https://img-blog.csdnimg.cn/20190729170530165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="2-多继承下的虚函数，虚函数表"><a href="#2-多继承下的虚函数，虚函数表" class="headerlink" title="2. 多继承下的虚函数，虚函数表"></a>2. 多继承下的虚函数，虚函数表</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"A::fun1()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"A::fun2()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"B::fun1()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun3</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"B::fun3()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 声明的顺序就是继承的顺序</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span> :</span> <span class="keyword">public</span> B, <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun4</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"C::fun4()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a;  </span><br><span class="line">	B b;</span><br><span class="line">	C c;</span><br><span class="line"></span><br><span class="line">	FUN* pb = (FUN*)*(<span class="keyword">int</span>*)&amp;c;</span><br><span class="line">	Fun(pb);         <span class="comment">// 还是上面的Fun()函数</span></span><br><span class="line"></span><br><span class="line">	FUN* pa = (FUN*)*(<span class="keyword">int</span>*)((<span class="keyword">char</span>*)&amp;c + <span class="keyword">sizeof</span>(A));</span><br><span class="line">	Fun(pa);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：<br><img src="https://img-blog.csdnimg.cn/20190729160339209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_7" alt="在这里插入图片描述"><br>我们从结果分析可得：<br>子类继承了两个父类的虚表指针，子类还是会像单继承一样将虚表进行拷贝，修改等一系列操作，<strong><em>但是需要注意的是，子类会将自己新加的虚函数放到第一个继承的父类的虚表中。</em></strong> 在实现多态的时候，还是相同的，谁调用就将虚表指针映射到哪个表上。</p>
-<p><img src="https://img-blog.csdnimg.cn/20190729171223112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/虚函数与虚函数表/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1039,7 +1031,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1047,7 +1039,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
