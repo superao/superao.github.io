@@ -144,6 +144,116 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-派生类的默认成员函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/派生类的默认成员函数/">派生类的默认成员函数</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="派生类的默认成员函数"><a href="#派生类的默认成员函数" class="headerlink" title="派生类的默认成员函数"></a>派生类的默认成员函数</h1><h2 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h2><p>作用：构造函数用来进行对象的初始化工作。</p>
+<p>关于构造函数大致可以分为 4 种情况：</p>
+<ul>
+<li>基类自己生成，派生类自己生成</li>
+<li>基类自己生成，派生类自己实现</li>
+<li>基类自己实现，派生类自己生成</li>
+<li>基类自己实现，派生类自己实现</li>
+</ul>
+<h6 id="总结如下："><a href="#总结如下：" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
+<li><strong><em>不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数，那么自动调用将发生错误，需要我们手动调用，但是最好我们自己在初始化列表的时候自己手动调用自己需要的构造函数。</em></strong></li>
+<li>生成的默认构造函数：对于自定义成员变量，它会自己调用自己的构造函数，对于内置类型，它不会进行初始化，从而导致访问出现随机值</li>
+<li>初始化顺序：先初始化基类的部分，再初始化派生类的部分<h6 id="最好的做法：自己实现自己调用，不要依赖编译器"><a href="#最好的做法：自己实现自己调用，不要依赖编译器" class="headerlink" title="最好的做法：自己实现自己调用，不要依赖编译器"></a>最好的做法：自己实现自己调用，不要依赖编译器</h6></li>
+</ol>
+<h2 id="2-拷贝构造，赋值运算"><a href="#2-拷贝构造，赋值运算" class="headerlink" title="2.拷贝构造，赋值运算"></a>2.拷贝构造，赋值运算</h2><p>作用：用于获得和某个对象一模一样的对象。</p>
+<p>关于拷贝，赋值函数大致可以分为 4 种情况：</p>
+<ul>
+<li>派生类不写，编译器自动生成的拷贝构造，赋值会自动调用基类的拷贝构造。</li>
+<li><strong><em>派生类写了，那么必须自己手动的去调用基类的拷贝构造，不会自己去调用</em></strong></li>
+</ul>
+<h6 id="总结如下：-1"><a href="#总结如下：-1" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
+<li>对于编译器自己生成的：自定义类型，它会调用自己的拷贝构造，赋值运算；内置类型，它会进行一种 “ 浅拷贝 “，即按照字节拷贝。</li>
+<li>一般情况下，我们可以不去写，编译器默认生成，<strong><em>但是对于存在指针，数组等这种类型，我们必须自己实现，并且自己调用基类的函数（深拷贝），否则在析构的时候用一块内存会被析构两次，从而发生 “ 未定义行为 “。</em></strong><h2 id="3-析构函数"><a href="#3-析构函数" class="headerlink" title="3.析构函数"></a>3.析构函数</h2>作用：析构函数用来进行对象的清理工作。<h6 id="总结如下：-2"><a href="#总结如下：-2" class="headerlink" title="总结如下："></a>总结如下：</h6></li>
+<li>派生类的析构函数会自动的调用基类析构函数，从而完全的清理掉对象；<strong><em>我们不要主动去调用基类的析构函数，这样会违反函数调用栈帧，同时同一内存会被清理两次。</em></strong></li>
+<li>派生类先会调用自己的析构函数，再去调用基类的析构函数，这样满足函数栈帧。</li>
+<li><strong><em>我们最好将基类的析构函数定义为虚函数，以便构成多态，防止基类指针指向派生类时，最后清理工作不完全，导致内存泄漏。</em></strong></li>
+<li>最好不要在析构函数内抛出异常，从而打断正常的执行流，导致发生内存泄漏。<h1 id="附：相关问题"><a href="#附：相关问题" class="headerlink" title="附：相关问题"></a>附：相关问题</h1></li>
+</ol>
+<ul>
+<li>设计不能被继承的类</li>
+</ul>
+<ol>
+<li>将基类的构造函数私有化（C++98）</li>
+<li>将基类加上 final 关键字则该基类不能被继承（C++11）</li>
+</ol>
+<ul>
+<li>派生类的切片问题<br>我们将派生类对象赋值给基类对象，我们将这种赋值问题称之为切片问题，编译器是这样的进行处理：将子类中的父类部分 “ 切出来 “，再赋值给子类对象，如果是指针或者引用只指向父类的那部分。<strong><em>注：”切的时候 “，切的只是成员变量，不会切掉成员函数，成员函数存放在代码段，也切不调。</em></strong><br><img src="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/派生类的默认成员函数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
