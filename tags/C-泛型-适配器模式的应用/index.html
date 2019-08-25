@@ -6,24 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>重载，重定义，重写 | Superao的博客</title>
+  <title>Tag: C++ 泛型 适配器模式的应用 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
-<meta name="keywords" content="C++">
-<meta property="og:type" content="article">
-<meta property="og:title" content="重载，重定义，重写">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/重载，重定义，重写/index.html">
+  <meta name="description" content="技术改变世界，阅读塑造人生">
+<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Superao的博客">
+<meta property="og:url" content="http://yoursite.com/tags/C-泛型-适配器模式的应用/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
+<meta property="og:description" content="技术改变世界，阅读塑造人生">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190806165754749.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2019080618014972.png">
-<meta property="og:updated_time" content="2019-08-07T09:23:48.596Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重载，重定义，重写">
-<meta name="twitter:description" content="重载，重定义，重写&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。 1. 重载：重载： 函数名相同，功能类似的几个函数构成重载。  构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==12345678910111213141516">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="Superao的博客">
+<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -147,248 +142,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-重载，重定义，重写" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      重载，重定义，重写
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/08/24/利用红黑树适配出-set-map-容器/" class="archive-article-date">
+  	<time datetime="2019-08-25T02:23:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/08/24/利用红黑树适配出-set-map-容器/">利用红黑树适配出 set_map 容器</a>
     </h1>
   
 
-        
-        <a href="/2019/08/07/重载，重定义，重写/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="重载，重定义，重写"><a href="#重载，重定义，重写" class="headerlink" title="重载，重定义，重写"></a>重载，重定义，重写</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在我学习了多态之后，我来系统的将这三个名字的含义进行总结归纳，区分一下它们之间的不同之处，方便我们可以更好的理解他们三者。</p>
-<h2 id="1-重载："><a href="#1-重载：" class="headerlink" title="1. 重载："></a>1. 重载：</h2><p><strong>重载：</strong> 函数名相同，功能类似的几个函数构成重载。</p>
-<ul>
-<li>构成条件：==同一作用域，函数名相同，参数不同（类型，个数）==<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b + c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  add(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">  add(<span class="number">1.222</span>, <span class="number">32.43</span>);</span><br><span class="line">  add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20190807171840989.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>底层实现：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++ 对函数名修饰规则与 C 语言相比有区别，在函数名修饰规则中加入了参数修饰，从而底层起到了对函数名的区分，这样在符号表中找函数地址的时候就会出现不同，从而实现了重载。</p>
-<h2 id="2-重定义（隐藏）"><a href="#2-重定义（隐藏）" class="headerlink" title="2.重定义（隐藏）"></a>2.重定义（隐藏）</h2><p><strong>隐藏：</strong> 继承类中，子类隐藏了父类的函数，使子类对象无法调用子类中继承过来的父类同名函数。</p>
-<ul>
-<li>构成条件：==不同作用域（子类/父类），函数名相同==</li>
-<li>==特别注意，析构函数虽然表面上看起来名字不同，但是在底层都被修饰为 <strong>destructor</strong>，因此上，析构函数也构成隐藏。==<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a + b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Fun</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"和是 "</span> &lt;&lt; a &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span>  <span class="comment">// 参数相同，构成隐藏</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> a - b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Fun</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> <span class="comment">// 参数不同，构成隐藏</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"和是 "</span> &lt;&lt; a + b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	B b;</span><br><span class="line">	<span class="comment">// b.Fun(10);		编译出错，参数太少</span></span><br><span class="line">	b.Fun(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; b.fun(<span class="number">10</span>, <span class="number">20</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>结果为：<br><img src="https://img-blog.csdnimg.cn/20190806165754749.png" alt="在这里插入图片描述"></p>
-<h2 id="3-重写（覆盖）"><a href="#3-重写（覆盖）" class="headerlink" title="3. 重写（覆盖）"></a>3. 重写（覆盖）</h2><p><strong>重写：</strong> 不同的对象完成相同的动作，实现了不同的效果；子类重写父类的虚函数。</p>
-<ul>
-<li>构成条件：==不同作用域(子类/父类)，虚函数名相同，参数相同，返回值类型相同。==</li>
-</ul>
-<p>==特例：==</p>
-<ul>
-<li>==协变：子类与父类虚函数名相同，参数完全相同，返回类型返回各自的指针/引用。==</li>
-<li>==析构函数的重写：析构函数的函数名在底层修饰为 <strong>destructor</strong>，并且析构函数无参数，无返回值，因此上析构函数也构成重写==<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// virtual A* fun()</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"A"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">virtual</span> ~A()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"A 的析构函数"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// virtual B* fun() override      构成重写</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> override</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"B"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">virtual</span> ~B() override</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"B 的析构函数"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A* pa = <span class="keyword">new</span> A;</span><br><span class="line">	pa-&gt;fun();</span><br><span class="line">	<span class="keyword">delete</span> pa;</span><br><span class="line"></span><br><span class="line">	A* pb = <span class="keyword">new</span> B;</span><br><span class="line">	pb-&gt;fun();</span><br><span class="line">	<span class="keyword">delete</span> pb;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Test();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>结果为：<br><img src="https://img-blog.csdnimg.cn/2019080618014972.png" alt="在这里插入图片描述"><br><strong>底层实现：==虚函数 + 虚函数表==</strong></p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><ul>
-<li>重载：同一作用域，函数名相同，参数不同。</li>
-<li>重定义：不同作用域，函数名相同。</li>
-<li>重写：不同作用域，虚函数名相同，参数相同，返回值类型相同。<h4 id="附："><a href="#附：" class="headerlink" title="附："></a>附：</h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们发现重写的条件非常苛刻，因此，<strong>如果两个函数不构成重写，就会构成重定义</strong>，因此，C++ 引入了两个关键字在一定程度上帮助了我们。</li>
-<li><strong>final：</strong> 表示该虚函数不能被继承。</li>
-<li><strong>override：</strong> 检查子类虚函数是否构成重写，没有则报错。</li>
-</ul>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="https://img-blog.csdnimg.cn/20190823203748400.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C++ 泛型 适配器模式的应用</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/重载，重定义，重写/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/08/07/动态规划/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          动态规划
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/08/07/隐式类型转化-整形提升/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">隐式类型转化---整形提升</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-        <div class="toc-container tooltip-left">
-            <i class="icon-font icon-category"></i>
-            <div class="tooltip tooltip-east">
-                <span class="tooltip-item">
-                </span>
-                <span class="tooltip-content">
-                    <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#重载，重定义，重写"><span class="toc-number">1.</span> <span class="toc-text">重载，重定义，重写</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-重载："><span class="toc-number">1.1.</span> <span class="toc-text">1. 重载：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-重定义（隐藏）"><span class="toc-number">1.2.</span> <span class="toc-text">2.重定义（隐藏）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-重写（覆盖）"><span class="toc-number">1.3.</span> <span class="toc-text">3. 重写（覆盖）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结："><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#附："><span class="toc-number">2.0.0.1.</span> <span class="toc-text">附：</span></a></li></ol></li></ol></li></ol></li></ol>
-                    </div>
-                </span>
-            </div>
-        </div>
-        
-    </div>
-</aside>
-
-
-
-  
-  <div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="重载，重定义，重写" data-title="重载，重定义，重写" data-url="http://yoursite.com/2019/08/07/重载，重定义，重写/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -411,9 +218,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
