@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190901153924476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190901161113759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090116464536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-01T08:49:52.547Z">
+<meta property="og:updated_time" content="2019-09-01T09:28:20.673Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈希结构">
 <meta name="twitter:description" content="哈希结构&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此">
@@ -171,7 +171,7 @@
 <a id="more"></a>
 
 <h2 id="哈希结构的本质"><a href="#哈希结构的本质" class="headerlink" title="哈希结构的本质"></a>哈希结构的本质</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们谈到哈希结构，就必须先知道什么是哈希结构? <strong>其实哈希结构是由两部分组成，一部分是由类似于&lt;数组&gt;一样的储存形式组成，另一部分由&lt;哈希函数&gt;组成，首先哈希函数是用来将某个关键值转化为一种特定地址/下标的一种函数，然后我们可以利用特定的地址/下标在数组中找到特定的位置，将需要储存的东西插入到它所对应的位置，进行储存，我们将此过程称之为 “映射”，查找过程也是类似的，我们同样可以利用哈希函数计算得到的值映射到对应的位置，然后进行一些其他的操作。</strong></p>
-<h4 id="常用的哈希函数"><a href="#常用的哈希函数" class="headerlink" title="常用的哈希函数"></a>常用的哈希函数</h4><ul>
+<h2 id="常用的哈希函数"><a href="#常用的哈希函数" class="headerlink" title="常用的哈希函数"></a>常用的哈希函数</h2><ul>
 <li>直接定址法 – 适用于数字比较小且密集的数据<ul>
 <li>直接将关键值作为下标/地址</li>
 </ul>
@@ -180,18 +180,18 @@
 <li>将关键值对数组的大小进行取模，得到的余数作为下标/地址</li>
 </ul>
 </li>
-<li>其他的哈希函数作为了解<br><img src="https://img-blog.csdnimg.cn/20190901153924476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="哈希结构的例子"></li>
+<li>平方取中法，折叠法，随机数法，数学分析法(了解)<br><img src="https://img-blog.csdnimg.cn/20190901153924476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="哈希结构的例子"></li>
 </ul>
 <h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这样我们直观的感受到了哈希结构是一种什么东西了，这只是最浅层的，它还是有很多的问题的，如果后面还有很多数据，那么我们这时就需要开更大的空间来映射，但是如果数据之间的间隔还是比较大的，这样造成很多空间是空闲的，这是一种非常浪费的做法。对于这样的现象我们可以利用除留余数法，这样的话，关键值经过哈希函数的运算得到的下标都是在数组的大小中的，不会出现浪费很多空间的情况，但是如果数据过多还是会造成一些问题。<br><img src="https://img-blog.csdnimg.cn/20190901161113759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>如果后面还有这些数据，那么会出现下面这种情况：<br><img src="https://img-blog.csdnimg.cn/2019090116464536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="哈希冲突"><br>我们发现经过哈希函数运算之后，我们所得到的下标所在的地方已经有值，我们无法在将新的值放进去了，我们称这种情况为 <strong>哈希冲突</strong></p>
-<h4 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 不相同的关键值经过哈希函数之后得到了相同的地址/小标，我们称这种情况为 <strong>哈希冲突</strong><br><strong>造成哈希冲突的原因:</strong> </p>
+<h2 id="哈希冲突"><a href="#哈希冲突" class="headerlink" title="哈希冲突"></a>哈希冲突</h2><p><strong>不相同的关键值经过哈希函数之后得到了相同的地址/小标，我们称这种情况为哈希冲突</strong><br>造成哈希冲突的原因:</p>
 <ul>
-<li><strong>哈希函数设计的不够好</strong></li>
-<li><strong>储存空间不够大</strong><ul>
+<li>哈希函数设计的不够好</li>
+<li>储存空间不够大<ul>
 <li>注：并不是一有哈希冲突就去开更大的空间，我们需要 <strong>负载因子</strong> 来帮我们进行判断。(负载因子 = 数据个数 / 空间大小)</li>
 </ul>
 </li>
 </ul>
-<p><strong>哈希冲突的解决方法:</strong></p>
+<p>哈希冲突的解决方法:</p>
 <ul>
 <li>闭散列<ul>
 <li>线性探测</li>
@@ -200,6 +200,7 @@
 </li>
 <li>开散列</li>
 </ul>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希结构中最重要的还是哈希函数，我们仔细思考一下，同样的都是数组结构，如果只是简单的在数组中进行常规搜索，那么在搜索领域中，它的效率是比较低的 O(n)，但是同样的储存结构在哈希中确实很高效的 O(1)，最主要的还是哈希函数的功劳，关键值经过哈希函数的一次计算，直接可以映射到需要搜索的附近位置，如果不发生哈希冲突，那么可以一次找到，从而极大的缩小了搜索的范围，因此上，它的效率大大的提高了。 <strong>哈希函数的作用相等于给每个关键值加上了索引。</strong></p>
 
       
 
@@ -338,7 +339,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希结构"><span class="toc-number">1.</span> <span class="toc-text">哈希结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希结构的本质"><span class="toc-number">1.1.</span> <span class="toc-text">哈希结构的本质</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常用的哈希函数"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">常用的哈希函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">1.1.0.2.</span> <span class="toc-text">分析：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#哈希冲突"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">哈希冲突</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希结构"><span class="toc-number">1.</span> <span class="toc-text">哈希结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希结构的本质"><span class="toc-number">1.1.</span> <span class="toc-text">哈希结构的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的哈希函数"><span class="toc-number">1.2.</span> <span class="toc-text">常用的哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">1.2.0.1.</span> <span class="toc-text">分析：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希冲突"><span class="toc-number">1.3.</span> <span class="toc-text">哈希冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.4.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -462,11 +463,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,18 +492,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
