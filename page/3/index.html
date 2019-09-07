@@ -144,6 +144,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-C-C-的类型转换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/C-C-的类型转换/">C_C++的类型转换</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/C-C-的类型转换/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h1><ul>
+<li><strong>隐式类型转换</strong>：算术转化，类型转化，…</li>
+<li><strong>显式类型转换</strong><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = (<span class="keyword">int</span>)<span class="string">'a'</span>;    <span class="comment">// C 中所有显示类型转化。</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h1 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h1><ul>
+<li><strong>static_cast</strong></li>
+<li><strong>reinterpret_cast</strong></li>
+<li><strong>const_cast</strong></li>
+<li><strong>dynamic_cast</strong></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有人会有疑问，为什么C++要搞出来这种强制类型转换呐？搞这个好像没有太大的用处，我们完全可以沿袭 C 语言的做法就可以搞定强制类型转换。其实，C++搞这个的目的是<strong>为了规范程序员的代码风格，让代码更加规范，方便他人阅读，方便后期维护</strong></p>
+<ol>
+<li><strong>static_cast：</strong><br>作用：用于 <strong>“ 相关类型 “</strong> 之间的转换，通俗点说，<strong>“ 普通数字之间的转换 “。</strong></li>
+</ol>
+<p>用法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StaticCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a);  <span class="comment">// 合法，注意使用语法</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">static_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1); </span><br><span class="line">	<span class="comment">// 不合法，不同类型的指针依然是无法完成转换的。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>reinterpret_cast：</strong><br>作用：用于 <strong>“不相关类型 “</strong> 之间的转换，通俗点说，<strong>“不同类别之间的转换”。</strong></li>
+</ol>
+<p>用法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReinterpretCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a); </span><br><span class="line">	<span class="comment">// 不合法， 因为数字之间是相同的类别，都是数字。</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1);      <span class="comment">// 合法</span></span><br><span class="line">	<span class="comment">// 不同的指针类型是不同的类别</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a2 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span>* pc2 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (a2); <span class="comment">// 合法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>const_cast：</strong><br>作用：用于<strong>去掉 const 成员的 const 属性</strong>，一般用于<strong>指针，引用。</strong></li>
+</ol>
+<p>用法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConstCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">10</span>;      <span class="comment">// 防止编译器优化代码</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a1 = (<span class="keyword">int</span>&amp;)a;              <span class="comment">// c 风格的强制类型转化</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt; (a); <span class="comment">// cc 风格的强制类型转化</span></span><br><span class="line">	a2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　a &lt;&lt; <span class="built_in">endl</span>;            <span class="comment">// 输出 20 </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span>* pb1 = (<span class="keyword">int</span>*)&amp;b;			  </span><br><span class="line">	<span class="keyword">int</span>* pb2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt; (&amp;b); </span><br><span class="line">	*pb2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>dynamic_cast：父类转化为子类</strong><br>作用：用于将父类对象的指针或者引用转化为子类对象的指针或引用（动态转换）</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(A* pa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	B* pb = <span class="keyword">dynamic_cast</span>&lt;B*&gt; (pa);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pb &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">	fun(&amp;a);   <span class="comment">// 00000000</span></span><br><span class="line">	fun(&amp;b);   <span class="comment">// 正确的地址</span></span><br><span class="line">	</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：<br>    1. <strong>dynamic_cast 只能用于*</strong> 多态类型 <strong>*，其他类型无法动态转换</strong><br>    2. <strong>dynamic_cast</strong> 失败返回 0，成功返回正确地址。<br>    <img src="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>同时，我目前认为这也是动态转化的产生的原因所在。</p>
+<h4 id="建议："><a href="#建议：" class="headerlink" title="建议："></a>建议：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们尽可能的少使用强制类型转化，尝试用其他方法去替换解决，如果不得不使用强制类型转化，那么我们也要小心，谨慎。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/C-C-的类型转换/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Markdown语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -345,11 +456,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -369,15 +488,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>红黑树 | Superao的博客</title>
+  <title>初始多线程 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="红黑树&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。">
-<meta name="keywords" content="算法与数据结构(map set)">
+  <meta name="description" content="多线程&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="红黑树">
-<meta property="og:url" content="http://yoursite.com/2019/08/14/红黑树/index.html">
+<meta property="og:title" content="初始多线程">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/初始多线程/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="红黑树&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。">
+<meta property="og:description" content="多线程&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203715365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-23T12:44:40.465Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/06/初始多线程/://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-07T06:47:30.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="红黑树">
-<meta name="twitter:description" content="红黑树&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="初始多线程">
+<meta name="twitter:description" content="多线程&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/06/初始多线程/://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -146,89 +146,56 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-红黑树" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-初始多线程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      红黑树
+      初始多线程
     </h1>
   
 
         
-        <a href="/2019/08/14/红黑树/" class="archive-article-date">
-  	<time datetime="2019-08-15T04:14:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-14</time>
+        <a href="/2019/09/06/初始多线程/" class="archive-article-date">
+  	<time datetime="2019-09-07T02:56:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们在之前实现了普通二叉搜索树，然后又实现了平衡二叉搜索树，因为平衡二叉搜索树是一颗绝对平衡的二叉搜索树，但是这种绝对平衡的二叉搜索树对于有些场景(频繁插入,删除)来说它的效率并没有我们想象的那么高，因此上就产生了红黑树，红黑树是一颗近似平衡的二叉搜索树，它在频繁的插入，删除操作的时候是比我们 AVL树效率更加高效的。因为达到绝对平衡需要用频繁的旋转来付出代价的，而近似平衡它不用频繁的旋转，从而提高了效率。虽然绝对平衡在查找效率方面优秀一些，但是在当代CPU的计算速度下，它们可以认为是同样的优秀，因此上，我们使用红黑树是比较多的。下面我们来实现一颗红黑树。</p>
+        <h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可以 <strong>在同一时间内把我们所有的事情全部做完</strong>，我们将这种处理任务的方式称之为 “并行化处理”，这样处理问题我们的效率会大大提升，在我们计算机的世界里也有这样的情景，因此，我们应该好好学习这种并行化处理。</p>
 <a id="more"></a>
-
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
-<li>红黑树: 通过从根节点到叶子结点的着色来达到最长路径不超过最短路径的二倍的一颗二叉搜索树</li>
-<li>着色规则有以下几条: <ol>
-<li>每个结点不是黑色就是红色</li>
-<li>根节点的颜色为黑色，空结点的颜色为黑色</li>
-<li>如果一个结点为红色，那么它的两个孩子的结点必须为黑色</li>
-<li>对于某一个结点来说，从它开始到叶子结点的每条路径的黑色结点数目是相同的<br><img src="https://img-blog.csdnimg.cn/20190823203720585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="红黑树示例"><br>我们分析示例图片发现:<ul>
-<li><strong>最短路径：全黑结点的路径</strong></li>
-<li><strong>最长路径：红结点最多的路径</strong></li>
-<li>其他路径的个数位于两者之间</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h2 id="树结点"><a href="#树结点" class="headerlink" title="树结点"></a>树结点</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span> color &#123;RED, BLACK&#125; color;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>, <span class="title">class</span> <span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">RBTreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    RBTreeNode(<span class="keyword">const</span> pair&lt;K,V&gt;&amp; kv) :_kv(kv), _left(<span class="literal">nullptr</span>), _right(<span class="literal">nullptr</span>), _parent(<span class="literal">nullptr</span>),</span><br><span class="line">    _col(RED) &#123;&#125;            <span class="comment">// 注：新插入结点的颜色必须为红色，因为每条路径的黑色结点数目是相同的</span></span><br><span class="line">                            <span class="comment">// 如果新插入黑色，那么会影响其他路径的黑色数目，而新插入红色结点，影响较小，只需调色</span></span><br><span class="line">    pair&lt;K, V&gt; _kv;</span><br><span class="line"></span><br><span class="line">    RBTreeNode&lt;K,V&gt;* _left;</span><br><span class="line">    RBTreeNode&lt;K,V&gt;* _right;</span><br><span class="line">    RBTreeNode&lt;K,V&gt;* _parent;</span><br><span class="line"></span><br><span class="line">    color _col;             <span class="comment">// 利用颜色来进行控制近似平衡</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>, <span class="title">class</span> <span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">RBTree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">typedef</span> RBTreeNode&lt;K, V&gt; Node;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    RBTree(Node* root = <span class="literal">nullptr</span>) :_root(root) &#123;&#125;</span><br><span class="line">    ~RBTree() &#123; Destroy(_root); &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">(Node* root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      Destroy(root-&gt;_left);</span><br><span class="line">      Destroy(root-&gt;_right);</span><br><span class="line">      <span class="keyword">delete</span> root;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Node* _root;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于插入操作来说，红黑树的插入与常规的二叉搜索树的插入是类似的，只不过是加入了颜色来控制了一下近似平衡，我们将红黑树的插入操作大致分为以下过程：</p>
+<h2 id="多线程与多进程"><a href="#多线程与多进程" class="headerlink" title="多线程与多进程"></a>多线程与多进程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多线程与多进程处理任务，它们的效率都是非常高的，多进程在处理任务是需要创建多个子进程来辅助任务的完成，而多线程处理任务是创建多个普通线程来辅助任务的完成，它们两者的功能是非常相似的，但是它们还是各自有各自的优点的。<br>多线程与多进程的区别：(互补)</p>
 <ul>
-<li>插入<ol>
-<li>查找合适的位置(空树/非空树)</li>
-<li>链接指针(左右之分)</li>
-</ol>
-</li>
-<li>控色<ol>
-<li>判断颜色，是否有连续的红色结点</li>
-<li>有，则控色；无，则不变</li>
-</ol>
-</li>
+<li>多线程在处理任务的时候它所消耗的系统资源比较少。( <strong>进程是系统分配资源的最小单位，线程是CPU调度的最小单位</strong>，因此多进程是要分配很多资源的)</li>
+<li>多线程在处理任务的时候稳定性不够高。(某个线程如果发生段错误等，那么整个进程都得退出)</li>
+<li>多线程在处理任务的时候效率相对比较高，调度切换消耗少(每个进程都有自己页表，虚拟地址空间，上下文数据等，它们在切换运行的时候，时间的消耗是比较大的，而线程它们共用同一块虚拟地址空间，页表，上下文数据等，它们在切换运行的时候，时间的消耗是比较小的)</li>
+<li>多线程在处理任务的时候通信方式是比较灵活的。(线程除了有进程间的通信方式外，还有指针，函数传参等通信方式)</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> pair&lt;K, V&gt;&amp; kv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 创建新的结点</span></span><br><span class="line">  Node* newnode = <span class="keyword">new</span> Node(kv);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(_root == <span class="literal">nullptr</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _root = newnode;</span><br><span class="line">    _root-&gt;_col = BLACK;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Node* par = <span class="literal">nullptr</span>;</span><br><span class="line">  Node* cur = _root;</span><br><span class="line">  <span class="keyword">while</span>(cur)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(cur-&gt;_kv.first &gt; kv.first)</span><br><span class="line">    &#123;</span><br><span class="line">      par = cur;</span><br><span class="line">      cur = cur-&gt;_left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(cur-&gt;_kv.first &lt; kv.first)</span><br><span class="line">    &#123;</span><br><span class="line">      par = cur;</span><br><span class="line">      cur = cur-&gt;_right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 位置找到，链接指针</span></span><br><span class="line">  cur = newnode;</span><br><span class="line">  <span class="keyword">if</span>(cur-&gt;_kv.first &lt; par-&gt;_kv.first)</span><br><span class="line">  &#123;</span><br><span class="line">    par-&gt;_left = cur;</span><br><span class="line">    cur-&gt;_parent = par;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">  &#123;</span><br><span class="line">    par-&gt;_right = cur;</span><br><span class="line">    cur-&gt;_parent = par;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 控色</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>线程的优点，对于进程来说就是它的缺点，而线程的缺点，对于进程来说就是它的优点</strong> ，我们在使用的时候需要视情况来选择比较合适的并行化处理，比如：需要稳定性的时候，我们要使用多进程(Shell终端，获取服务的服务器主机等)，其他大多数情况下我们就使用多线程来处理并行化处理。</p>
+<h2 id="到底什么是线程？"><a href="#到底什么是线程？" class="headerlink" title="到底什么是线程？"></a>到底什么是线程？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在说线程之前我们先说说什么是进程，站在我们用户的角度，进程就是一个运行中的程序，而在操作系统眼里，进程是一个控制程序(用代码生成的可执行文件)运行的控制块，简称PCB，一般由一个结构体(Linux下为task_struct)来描述该程序运行的各种信息。在Linux操作系统下，我们没有正真意义上的线程，它的线程是由PCB模拟实现出来的，因此上，线程就是一个轻量级的进程，PCB相较于传统的操作系统更加轻量化，而我们之前说的进程就是由一个线程组，当然这和我们传统的操作系统相比是有区别的。</strong><br><img src="://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="线程进程的图示"><br>我们发现平时写Demo都是第一种情况下的程序，我们可以根据这个图示来好好的理解一下是什么线程，是什么是进程。</p>
+<h4 id="pid-tid-tgid"><a href="#pid-tid-tgid" class="headerlink" title="pid/tid/tgid"></a>pid/tid/tgid</h4><ul>
+<li>pid = LWP轻量级继承ID</li>
+<li>tid = 线程的首地址(每个线程在虚拟地址空间中有一块自己的区域，该区域的首地址就是tid)</li>
+<li>tgid = 线程组ID</li>
+</ul>
+<h2 id="线程间的共享与独有"><a href="#线程间的共享与独有" class="headerlink" title="线程间的共享与独有"></a>线程间的共享与独有</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我清楚了什么是线程之后，我们来说一说每个线程之间的差距，如何对它们进行合理的分配，即线程的独有与共享.</p>
+<ul>
+<li>共享: 虚拟地址空间(mm_struct)，页表，信号处理方式，文件描述符(file_struct)，当前工作路径，用户ID/组ID</li>
+<li>独有: 调用栈，寄存器信息，信号屏蔽字，errno<br><img src="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt> </li>
+</ul>
+<h2 id="多线程的基本操作"><a href="#多线程的基本操作" class="headerlink" title="多线程的基本操作"></a>多线程的基本操作</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Linux中没有直接操作线程的接口让我们来进行操作，但是大佬们为我们在用户态封装了一套线程库来供我们方便使用。</p>
+<h4 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="comment">// 一个线程创建后，默认为joinable属性，该属性的线程退出时需要被等待</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="控色"><a href="#控色" class="headerlink" title="控色"></a>控色</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果有连续的红色结点，那么我们需要调色，我们对结点的颜色控制的目标就是为了满足着色规则，这样才能达到红黑树的要求，我们大致将红黑树的调色分为以下三种：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190823203715365.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="红黑树抽象模型"></p>
-<ol>
-<li>cur 为红色，par 为红色，ppar 为黑色，u 为红色</li>
-<li>cur 为红色，par 为红色，ppar 为黑色，u 为黑色/不存在(cur par ppar 为斜线)</li>
-<li>cur 为红色，par 为红色，ppar 为黑色，u 为黑色/不存在(cur par ppar 为折线)</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 当par cur都为红色时，需要继续调色</span></span><br><span class="line"><span class="keyword">while</span>(par &amp;&amp; par-&gt;_col == RED)</span><br><span class="line">&#123;</span><br><span class="line">  Node* ppar = par-&gt;_parent;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ppar 的左子树</span></span><br><span class="line">  <span class="keyword">if</span>(ppar &amp;&amp; par == ppar-&gt;_left)</span><br><span class="line">  &#123;</span><br><span class="line">    Node* u = ppar-&gt;_right;</span><br><span class="line">    <span class="comment">// 情况 1</span></span><br><span class="line">    <span class="keyword">if</span>(u &amp;&amp; u-&gt;_col == BLACK)</span><br><span class="line">    &#123;</span><br><span class="line">      par-&gt;_col = u-&gt;_col = BLACK;</span><br><span class="line">      ppar-&gt;_col = RED;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 持续调色</span></span><br><span class="line">      cur = ppar;</span><br><span class="line">      par = cur-&gt;_parent;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 情况 2 / 3</span></span><br><span class="line">    <span class="keyword">if</span>(u == <span class="literal">nullptr</span> || (u &amp;&amp; u-&gt;_col == BLACK))</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">// 将情况 3 转化为情况 2</span></span><br><span class="line">      <span class="keyword">if</span>(par &amp;&amp; cur == par-&gt;_right)</span><br><span class="line">      &#123;</span><br><span class="line">        RototeL(par);</span><br><span class="line">        swap(par, cur);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 处理情况 2 </span></span><br><span class="line">      RotateR(ppar);</span><br><span class="line">      ppar-&gt;_col = RED;</span><br><span class="line">      par-&gt;_col = BLACK;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ppar 的右子树</span></span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(ppar &amp;&amp; par == ppar-&gt;_right)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _root-&gt;_col = BLACK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="线程的终止"><a href="#线程的终止" class="headerlink" title="线程的终止"></a>线程的终止</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="comment">// return 退出</span></span><br><span class="line"><span class="keyword">void</span> pthread_exit(<span class="keyword">void</span> *retval); <span class="comment">// 线程退出</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>; <span class="comment">// 退出一个指定的线程</span></span><br><span class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>); <span class="comment">// 获取自身线程的tid</span></span><br><span class="line"><span class="comment">// 注意：每个线程(joinable)退出的时候，都需要被等待，如果不等待退出的那块进程的资源还在内存中没有被释放，因此就会成为僵死线程，</span></span><br><span class="line"><span class="comment">// 我们可以在终端进行查看，但是终端只显示主线程的状态，因此我们无法查看到普通线程僵死的状态，但是我们必须清楚这一点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主线程在return之后整个进程都会被退出，其他方式的退出不会引起这样的情况发生，主线程退出之后，其他线程依然还在工作</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="检测"><a href="#检测" class="headerlink" title="检测"></a>检测</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们写完红黑树后，需要对红黑树进行检测，如果不用特殊的方法来进行检测的话，那么它和常规的二叉搜索树是没有任何区别的，我们自己写的漏洞也是无法检测出来的。</p>
-<h6 id="如何检测一颗树为红黑树？"><a href="#如何检测一颗树为红黑树？" class="headerlink" title="如何检测一颗树为红黑树？"></a>如何检测一颗树为红黑树？</h6><ul>
-<li>空树是一颗红黑树</li>
-<li>非空树<ul>
-<li>自身是一颗红黑树</li>
-<li>左，右子树也是一颗红黑树<h6 id="如何检测自身是否为红黑树？-调色规则"><a href="#如何检测自身是否为红黑树？-调色规则" class="headerlink" title="如何检测自身是否为红黑树？(调色规则)"></a>如何检测自身是否为红黑树？(调色规则)</h6><ul>
-<li>1.根结点的颜色为黑色</li>
-<li>2.每条路径的黑色结点的数目是相同的(统计)</li>
-<li>3.不能出现连续的红色结点</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">IsRBTree</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  Node* root = _root;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 空树为红黑树</span></span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 检测根节点是否为黑色</span></span><br><span class="line">  <span class="keyword">if</span>(root-&gt;_col != BLACK)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 统计获取到任意一条路径的黑色结点</span></span><br><span class="line">  Node* cur = root;</span><br><span class="line">  <span class="keyword">size_t</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(cur)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span>(cur-&gt;_col == BLACK)</span><br><span class="line">    &#123;</span><br><span class="line">      count++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    cur = cur-&gt;_left;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 统计每条路径的黑色结点</span></span><br><span class="line">  <span class="keyword">size_t</span> k = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> isRBTree(root, k, count);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isRBTree</span><span class="params">(Node* root, <span class="keyword">size_t</span> k, <span class="keyword">size_t</span> count)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 走到 nullptr 的时候，检测黑色结点数目是否相同</span></span><br><span class="line">  <span class="keyword">if</span>(root == <span class="literal">nullptr</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 以 count 为基准，进行判断</span></span><br><span class="line">    <span class="keyword">if</span>(k != count)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">cout</span> &lt;&lt; <span class="string">"错误：每条路径的黑色结点数目必须是相同的"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 统计黑色结点</span></span><br><span class="line">  <span class="keyword">if</span>(root-&gt;_col == BLACK)</span><br><span class="line">  &#123;</span><br><span class="line">    k++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不能出现连续的红色结点</span></span><br><span class="line">  Node* par = root-&gt;_parent;</span><br><span class="line">  <span class="keyword">if</span>(par-&gt;_col == RED &amp;&amp; root-&gt;_col == RED)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"错误：不能出现连续的红色结点"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 观察左，右子树是否为红黑树</span></span><br><span class="line">  <span class="keyword">return</span> isRBTree(root-&gt;_left, k, count) &amp;&amp; isRBTree(root-&gt;_right, k, count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="线程的等待"><a href="#线程的等待" class="headerlink" title="线程的等待"></a>线程的等待</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **retval)</span></span>;</span><br><span class="line"><span class="comment">// 获取线程的返回值，并回收资源</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 红黑树在书写的过程中，一定要保证没有空指针问题，每次在书写的时候，先考虑一下，结点有没有为空的情况；红黑树在性能方面还是比较优的一种二叉搜索树，这一切都是它通过颜色来控制近似平衡所带来的优点，我们利用它封装出了map set 容器，这样我们就可以利用简单的操作来实现一些性能更优的算法和功能。<br><a href="https://github.com/superao/C-/blob/master/RBT.h" target="_blank" rel="noopener">红黑树完整代码</a></p>
+<h4 id="线程的分离"><a href="#线程的分离" class="headerlink" title="线程的分离"></a>线程的分离</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">// 将某个线程的joinable属性设置为detach属性，此属性的线程退出的时候，自动释放资源</span></span><br><span class="line"><span class="comment">// 适用于不需要返回数据直接分离即可的线程</span></span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -268,7 +235,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法与数据结构(map set)</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -324,7 +291,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/14/红黑树/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/06/初始多线程/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -338,18 +305,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/21/单例模式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          单例模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/10/平衡二叉搜索树/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">平衡二叉搜索树</div>
+    <a href="/2019/09/01/哈希冲突-开散列/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">哈希冲突-开散列</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -376,7 +334,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#红黑树"><span class="toc-number">1.</span> <span class="toc-text">红黑树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结点"><span class="toc-number">1.2.</span> <span class="toc-text">树结点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结构"><span class="toc-number">1.3.</span> <span class="toc-text">树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入"><span class="toc-number">1.4.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#控色"><span class="toc-number">1.5.</span> <span class="toc-text">控色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#检测"><span class="toc-number">1.6.</span> <span class="toc-text">检测</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#如何检测一颗树为红黑树？"><span class="toc-number">1.6.0.0.0.1.</span> <span class="toc-text">如何检测一颗树为红黑树？</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#如何检测自身是否为红黑树？-调色规则"><span class="toc-number">1.6.0.0.0.2.</span> <span class="toc-text">如何检测自身是否为红黑树？(调色规则)</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.7.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多线程"><span class="toc-number">1.</span> <span class="toc-text">多线程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程与多进程"><span class="toc-number">1.1.</span> <span class="toc-text">多线程与多进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#到底什么是线程？"><span class="toc-number">1.2.</span> <span class="toc-text">到底什么是线程？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pid-tid-tgid"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">pid/tid/tgid</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程间的共享与独有"><span class="toc-number">1.3.</span> <span class="toc-text">线程间的共享与独有</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程的基本操作"><span class="toc-number">1.4.</span> <span class="toc-text">多线程的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的创建"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">线程的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的终止"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">线程的终止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的等待"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">线程的等待</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的分离"><span class="toc-number">1.4.0.4.</span> <span class="toc-text">线程的分离</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -390,7 +348,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="红黑树" data-title="红黑树" data-url="http://yoursite.com/2019/08/14/红黑树/"></div>
+	<div class="ds-thread" data-thread-key="初始多线程" data-title="初始多线程" data-url="http://yoursite.com/2019/09/06/初始多线程/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
