@@ -16,13 +16,13 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="多线程&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://yoursite.com/2019/09/06/初始多线程/://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-07T06:47:30.448Z">
+<meta property="og:updated_time" content="2019-09-07T06:51:33.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初始多线程">
 <meta name="twitter:description" content="多线程&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/06/初始多线程/://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -176,7 +176,7 @@
 <li>多线程在处理任务的时候通信方式是比较灵活的。(线程除了有进程间的通信方式外，还有指针，函数传参等通信方式)</li>
 </ul>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>线程的优点，对于进程来说就是它的缺点，而线程的缺点，对于进程来说就是它的优点</strong> ，我们在使用的时候需要视情况来选择比较合适的并行化处理，比如：需要稳定性的时候，我们要使用多进程(Shell终端，获取服务的服务器主机等)，其他大多数情况下我们就使用多线程来处理并行化处理。</p>
-<h2 id="到底什么是线程？"><a href="#到底什么是线程？" class="headerlink" title="到底什么是线程？"></a>到底什么是线程？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在说线程之前我们先说说什么是进程，站在我们用户的角度，进程就是一个运行中的程序，而在操作系统眼里，进程是一个控制程序(用代码生成的可执行文件)运行的控制块，简称PCB，一般由一个结构体(Linux下为task_struct)来描述该程序运行的各种信息。在Linux操作系统下，我们没有正真意义上的线程，它的线程是由PCB模拟实现出来的，因此上，线程就是一个轻量级的进程，PCB相较于传统的操作系统更加轻量化，而我们之前说的进程就是由一个线程组，当然这和我们传统的操作系统相比是有区别的。</strong><br><img src="://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="线程进程的图示"><br>我们发现平时写Demo都是第一种情况下的程序，我们可以根据这个图示来好好的理解一下是什么线程，是什么是进程。</p>
+<h2 id="到底什么是线程？"><a href="#到底什么是线程？" class="headerlink" title="到底什么是线程？"></a>到底什么是线程？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在说线程之前我们先说说什么是进程，站在我们用户的角度，进程就是一个运行中的程序，而在操作系统眼里，进程是一个控制程序(用代码生成的可执行文件)运行的控制块，简称PCB，一般由一个结构体(Linux下为task_struct)来描述该程序运行的各种信息。在Linux操作系统下，我们没有正真意义上的线程，它的线程是由PCB模拟实现出来的，因此上，线程就是一个轻量级的进程，PCB相较于传统的操作系统更加轻量化，而我们之前说的进程就是由一个线程组，当然这和我们传统的操作系统相比是有区别的。</strong><br><img src="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="线程进程的图示"><br>我们发现平时写Demo都是第一种情况下的程序，我们可以根据这个图示来好好的理解一下是什么线程，是什么是进程。</p>
 <h4 id="pid-tid-tgid"><a href="#pid-tid-tgid" class="headerlink" title="pid/tid/tgid"></a>pid/tid/tgid</h4><ul>
 <li>pid = LWP轻量级继承ID</li>
 <li>tid = 线程的首地址(每个线程在虚拟地址空间中有一块自己的区域，该区域的首地址就是tid)</li>
@@ -462,15 +462,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,7 +478,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -490,11 +490,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
