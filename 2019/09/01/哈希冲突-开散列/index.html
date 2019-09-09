@@ -8,18 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>哈希冲突-开散列 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="开散列&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在解决哈希冲突的时候，我们有两种解决思路，一种是闭散列的解决方式，我们在前面的博客已经提到过，在这篇博客中，我们重点来说一下我们的开散列解决哈希冲突的问题，开散列在解决哈希冲突的时候，不但大大的节约了我们的内存空间，而且它的查找效率也没有发生太大的改变，因此这也是我们学习开散列的主要原因所在。">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="哈希冲突-开散列">
 <meta property="og:url" content="http://yoursite.com/2019/09/01/哈希冲突-开散列/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="开散列&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在解决哈希冲突的时候，我们有两种解决思路，一种是闭散列的解决方式，我们在前面的博客已经提到过，在这篇博客中，我们重点来说一下我们的开散列解决哈希冲突的问题，开散列在解决哈希冲突的时候，不但大大的节约了我们的内存空间，而且它的查找效率也没有发生太大的改变，因此这也是我们学习开散列的主要原因所在。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-09-01T09:34:36.476Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190909144058805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190909145803994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-09T07:12:46.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈希冲突-开散列">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:description" content="开散列&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在解决哈希冲突的时候，我们有两种解决思路，一种是闭散列的解决方式，我们在前面的博客已经提到过，在这篇博客中，我们重点来说一下我们的开散列解决哈希冲突的问题，开散列在解决哈希冲突的时候，不但大大的节约了我们的内存空间，而且它的查找效率也没有发生太大的改变，因此这也是我们学习开散列的主要原因所在。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190909144058805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -163,7 +166,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="开散列"><a href="#开散列" class="headerlink" title="开散列"></a>开散列</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在解决哈希冲突的时候，我们有两种解决思路，一种是闭散列的解决方式，我们在前面的博客已经提到过，在这篇博客中，我们重点来说一下我们的开散列解决哈希冲突的问题，开散列在解决哈希冲突的时候，不但大大的节约了我们的内存空间，而且它的查找效率也没有发生太大的改变，因此这也是我们学习开散列的主要原因所在。</p>
+<a id="more"></a>
+
+<h2 id="开散列解决方法"><a href="#开散列解决方法" class="headerlink" title="开散列解决方法"></a>开散列解决方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 开散列解决哈希冲突的主要方法是将所有冲突的值链接到它所对应的位置上，这样不管有多少冲突的值都可以链成一条链表，这种解决方式可以充分的利用空间，从而即保持了高效又减少了内存的浪费，但是这种解决方法还是有一点点的问题，比如我们的一组数据中冲突的值太多了，那么这样的话，链接到某个位置的链表就会很长，这样的话，对于大量数据的话，这时效率还是会低很多的，因此，终极的解决方法是： <strong>当某个位置冲突的值太多了，那么这时候我们可以考虑不挂链表而挂成一颗红黑树</strong> ，这样的话，我们的效率就会不受到外界因素的影响。<br><img src="https://img-blog.csdnimg.cn/20190909144058805.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="扩容问题"><a href="#扩容问题" class="headerlink" title="扩容问题"></a>扩容问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于每一个哈希表它都需要控制它的负载因子，开散列的负载因子我们一般控制的比较大，但是到达一定的程度后，我们还是需要增容，因此上，不管闭散列，开散列它都需要进行扩容重新映射到新的位置上，这样其实是哈希表一个致命的缺点，查找效率很高，但是没有红黑树稳定，下面图示演示了它们的差别：<br><img src="https://img-blog.csdnimg.cn/20190909145803994.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="红黑树和哈希表的效率比较"></p>
+<h4 id="分析："><a href="#分析：" class="headerlink" title="分析："></a>分析：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过折线图的分析，我们发现随着数据量的增大，它会发生一次增容，从而导致效率大大降低为 <strong>O(logn)</strong> ，但是只要起初控制好数据量与容量的关系，那么它的效率还是非常高的。 <strong>对于增容导致的全部数据重新映射的场景下，我们也可以利用一致性哈希来解决</strong> </p>
+
       
 
       
@@ -197,6 +206,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -299,7 +319,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#开散列"><span class="toc-number">1.</span> <span class="toc-text">开散列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#开散列解决方法"><span class="toc-number">1.1.</span> <span class="toc-text">开散列解决方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩容问题"><span class="toc-number">1.2.</span> <span class="toc-text">扩容问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">1.2.0.1.</span> <span class="toc-text">分析：</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -431,11 +451,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -443,11 +463,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,6 +472,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
