@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>位图 | Superao的博客</title>
+  <title>位图/布隆过滤器 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="位图">
-<meta property="og:url" content="http://yoursite.com/2019/09/08/位图/index.html">
+<meta property="og:title" content="位图&#x2F;布隆过滤器">
+<meta property="og:url" content="http://yoursite.com/2019/09/09/位图-布隆过滤器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-09-09T06:06:04.862Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190909175845166.png">
+<meta property="og:updated_time" content="2019-09-09T10:03:06.655Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="位图">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="位图&#x2F;布隆过滤器">
+<meta name="twitter:description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190909175845166.png">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -143,27 +145,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-位图" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-位图-布隆过滤器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      位图
+      位图/布隆过滤器
     </h1>
   
 
         
-        <a href="/2019/09/08/位图/" class="archive-article-date">
-  	<time datetime="2019-09-09T06:06:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-08</time>
+        <a href="/2019/09/09/位图-布隆过滤器/" class="archive-article-date">
+  	<time datetime="2019-09-09T07:31:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="哈希应用"><a href="#哈希应用" class="headerlink" title="哈希应用"></a>哈希应用</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海量数据处理的时候我们使用这些东西可以快速的帮助我们完成我们的任务，这也是哈希最常见的一些应用了。</p>
+<a id="more"></a>
+
+<h2 id="数据的大小"><a href="#数据的大小" class="headerlink" title="数据的大小"></a>数据的大小</h2><ul>
+<li>1B = 8bit    1KB = 1024B    1MB = 1024KB    1G = 1024MB</li>
+<li>1G = 1024 * 1024 * 1024 = 1073741824B(字节) = 10亿7千万字节<br>经过我们的运算，我们发现1G的内存最多储存10亿7千万字节的数据，我们粗略的计算一下，如果我们的计算机有4G内存的话，操作系统用掉1G内存，那么此时我们就只剩下3G内存了，如果数据量太大的话，我们内存中根本放不下我们的数据，更不用进行查找之类的一些操作了，因此上，在这种情况下，我们可以利用我们的位图进行解决。</li>
+</ul>
+<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位图是一种利用哈希的思想，将数据(数字)与比特位之间建立一一映射的一种数据结构，我们可以利用这种映射关系从而对我们的比特位进行标记，根据这种标记可以查找我们的数据在不在问题了，这样解决了一部分海量数据的问题，在次基础上位图还附带了一些其他的功能。</p>
+<h6 id="位图的所有功能"><a href="#位图的所有功能" class="headerlink" title="位图的所有功能:"></a>位图的所有功能:</h6><ul>
+<li>查找：将所有的数据映射到对应的比特位上，进行查找的时候，如果该数据对应的比特位为 1，那么说明存在，反之不在。</li>
+<li>去重：将所有的数据在映射到对应的比特位上时，如果发现对应的位置已经为 1，那么将不做任何处理，继续映射下一个数据。</li>
+<li>排序：将所有的数据映射到对应位置后，依次遍历每个比特位，然后输出每个对应的数据，这样就一定程度上完成了排序。</li>
+</ul>
+<h6 id="位图的常用场景"><a href="#位图的常用场景" class="headerlink" title="位图的常用场景:"></a>位图的常用场景:</h6><ul>
+<li>海量，无重复数据查找在不在的场景</li>
+<li>查找两个数据的交集，并集等场景</li>
+</ul>
+<p><a href="https://github.com/superao/C-/blob/master/bitmap.cpp" target="_blank" rel="noopener">位图的实现</a></p>
+<h6 id="代码实现过程中一些小问题的总结："><a href="#代码实现过程中一些小问题的总结：" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><p><img src="https://img-blog.csdnimg.cn/20190909175845166.png" alt></p>
+
       
 
       
@@ -197,6 +218,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -247,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/08/位图/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/09/位图-布隆过滤器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,7 +322,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希应用"><span class="toc-number">1.</span> <span class="toc-text">哈希应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的大小"><span class="toc-number">1.1.</span> <span class="toc-text">数据的大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位图"><span class="toc-number">1.2.</span> <span class="toc-text">位图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的所有功能"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">位图的所有功能:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的常用场景"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">位图的常用场景:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结："><span class="toc-number">1.2.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -304,7 +336,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="位图" data-title="位图" data-url="http://yoursite.com/2019/09/08/位图/"></div>
+	<div class="ds-thread" data-thread-key="位图-布隆过滤器" data-title="位图/布隆过滤器" data-url="http://yoursite.com/2019/09/09/位图-布隆过滤器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -426,6 +458,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -435,10 +471,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
