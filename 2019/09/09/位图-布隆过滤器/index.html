@@ -17,7 +17,9 @@
 <meta property="og:description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190909175845166.png">
-<meta property="og:updated_time" content="2019-09-09T10:03:06.655Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/201909100950253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-10T02:54:21.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位图&#x2F;布隆过滤器">
 <meta name="twitter:description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
@@ -172,18 +174,34 @@
 <li>1B = 8bit    1KB = 1024B    1MB = 1024KB    1G = 1024MB</li>
 <li>1G = 1024 * 1024 * 1024 = 1073741824B(字节) = 10亿7千万字节<br>经过我们的运算，我们发现1G的内存最多储存10亿7千万字节的数据，我们粗略的计算一下，如果我们的计算机有4G内存的话，操作系统用掉1G内存，那么此时我们就只剩下3G内存了，如果数据量太大的话，我们内存中根本放不下我们的数据，更不用进行查找之类的一些操作了，因此上，在这种情况下，我们可以利用我们的位图进行解决。</li>
 </ul>
-<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位图是一种利用哈希的思想，将数据(数字)与比特位之间建立一一映射的一种数据结构，我们可以利用这种映射关系从而对我们的比特位进行标记，根据这种标记可以查找我们的数据在不在问题了，这样解决了一部分海量数据的问题，在次基础上位图还附带了一些其他的功能。</p>
+<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位图是一种利用哈希的思想，将数据(数字)与比特位之间建立一一映射的一种数据结构，我们可以利用这种映射关系从而对我们的比特位进行标记，根据这种标记可以查找我们的数据在不在问题了，这样解决了一部分海量数据的问题，在此基础上位图还附带了一些其他的功能。</p>
 <h6 id="位图的所有功能"><a href="#位图的所有功能" class="headerlink" title="位图的所有功能:"></a>位图的所有功能:</h6><ul>
-<li>查找：将所有的数据映射到对应的比特位上，进行查找的时候，如果该数据对应的比特位为 1，那么说明存在，反之不在。</li>
-<li>去重：将所有的数据在映射到对应的比特位上时，如果发现对应的位置已经为 1，那么将不做任何处理，继续映射下一个数据。</li>
-<li>排序：将所有的数据映射到对应位置后，依次遍历每个比特位，然后输出每个对应的数据，这样就一定程度上完成了排序。</li>
+<li><strong>查找：将所有的数据映射到对应的比特位上，进行查找的时候，如果该数据对应的比特位为 1，那么说明存在，反之不在。</strong></li>
+<li><strong>去重：将所有的数据在映射到对应的比特位上时，如果发现对应的位置已经为 1，那么将不做任何处理，继续映射下一个数据。</strong></li>
+<li><strong>排序：将所有的数据映射到对应位置后，依次遍历每个比特位，然后输出每个对应的数据，这样就一定程度上完成了排序。</strong></li>
 </ul>
 <h6 id="位图的常用场景"><a href="#位图的常用场景" class="headerlink" title="位图的常用场景:"></a>位图的常用场景:</h6><ul>
-<li>海量，无重复数据查找在不在的场景</li>
+<li>海量，无重复，无符号数据查找在不在的场景</li>
 <li>查找两个数据的交集，并集等场景</li>
 </ul>
 <p><a href="https://github.com/superao/C-/blob/master/bitmap.cpp" target="_blank" rel="noopener">位图的实现</a></p>
-<h6 id="代码实现过程中一些小问题的总结："><a href="#代码实现过程中一些小问题的总结：" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><p><img src="https://img-blog.csdnimg.cn/20190909175845166.png" alt></p>
+<h6 id="代码实现过程中一些小问题的总结："><a href="#代码实现过程中一些小问题的总结：" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><ul>
+<li>位图开辟空间的大小取决于此堆数据所能表示的最大范围 </li>
+<li>在位图中有些位置的 1 可能会被解释为负数的符号位，这样导致在统计 1 个数的时候，”除2” 和 “右移一位” 会有差别。</li>
+<li>使用无符号数据类型或使用右移操作符，都可以保证统计个数不会出错。<br><img src="https://img-blog.csdnimg.cn/20190909175845166.png" alt></li>
+</ul>
+<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们实现位图之后，我们发现了一个情况，它的数据类型必须是整形，这样对我们其他类型的数据非常的不友好，而且我们使用其他类型的数据场景也是非常多的，为了解决这一问题，我们可以利用 <strong>哈希函数 + 位图</strong> 来帮助我们进行解决，这种数据结构为 <strong>布隆过滤器</strong>。 哈希函数将不同类型的数据转化为特定的下标地址，位图在相应的地址下标进行标记，从而使我们处理数据时更加方便。<br><img src="https://img-blog.csdnimg.cn/201909100950253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<h6 id="布隆过滤器的缺点"><a href="#布隆过滤器的缺点" class="headerlink" title="布隆过滤器的缺点"></a>布隆过滤器的缺点</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希函数在映射位置的时候都会引起一种数据冲突的现象，虽然这种情况比较小，但是数据量太大的话就 <strong>导致了我们原来不存在的数据，在进行判断的时候判断为它存在，使我们的不存在的判断不精确，但是存在的判断使非常精确的</strong></p>
+<h6 id="误判"><a href="#误判" class="headerlink" title="误判"></a>误判</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从理论上讲，这个误判是一定存在的，我们需要解决的是在一定的数据量中如何降低我们的误判率，我们唯一的入手点就是哈希函数，随着数据量的增加，我们需要通过多个哈希函数将一个数据映射到多个位置上，这样的话，在一定程度上大大降低了我们的误判率。<br><img src="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br><a href>代码实现</a></p>
+<h6 id="代码实现过程中一些小问题的总结：-1"><a href="#代码实现过程中一些小问题的总结：-1" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><h2 id="哈希切割"><a href="#哈希切割" class="headerlink" title="哈希切割"></a>哈希切割</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们虽然可以将有些数据从磁盘中读取，然后用一个/多个比特位进行标记状态，但是如果数据量太大的话，我们用一个比特位都放不下，那么这时候位图/布隆过滤器就解决不了这种问题，因此上，我们这时候就需要使用哈希切分来帮助我们完成各种操作。</p>
+<h2 id="哈希切分的作用："><a href="#哈希切分的作用：" class="headerlink" title="哈希切分的作用："></a>哈希切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希切分是利用一种哈希函数将一个非常大的文件切割为几个小文件的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以处理任何大小的海量数据，不管有多大的数据都可以进行处理。</p>
+<ul>
+<li>给一个超过100G大小的log file, log中存着IP地址, 设计算法找到出现次数最多的IP地址？ 与上题条件相同，如何找到top K的IP？ </li>
+<li>给定100亿个整数，设计算法找到只出现一次的整数？</li>
+<li>给两个文件，分别有100亿个整数，我们只有1G内存，如何找到两个文件交集？</li>
+<li>1个文件有100亿个int，1G内存，设计算法找到出现次数不超过2次的所有整数？(次数 &lt;= 2 : 3种状态，利用 2 个比特位或者两张位图)</li>
+<li>给两个文件，分别有100亿个query，我们只有1G内存，如何找到两个文件交集？分别给出精确算法和近似算法？</li>
+</ul>
 
       
 
@@ -322,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希应用"><span class="toc-number">1.</span> <span class="toc-text">哈希应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的大小"><span class="toc-number">1.1.</span> <span class="toc-text">数据的大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位图"><span class="toc-number">1.2.</span> <span class="toc-text">位图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的所有功能"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">位图的所有功能:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的常用场景"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">位图的常用场景:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结："><span class="toc-number">1.2.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希应用"><span class="toc-number">1.</span> <span class="toc-text">哈希应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的大小"><span class="toc-number">1.1.</span> <span class="toc-text">数据的大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位图"><span class="toc-number">1.2.</span> <span class="toc-text">位图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的所有功能"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">位图的所有功能:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的常用场景"><span class="toc-number">1.2.0.0.0.2.</span> <span class="toc-text">位图的常用场景:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结："><span class="toc-number">1.2.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#布隆过滤器"><span class="toc-number">1.3.</span> <span class="toc-text">布隆过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#布隆过滤器的缺点"><span class="toc-number">1.3.0.0.0.1.</span> <span class="toc-text">布隆过滤器的缺点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#误判"><span class="toc-number">1.3.0.0.0.2.</span> <span class="toc-text">误判</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结：-1"><span class="toc-number">1.3.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希切割"><span class="toc-number">1.4.</span> <span class="toc-text">哈希切割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希切分的作用："><span class="toc-number">1.5.</span> <span class="toc-text">哈希切分的作用：</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -450,10 +468,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
@@ -470,10 +484,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
@@ -483,6 +493,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
