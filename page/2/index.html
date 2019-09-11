@@ -663,6 +663,13 @@
 
 <p>输出结果：<br><img src="https://img-blog.csdnimg.cn/20190729160339209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_7" alt="在这里插入图片描述"><br>我们从结果分析可得：<br>子类继承了两个父类的虚表指针，子类还是会像单继承一样将虚表进行拷贝，修改等一系列操作，<strong><em>但是需要注意的是，子类会将自己新加的虚函数放到第一个继承的父类的虚表中。</em></strong> 在实现多态的时候，还是相同的，谁调用就将虚表指针映射到哪个表上。</p>
 <p><img src="https://img-blog.csdnimg.cn/20190729171223112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="常见的相关习题："><a href="#常见的相关习题：" class="headerlink" title="常见的相关习题："></a>常见的相关习题：</h4><ul>
+<li>inline函数可以是虚函数吗？答：不能，因为 inline 函数在编译的时候并没有进行函数压栈，因此 inline 函数没有地址，无法把地址放到虚函数表中</li>
+<li>静态成员可以是虚函数吗？答：不能，因为静态成员函数没有 this 指针，使用类型::成员函数的调用方式无法访问虚函数表，所以静态成员函数无法放进虚函数表</li>
+<li>构造函数可以是虚函数吗？答：不能，因为 <strong>对象中的虚函数表指针是在构造函数初始化列表阶段才初始化的</strong></li>
+<li>对象访问普通函数快还是虚函数更快？答：首先如果是普通对象，是一样快的。如果是指针对象或者是引用对象，则调用的普通函数快，因为构成多态，运行时调用虚函数需要到虚函数表中去查找</li>
+<li>析构函数可以是虚函数吗？什么场景下析构函数是虚函数？ 答：析构函数可以是虚函数; 当我们使用父类指针对象的时候，我们既可以让该指针指向父类，也可以让该指针指向子类(“截断”)，这时候析构函数我们需要将它设置为虚函数，如果不设置为虚函数，它只会调用父类的析构函数，从而子类的那块空间没有释放，这时候就会导致内存泄漏。</li>
+</ul>
 
       
 
@@ -1109,6 +1116,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -1117,19 +1128,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1137,11 +1136,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729170530165.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729160339209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_7">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729171223112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-07T08:43:57.009Z">
+<meta property="og:updated_time" content="2019-09-11T08:42:43.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚函数与虚函数表">
 <meta name="twitter:description" content="虚函数与虚函数表再议&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。 声明：32位系统，VS2013下编译。1. 单继承下的虚函">
@@ -177,6 +177,13 @@
 
 <p>输出结果：<br><img src="https://img-blog.csdnimg.cn/20190729160339209.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_7" alt="在这里插入图片描述"><br>我们从结果分析可得：<br>子类继承了两个父类的虚表指针，子类还是会像单继承一样将虚表进行拷贝，修改等一系列操作，<strong><em>但是需要注意的是，子类会将自己新加的虚函数放到第一个继承的父类的虚表中。</em></strong> 在实现多态的时候，还是相同的，谁调用就将虚表指针映射到哪个表上。</p>
 <p><img src="https://img-blog.csdnimg.cn/20190729171223112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="常见的相关习题："><a href="#常见的相关习题：" class="headerlink" title="常见的相关习题："></a>常见的相关习题：</h4><ul>
+<li>inline函数可以是虚函数吗？答：不能，因为 inline 函数在编译的时候并没有进行函数压栈，因此 inline 函数没有地址，无法把地址放到虚函数表中</li>
+<li>静态成员可以是虚函数吗？答：不能，因为静态成员函数没有 this 指针，使用类型::成员函数的调用方式无法访问虚函数表，所以静态成员函数无法放进虚函数表</li>
+<li>构造函数可以是虚函数吗？答：不能，因为 <strong>对象中的虚函数表指针是在构造函数初始化列表阶段才初始化的</strong></li>
+<li>对象访问普通函数快还是虚函数更快？答：首先如果是普通对象，是一样快的。如果是指针对象或者是引用对象，则调用的普通函数快，因为构成多态，运行时调用虚函数需要到虚函数表中去查找</li>
+<li>析构函数可以是虚函数吗？什么场景下析构函数是虚函数？ 答：析构函数可以是虚函数; 当我们使用父类指针对象的时候，我们既可以让该指针指向父类，也可以让该指针指向子类(“截断”)，这时候析构函数我们需要将它设置为虚函数，如果不设置为虚函数，它只会调用父类的析构函数，从而子类的那块空间没有释放，这时候就会导致内存泄漏。</li>
+</ul>
 
       
 
@@ -324,7 +331,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#虚函数与虚函数表再议"><span class="toc-number">1.</span> <span class="toc-text">虚函数与虚函数表再议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#声明：32位系统，VS2013下编译。"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">声明：32位系统，VS2013下编译。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-单继承下的虚函数，虚函数表"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 单继承下的虚函数，虚函数表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-多继承下的虚函数，虚函数表"><span class="toc-number">1.1.</span> <span class="toc-text">2. 多继承下的虚函数，虚函数表</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#虚函数与虚函数表再议"><span class="toc-number">1.</span> <span class="toc-text">虚函数与虚函数表再议</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#声明：32位系统，VS2013下编译。"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">声明：32位系统，VS2013下编译。</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-单继承下的虚函数，虚函数表"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 单继承下的虚函数，虚函数表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">总结：通过运行结果我们发现，子类重写了哪个虚函数就将哪个虚函数进行覆盖，如果有新加的虚函数，那么就将虚函数添加到虚表的后面。不同的对象虚表指针映射不同的虚表，谁调用就将虚表指针映射谁的虚表上。</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-多继承下的虚函数，虚函数表"><span class="toc-number">1.1.</span> <span class="toc-text">2. 多继承下的虚函数，虚函数表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#常见的相关习题："><span class="toc-number">1.1.0.1.</span> <span class="toc-text">常见的相关习题：</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -448,6 +455,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -456,19 +467,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -476,11 +475,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/201909100950253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190910132950967.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-10T05:43:55.438Z">
+<meta property="og:updated_time" content="2019-09-11T08:45:17.526Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="海量数据处理">
 <meta name="twitter:description" content="哈希应用&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海">
@@ -196,8 +196,8 @@
 <h6 id="误判"><a href="#误判" class="headerlink" title="误判"></a>误判</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从理论上讲，这个误判是一定存在的，我们需要解决的是在一定的数据量中如何降低我们的误判率，我们唯一的入手点就是哈希函数，随着数据量的增加，我们需要 <strong>通过多个哈希函数将一个数据映射到多个位置上</strong> ，这样的话，在一定程度上大大降低了我们的误判率。<br><img src="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br><a href>布隆过滤器的实现</a></p>
 <h6 id="代码实现过程中一些小问题的总结：-1"><a href="#代码实现过程中一些小问题的总结：-1" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><h2 id="哈希切割-平均切割"><a href="#哈希切割-平均切割" class="headerlink" title="哈希切割/平均切割"></a>哈希切割/平均切割</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们虽然可以将有些数据从磁盘中读取，然后用一个/多个比特位进行标记状态，但是如果数据量太大的话，我们用一个比特位都放不下，那么这时候位图/布隆过滤器就解决不了这种问题，因此上，我们这时候就需要使用哈希切分来帮助我们完成各种操作。</p>
 <h2 id="平均切分的作用："><a href="#平均切分的作用：" class="headerlink" title="平均切分的作用："></a>平均切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 平均切分是将一个非常大的文件切割为几个小文件的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以处理任何大小的海量数据，不管有多大的数据都可以进行处理。</p>
-<h2 id="哈希切分的作用："><a href="#哈希切分的作用：" class="headerlink" title="哈希切分的作用："></a>哈希切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希切分是利用哈希函数将一个非常大的文件中相同的数据切割到同一个文件中的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以海量数据的大文件进行分类。( <strong>通常用于文件的分类</strong> )</p>
-<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>我们在进行海量数据处理的时候，我们应该根据数据的情况以及处理要求来进行选择如何切分，对于大多数数据我们一般采用平均切分，当需要对文件进行分类的时候，我们一般才使用哈希切分。</strong> </p>
+<h2 id="哈希切分的作用："><a href="#哈希切分的作用：" class="headerlink" title="哈希切分的作用："></a>哈希切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希切分是利用哈希函数将一个非常大的文件中相同的数据切割到同一个文件中的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以海量数据的大文件进行分类。( <strong>通常用于文件的分类 / 将相同的东西放到同一个文件中</strong> )</p>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>我们在进行海量数据处理的时候，我们应该根据数据的情况以及处理要求来进行选择如何切分，对于大多数数据我们一般采用平均切分，当需要对文件进行分类的时候，我们一般才使用哈希切分，我们适场景而定</strong> </p>
 <h2 id="海量数据习题："><a href="#海量数据习题：" class="headerlink" title="海量数据习题："></a>海量数据习题：</h2><ul>
 <li>给一个超过100G大小的log file, log中存着IP地址, 设计算法找到出现次数最多的IP地址？ 与上题条件相同，如何找到top K的IP？ </li>
 <li>给定100亿个整数，设计算法找到只出现一次的整数？</li>
@@ -467,6 +467,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -475,19 +479,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,11 +487,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
