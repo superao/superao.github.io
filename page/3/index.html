@@ -144,6 +144,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-多态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/07/多态/">多态</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/07/多态/" class="archive-article-date">
+  	<time datetime="2019-08-07T08:31:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="“-变化多端-“的-多态"><a href="#“-变化多端-“的-多态" class="headerlink" title="“ 变化多端 “的 多态"></a>“ 变化多端 “的 <strong><em>多态</em></strong></h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;世间万物都有不同的呈现方式，我们作为世界的改变者（程序员）来说，那么我们如何使我们的程序展现出不同的呈现方式呐？下面我们将由浅入深来了解一下 <strong><em>多态</em></strong>。</p>
+<h2 id="多态："><a href="#多态：" class="headerlink" title="多态："></a>多态：</h2><p><img src="https://img-blog.csdnimg.cn/20190729113710967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="动态多态声明：32位操作系统，环境-VS2013"><a href="#动态多态声明：32位操作系统，环境-VS2013" class="headerlink" title="动态多态声明：32位操作系统，环境 VS2013"></a>动态多态声明：32位操作系统，环境 VS2013</h3><h3 id="1-什么是多态呐？"><a href="#1-什么是多态呐？" class="headerlink" title="1.什么是多态呐？"></a>1.什么是多态呐？</h3><p><strong>》》功能</strong>：多态我们从字面意思上来理解，意思就是：多种多样的状态，其实在程序中我们也有相似意思，即<strong>当完成某一个动作时，不同的对象会产生不同的结果</strong>。<br><strong>例如</strong>：同样买票，学生买票和成人买票价格就是不一样的呐。</p>
+<p><strong>》》本质</strong>：多态的本质其实就是子类重写了父类的虚函数（virtual），在调用的时候，只能使用父类的指针或者引用来调用虚函数，从而使不同的对象（具有继承关系的类对象），调用 <strong><em>同一函数</em></strong>，产生了不同的结果。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// 虚函数</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Pay</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"成人全价"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span> :</span> <span class="keyword">public</span> Person</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="comment">// 虚函数</span></span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Pay</span><span class="params">()</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"学生半票"</span> &lt;&lt; <span class="built_in">endl</span>;  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Person* p = <span class="keyword">new</span> Person;</span><br><span class="line">	p-&gt;Pay();</span><br><span class="line"></span><br><span class="line">	Person* s = <span class="keyword">new</span> Student;</span><br><span class="line">	s-&gt;Pay();</span><br><span class="line">	</span><br><span class="line">	Person pt;</span><br><span class="line">	Student st;</span><br><span class="line">	Person&amp; pp = pt;</span><br><span class="line">	Student&amp; ss = st;</span><br><span class="line">	pp.Pay();</span><br><span class="line">	ss.Pay();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20190729100045661.png" alt="在这里插入图片描述"></p>
+<h3 id="2-多态是如何实现的呐？"><a href="#2-多态是如何实现的呐？" class="headerlink" title="2.多态是如何实现的呐？"></a>2.多态是如何实现的呐？</h3><p>》》首先需要借助两个东西来实现：<strong>“ 虚函数表 和 虚函数 “</strong><br>》》多态需要两个条件，子类重写了父类的虚函数，对象利用父类的引用或者指针来调用虚函数。（因为这样的话，我们既可以指向父类也可以指向子类。（子类会进行切片））</p>
+<p>》》多态的底层是这样实现的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test1</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	Person p;</span><br><span class="line">	Student s;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(Person) &lt;&lt; <span class="built_in">endl</span>;      <span class="comment">// 结果为 4</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(Student) &lt;&lt; <span class="built_in">endl</span>;     <span class="comment">// 结果为 4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们借用上面两个类，测试得出，父类的结果为 4, 子类的结果也为 4，这是为什么呐？</p>
+<p><img src="https://img-blog.csdnimg.cn/20190729092255791.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>通过测试，我们发现，父类中多了一个指针（_vfptr），子类继承了父类的指针( _vfprt )</p>
+<h4 id="注意：子类是没有虚函数表指针的，它是继承了父类的指针。"><a href="#注意：子类是没有虚函数表指针的，它是继承了父类的指针。" class="headerlink" title="注意：子类是没有虚函数表指针的，它是继承了父类的指针。"></a><strong>注意：子类是没有虚函数表指针的，它是继承了父类的指针。</strong></h4><p> 因为指针大小为 4，我们把这个指针称作 <strong><em>虚函数表指针</em></strong>，这个指针指向了一张 <strong><em>虚函数表</em></strong> （本质是一个存放函数地址的指针数组），然后这个虚函数表中存放了每个虚函数的地址。即：<br> <img src="https://img-blog.csdnimg.cn/20190729105440769.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 多态实现过程：<br> <img src="https://img-blog.csdnimg.cn/20190729095929505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br> 最后在不同的表中call不同的函数。</p>
+<h3 id="3-多态实现过程中的小细节问题"><a href="#3-多态实现过程中的小细节问题" class="headerlink" title="3. 多态实现过程中的小细节问题"></a>3. 多态实现过程中的小细节问题</h3><ul>
+<li>虚函数表指针在什么时候进行的初始化？虚函数表在什么时候初始化呐？<br>虚函数表指针在构造函数初始化列表的时候进行初始化的，因此上，我们也可以推出构造函数不能成为虚函数；虚函数是在编译的时候完成的，因此，是在编译时期进行初始化的。</li>
+<li>为什么不将虚函数/函数放到每个对象中？<br>因为放到每个对象中，如何对象多了，那么会造成空间的浪费，放到代码段，可以实现共享。</li>
+<li>编译器如何在虚函数表中找到对应的虚函数呐？<br>虚函数在虚函数表中的位置与虚函数的声明位置是一致的，在找哪个虚函数的时候，只需对虚函数表指针加上对应偏移量即可。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/07/多态/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-多继承-菱形继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
