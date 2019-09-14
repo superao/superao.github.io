@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>组合与继承 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。">
+  <meta name="description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承可以说是都是代码的一种复用，继承是一种耦合度比较高的一种代码复用，当我们的需求发生变化时，这种高耦合的代码复用是非常难抵御变化的，而组合是一种低耦合的一种代码复用，它是比较容易抵御需求发生变化的。它们各自的优缺点我们在代码中通过注释来详细说明，并且通过代码知道什么时候使用组合，什么时候使用继承。">
 <meta name="keywords" content="C++ 继承">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组合与继承">
 <meta property="og:url" content="http://yoursite.com/2019/08/24/组合与继承/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。">
+<meta property="og:description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承可以说是都是代码的一种复用，继承是一种耦合度比较高的一种代码复用，当我们的需求发生变化时，这种高耦合的代码复用是非常难抵御变化的，而组合是一种低耦合的一种代码复用，它是比较容易抵御需求发生变化的。它们各自的优缺点我们在代码中通过注释来详细说明，并且通过代码知道什么时候使用组合，什么时候使用继承。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-08-27T07:00:45.239Z">
+<meta property="og:updated_time" content="2019-09-14T17:19:57.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="组合与继承">
-<meta name="twitter:description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。">
+<meta name="twitter:description" content="继承与组合&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 组合与继承可以说是都是代码的一种复用，继承是一种耦合度比较高的一种代码复用，当我们的需求发生变化时，这种高耦合的代码复用是非常难抵御变化的，而组合是一种低耦合的一种代码复用，它是比较容易抵御需求发生变化的。它们各自的优缺点我们在代码中通过注释来详细说明，并且通过代码知道什么时候使用组合，什么时候使用继承。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -163,7 +163,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="继承与组合"><a href="#继承与组合" class="headerlink" title="继承与组合"></a>继承与组合</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。</p>
+        <h1 id="继承与组合"><a href="#继承与组合" class="headerlink" title="继承与组合"></a>继承与组合</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 组合与继承可以说是都是代码的一种复用，继承是一种耦合度比较高的一种代码复用，当我们的需求发生变化时，这种高耦合的代码复用是非常难抵御变化的，而组合是一种低耦合的一种代码复用，它是比较容易抵御需求发生变化的。它们各自的优缺点我们在代码中通过注释来详细说明，并且通过代码知道什么时候使用组合，什么时候使用继承。</p>
 <a id="more"></a>
 <p><a href="https://github.com/superao/C-/blob/master/%E7%BB%A7%E6%89%BF%E4%B8%8E%E7%BB%84%E5%90%88.cpp" target="_blank" rel="noopener">组合与继承</a></p>
 
@@ -275,11 +275,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/24/利用红黑树适配出-set-map-容器/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/24/适配map和set容器/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          利用红黑树适配出 set_map 容器
+          利用红黑树适配出 set/map 容器
         
       </div>
     </a>
@@ -453,10 +453,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -474,6 +470,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,22 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>C_C++的类型转换 | Superao的博客</title>
+  <title>利用红黑树适配出 set/map 容器 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C语言的类型转换 隐式类型转换：算术转化，类型转化，… 显式类型转换1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    C++强制类型转换 static_cast reinterpret_cast const_cast dynamic_cast  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;有人会有疑问，为什么C++要搞出来这种">
-<meta name="keywords" content="C++">
+  <meta name="description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
+<meta name="keywords" content="C++ 泛型 适配器模式的应用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C_C++的类型转换">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/C-C-的类型转换/index.html">
+<meta property="og:title" content="利用红黑树适配出 set&#x2F;map 容器">
+<meta property="og:url" content="http://yoursite.com/2019/08/24/适配map和set容器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="C语言的类型转换 隐式类型转换：算术转化，类型转化，… 显式类型转换1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    C++强制类型转换 static_cast reinterpret_cast const_cast dynamic_cast  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;有人会有疑问，为什么C++要搞出来这种">
+<meta property="og:description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-07T08:52:03.249Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190825115151736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190827204941606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190827222951724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-14T16:34:53.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C_C++的类型转换">
-<meta name="twitter:description" content="C语言的类型转换 隐式类型转换：算术转化，类型转化，… 显式类型转换1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    C++强制类型转换 static_cast reinterpret_cast const_cast dynamic_cast  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;有人会有疑问，为什么C++要搞出来这种">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="利用红黑树适配出 set&#x2F;map 容器">
+<meta name="twitter:description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -145,64 +148,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-C-C-的类型转换" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-适配map和set容器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C_C++的类型转换
+      利用红黑树适配出 set/map 容器
     </h1>
   
 
         
-        <a href="/2019/08/07/C-C-的类型转换/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/08/24/适配map和set容器/" class="archive-article-date">
+  	<time datetime="2019-08-25T02:23:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h1><ul>
-<li><strong>隐式类型转换</strong>：算术转化，类型转化，…</li>
-<li><strong>显式类型转换</strong><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = (<span class="keyword">int</span>)<span class="string">'a'</span>;    <span class="comment">// C 中所有显示类型转化。</span></span><br></pre></td></tr></table></figure>
+        <h1 id="适配-map-set-容器"><a href="#适配-map-set-容器" class="headerlink" title="适配 map/set 容器"></a>适配 map/set 容器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适配出不同的上层容器。</p>
+<a id="more"></a>
 
+<h2 id="观察源码"><a href="#观察源码" class="headerlink" title="观察源码"></a>观察源码</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们要学习这种泛型的适配，那么我们就需要保持一颗敬畏之心，我们先来仔细的观察一下标准库是怎么实现的，然后等我们理解了大佬们的操作之后，再来照猫画虎实现一下这种泛型的适配。<br><img src="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="map/set泛型适配的主要逻辑"><br><img src="https://img-blog.csdnimg.cn/20190825115151736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="标准库中的主要框架"><br>通过上述的分析我们发现，上层的 map / set 里面的 value_type 是不同的类型，它是通过 value_type 来传给它的下一层 rb_tree，最后一直传递到 _rb_tree_node，让它自己知道到底是该储存 Key，还是 pair 结构体，这样通过一步一步传递的方式实现了泛型适配。</p>
+<h2 id="模拟实现-插入，迭代器"><a href="#模拟实现-插入，迭代器" class="headerlink" title="模拟实现(插入，迭代器)"></a>模拟实现(插入，迭代器)</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过分析上述的代码框架我们知道了如何利用红黑树去实现这种泛型适配，因此，站在学习的角度上来说，我们应该完整的实现一下这种泛型的适配，当然，我们实现的时候没必要像标准库那么复杂，我们只是学习它的思路，实现相似的功能，下图是我们实现的大体框架：<br><img src="https://img-blog.csdnimg.cn/20190827204941606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="泛型适配"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是我们大体的实现思路， <strong>我们利用模板参数从上层一直传递到下层，我们通过这样的方式来告诉红黑树里面存的到底是什么东西，同时我们也理解了更深一层的泛型，我们从上往下看，不管你是pair&lt;K, V&gt;模型，还是K模型，我们都把它视为是一种类型，然后在结点中存储这种类型即可。我们从下向上看，我结点中储存就是一种V的类型，我不管你是什么类型，你传我什么类型我就是什么类型，我们现在回过头来发现其实利用一颗树适配出两个不同类型的容器也就那么一回事，没有我们起初想的那么神奇。</strong></p>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过分析我们的大体框架之后，我们这时就利用利用红黑树的成员函数适配出我们所需要的接口 <strong>(适配器思想)</strong>，但是在适配的过程中我们需要注意一些小小的几个细节问题，剩下的其他方面都是红黑树的知识。</p>
+<ul>
+<li>比较大小问题<ul>
+<li>我们都知道向树中插入的时候插入的是一个存放值的结点，由于它是一颗二叉搜索树，因此上，结点中的值需要支持比较大小才能完成插入，对于我们的K模型来说可以直接比较，但是K/V模型不行，需要我们从中取出K来进行比较，这时就用到了我们上图中写的仿函数了。</li>
+</ul>
+</li>
+<li>返回值问题<ul>
+<li>map 容器支持[]的操作，我们放到 operator[] 的时候解释</li>
+</ul>
 </li>
 </ul>
-<h1 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h1><ul>
-<li><strong>static_cast</strong></li>
-<li><strong>reinterpret_cast</strong></li>
-<li><strong>const_cast</strong></li>
-<li><strong>dynamic_cast</strong></li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 因为二叉搜索树的插入避免不了要进行比较大小，但是两种不同类型，比较方式是不同的:</span></span><br><span class="line"><span class="comment">// Key 直接比，而 Key / Value 需要取出 Key 来比; 因此上这时候传入同样的val，返回不同的结果，那非仿函数莫属了。</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>, <span class="title">class</span> <span class="title">V</span>, <span class="title">class</span> <span class="title">KeyOfVal</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">RBTree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> V&amp; val)</span></span></span><br><span class="line"><span class="function">  </span>&#123;</span><br><span class="line">    <span class="comment">// 用来比较的仿函数对象</span></span><br><span class="line">    KeyOfVal kov;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 这里的比较需要仿函数来完成 ，因为我们也不知道传进来的是什么，不同的类型最后返回不同的值，返回之后再进行比较</span></span><br><span class="line">    <span class="keyword">if</span>(kov(cur-&gt;_val) &gt; kov(val))	</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 完整代码见文末</span></span><br><span class="line">&#125;;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 适配两个容器</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Set</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 仿函数</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SetKeyOfVal</span> </span></span><br><span class="line"><span class="class">    &#123;</span> </span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">const</span> K&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> K&amp; val)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> K&amp; val)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// 适配</span></span><br><span class="line">      <span class="keyword">return</span> _rbt.Insert(val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    RBTree&lt;K, K, SetKeyOfVal&gt; _rbt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>, <span class="title">class</span> <span class="title">V</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">Map</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 仿函数</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">MapKeyOfVal</span> </span></span><br><span class="line"><span class="class">    &#123;</span> </span><br><span class="line">      <span class="keyword">public</span>:</span><br><span class="line">      <span class="function"><span class="keyword">const</span> K&amp; <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> pair&lt;K, V&gt;&amp; val)</span></span></span><br><span class="line"><span class="function">      </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> val.first;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Insert</span><span class="params">(<span class="keyword">const</span> pair&lt;K, V&gt;&amp; val)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> _rbt.Insert(val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    RBTree&lt;K, pair&lt;K, V&gt;, MapKeyOfVal&gt; _rbt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 迭代器是每个容器必不可少的部分，我们经过前面容器的学习，到现在也是比较了解迭代器了，迭代器的本质就是一个指针而已，我们实现map set容器的迭代器之前先在树层面上写一个迭代器类方便我们适配出两个容器的迭代器，下图是我们大体的实现框架：<br><img src="https://img-blog.csdnimg.cn/20190827222951724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="迭代器的大致框架"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上图就是我们实现迭代器的大致思路，只有这样才能实现出我们想要的迭代器，如果直接在容器层面是实现不出来迭代器，因为容器中就只有一整树，没有其他东西，因此无法遍历到每一个结点上，只有在树层面上才能实现遍历到每一个结点上。为了保持良好的封装性，我们将迭代器写在一个新的类中，重所需要的各种操作符。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// begin() : 返回红黑树的最左结点</span></span><br><span class="line"> <span class="comment">// end() : 返回nullptr(_root的父节点)</span></span><br><span class="line"></span><br><span class="line"> <span class="comment">// operator++ 走二叉树的中序(左根右)</span></span><br><span class="line"> <span class="number">1.</span>获取当前结点</span><br><span class="line"> <span class="number">2.</span>如果当前结点的右为空，说明我访问完了; </span><br><span class="line"><span class="number">1.</span>观察父节点，如果我是父亲的右，说明父亲也访问完了，走到父亲位置，继续观察，循环此过程。</span><br><span class="line"><span class="number">2.</span>观察父结点，如果我是父亲的左，说明父亲没有访问完，那么返回父亲结点即可。</span><br><span class="line"> <span class="number">3.</span>如果当前结点的右不为空，那么去右树的最后结点即可。</span><br><span class="line"> <span class="comment">// operator* : 返回结点中的值的引用 return _pnode-&gt;_val; (this-&gt;_pnode-&gt;_val)</span></span><br><span class="line"> <span class="comment">// operator-&gt; : 返回结点中的值的地址 return &amp;(operator*()); </span></span><br><span class="line"> <span class="comment">// (因为我们想要利用迭代器 + 箭头访问到里面的数据, C++在这里省去了一个箭头)</span></span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/superao/C-/blob/master/rbt.h" target="_blank" rel="noopener">完整代码</a></p>
+<h4 id="map的operator"><a href="#map的operator" class="headerlink" title="map的operator"></a>map的operator<a href="K/V"></a></h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; map的[]操作是利用K来返回V的一种功能，我们要想实现它，就必须了解它的全部用法，我们先来看下面的例子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt; m;</span><br><span class="line">m[<span class="string">"sort"</span>];           <span class="comment">// 查找 + 插入(V的缺省值)</span></span><br><span class="line">m[<span class="string">"sort"</span>] = <span class="string">"xxxx"</span>;  <span class="comment">// 查找 + 修改(赋值)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 本质是在红黑树中寻找sort(K)的位置(查找)，找到之后，不管以前存不存在，返回V的引用，然后在赋值修改</span></span><br><span class="line">V&amp; <span class="keyword">operator</span>[](<span class="keyword">const</span> K&amp; key)</span><br><span class="line">&#123;</span><br><span class="line">  pair&lt;iterator, <span class="keyword">bool</span>&gt; it = _rbt.Insert(make_pair(key, V());</span><br><span class="line">  <span class="keyword">return</span> it.first-&gt;second;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果Insert只返回bool是无法完成该操作的，因为可以修改V，那么就需要迭代器来进行支持</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>set的完整代码:<a href="https://github.com/superao/C-/blob/master/rbt.h" target="_blank" rel="noopener">rbt.h</a> <a href="https://github.com/superao/C-/blob/master/Myset.h" target="_blank" rel="noopener">Myset.h</a> <a href="https://github.com/superao/C-/blob/master/set.cpp" target="_blank" rel="noopener">set.cpp</a></li>
+<li>map的完整代码:<a href="https://github.com/superao/C-/blob/master/rbt.h" target="_blank" rel="noopener">rbt.h</a> <a href="https://github.com/superao/C-/blob/master/Mymap.h" target="_blank" rel="noopener">Mymap.h</a> <a href="https://github.com/superao/C-/blob/master/map.cpp" target="_blank" rel="noopener">map.cpp</a></li>
 </ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有人会有疑问，为什么C++要搞出来这种强制类型转换呐？搞这个好像没有太大的用处，我们完全可以沿袭 C 语言的做法就可以搞定强制类型转换。其实，C++搞这个的目的是<strong>为了规范程序员的代码风格，让代码更加规范，方便他人阅读，方便后期维护</strong></p>
-<ol>
-<li><strong>static_cast：</strong><br>作用：用于 <strong>“ 相关类型 “</strong> 之间的转换，通俗点说，<strong>“ 普通数字之间的转换 “。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StaticCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a);  <span class="comment">// 合法，注意使用语法</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">static_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1); </span><br><span class="line">	<span class="comment">// 不合法，不同类型的指针依然是无法完成转换的。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>reinterpret_cast：</strong><br>作用：用于 <strong>“不相关类型 “</strong> 之间的转换，通俗点说，<strong>“不同类别之间的转换”。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReinterpretCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a); </span><br><span class="line">	<span class="comment">// 不合法， 因为数字之间是相同的类别，都是数字。</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1);      <span class="comment">// 合法</span></span><br><span class="line">	<span class="comment">// 不同的指针类型是不同的类别</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a2 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span>* pc2 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (a2); <span class="comment">// 合法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>const_cast：</strong><br>作用：用于<strong>去掉 const 成员的 const 属性</strong>，一般用于<strong>指针，引用。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConstCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">10</span>;      <span class="comment">// 防止编译器优化代码</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a1 = (<span class="keyword">int</span>&amp;)a;              <span class="comment">// c 风格的强制类型转化</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt; (a); <span class="comment">// cc 风格的强制类型转化</span></span><br><span class="line">	a2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　a &lt;&lt; <span class="built_in">endl</span>;            <span class="comment">// 输出 20 </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span>* pb1 = (<span class="keyword">int</span>*)&amp;b;			  </span><br><span class="line">	<span class="keyword">int</span>* pb2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt; (&amp;b); </span><br><span class="line">	*pb2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><strong>dynamic_cast：父类转化为子类</strong><br>作用：用于将父类对象的指针或者引用转化为子类对象的指针或引用（动态转换）</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(A* pa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	B* pb = <span class="keyword">dynamic_cast</span>&lt;B*&gt; (pa);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pb &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">	fun(&amp;a);   <span class="comment">// 00000000</span></span><br><span class="line">	fun(&amp;b);   <span class="comment">// 正确的地址</span></span><br><span class="line">	</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：<br>    1. <strong>dynamic_cast 只能用于*</strong> 多态类型 <strong>*，其他类型无法动态转换</strong><br>    2. <strong>dynamic_cast</strong> 失败返回 0，成功返回正确地址。<br>    <img src="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>同时，我目前认为这也是动态转化的产生的原因所在。</p>
-<h4 id="建议："><a href="#建议：" class="headerlink" title="建议："></a>建议：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们尽可能的少使用强制类型转化，尝试用其他方法去替换解决，如果不得不使用强制类型转化，那么我们也要小心，谨慎。</p>
 
       
 
@@ -242,7 +236,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C++ 泛型 适配器模式的应用</a>
         		</li>
       		
 		</ul>
@@ -298,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/C-C-的类型转换/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/24/适配map和set容器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -312,18 +306,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/多继承-菱形继承/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/31/哈希结构/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          多继承---菱形继承
+          哈希结构
         
       </div>
     </a>
   
   
-    <a href="/2019/08/07/Markdown语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Markdown语法</div>
+    <a href="/2019/08/24/组合与继承/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">组合与继承</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -350,7 +344,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C语言的类型转换"><span class="toc-number">1.</span> <span class="toc-text">C语言的类型转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-强制类型转换"><span class="toc-number">2.</span> <span class="toc-text">C++强制类型转换</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#建议："><span class="toc-number">2.0.0.1.</span> <span class="toc-text">建议：</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#适配-map-set-容器"><span class="toc-number">1.</span> <span class="toc-text">适配 map/set 容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#观察源码"><span class="toc-number">1.1.</span> <span class="toc-text">观察源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模拟实现-插入，迭代器"><span class="toc-number">1.2.</span> <span class="toc-text">模拟实现(插入，迭代器)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#插入"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map的operator"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">map的operator</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -364,7 +358,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="C-C-的类型转换" data-title="C_C++的类型转换" data-url="http://yoursite.com/2019/08/07/C-C-的类型转换/"></div>
+	<div class="ds-thread" data-thread-key="适配map和set容器" data-title="利用红黑树适配出 set/map 容器" data-url="http://yoursite.com/2019/08/24/适配map和set容器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -490,10 +484,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -511,6 +501,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
               </li>
             
             <div class="clearfix"></div>

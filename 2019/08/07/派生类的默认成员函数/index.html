@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>派生类的默认成员函数 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现  总结如下： 不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数">
+  <meta name="description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
 <meta name="keywords" content="C++ 继承">
 <meta property="og:type" content="article">
 <meta property="og:title" content="派生类的默认成员函数">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/派生类的默认成员函数/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现  总结如下： 不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数">
+<meta property="og:description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-14T07:58:54.802Z">
+<meta property="og:updated_time" content="2019-09-14T12:28:57.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="派生类的默认成员函数">
-<meta name="twitter:description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现  总结如下： 不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数">
+<meta name="twitter:description" content="派生类的默认成员函数1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -173,6 +173,7 @@
 <li>基类自己实现，派生类自己生成</li>
 <li>基类自己实现，派生类自己实现</li>
 </ul>
+<a id="more"></a>
 <h6 id="总结如下："><a href="#总结如下：" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
 <li><strong>不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数，那么自动调用将发生错误，需要我们手动调用，但是最好我们自己在初始化列表的时候自己手动调用自己需要的构造函数。</strong></li>
 <li>生成的默认构造函数：对于自定义成员变量，它会自己调用自己的构造函数，对于内置类型，它不会进行初始化，从而导致访问出现随机值</li>
@@ -196,14 +197,11 @@
 <li><strong><em>我们最好将基类的析构函数定义为虚函数，以便构成多态，防止基类指针指向派生类时，最后清理工作不完全，导致内存泄漏。</em></strong></li>
 <li>最好不要在析构函数内抛出异常，从而打断正常的执行流，导致发生内存泄漏。</li>
 </ol>
-<h6 id="附：相关问题"><a href="#附：相关问题" class="headerlink" title="附：相关问题"></a>附：相关问题</h6><ul>
-<li>设计不能被继承的类</li>
-</ul>
-<ol>
+<h2 id="附：相关问题"><a href="#附：相关问题" class="headerlink" title="附：相关问题"></a>附：相关问题</h2><h6 id="1-设计不能被继承的类"><a href="#1-设计不能被继承的类" class="headerlink" title="1.设计不能被继承的类"></a>1.设计不能被继承的类</h6><ol>
 <li>将基类的构造函数私有化（C++98）</li>
 <li>将基类加上 final 关键字则该基类不能被继承（C++11）</li>
 </ol>
-<h6 id="派生类的切片问题"><a href="#派生类的切片问题" class="headerlink" title="派生类的切片问题"></a>派生类的切片问题</h6><p>我们将派生类对象赋值给基类对象，我们将这种赋值问题称之为切片问题，编译器是这样的进行处理：将子类中的父类部分 “ 切出来 “，再赋值给子类对象，如果是指针或者引用只指向父类的那部分。<strong>注：”切的时候 “，切的只是成员变量，不会切掉成员函数，成员函数存放在代码段，也切不调。</strong><br><img src="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h6 id="2-派生类的切片问题"><a href="#2-派生类的切片问题" class="headerlink" title="2.派生类的切片问题"></a>2.派生类的切片问题</h6><p>我们将派生类对象赋值给基类对象，我们将这种赋值问题称之为切片问题，编译器是这样的进行处理：将子类中的父类部分 “ 切出来 “，再赋值给子类对象，如果是指针或者引用只指向父类的那部分。<strong>注：”切的时候 “，切的只是成员变量，不会切掉成员函数，成员函数存放在代码段，也切不调。</strong><br><img src="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
       
 
@@ -351,7 +349,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#派生类的默认成员函数"><span class="toc-number">1.</span> <span class="toc-text">派生类的默认成员函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-构造函数"><span class="toc-number">1.1.</span> <span class="toc-text">1. 构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下："><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-拷贝构造，赋值运算"><span class="toc-number">1.2.</span> <span class="toc-text">2.拷贝构造，赋值运算</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-1"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-析构函数"><span class="toc-number">1.3.</span> <span class="toc-text">3.析构函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-2"><span class="toc-number">1.3.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#附：相关问题"><span class="toc-number">1.3.0.0.0.2.</span> <span class="toc-text">附：相关问题</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#派生类的切片问题"><span class="toc-number">1.3.0.0.0.3.</span> <span class="toc-text">派生类的切片问题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#派生类的默认成员函数"><span class="toc-number">1.</span> <span class="toc-text">派生类的默认成员函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-构造函数"><span class="toc-number">1.1.</span> <span class="toc-text">1. 构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下："><span class="toc-number">1.1.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-拷贝构造，赋值运算"><span class="toc-number">1.2.</span> <span class="toc-text">2.拷贝构造，赋值运算</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-1"><span class="toc-number">1.2.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-析构函数"><span class="toc-number">1.3.</span> <span class="toc-text">3.析构函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-2"><span class="toc-number">1.3.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附：相关问题"><span class="toc-number">1.4.</span> <span class="toc-text">附：相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-设计不能被继承的类"><span class="toc-number">1.4.0.0.0.1.</span> <span class="toc-text">1.设计不能被继承的类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-派生类的切片问题"><span class="toc-number">1.4.0.0.0.2.</span> <span class="toc-text">2.派生类的切片问题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -491,10 +489,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -512,6 +506,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
               </li>
             
             <div class="clearfix"></div>

@@ -576,19 +576,19 @@
 
 
   
-    <article id="post-利用红黑树适配出-set-map-容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-适配map和set容器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/24/利用红黑树适配出-set-map-容器/">利用红黑树适配出 set_map 容器</a>
+      <a class="article-title" href="/2019/08/24/适配map和set容器/">利用红黑树适配出 set/map 容器</a>
     </h1>
   
 
         
-        <a href="/2019/08/24/利用红黑树适配出-set-map-容器/" class="archive-article-date">
+        <a href="/2019/08/24/适配map和set容器/" class="archive-article-date">
   	<time datetime="2019-08-25T02:23:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
 </a>
         
@@ -596,7 +596,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="适配-map-set-容器"><a href="#适配-map-set-容器" class="headerlink" title="适配 map_set 容器"></a>适配 map_set 容器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适配出不同的上层容器。</p>
+        <h1 id="适配-map-set-容器"><a href="#适配-map-set-容器" class="headerlink" title="适配 map/set 容器"></a>适配 map/set 容器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适配出不同的上层容器。</p>
         
       
 
@@ -620,7 +620,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/24/利用红黑树适配出-set-map-容器/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/08/24/适配map和set容器/">展开全文 >></a>
         </p>
       
 
@@ -670,7 +670,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="继承与组合"><a href="#继承与组合" class="headerlink" title="继承与组合"></a>继承与组合</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 组合与继承都是代码的一种复用，但是它们是有一定的区别的，它们各有什么优缺点，什么时候使用组合，什么时候使用继承，我们都应该清楚，我们利用下面的代码进行分析并总结。</p>
+        <h1 id="继承与组合"><a href="#继承与组合" class="headerlink" title="继承与组合"></a>继承与组合</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 组合与继承可以说是都是代码的一种复用，继承是一种耦合度比较高的一种代码复用，当我们的需求发生变化时，这种高耦合的代码复用是非常难抵御变化的，而组合是一种低耦合的一种代码复用，它是比较容易抵御需求发生变化的。它们各自的优缺点我们在代码中通过注释来详细说明，并且通过代码知道什么时候使用组合，什么时候使用继承。</p>
         
       
 
@@ -977,10 +977,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -998,6 +994,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
               </li>
             
             <div class="clearfix"></div>
