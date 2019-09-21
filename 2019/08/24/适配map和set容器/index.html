@@ -6,24 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>利用红黑树适配出 set/map 容器 | Superao的博客</title>
+  <title>红黑树适配出 set/map 容器(深层泛型) | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适">
 <meta name="keywords" content="C++ 泛型 适配器模式的应用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="利用红黑树适配出 set&#x2F;map 容器">
+<meta property="og:title" content="红黑树适配出 set&#x2F;map 容器(深层泛型)">
 <meta property="og:url" content="http://yoursite.com/2019/08/24/适配map和set容器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190825115151736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190827204941606.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190827222951724.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-14T16:34:53.187Z">
+<meta property="og:updated_time" content="2019-09-21T03:32:59.785Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用红黑树适配出 set&#x2F;map 容器">
-<meta name="twitter:description" content="适配 map/set 容器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识">
+<meta name="twitter:title" content="红黑树适配出 set&#x2F;map 容器(深层泛型)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -155,7 +155,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      利用红黑树适配出 set/map 容器
+      红黑树适配出 set/map 容器(深层泛型)
     </h1>
   
 
@@ -168,7 +168,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="适配-map-set-容器"><a href="#适配-map-set-容器" class="headerlink" title="适配 map/set 容器"></a>适配 map/set 容器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适配出不同的上层容器。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习并且实现了红黑树之后，那么我们对于 map_set 的底层结构具有了一定性质的了解，这时候我们应该利用底层的结构适配出我们所需要的 map_set 容器，由于一棵树要适配出两种不同的模型，一种是 Key 模型，一种是 Key / Value 模型，想要解决这种问题我们必须对泛型有一定的认识，这样才可以利用下层结构适配出不同的上层容器。</p>
 <a id="more"></a>
 
 <h2 id="观察源码"><a href="#观察源码" class="headerlink" title="观察源码"></a>观察源码</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们要学习这种泛型的适配，那么我们就需要保持一颗敬畏之心，我们先来仔细的观察一下标准库是怎么实现的，然后等我们理解了大佬们的操作之后，再来照猫画虎实现一下这种泛型的适配。<br><img src="https://img-blog.csdnimg.cn/20190825115144434.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="map/set泛型适配的主要逻辑"><br><img src="https://img-blog.csdnimg.cn/20190825115151736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="标准库中的主要框架"><br>通过上述的分析我们发现，上层的 map / set 里面的 value_type 是不同的类型，它是通过 value_type 来传给它的下一层 rb_tree，最后一直传递到 _rb_tree_node，让它自己知道到底是该储存 Key，还是 pair 结构体，这样通过一步一步传递的方式实现了泛型适配。</p>
@@ -344,7 +344,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#适配-map-set-容器"><span class="toc-number">1.</span> <span class="toc-text">适配 map/set 容器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#观察源码"><span class="toc-number">1.1.</span> <span class="toc-text">观察源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模拟实现-插入，迭代器"><span class="toc-number">1.2.</span> <span class="toc-text">模拟实现(插入，迭代器)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#插入"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map的operator"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">map的operator</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#观察源码"><span class="toc-number">1.</span> <span class="toc-text">观察源码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模拟实现-插入，迭代器"><span class="toc-number">2.</span> <span class="toc-text">模拟实现(插入，迭代器)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#插入"><span class="toc-number">2.0.1.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器"><span class="toc-number">2.0.2.</span> <span class="toc-text">迭代器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map的operator"><span class="toc-number">2.0.3.</span> <span class="toc-text">map的operator</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -358,7 +358,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="适配map和set容器" data-title="利用红黑树适配出 set/map 容器" data-url="http://yoursite.com/2019/08/24/适配map和set容器/"></div>
+	<div class="ds-thread" data-thread-key="适配map和set容器" data-title="红黑树适配出 set/map 容器(深层泛型)" data-url="http://yoursite.com/2019/08/24/适配map和set容器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

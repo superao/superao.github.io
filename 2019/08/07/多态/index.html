@@ -8,23 +8,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>多态 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="多态&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
 <meta name="keywords" content="C++ 多态">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多态">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/多态/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="多态&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729113710967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729100045661.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729092255791.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729105440769.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190729095929505.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-21T03:22:19.488Z">
+<meta property="og:updated_time" content="2019-09-21T03:27:29.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多态">
-<meta name="twitter:description" content="多态&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态，因此上，我们大概分为以下两类:">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190729113710967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -169,7 +169,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：<strong>不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态</strong>，因此上，我们大概分为以下两类:</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：<strong>不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态</strong>，因此上，我们大概分为以下两类:</p>
 <a id="more"></a>
 
 <h3 id="多态的分类"><a href="#多态的分类" class="headerlink" title="多态的分类:"></a>多态的分类:</h3><p><img src="https://img-blog.csdnimg.cn/20190729113710967.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
@@ -341,7 +341,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#多态"><span class="toc-number">1.</span> <span class="toc-text">多态</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多态的分类"><span class="toc-number">1.0.1.</span> <span class="toc-text">多态的分类:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是多态呐？-WIN32-VS编译器"><span class="toc-number">1.0.2.</span> <span class="toc-text">1.什么是多态呐？(WIN32, VS编译器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态是如何实现的呐？"><span class="toc-number">1.0.3.</span> <span class="toc-text">2.多态是如何实现的呐？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多态实现过程："><span class="toc-number">1.0.4.</span> <span class="toc-text">3. 多态实现过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-多态原理的相关问题"><span class="toc-number">1.0.5.</span> <span class="toc-text">4. 多态原理的相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-相关文章链接"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">5.相关文章链接:</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#多态的分类"><span class="toc-number">1.</span> <span class="toc-text">多态的分类:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-什么是多态呐？-WIN32-VS编译器"><span class="toc-number">2.</span> <span class="toc-text">1.什么是多态呐？(WIN32, VS编译器)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-多态是如何实现的呐？"><span class="toc-number">3.</span> <span class="toc-text">2.多态是如何实现的呐？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-多态实现过程："><span class="toc-number">4.</span> <span class="toc-text">3. 多态实现过程：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-多态原理的相关问题"><span class="toc-number">5.</span> <span class="toc-text">4. 多态原理的相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-相关文章链接"><span class="toc-number">5.1.</span> <span class="toc-text">5.相关文章链接:</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

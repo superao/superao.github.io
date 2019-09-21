@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>二叉搜索树的实现 | Superao的博客</title>
+  <title>二叉搜索树(BST) | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta name="keywords" content="算法与数据结构(map set)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉搜索树的实现">
+<meta property="og:title" content="二叉搜索树(BST)">
 <meta property="og:url" content="http://yoursite.com/2019/08/08/二叉搜索树的实现/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203730297.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-23T12:45:47.616Z">
+<meta property="og:updated_time" content="2019-09-21T03:25:32.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二叉搜索树的实现">
-<meta name="twitter:description" content="二叉搜索树(BST)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
+<meta name="twitter:title" content="二叉搜索树(BST)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习了 map set 容器之后，我迫不及待的想要自己造轮子，由于 map set 的底层是 红黑树结构，红黑树是一颗二叉搜索树 ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203730297.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -152,7 +152,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      二叉搜索树的实现
+      二叉搜索树(BST)
     </h1>
   
 
@@ -165,7 +165,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="二叉搜索树-BST"><a href="#二叉搜索树-BST" class="headerlink" title="二叉搜索树(BST)"></a>二叉搜索树(BST)</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学习了 <strong>map set</strong> 容器之后，我迫不及待的想要自己造轮子，由于 <strong>map set</strong> 的底层是 <strong>红黑树结构，红黑树是一颗二叉搜索树</strong> ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学习了 <strong>map set</strong> 容器之后，我迫不及待的想要自己造轮子，由于 <strong>map set</strong> 的底层是 <strong>红黑树结构，红黑树是一颗二叉搜索树</strong> ，因此我们先实现最简单的二叉搜索树，一步一步的递推到红黑树。</p>
 <a id="more"></a>
 
 <h2 id="树结点"><a href="#树结点" class="headerlink" title="树结点"></a>树结点</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Key 模型</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">K</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">BSTreeNode</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    BSTreeNode(<span class="keyword">const</span> K&amp; key) :_key(key), _left(<span class="literal">nullptr</span>), _right(<span class="literal">nullptr</span>) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    K _key;                  <span class="comment">// 用来储存数据</span></span><br><span class="line">    BSTreeNode&lt;K&gt;* _left;    <span class="comment">// 左孩子</span></span><br><span class="line">    BSTreeNode&lt;K&gt;* _right;   <span class="comment">// 右孩子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -342,7 +342,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#二叉搜索树-BST"><span class="toc-number">1.</span> <span class="toc-text">二叉搜索树(BST)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#树结点"><span class="toc-number">1.1.</span> <span class="toc-text">树结点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结构"><span class="toc-number">1.2.</span> <span class="toc-text">树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入"><span class="toc-number">1.3.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找"><span class="toc-number">1.4.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除"><span class="toc-number">1.5.</span> <span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结:</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#树结点"><span class="toc-number">1.</span> <span class="toc-text">树结点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结构"><span class="toc-number">2.</span> <span class="toc-text">树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入"><span class="toc-number">3.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#查找"><span class="toc-number">4.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除"><span class="toc-number">5.</span> <span class="toc-text">删除</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number"></span> <span class="toc-text">总结:</span></a>
                     </div>
                 </span>
             </div>
@@ -356,7 +356,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="二叉搜索树的实现" data-title="二叉搜索树的实现" data-url="http://yoursite.com/2019/08/08/二叉搜索树的实现/"></div>
+	<div class="ds-thread" data-thread-key="二叉搜索树的实现" data-title="二叉搜索树(BST)" data-url="http://yoursite.com/2019/08/08/二叉搜索树的实现/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

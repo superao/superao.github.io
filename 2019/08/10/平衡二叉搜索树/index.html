@@ -6,25 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>平衡二叉搜索树 | Superao的博客</title>
+  <title>平衡二叉搜索树(AVLTree) | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="平衡二叉搜索树(AVLTree)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体的实现一颗平衡二叉搜索树。">
 <meta name="keywords" content="算法与数据结构(map set)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="平衡二叉搜索树">
+<meta property="og:title" content="平衡二叉搜索树(AVLTree)">
 <meta property="og:url" content="http://yoursite.com/2019/08/10/平衡二叉搜索树/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="平衡二叉搜索树(AVLTree)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体的实现一颗平衡二叉搜索树。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203754697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019082320381118.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203800667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203815801.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190823203806674.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-08-23T12:49:29.206Z">
+<meta property="og:updated_time" content="2019-09-21T03:29:19.153Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="平衡二叉搜索树">
-<meta name="twitter:description" content="平衡二叉搜索树(AVLTree)&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体">
+<meta name="twitter:title" content="平衡二叉搜索树(AVLTree)">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体的实现一颗平衡二叉搜索树。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190823203754697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -156,7 +156,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      平衡二叉搜索树
+      平衡二叉搜索树(AVLTree)
     </h1>
   
 
@@ -169,7 +169,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="平衡二叉搜索树-AVLTree"><a href="#平衡二叉搜索树-AVLTree" class="headerlink" title="平衡二叉搜索树(AVLTree)"></a>平衡二叉搜索树(AVLTree)</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体的实现一颗平衡二叉搜索树。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;二叉搜索树是一种在查找过程中是非常优的一种数据结构，在应用上我们经常使用二叉搜索树来进行查找，但是二叉搜索树有一定的缺陷，如果查找一组有序的数据，那么我们普通的二叉搜索树的效率是非常慢的，因此上，我们发现了平衡二叉搜索树，对于这样的一颗树我们的查找效率即使在有序数据中也是非常优的。下面我们来具体的实现一颗平衡二叉搜索树。</p>
 <a id="more"></a>
 
 <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
@@ -320,7 +320,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          红黑树
+          红黑树(RBTree)
         
       </div>
     </a>
@@ -354,7 +354,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#平衡二叉搜索树-AVLTree"><span class="toc-number">1.</span> <span class="toc-text">平衡二叉搜索树(AVLTree)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结点"><span class="toc-number">1.2.</span> <span class="toc-text">树结点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结构"><span class="toc-number">1.3.</span> <span class="toc-text">树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入"><span class="toc-number">1.4.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#旋转"><span class="toc-number">1.5.</span> <span class="toc-text">旋转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">1.6.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结点"><span class="toc-number">2.</span> <span class="toc-text">树结点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#树结构"><span class="toc-number">3.</span> <span class="toc-text">树结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入"><span class="toc-number">4.</span> <span class="toc-text">插入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#旋转"><span class="toc-number">5.</span> <span class="toc-text">旋转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -368,7 +368,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="平衡二叉搜索树" data-title="平衡二叉搜索树" data-url="http://yoursite.com/2019/08/10/平衡二叉搜索树/"></div>
+	<div class="ds-thread" data-thread-key="平衡二叉搜索树" data-title="平衡二叉搜索树(AVLTree)" data-url="http://yoursite.com/2019/08/10/平衡二叉搜索树/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

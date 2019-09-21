@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>哈希结构 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="哈希结构&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此，我们还">
 <meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="哈希结构">
 <meta property="og:url" content="http://yoursite.com/2019/08/31/哈希结构/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="哈希结构&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此，我们还">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190901153924476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190901161113759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090116464536.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-01T09:28:20.673Z">
+<meta property="og:updated_time" content="2019-09-21T03:27:17.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哈希结构">
-<meta name="twitter:description" content="哈希结构&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： 当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。 因此，我们还">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190901153924476.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -167,7 +167,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="哈希结构"><a href="#哈希结构" class="headerlink" title="哈希结构"></a>哈希结构</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： <strong>当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。</strong> 因此，我们还需要学习比红黑树更加高效的数据结构来优化我们常用的一些基本操作。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们学习了红黑树之后，我们发现它的查找效率是非常高效的，而且很多的其他操作也是依赖于查找操作的，但是红黑树的查找还不是最优的一种数据结构，它的效率取决于树的高度，当结点数目过多时，那么它的效率会差那么一点点的，我们理想状态是： <strong>当拿到一个关键值，不用进行比较直接就可以拿到我们想要的数据，这才是我们理想的状态。</strong> 因此，我们还需要学习比红黑树更加高效的数据结构来优化我们常用的一些基本操作。</p>
 <a id="more"></a>
 
 <h2 id="哈希结构的本质"><a href="#哈希结构的本质" class="headerlink" title="哈希结构的本质"></a>哈希结构的本质</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们谈到哈希结构，就必须先知道什么是哈希结构? <strong>其实哈希结构是由两部分组成，一部分是由类似于&lt;数组&gt;一样的储存形式组成，另一部分由&lt;哈希函数&gt;组成，首先哈希函数是用来将某个关键值转化为一种特定地址/下标的一种函数，然后我们可以利用特定的地址/下标在数组中找到特定的位置，将需要储存的东西插入到它所对应的位置，进行储存，我们将此过程称之为 “映射”，查找过程也是类似的，我们同样可以利用哈希函数计算得到的值映射到对应的位置，然后进行一些其他的操作。</strong></p>
@@ -321,7 +321,7 @@
   
   
     <a href="/2019/08/24/适配map和set容器/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">利用红黑树适配出 set/map 容器</div>
+      <div class="article-nav-title">红黑树适配出 set/map 容器(深层泛型)</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -348,7 +348,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#哈希结构"><span class="toc-number">1.</span> <span class="toc-text">哈希结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希结构的本质"><span class="toc-number">1.1.</span> <span class="toc-text">哈希结构的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的哈希函数"><span class="toc-number">1.2.</span> <span class="toc-text">常用的哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">1.2.0.1.</span> <span class="toc-text">分析：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希冲突"><span class="toc-number">1.3.</span> <span class="toc-text">哈希冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">1.4.</span> <span class="toc-text">总结：</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希结构的本质"><span class="toc-number">1.</span> <span class="toc-text">哈希结构的本质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用的哈希函数"><span class="toc-number">2.</span> <span class="toc-text">常用的哈希函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分析："><span class="toc-number">2.0.1.</span> <span class="toc-text">分析：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希冲突"><span class="toc-number">3.</span> <span class="toc-text">哈希冲突</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">4.</span> <span class="toc-text">总结：</span></a></li></ol>
                     </div>
                 </span>
             </div>
