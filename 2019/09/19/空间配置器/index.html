@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>C/C++的类型转换 | Superao的博客</title>
+  <title>空间配置器 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
-<meta name="keywords" content="C++">
+  <meta name="description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
+<meta name="keywords" content="STL容器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C&#x2F;C++的类型转换">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/Cpp的类型转化/index.html">
+<meta property="og:title" content="空间配置器">
+<meta property="og:url" content="http://yoursite.com/2019/09/19/空间配置器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
+<meta property="og:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-14T15:33:58.488Z">
+<meta property="og:updated_time" content="2019-09-20T04:04:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C&#x2F;C++的类型转换">
-<meta name="twitter:description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="空间配置器">
+<meta name="twitter:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -145,67 +143,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Cpp的类型转化" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-空间配置器" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      C/C++的类型转换
+      空间配置器
     </h1>
   
 
         
-        <a href="/2019/08/07/Cpp的类型转化/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/09/19/空间配置器/" class="archive-article-date">
+  	<time datetime="2019-09-20T01:39:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="C-C-语言类型转化的总结"><a href="#C-C-语言类型转化的总结" class="headerlink" title="C/C++语言类型转化的总结:"></a>C/C++语言类型转化的总结:</h1><h4 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h4><ul>
-<li>隐式类型转换：算术转化，类型转化，整形提升，…</li>
-<li>显式类型转换：(目标类型)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = (<span class="keyword">int</span>)<span class="string">'a'</span>;    <span class="comment">// C 中所有显示类型转化。</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不加注释，我们是比较难看懂某些代码的，因此上，C++语言为了规范管理我们的类型转化，它提出了四种类型转换的关键字，每个关键字都有它不同的转换作用，这样可以更好的，规范的实现类型转化，进而让代码更加规范，方便他人阅读，方便后期维护**</p>
+        <h1 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。</p>
 <a id="more"></a>
 
-<h4 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h4><ul>
-<li><strong>static_cast</strong></li>
-<li><strong>reinterpret_cast</strong></li>
-<li><strong>const_cast</strong></li>
-<li><strong>dynamic_cast</strong><!-- more --></li>
+<h4 id="1-空间配置器的优点"><a href="#1-空间配置器的优点" class="headerlink" title="1.空间配置器的优点"></a>1.空间配置器的优点</h4><ul>
+<li>频繁的申请释放空间时更加的高效</li>
+<li><strong>多次申请小空间不会造成内存空间的浪费</strong></li>
+<li>申请释放空间失败，具有异常机制</li>
 </ul>
-<ol>
-<li><strong>static_cast：</strong><br>作用：用于 <strong>“ 相关类型 “</strong> 之间的转换，通俗点说，<strong>“ 普通数字之间的转换 “。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StaticCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a);  <span class="comment">// 合法，注意使用语法</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">static_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1); </span><br><span class="line">	<span class="comment">// 不合法，不同类型的指针依然是无法完成转换的。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><strong>reinterpret_cast：</strong><br>作用：用于 <strong>“不相关类型 “</strong> 之间的转换，通俗点说，<strong>“不同类别之间的转换”。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReinterpretCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">double</span> a = <span class="number">1.110</span>;</span><br><span class="line">	<span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	b = <span class="keyword">static_cast</span>&lt;<span class="keyword">int</span>&gt; (a); </span><br><span class="line">	<span class="comment">// 不合法， 因为数字之间是相同的类别，都是数字。</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a1 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">	<span class="keyword">int</span>* pa1 = &amp;a1;</span><br><span class="line">	<span class="keyword">char</span>* pc1 = &amp;c1;</span><br><span class="line">	pc1 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (pa1);      <span class="comment">// 合法</span></span><br><span class="line">	<span class="comment">// 不同的指针类型是不同的类别</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> a2 = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">char</span>* pc2 = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">char</span>*&gt; (a2); <span class="comment">// 合法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li><strong>const_cast：</strong><br>作用：用于<strong>去掉 const 成员的 const 属性</strong>，一般用于<strong>指针，引用。</strong></li>
-</ol>
-<p>用法如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ConstCast</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">10</span>;      <span class="comment">// 防止编译器优化代码</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a1 = (<span class="keyword">int</span>&amp;)a;              <span class="comment">// c 风格的强制类型转化</span></span><br><span class="line">	<span class="keyword">int</span>&amp; a2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>&amp;&gt; (a); <span class="comment">// cc 风格的强制类型转化</span></span><br><span class="line">	a2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　a &lt;&lt; <span class="built_in">endl</span>;            <span class="comment">// 输出 20 </span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">volatile</span> <span class="keyword">const</span> <span class="keyword">int</span> b = <span class="number">10</span>;</span><br><span class="line">	<span class="keyword">int</span>* pb1 = (<span class="keyword">int</span>*)&amp;b;			  </span><br><span class="line">	<span class="keyword">int</span>* pb2 = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt; (&amp;b); </span><br><span class="line">	*pb2 = <span class="number">20</span>;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt;　b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li><strong>dynamic_cast：父类转化为子类</strong><br>作用：用于将父类对象的指针或者引用转化为子类对象的指针或引用（动态转换）</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> :</span> <span class="keyword">public</span> A &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(A* pa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	B* pb = <span class="keyword">dynamic_cast</span>&lt;B*&gt; (pa);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pb &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	A a;</span><br><span class="line">	B b;</span><br><span class="line">	fun(&amp;a);   <span class="comment">// 00000000</span></span><br><span class="line">	fun(&amp;b);   <span class="comment">// 正确的地址</span></span><br><span class="line">	</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意：<br>    1. <strong>dynamic_cast 只能用于*</strong> 多态类型 <strong>*，其他类型无法动态转换</strong><br>    2. <strong>dynamic_cast</strong> 失败返回 0，成功返回正确地址。<br>    <img src="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>同时，我目前认为这也是动态转化的产生的原因所在。</p>
-<h4 id="建议："><a href="#建议：" class="headerlink" title="建议："></a>建议：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们尽可能的少使用强制类型转化，尝试用其他方法去替换解决，如果不得不使用强制类型转化，那么我们也要小心，谨慎。</p>
-
+<p>我们只有知道了空间配置器的底层实现原理以及 malloc 的底层实现原理，才能体现出空间配置器的各个优点。</p>
+<h4 id="2-malloc-free如何管理内存"><a href="#2-malloc-free如何管理内存" class="headerlink" title="2.malloc, free如何管理内存"></a>2.malloc, free如何管理内存</h4><h4 id="3-空间配置器如何管理内存"><a href="#3-空间配置器如何管理内存" class="headerlink" title="3.空间配置器如何管理内存"></a>3.空间配置器如何管理内存</h4><h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4>
       
 
       
@@ -244,7 +211,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STL容器</a>
         		</li>
       		
 		</ul>
@@ -300,7 +267,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/Cpp的类型转化/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/19/空间配置器/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -314,18 +281,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/多继承-菱形继承/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          多继承---菱形继承
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/07/Markdown语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Markdown语法</div>
+    <a href="/2019/09/13/智能指针/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">智能指针</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -352,7 +310,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-C-语言类型转化的总结"><span class="toc-number">1.</span> <span class="toc-text">C/C++语言类型转化的总结:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C语言的类型转换"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">C语言的类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C-强制类型转换"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">C++强制类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议："><span class="toc-number">1.0.0.3.</span> <span class="toc-text">建议：</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#空间配置器"><span class="toc-number">1.</span> <span class="toc-text">空间配置器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间配置器的优点"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.空间配置器的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-malloc-free如何管理内存"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.malloc, free如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-空间配置器如何管理内存"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.空间配置器如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.总结</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -366,7 +324,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Cpp的类型转化" data-title="C/C++的类型转换" data-url="http://yoursite.com/2019/08/07/Cpp的类型转化/"></div>
+	<div class="ds-thread" data-thread-key="空间配置器" data-title="空间配置器" data-url="http://yoursite.com/2019/09/19/空间配置器/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
