@@ -8,18 +8,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>空间配置器 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
-<meta name="keywords" content="STL容器">
+  <meta name="description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
+<meta name="keywords" content="STL容器(内存管理)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="空间配置器">
 <meta property="og:url" content="http://yoursite.com/2019/09/19/空间配置器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
+<meta property="og:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-09-20T04:04:59.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190922102343495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190922113130809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190922155419685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-09-22T08:06:49.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="空间配置器">
-<meta name="twitter:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理">
+<meta name="twitter:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190922102343495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -163,16 +167,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更好，更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。</p>
+        <h1 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。</p>
 <a id="more"></a>
 
 <h4 id="1-空间配置器的优点"><a href="#1-空间配置器的优点" class="headerlink" title="1.空间配置器的优点"></a>1.空间配置器的优点</h4><ul>
+<li>申请小空间时不会造成内存碎片化</li>
 <li>频繁的申请释放空间时更加的高效</li>
 <li><strong>多次申请小空间不会造成内存空间的浪费</strong></li>
 <li>申请释放空间失败，具有异常机制</li>
 </ul>
 <p>我们只有知道了空间配置器的底层实现原理以及 malloc 的底层实现原理，才能体现出空间配置器的各个优点。</p>
-<h4 id="2-malloc-free如何管理内存"><a href="#2-malloc-free如何管理内存" class="headerlink" title="2.malloc, free如何管理内存"></a>2.malloc, free如何管理内存</h4><h4 id="3-空间配置器如何管理内存"><a href="#3-空间配置器如何管理内存" class="headerlink" title="3.空间配置器如何管理内存"></a>3.空间配置器如何管理内存</h4><h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4>
+<h4 id="2-malloc-free如何管理内存"><a href="#2-malloc-free如何管理内存" class="headerlink" title="2.malloc, free如何管理内存"></a>2.malloc, free如何管理内存</h4><p><a href>malloc 底层实现与内存对齐</a></p>
+<h4 id="3-空间配置器如何管理内存"><a href="#3-空间配置器如何管理内存" class="headerlink" title="3.空间配置器如何管理内存"></a>3.空间配置器如何管理内存</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 空间配置器从功能角度上说是一种管理程序中内存的申请与释放的工作，从实现角度上说对于不同的空间配置器有不同的实现细节，空间配置器分为两类：一级空间配置器和二级空间配置器，分别用来管理大内存(&gt; 128Byte)和小内存(&lt;= 128Byte)，它们在空间管理上既有明确的分工，也有相互的合作。</p>
+<h6 id="一级空间配置器"><a href="#一级空间配置器" class="headerlink" title="一级空间配置器:"></a>一级空间配置器:</h6><p><img src="https://img-blog.csdnimg.cn/20190922102343495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="一级空间配置器"><br>我们从源码中分析出了一级空间配置器的主要实现原理，从实现框架中发现，一级空间配置器封装了malloc, free, 内存不足时的异常处理机制等，从而让我们的内存管理更加合理高效，不会因为没有内存而直接返回。</p>
+<h6 id="二级空间配置器"><a href="#二级空间配置器" class="headerlink" title="二级空间配置器:"></a>二级空间配置器:</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 二级空间配置器管理小空间，程序如果每次都向系统进行申请，那么效率会非常的低，因为 malloc 函数需要遍历一下内存空间，因此频繁的进行就会导致效率降低，并且还具有部分空间的浪费(内存的头部)，为了效率的提升，标准库采用了 “内存池” 来进行管理，当需要内存时，直接向内存池中进行获取，为了进一步的提高效率，标准库还采用 “哈希桶”，将内存事先化分一部分不同的大小，然后直接将不同大小的内存片直接挂到哈希桶的对应位置上，当需要内存时，直接从哈希桶的对应位置进行获取，不用去内存池中去申请，这样提高了程序内存的获取速度。<br><img src="https://img-blog.csdnimg.cn/20190922113130809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="二级空间配置器示意图"><br><strong>我们发现标准库中的哈希桶是以 8 字节为单位来链接不同大小的内存，这是由于当我们使用指针变量时才申请内存，但是为了程序可以在 64 位操作系统上可以运行，因此上，采用以 8 字节进行对齐，方便使用，但是这样的话，我们申请 5 字节到最后还是申请了 8 字节，虽然这样解决掉了外部内存碎片化，但是导致了部分内部内存碎片化，但是这样的做法是利远大于弊。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 哈希桶的相关参数</span></span><br><span class="line">    <span class="keyword">enum</span> &#123;__ALIGN = <span class="number">8</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span> &#123;__MAX_BYTES = <span class="number">128</span>&#125;;</span><br><span class="line">    <span class="keyword">enum</span> &#123;__NFREELISTS = __MAX_BYTES/__ALIGN&#125;;</span><br><span class="line"><span class="comment">// 向上对齐</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> size_t <span class="title">ROUND_UP</span><span class="params">(<span class="keyword">size_t</span> bytes)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> (((bytes) + __ALIGN<span class="number">-1</span>) &amp; ~(__ALIGN - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 桶结点</span></span><br><span class="line">    <span class="keyword">union</span> obj &#123;</span><br><span class="line">          <span class="keyword">union</span> obj * free_list_link;</span><br><span class="line">          <span class="keyword">char</span> client_data[<span class="number">1</span>];    <span class="comment">/* The client sees this.        */</span></span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>对于桶结点标准库使用的是 “联合体”，而不是 “结构体”，这是因为，在链表中，我们既要储存下一个结点的地址，又要储存本结点的数据，因此需要两块不同的空间来存储(内存对齐)，因此需要结构体，但是此时的桶结点只需要记录下一块空间的地址，不需要储存什么数据，因此使用一块空间即可足够，这样就可以减少内存空间的消耗，因此使用联合体。</p>
+<h6 id="二级空间配置器的流程"><a href="#二级空间配置器的流程" class="headerlink" title="二级空间配置器的流程:"></a>二级空间配置器的流程:</h6><p><img src="https://img-blog.csdnimg.cn/20190922155419685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>不同的空间配置器管理着不同大小的空间，一级空间配置器封装了 malloc, free, 异常处理机制帮助我们更加合理的管理程序所需的空间，二级空间配置器，利用 内存池 + 哈希桶 管理我们程序中所需要的小空间，从而让我们的程序效率大大提高与直接向系统进行申请即提高了效率又节省了很多的空间。</strong></p>
+
       
 
       
@@ -211,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">STL容器</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">STL容器(内存管理)</a>
         		</li>
       		
 		</ul>
@@ -310,7 +324,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#空间配置器"><span class="toc-number">1.</span> <span class="toc-text">空间配置器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间配置器的优点"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.空间配置器的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-malloc-free如何管理内存"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.malloc, free如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-空间配置器如何管理内存"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.空间配置器如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.总结</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#空间配置器"><span class="toc-number">1.</span> <span class="toc-text">空间配置器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间配置器的优点"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.空间配置器的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-malloc-free如何管理内存"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.malloc, free如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-空间配置器如何管理内存"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.空间配置器如何管理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#一级空间配置器"><span class="toc-number">1.0.0.3.0.1.</span> <span class="toc-text">一级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器"><span class="toc-number">1.0.0.3.0.2.</span> <span class="toc-text">二级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器的流程"><span class="toc-number">1.0.0.3.0.3.</span> <span class="toc-text">二级空间配置器的流程:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.总结</span></a></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -438,11 +452,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,10 +472,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
@@ -474,7 +484,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">STL容器</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
               </li>
              
               <li class="article-tag-list-item">
