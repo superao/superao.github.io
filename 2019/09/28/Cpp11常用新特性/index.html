@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有怎么使用过，因此，我们需要来好好的了解一下，帮助我们了解新语法。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-09-29T02:28:17.802Z">
+<meta property="og:updated_time" content="2019-09-29T05:23:22.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp11常用新特性">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有怎么使用过，因此，我们需要来好好的了解一下，帮助我们了解新语法。">
@@ -166,7 +166,7 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有怎么使用过，因此，我们需要来好好的了解一下，帮助我们了解新语法。</p>
 <a id="more"></a>
 <h4 id="1-列表初始化"><a href="#1-列表初始化" class="headerlink" title="1.列表初始化"></a>1.列表初始化</h4><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C++98 中我们可以使用出初始化列表来初始化我们的数组，对于自定义类型我们是无法使用初始化列表来进行初始化的，因此在 C++11 中扩大了初始化列表的使用范围，这样我们 <strong>既可以用初始化列表来初始化我们的内置类型又可以来初始化我们的自定义类型。</strong> </p>
-<h6 id="初始化列表的使用范围"><a href="#初始化列表的使用范围" class="headerlink" title="初始化列表的使用范围"></a>初始化列表的使用范围</h6><table>
+<h6 id="初始化列表的版本支持"><a href="#初始化列表的版本支持" class="headerlink" title="初始化列表的版本支持"></a>初始化列表的版本支持</h6><table>
 <thead>
 <tr>
 <th align="center"></th>
@@ -182,7 +182,7 @@
 <td align="center">不可以</td>
 <td align="center">不可以</td>
 <td align="center">不可以</td>
-<td align="center">可以</td>
+<td align="center"><strong>可以</strong></td>
 <td align="center">不可以</td>
 </tr>
 <tr>
@@ -194,7 +194,15 @@
 <td align="center">可以</td>
 </tr>
 </tbody></table>
-<h6 id="附-数组，动态数组可以认为它是内置类型-标准容器可以认为它是自定义类型，为了更加清楚的了解-C-11-的扩充范围，我们将其划分的更加细致"><a href="#附-数组，动态数组可以认为它是内置类型-标准容器可以认为它是自定义类型，为了更加清楚的了解-C-11-的扩充范围，我们将其划分的更加细致" class="headerlink" title="附:数组，动态数组可以认为它是内置类型; 标准容器可以认为它是自定义类型，为了更加清楚的了解 C++11 的扩充范围，我们将其划分的更加细致"></a>附:数组，动态数组可以认为它是内置类型; 标准容器可以认为它是自定义类型，为了更加清楚的了解 C++11 的扩充范围，我们将其划分的更加细致</h6>
+<p><strong>附:数组，动态数组可以认为它是内置类型; 标准容器可以认为它是自定义类型，为了更加清楚的了解 C++11 的扩充范围，我们将其划分的更加细致，并且在 C++11 中使用初始化列表的时候可以不需要使用等号。</strong></p>
+<h6 id="初始化列表的实现"><a href="#初始化列表的实现" class="headerlink" title="初始化列表的实现"></a>初始化列表的实现</h6><ul>
+<li>内置类型，自定义非容器类: 编译器默认支持</li>
+<li>容器类: 实现 initializer_list 接口的构造函数</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟实现vector的初始化列表</span></span><br><span class="line">Vector(<span class="keyword">const</span> <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">list</span>)</span><br><span class="line">  :_start(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">list</span>.size()])</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">list</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _start[index++] = e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initializer_list类中有三个成员，分别为 begin(), end(), size();</span></span><br><span class="line">begin(): 返回列表的第一个元素的地址</span><br><span class="line">end(): 返回列表的最后一个元素的下一个位置的地址</span><br><span class="line">size(): 返回列表的所有元素的个数</span><br></pre></td></tr></table></figure>
+
+<p>容器类的初始化列表的支持我们可以理解为先将我们需要初始化的数据放到一个容器类(initializer_list)中，然后我们利用它的 迭代器/范围for 将元素一个一个赋值给所需要的容器上，这样的话，我们就可以完成了容器的列表初始化了。 </p>
+
       
 
       
@@ -332,7 +340,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-列表初始化"><span class="toc-number">1.</span> <span class="toc-text">1.列表初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#初始化列表的使用范围"><span class="toc-number">1.0.1.</span> <span class="toc-text">初始化列表的使用范围</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#附-数组，动态数组可以认为它是内置类型-标准容器可以认为它是自定义类型，为了更加清楚的了解-C-11-的扩充范围，我们将其划分的更加细致"><span class="toc-number">1.0.2.</span> <span class="toc-text">附:数组，动态数组可以认为它是内置类型; 标准容器可以认为它是自定义类型，为了更加清楚的了解 C++11 的扩充范围，我们将其划分的更加细致</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-列表初始化"><span class="toc-number">1.</span> <span class="toc-text">1.列表初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#初始化列表的版本支持"><span class="toc-number">1.0.1.</span> <span class="toc-text">初始化列表的版本支持</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#初始化列表的实现"><span class="toc-number">1.0.2.</span> <span class="toc-text">初始化列表的实现</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -456,11 +464,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -484,10 +492,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
@@ -497,6 +501,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
