@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-03T02:55:20.956Z">
+<meta property="og:updated_time" content="2019-10-03T03:06:55.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Cpp11常用新特性">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。">
@@ -202,14 +202,14 @@
 <li>内置类型，自定义非容器类: 编译器默认支持</li>
 <li>容器类: 实现 initializer_list 接口的构造函数(如下:)</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟实现vector的初始化列表</span></span><br><span class="line">Vector(<span class="keyword">const</span> <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">list</span>)</span><br><span class="line">  :_start(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">list</span>.size()])</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">list</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _start[index++] = e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initializer_list类中有三个成员，分别为 begin(), end(), size();</span></span><br><span class="line">begin(): 返回列表的第一个元素的地址</span><br><span class="line">end(): 返回列表的最后一个元素的下一个位置的地址</span><br><span class="line">size(): 返回列表的所有元素的个数</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟实现vector的初始化列表</span></span><br><span class="line">Vector(<span class="keyword">const</span> <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">list</span>)</span><br><span class="line">  :_start(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">list</span>.size()])</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">list</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _start[index++] = e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initializer_list类中有三个成员，分别为 begin(), end(), size();</span></span><br><span class="line"><span class="comment">// begin(): 返回列表的第一个元素的地址</span></span><br><span class="line"><span class="comment">// end(): 返回列表的最后一个元素的下一个位置的地址</span></span><br><span class="line"><span class="comment">// size(): 返回列表的所有元素的个数</span></span><br></pre></td></tr></table></figure>
 
 <p>容器类的初始化列表的支持我们可以理解为先将我们需要初始化的数据放到一个容器类(initializer_list)中，然后我们利用它的 迭代器/范围for 将元素一个一个通过自己赋值给所需要的容器上，这样的话，我们就可以支持了容器的列表初始化了。<br><a href="https://github.com/superao/C-/blob/master/Cpp11.cpp" target="_blank" rel="noopener">初始化列表练习</a></p>
 <h2 id="2-类型推导"><a href="#2-类型推导" class="headerlink" title="2. 类型推导"></a>2. 类型推导</h2><ul>
 <li>编译时期类型推导(auto)，编译时期就可以确定类型。</li>
 <li>运行时期类型推导(decltype)，运行之后才可以确定类型，但是大大降低了程序的效率。</li>
 </ul>
-<p>编译时期的类型推导的两点用途: 1.变量表达式求值的类型推导; 2.迭代器类型(迭代器类型太长，可以减少书写)<br>运行时期的类型推导的两点用途: 1.常量表达式求值的类型推导; 2.函数返回值类型的推导<br><a href="https://github.com/superao/C-/blob/master/type.cpp" target="_blank" rel="noopener">类型推导练习</a></p>
+<p>编译时期的类型推导的两点用途: 1.变量表达式求值的类型推导; 2.迭代器类型(迭代器类型太长，可以减少书写)<br>运行时期的类型推导的两点用途: 1.常量表达式求值的类型推导; 2.函数返回值类型的推导<br><a href="https://github.com/superao/C-/blob/master/type.cpp" target="_blank" rel="noopener">类型推导练习(借助typeinfo库进行测试)</a></p>
 <h2 id="3-委派构造函数"><a href="#3-委派构造函数" class="headerlink" title="3. 委派构造函数"></a>3. 委派构造函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在 C++98 中当我们对类进行不同需求的初始化的时候，利用不同的构造函数来帮助我们完成，但是这些重载的构造函数中，有大量的重复代码，因为它们初始化的内容是相同的，因此，为了解决这一问题，在 C++11 中，利用 <strong>“一个基准函数”</strong> 解决了这一问题。<br><strong>解决思路:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在构造函数中设置一个基准构造函数，专门用来初始化相似的部分，然后再重载不同需求的构造函数，让不同的构造函数来调用这个基准构造函数，初始化相同的部分，不同的部分自行进行初始化。 这个基准函数称之为 “目标构造函数”，调用它的构造函数称之为 “委派构造函数”。 <strong>注意：目标构造函数与委派构造函数不要相互调用，这样会导致循环压栈，导致栈溢出。</strong><br><a href="https://github.com/superao/C-/blob/master/%E5%A7%94%E6%B4%BE%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.cpp" target="_blank" rel="noopener">委派构造函数练习</a></p>
 <h2 id="4-右值引用"><a href="#4-右值引用" class="headerlink" title="4. 右值引用"></a>4. 右值引用</h2><p><a href>右值引用</a></p>
 <h2 id="5-lambda-表达式"><a href="#5-lambda-表达式" class="headerlink" title="5. lambda 表达式"></a>5. lambda 表达式</h2><p><a href>lambda 表达式</a></p>
@@ -475,23 +475,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,15 +503,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
