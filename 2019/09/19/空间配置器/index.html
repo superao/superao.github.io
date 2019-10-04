@@ -8,21 +8,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>空间配置器 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
 <meta name="keywords" content="STL容器(内存管理)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="空间配置器">
 <meta property="og:url" content="http://yoursite.com/2019/09/19/空间配置器/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190922102343495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190922113130809.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190922155419685.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-22T08:14:40.827Z">
+<meta property="og:updated_time" content="2019-10-03T12:39:03.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="空间配置器">
-<meta name="twitter:description" content="空间配置器&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190922102343495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -167,7 +167,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="空间配置器"><a href="#空间配置器" class="headerlink" title="空间配置器"></a>空间配置器</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; STL 六大组件中，空间配置器是非常重要的组件之一，空间配置器可以更好的帮助其他容器(list, vector, map, set,…)管理空间，我们程序中也可以利用空间配置器帮助我们更加高效的管理空间，空间配置器它相比向内存直接申请空间具有很多优点，我们只有清楚的了解了空间配置器原理之后，我们才能更好的管理内存。</p>
 <a id="more"></a>
 
 <h4 id="1-空间配置器的优点"><a href="#1-空间配置器的优点" class="headerlink" title="1.空间配置器的优点"></a>1.空间配置器的优点</h4><ul>
@@ -337,7 +337,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#空间配置器"><span class="toc-number">1.</span> <span class="toc-text">空间配置器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间配置器的优点"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">1.空间配置器的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-malloc-free如何管理内存"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">2.malloc, free如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-空间配置器如何管理内存"><span class="toc-number">1.0.0.3.</span> <span class="toc-text">3.空间配置器如何管理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#一级空间配置器"><span class="toc-number">1.0.0.3.0.1.</span> <span class="toc-text">一级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器"><span class="toc-number">1.0.0.3.0.2.</span> <span class="toc-text">二级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器的流程"><span class="toc-number">1.0.0.3.0.3.</span> <span class="toc-text">二级空间配置器的流程:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#释放空间"><span class="toc-number">1.0.0.3.0.4.</span> <span class="toc-text">释放空间:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">1.0.0.4.</span> <span class="toc-text">4.总结</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-空间配置器的优点"><span class="toc-number">1.</span> <span class="toc-text">1.空间配置器的优点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-malloc-free如何管理内存"><span class="toc-number">2.</span> <span class="toc-text">2.malloc, free如何管理内存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-空间配置器如何管理内存"><span class="toc-number">3.</span> <span class="toc-text">3.空间配置器如何管理内存</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#一级空间配置器"><span class="toc-number">3.0.1.</span> <span class="toc-text">一级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器"><span class="toc-number">3.0.2.</span> <span class="toc-text">二级空间配置器:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#二级空间配置器的流程"><span class="toc-number">3.0.3.</span> <span class="toc-text">二级空间配置器的流程:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#释放空间"><span class="toc-number">3.0.4.</span> <span class="toc-text">释放空间:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-总结"><span class="toc-number">4.</span> <span class="toc-text">4.总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -465,7 +465,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,7 +477,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,15 +489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,7 +501,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">

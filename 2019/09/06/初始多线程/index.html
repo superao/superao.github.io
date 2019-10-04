@@ -18,7 +18,7 @@
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-03T03:47:00.448Z">
+<meta property="og:updated_time" content="2019-10-03T12:37:01.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初始多线程">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可">
@@ -188,13 +188,13 @@
 <li>独有: 调用栈区，寄存器信息，信号屏蔽字，errno<br><img src="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt> </li>
 </ul>
 <h2 id="多线程的基本操作"><a href="#多线程的基本操作" class="headerlink" title="多线程的基本操作"></a>多线程的基本操作</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Linux中没有直接操作线程的接口让我们来进行操作，但是大佬们为我们在用户态封装了一套线程库来供我们方便使用。</p>
-<h4 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="comment">// 一个线程创建后，默认为joinable属性，该属性的线程退出时需要被等待</span></span><br></pre></td></tr></table></figure>
+<h4 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="comment">// 一个线程创建后，默认属性为 joinable 属性，该属性的线程退出时需要被等待</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="线程的终止"><a href="#线程的终止" class="headerlink" title="线程的终止"></a>线程的终止</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="comment">// return 退出</span></span><br><span class="line"><span class="keyword">void</span> pthread_exit(<span class="keyword">void</span> *retval); <span class="comment">// 线程退出</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>; <span class="comment">// 退出一个指定的线程</span></span><br><span class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>); <span class="comment">// 获取自身线程的tid</span></span><br><span class="line"><span class="comment">// 注意：每个线程(joinable)退出的时候，都需要被等待，如果不等待退出的那块进程的资源还在内存中没有被释放，就会成为僵死线程，</span></span><br><span class="line"><span class="comment">// 我们可以在终端进行查看，但是终端只显示主线程的状态，因此我们无法查看到普通线程僵死的状态，但是我们必须清楚这一点。</span></span><br><span class="line"><span class="comment">// 主线程在return之后整个进程都会被退出，主线程退出之后其他线程依然还在工作，其他方式的退出不会引起这样的情况发生。</span></span><br></pre></td></tr></table></figure>
+<h4 id="线程的终止"><a href="#线程的终止" class="headerlink" title="线程的终止"></a>线程的终止</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 退出:</span></span><br><span class="line"><span class="keyword">return</span>                                <span class="comment">// return 退出,直接将返回值进行返回。</span></span><br><span class="line"><span class="keyword">void</span> pthread_exit(<span class="keyword">void</span> *retval);      <span class="comment">// exit 退出,将返回值作为参数传入,最后将需要被返回的值返回出去。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消:</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>; <span class="comment">// 取消一个指定的线程,不管是否进行完毕,都需要退出。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>);         <span class="comment">// 获取自身线程的 tid</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结：每个线程(joinable)退出的时候，都需要被等待，如果不等待退出的那块进程的资源还在内存中没有被释放，就会成为僵死线程</span></span><br><span class="line"><span class="comment">// 我们可以在终端进行查看，但是终端只显示主线程的状态，因此我们无法查看到普通线程僵死的状态，但是我们必须清楚这一点</span></span><br><span class="line"><span class="comment">// 主线程在return之后整个进程都会被退出，主线程退出之后其他线程依然还在工作，其他方式的退出不会引起这样的情况发生</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="线程的等待"><a href="#线程的等待" class="headerlink" title="线程的等待"></a>线程的等待</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **retval)</span></span>;</span><br><span class="line"><span class="comment">// 获取线程的返回值，并回收资源</span></span><br></pre></td></tr></table></figure>
+<h4 id="线程的等待"><a href="#线程的等待" class="headerlink" title="线程的等待"></a>线程的等待</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **retval)</span></span>;</span><br><span class="line"><span class="comment">// 线程退出后(return, exit)，获取线程的返回值，并回收资源</span></span><br><span class="line"><span class="comment">// 线程取消后(cancle)，不一定能获取到它的返回值(有可能在执行过程中就被取消了)</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="线程的分离"><a href="#线程的分离" class="headerlink" title="线程的分离"></a>线程的分离</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">// 将某个线程的joinable属性设置为detach属性，此属性的线程退出的时候，自动释放资源</span></span><br><span class="line"><span class="comment">// 适用于不需要返回数据直接分离即可的线程</span></span><br></pre></td></tr></table></figure>
+<h4 id="线程的分离"><a href="#线程的分离" class="headerlink" title="线程的分离"></a>线程的分离</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">// 将某个线程的 joinable 属性设置为 detach 属性，此属性的线程退出的时候，不需要被等待，自动释放资源</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -471,7 +471,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -479,7 +483,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,15 +495,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,7 +507,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
