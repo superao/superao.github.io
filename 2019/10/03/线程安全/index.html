@@ -17,7 +17,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-04T03:16:53.279Z">
+<meta property="og:updated_time" content="2019-10-04T03:23:39.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
@@ -167,11 +167,13 @@
       
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一些相关知识，这样才能开发出稳定性很强的并发性程序。</p>
 <a id="more"></a>
-<h2 id="什么是线程安全？"><a href="#什么是线程安全？" class="headerlink" title="什么是线程安全？"></a>什么是线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在明白线程安全之前，我们需要先明白两个概念 <strong>“执行流”</strong> 和 <strong>“临界区”</strong>，首先，一个线程在执行一段程序代码的时候，我们就把这个线程就称之为 “一个执行流”，在程序中有很多文件，变量等数据资源，这些资源可以被多个线程访问，我们把这种资源称之为 “临界区(临界资源)”，那么线程安全就是: <strong>当程序中多个执行流同时访问临界资源时，不会出现数据二义性等问题</strong>。</p>
-<h2 id="如何实现线程安全？"><a href="#如何实现线程安全？" class="headerlink" title="如何实现线程安全？"></a>如何实现线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 程序中的代码在经过汇编的时候汇编为汇编指令的时候，一条代码可能会被转化为多条执行指令。我们在保证线程安全的时候，只需要保证每个线程在操作临界资源的时候，操作指令不会被其他执行流打断即可保证线程安全。因此，保证线程安全可以利用两大思想: <strong>同步</strong> 和 <strong>互斥</strong></p>
-<h4 id="互斥-互斥锁"><a href="#互斥-互斥锁" class="headerlink" title="互斥(互斥锁)"></a>互斥(互斥锁)</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  互斥实现线程安全时 <strong>利用在同一时间段内，只能有一个执行流可以操作临界资源</strong>，从而保证了线程安全，但是这种实现方式不保证每个线程执行的公平性/合理性，当只有满足可以访问的条件并且自身还拿到了 CPU 的时间片时才可以操作，其他的情况下都不能操作，因此，无法保证时公平/合理性。</p>
-<h6 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 互斥锁实现互斥时 <strong>利用一个只有 0 / 1 的计数器来进行条件判断，从而实现对临界资源的加锁和解锁操作，实现了在同一时间段内，只有拥有锁的线程才可以进行操作临界资源，其他线程不能的思想</strong>，从而实现了互斥，实现了线程安全，但是互斥锁在进行 0 / 1 条件判断的时候也需要是不可中断的操作，只有这样才能真正的实现线程安全。<br><strong>互斥锁实现不可中断操作:</strong><br><img src="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="不可中断操作"><br><strong>分析</strong>:<br>当我们对某个变量的值进行更新时是需要三条汇编指令的，这三条指令在执行的时候都有可能被打断，这样我们实现不了互斥锁本身的安全，因此上，我需要一种操作来完成不可被打断的操作来更新我们的数据，也就是将三条指令归并为一条指令(xchgb)，直接进行交换，这样操作就不会被打断了。<br><strong>互斥锁实现原理:</strong><br>加锁:<br>解锁:</p>
-<h4 id="同步-条件变量"><a href="#同步-条件变量" class="headerlink" title="同步(条件变量)"></a>同步(条件变量)</h4><h4 id="信号量-互斥-同步"><a href="#信号量-互斥-同步" class="headerlink" title="信号量(互斥/同步)"></a>信号量(互斥/同步)</h4><h4 id="基于互斥锁-条件变量实现生产者与消费者模型"><a href="#基于互斥锁-条件变量实现生产者与消费者模型" class="headerlink" title="基于互斥锁, 条件变量实现生产者与消费者模型"></a>基于互斥锁, 条件变量实现生产者与消费者模型</h4>
+<h2 id="1-什么是线程安全？"><a href="#1-什么是线程安全？" class="headerlink" title="1. 什么是线程安全？"></a>1. 什么是线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在明白线程安全之前，我们需要先明白两个概念 <strong>“执行流”</strong> 和 <strong>“临界区”</strong>，首先，一个线程在执行一段程序代码的时候，我们就把这个线程就称之为 “一个执行流”，在程序中有很多文件，变量等数据资源，这些资源可以被多个线程访问，我们把这种资源称之为 “临界区(临界资源)”，那么线程安全就是: <strong>当程序中多个执行流同时访问临界资源时，不会出现数据二义性等问题</strong>。</p>
+<h2 id="2-如何实现线程安全？"><a href="#2-如何实现线程安全？" class="headerlink" title="2. 如何实现线程安全？"></a>2. 如何实现线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 程序中的代码在经过汇编的时候汇编为汇编指令的时候，一条代码可能会被转化为多条执行指令。我们在保证线程安全的时候，只需要保证每个线程在操作临界资源的时候，操作指令不会被其他执行流打断即可保证线程安全。因此，保证线程安全有两大思想:<strong>同步</strong>和<strong>互斥</strong></p>
+<h3 id="互斥"><a href="#互斥" class="headerlink" title="互斥"></a>互斥</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  互斥实现线程安全时 <strong>利用在同一时间段内，只能有一个执行流可以操作临界资源</strong>，从而保证了线程安全，但是这种实现方式不保证每个线程执行的公平性/合理性，当只有满足可以访问的条件并且自身还拿到了 CPU 的时间片时才可以操作，其他的情况下都不能操作，因此，无法保证时公平/合理性。</p>
+<h5 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 互斥锁实现互斥时 <strong>利用一个只有 0 / 1 的计数器来进行条件判断，从而实现对临界资源的加锁和解锁操作，实现了在同一时间段内，只有拥有锁的线程才可以进行操作临界资源，其他线程不能的思想</strong>，从而实现了互斥，实现了线程安全，但是互斥锁在进行 0 / 1 条件判断的时候也需要是不可中断的操作，只有这样才能真正的实现线程安全。</p>
+<h6 id="互斥锁实现不可中断操作"><a href="#互斥锁实现不可中断操作" class="headerlink" title="互斥锁实现不可中断操作:"></a>互斥锁实现不可中断操作:</h6><p><img src="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="不可中断操作"><br><strong>分析</strong>:<br>当我们对某个变量的值进行更新时是需要三条汇编指令的，这三条指令在执行的时候都有可能被打断，这样我们实现不了互斥锁本身的安全，因此上，我需要一种操作来完成不可被打断的操作来更新我们的数据，也就是将三条指令归并为一条指令(xchgb)，直接进行交换，这样操作就不会被打断了。</p>
+<h6 id="互斥锁实现原理"><a href="#互斥锁实现原理" class="headerlink" title="互斥锁实现原理:"></a>互斥锁实现原理:</h6><p>加锁:<br>解锁:</p>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="基于互斥锁-条件变量实现生产者与消费者模型"><a href="#基于互斥锁-条件变量实现生产者与消费者模型" class="headerlink" title="基于互斥锁, 条件变量实现生产者与消费者模型"></a>基于互斥锁, 条件变量实现生产者与消费者模型</h3>
       
 
       
@@ -309,7 +311,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是线程安全？"><span class="toc-number">1.</span> <span class="toc-text">什么是线程安全？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现线程安全？"><span class="toc-number">2.</span> <span class="toc-text">如何实现线程安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#互斥-互斥锁"><span class="toc-number">2.0.1.</span> <span class="toc-text">互斥(互斥锁)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#互斥锁"><span class="toc-number">2.0.1.0.1.</span> <span class="toc-text">互斥锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步-条件变量"><span class="toc-number">2.0.2.</span> <span class="toc-text">同步(条件变量)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信号量-互斥-同步"><span class="toc-number">2.0.3.</span> <span class="toc-text">信号量(互斥/同步)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于互斥锁-条件变量实现生产者与消费者模型"><span class="toc-number">2.0.4.</span> <span class="toc-text">基于互斥锁, 条件变量实现生产者与消费者模型</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是线程安全？"><span class="toc-number">1.</span> <span class="toc-text">1. 什么是线程安全？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-如何实现线程安全？"><span class="toc-number">2.</span> <span class="toc-text">2. 如何实现线程安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#互斥"><span class="toc-number">2.1.</span> <span class="toc-text">互斥</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#互斥锁"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">互斥锁</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#互斥锁实现不可中断操作"><span class="toc-number">2.1.0.1.1.</span> <span class="toc-text">互斥锁实现不可中断操作:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#互斥锁实现原理"><span class="toc-number">2.1.0.1.2.</span> <span class="toc-text">互斥锁实现原理:</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同步"><span class="toc-number">2.2.</span> <span class="toc-text">同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#信号量"><span class="toc-number">2.3.</span> <span class="toc-text">信号量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于互斥锁-条件变量实现生产者与消费者模型"><span class="toc-number">2.4.</span> <span class="toc-text">基于互斥锁, 条件变量实现生产者与消费者模型</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -437,10 +439,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
@@ -449,11 +447,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,15 +471,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
