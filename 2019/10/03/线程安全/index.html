@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004115124400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004115237481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-04T10:13:35.445Z">
+<meta property="og:updated_time" content="2019-10-04T13:39:06.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
@@ -187,7 +187,8 @@
 <h6 id="互斥锁接口"><a href="#互斥锁接口" class="headerlink" title="互斥锁接口:"></a>互斥锁接口:</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 互斥锁类型:</span></span><br><span class="line"><span class="keyword">pthread_mutex_t</span>              <span class="comment">// 它是一个互斥锁结构体，包含计数器，等待队列，程序控制等等信息</span></span><br><span class="line">pthread_mutex_init;          <span class="comment">// 初始化锁资源(宏赋值也行)</span></span><br><span class="line">pthread_mutex_destroy;       <span class="comment">// 销毁锁资源</span></span><br><span class="line">pthread_mutex_lock;          <span class="comment">// 加锁操作</span></span><br><span class="line">pthread_mutex_trylock;       <span class="comment">// 尝试加锁，加锁失败则报错(不常用)</span></span><br><span class="line">pthread_mutex_unlock;        <span class="comment">// 解锁操作</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="https://github.com/superao/Linux/blob/master/%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E7%8E%B0%E6%8A%A2%E7%A5%A8.c" target="_blank" rel="noopener">互斥锁的使用</a></p>
-<h6 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题:"></a>死锁问题:</h6><h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="生产者与消费者模型"><a href="#生产者与消费者模型" class="headerlink" title="生产者与消费者模型"></a>生产者与消费者模型</h3>
+<h6 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题:"></a>死锁问题:</h6><p><a href>死锁问题</a></p>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><h3 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h3><h3 id="生产者与消费者模型"><a href="#生产者与消费者模型" class="headerlink" title="生产者与消费者模型"></a>生产者与消费者模型</h3>
       
 
       
@@ -295,6 +296,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/10/04/死锁问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          死锁问题
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/28/Cpp11常用新特性/" id="article-nav-older" class="article-nav-link-wrap">
@@ -457,19 +467,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,6 +484,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
