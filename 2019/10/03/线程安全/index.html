@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Superao的博客</title>
+  <title>线程安全 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 编程, 代码, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程安全">
+<meta property="og:url" content="http://yoursite.com/2019/10/03/线程安全/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
 <meta property="og:locale" content="中文">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-04T03:16:53.279Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="线程安全">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -142,32 +145,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-虚函数与虚函数表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-线程安全" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/虚函数与虚函数表/">虚函数与虚函数表</a>
+    <h1 class="article-title" itemprop="name">
+      线程安全
     </h1>
   
 
         
-        <a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/10/03/线程安全/" class="archive-article-date">
+  	<time datetime="2019-10-04T00:50:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了更加清楚的了解到多态底层的实现，我们将继续深入的来研究一下虚函数和虚函数表，因为虚函数就是用来实现多态的，我们都知道编译器是通过虚函数表来映射到虚函数身上的，而虚函数表就是一个存放函数指针的指针数组。我们通过这个指针数组再来清楚的看一下虚函数。</p>
-        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一些相关知识，这样才能开发出稳定性很强的并发性程序。</p>
+<a id="more"></a>
+<h2 id="什么是线程安全？"><a href="#什么是线程安全？" class="headerlink" title="什么是线程安全？"></a>什么是线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在明白线程安全之前，我们需要先明白两个概念 <strong>“执行流”</strong> 和 <strong>“临界区”</strong>，首先，一个线程在执行一段程序代码的时候，我们就把这个线程就称之为 “一个执行流”，在程序中有很多文件，变量等数据资源，这些资源可以被多个线程访问，我们把这种资源称之为 “临界区(临界资源)”，那么线程安全就是: <strong>当程序中多个执行流同时访问临界资源时，不会出现数据二义性等问题</strong>。</p>
+<h2 id="如何实现线程安全？"><a href="#如何实现线程安全？" class="headerlink" title="如何实现线程安全？"></a>如何实现线程安全？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 程序中的代码在经过汇编的时候汇编为汇编指令的时候，一条代码可能会被转化为多条执行指令。我们在保证线程安全的时候，只需要保证每个线程在操作临界资源的时候，操作指令不会被其他执行流打断即可保证线程安全。因此，保证线程安全可以利用两大思想: <strong>同步</strong> 和 <strong>互斥</strong></p>
+<h4 id="互斥-互斥锁"><a href="#互斥-互斥锁" class="headerlink" title="互斥(互斥锁)"></a>互斥(互斥锁)</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  互斥实现线程安全时 <strong>利用在同一时间段内，只能有一个执行流可以操作临界资源</strong>，从而保证了线程安全，但是这种实现方式不保证每个线程执行的公平性/合理性，当只有满足可以访问的条件并且自身还拿到了 CPU 的时间片时才可以操作，其他的情况下都不能操作，因此，无法保证时公平/合理性。</p>
+<h6 id="互斥锁"><a href="#互斥锁" class="headerlink" title="互斥锁"></a>互斥锁</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 互斥锁实现互斥时 <strong>利用一个只有 0 / 1 的计数器来进行条件判断，从而实现对临界资源的加锁和解锁操作，实现了在同一时间段内，只有拥有锁的线程才可以进行操作临界资源，其他线程不能的思想</strong>，从而实现了互斥，实现了线程安全，但是互斥锁在进行 0 / 1 条件判断的时候也需要是不可中断的操作，只有这样才能真正的实现线程安全。<br><strong>互斥锁实现不可中断操作:</strong><br><img src="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="不可中断操作"><br><strong>分析</strong>:<br>当我们对某个变量的值进行更新时是需要三条汇编指令的，这三条指令在执行的时候都有可能被打断，这样我们实现不了互斥锁本身的安全，因此上，我需要一种操作来完成不可被打断的操作来更新我们的数据，也就是将三条指令归并为一条指令(xchgb)，直接进行交换，这样操作就不会被打断了。<br><strong>互斥锁实现原理:</strong><br>加锁:<br>解锁:</p>
+<h4 id="同步-条件变量"><a href="#同步-条件变量" class="headerlink" title="同步(条件变量)"></a>同步(条件变量)</h4><h4 id="信号量-互斥-同步"><a href="#信号量-互斥-同步" class="headerlink" title="信号量(互斥/同步)"></a>信号量(互斥/同步)</h4><h4 id="基于互斥锁-条件变量实现生产者与消费者模型"><a href="#基于互斥锁-条件变量实现生产者与消费者模型" class="headerlink" title="基于互斥锁, 条件变量实现生产者与消费者模型"></a>基于互斥锁, 条件变量实现生产者与消费者模型</h4>
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://img-blog.csdnimg.cn/20190823203748400.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -178,7 +210,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
@@ -187,16 +219,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/虚函数与虚函数表/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/03/线程安全/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/28/Cpp11常用新特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Cpp11常用新特性</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -211,474 +302,52 @@
         </div>
         
         
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-派生类的默认成员函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/派生类的默认成员函数/">派生类(子类)的默认成员函数</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h2><p>作用：构造函数用来进行对象的初始化工作。</p>
-<p>关于构造函数大致可以分为 4 种情况：</p>
-<ul>
-<li>基类自己生成，派生类自己生成</li>
-<li>基类自己生成，派生类自己实现</li>
-<li>基类自己实现，派生类自己生成</li>
-<li>基类自己实现，派生类自己实现</li>
-</ul>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/派生类的默认成员函数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是线程安全？"><span class="toc-number">1.</span> <span class="toc-text">什么是线程安全？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何实现线程安全？"><span class="toc-number">2.</span> <span class="toc-text">如何实现线程安全？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#互斥-互斥锁"><span class="toc-number">2.0.1.</span> <span class="toc-text">互斥(互斥锁)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#互斥锁"><span class="toc-number">2.0.1.0.1.</span> <span class="toc-text">互斥锁</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步-条件变量"><span class="toc-number">2.0.2.</span> <span class="toc-text">同步(条件变量)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#信号量-互斥-同步"><span class="toc-number">2.0.3.</span> <span class="toc-text">信号量(互斥/同步)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于互斥锁-条件变量实现生产者与消费者模型"><span class="toc-number">2.0.4.</span> <span class="toc-text">基于互斥锁, 条件变量实现生产者与消费者模型</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
             </div>
         </div>
         
-        
     </div>
 </aside>
 
 
 
-
   
-    <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/继承/">继承</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/继承/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 继承是我们面向对象的三大特性之一，也是我们最先学习到的一种特性，继承在一定程度上可以理解为是将一种事物(类)与另一种事物(类)之间建立一种关系，这种关系将两类事物紧密的结合起来，这种关系的耦合度是比较高的，在某些特定的情况下，如果 <strong>耦合度太高的话，对于我们处理/修改某一个事物的时候是非常太方便的</strong> 。但是 <strong>有时候我们可以利用继承帮助我们减轻我们的工作量或者是更好的管理我们的代码框架。</strong></p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/继承/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多态" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/多态/">多态</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/多态/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多态是我们面向对象三大特性之一，它的功能是非常强大的，那到底多态到底是一个什么东西呐？多态通俗点来说就是：<strong>不同的对象调用相同的函数(同名函数)，执行不同的功能，从而实现不同的结果，这就是我们常说的多态，多态是一种比较广的一种概念，只要满足上述的叙述我们都可以称之为多态</strong>，因此上，我们大概分为以下两类:</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/多态/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-多继承-菱形继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/多继承-菱形继承/">多继承---菱形继承</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/多继承-菱形继承/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-菱形继承："><a href="#1-菱形继承：" class="headerlink" title="1. 菱形继承："></a>1. 菱形继承：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++ 是一种支持多继承的语言，对于多继承来说即有好处又有坏处，它的 <strong><em>好处就是可以让某些类更好的体现出它们之间的关系</em></strong>。比如：研究生即是一名助教，又是一名学生，我们想要表达这样的关系，就需要设计出学生类，老师类，再设计研究生类来继承它，因此多继承就可以很好的表达这种关系；当然这也是它的 <strong><em>缺点</em></strong>，这样的话 <strong><em>很容易造成数据冗余，以及数据访问二义性。</em></strong>，当然，C++ 它在实现这种多继承的时候，有它自己的解决方法。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/多继承-菱形继承/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Cpp的类型转化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/Cpp的类型转化/">C/C++的类型转换</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/Cpp的类型转化/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="C-C-语言类型转化的总结"><a href="#C-C-语言类型转化的总结" class="headerlink" title="C/C++语言类型转化的总结:"></a>C/C++语言类型转化的总结:</h1><h4 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h4><ul>
-<li>隐式类型转换：算术转化，类型转化，整形提升，…</li>
-<li>显式类型转换：(目标类型)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = (<span class="keyword">int</span>)<span class="string">'a'</span>;    <span class="comment">// C 中所有显示类型转化。</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不加注释，我们是比较难看懂某些代码的，因此上，C++语言为了规范管理我们的类型转化，它提出了四种类型转换的关键字，每个关键字都有它不同的转换作用，这样可以更好的，规范的实现类型转化，进而让代码更加规范，方便他人阅读，方便后期维护**</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/Cpp的类型转化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Markdown语法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/07/Markdown语法/">Markdown语法</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/07/Markdown语法/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:29:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-标题"><a href="#1-标题" class="headerlink" title="1.标题"></a>1.标题</h4><p>  一级标题: “# 字”<br>  二级标题: “## 字”<br>  三级标题: “### 字”<br>  四级标题: “#### 字”<br>  注意:这里符号与字之间是有空格的</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/07/Markdown语法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="线程安全" data-title="线程安全" data-url="http://yoursite.com/2019/10/03/线程安全/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -701,8 +370,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

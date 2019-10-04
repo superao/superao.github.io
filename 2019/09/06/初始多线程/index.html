@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>初始多线程 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成 “超人”，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初始多线程">
 <meta property="og:url" content="http://yoursite.com/2019/09/06/初始多线程/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成 “超人”，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-03T12:37:01.717Z">
+<meta property="og:updated_time" content="2019-10-04T01:31:07.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初始多线程">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成 “超人”，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -166,36 +166,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成超人，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可以 <strong>在同一时间内把我们所有的事情全部做完</strong>，我们将这种处理任务的方式称之为 “并行化处理”，这样处理问题我们的效率会大大提升，在我们计算机的世界里也有这样的情景，因此，我们应该好好学习这种并行化处理。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们日常生活中，我们要想完成自己每天的任务就需要按照自己的安排一件一件的来处理事情。我们把这样的处理任务的方式称之为 “串行化处理”，但是这样的处理方式效率太慢了，我们想要快速处理完自己每天的任务，然后留点剩余时间去做一下其他事情，那么这时候我们就要变成 “超人”，需要有多个大脑，有多个手脚或者有多个影分身等，这样的话，我们就可以 <strong>在同一时间内把我们所有的事情全部做完</strong>，我们将这种处理任务的方式称之为 “并行化处理”，这样处理问题我们的效率会大大提升，在我们计算机的世界里也有这样的情景，因此，我们应该好好学习这种并行化处理。</p>
 <a id="more"></a>
-<h2 id="多线程与多进程"><a href="#多线程与多进程" class="headerlink" title="多线程与多进程"></a>多线程与多进程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多线程与多进程处理任务，它们的效率都是非常高的，多进程在处理任务是需要创建多个子进程来辅助任务的完成，而多线程处理任务是创建多个普通线程来辅助任务的完成，它们两者的功能是非常相似的，但是它们还是各自有各自的优点的。<br>多线程与多进程的区别：(互补)</p>
-<ul>
-<li>多线程在处理任务的时候它所消耗的系统资源比较少。( <strong>进程是系统分配资源的最小单位，线程是CPU调度的最小单位</strong>，因此多进程是要分配很多资源的)</li>
-<li>多线程在处理任务的时候稳定性不够高。(对于某些错误的发生，整个进程都得退出，如：段错误)</li>
-<li>多线程在处理任务的时候效率相对比较高，调度切换消耗少(每个进程都有自己页表，虚拟地址空间，上下文数据等，它们在切换运行的时候，时间的消耗是比较大的，而线程它们共用同一块虚拟地址空间，页表，上下文数据等，它们在切换运行的时候，时间的消耗是比较小的)</li>
-<li>多线程在处理任务的时候通信方式是比较灵活的。(线程除了有进程间的通信方式外，还有指针，函数传参等通信方式)</li>
+<h2 id="多线程与多进程"><a href="#多线程与多进程" class="headerlink" title="多线程与多进程"></a>多线程与多进程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多线程与多进程处理任务，它们的效率都是非常高的，多进程在处理任务是需要创建多个子进程来辅助任务的完成，而多线程处理任务是创建多个普通线程来辅助任务的完成，它们两者的功能是非常相似的，但是它们还是各自有各自的优点的。</p>
+<h4 id="多线程与多进程的区别-互补"><a href="#多线程与多进程的区别-互补" class="headerlink" title="多线程与多进程的区别:(互补)"></a>多线程与多进程的区别:(互补)</h4><h6 id="多线程的优点"><a href="#多线程的优点" class="headerlink" title="多线程的优点"></a>多线程的优点</h6><ul>
+<li>多线程在处理任务的时候所消耗的系统资源较少。( <strong>进程是系统分配资源的最小单位，线程是CPU调度的最小单位</strong>，多进程是要分配很多资源的，而线程间很多资源都是共享的)</li>
+<li>多线程在处理任务的时候效率较高，调度切换消耗少(每个进程都有自己页表，虚拟地址空间，上下文数据等，它们在切换运行的时候，消耗是比较大的，而线程它们共用同一块虚拟地址空间，页表，上下文数据等，它们在切换运行的时候，消耗是比较小的)</li>
+<li>多线程在处理任务的时候，通信方式比较灵活。(线程除了有进程间的通信方式外，还有指针访问，函数传参等通信方式)</li>
 </ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>线程的优点，对于进程来说就是它的缺点，而线程的缺点，对于进程来说就是它的优点</strong> ，我们在使用的时候需要视情况来选择比较合适的并行化处理，比如：需要稳定性的时候，我们要使用多进程(Shell终端，获取服务的服务器主机等)，其他大多数情况下我们就使用多线程来处理并行化处理。</p>
-<h2 id="到底什么是线程？"><a href="#到底什么是线程？" class="headerlink" title="到底什么是线程？"></a>到底什么是线程？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在说线程之前我们先说说什么是进程，站在我们用户的角度，进程就是一个运行中的程序，而在操作系统眼里，进程是一个控制程序(代码生成的可执行文件)运行的控制块，简称PCB，由一个结构体(Linux下为task_struct)来描述该程序运行的各种信息。在Linux操作系统下，没有正真意义上的线程，它的线程是由PCB模拟实现出来的，因此我们可以说线程就是一个轻量级的进程，它相较于传统的操作系统的进程更加轻量化，因为这些PCB之间共用同一个虚拟地址空间，共享进程大部分资源，因此它是一个轻量级进程，而我们之前说的进程就是一个线程组，当然这和我们传统的操作系统相比是有区别的。</strong><br><img src="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="线程进程的图示"><br>我们发现平时写Demo都是第一种情况下的程序，我们可以根据这个图示来好好的理解一下是什么线程，是什么是进程。</p>
-<h4 id="pid-tid-tgid"><a href="#pid-tid-tgid" class="headerlink" title="pid/tid/tgid"></a>pid/tid/tgid</h4><ul>
+<h6 id="多线程的缺点"><a href="#多线程的缺点" class="headerlink" title="多线程的缺点"></a>多线程的缺点</h6><ul>
+<li>多线程在处理任务的时候，稳定性不够高。(对于某些错误的发生，整个进程都得退出，如：段错误)</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>总结</strong>: 线程的优点，对于进程来说就是它的缺点，而线程的缺点，对于进程来说就是它的优点，它们两者的优缺点是互补的，我们在使用的时候需要视情况来选择比较合适的并发处理，比如：需要稳定性的时候，我们要使用多进程(Shell终端，获取服务的服务器主机等)，其他大多数情况下我们就使用多线程来处理。</p>
+<h2 id="到底什么是线程？"><a href="#到底什么是线程？" class="headerlink" title="到底什么是线程？"></a>到底什么是线程？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在说线程之前我们先说说什么是进程，<strong>站在我们用户的角度，进程就是一个运行中的程序，而在操作系统眼里，进程是一个控制程序(代码生成的可执行文件)运行的控制块，简称PCB，由一个结构体(Linux下为task_struct)来描述该程序运行的各种信息。在Linux操作系统下，没有正真意义上的线程，它的线程是由PCB模拟实现出来的，因此我们可以说线程就是一个轻量级的进程，它相较于传统的操作系统的进程更加轻量化，因为这些PCB之间共用同一个虚拟地址空间，共享进程大部分资源，因此它是一个轻量级进程</strong>，而我们之前说的进程就是一个线程组，当然这和我们传统的操作系统相比是有区别的。<br><img src="https://img-blog.csdnimg.cn/20190907125957816.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="线程进程的图示"><br>我们发现平时写Demo都是第一种情况下的程序，我们可以根据这个图示来好好的理解一下是什么线程，是什么是进程。</p>
+<h4 id="线程的-ID"><a href="#线程的-ID" class="headerlink" title="线程的 ID"></a>线程的 ID</h4><ul>
 <li>pid = LWP轻量级继承ID</li>
 <li>tid = 线程的首地址(每个线程在虚拟地址空间中有一块自己的区域，该区域的首地址就是tid)</li>
 <li>tgid = 线程组ID</li>
 </ul>
-<h2 id="线程间的共享与独有"><a href="#线程间的共享与独有" class="headerlink" title="线程间的共享与独有"></a>线程间的共享与独有</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我清楚了什么是线程之后，我们来说一说每个线程之间的差距，如何对它们进行合理的分配，即线程的独有与共享.</p>
+<h2 id="线程的共享与独有"><a href="#线程的共享与独有" class="headerlink" title="线程的共享与独有"></a>线程的共享与独有</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们清楚了什么是线程之后，我们还应该明白每个线程是如何工作的，在生活中的工作和线程的工作是类似的，在生活中，大家都是在一块大的空间内进行合作，然后在大空间中，每个人又有自己的小空间来进行分工工作，类比到线程也是一样的，线程间有共享的一些东西，然后每个线程还会有自己一些特殊的东西，这些东西就是线程的独有与共享的内容。</p>
 <ul>
 <li>共享: 虚拟地址空间(代码段/数据段)，页表，信号处理方式，文件描述符表，当前工作路径，用户ID/组ID</li>
-<li>独有: 调用栈区，寄存器信息，信号屏蔽字，errno<br><img src="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt> </li>
+<li>独有: 调用栈区，寄存器信息，信号屏蔽字，errno(发生错误时会置换)<br><img src="https://img-blog.csdnimg.cn/2019090714451891.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt> </li>
 </ul>
-<h2 id="多线程的基本操作"><a href="#多线程的基本操作" class="headerlink" title="多线程的基本操作"></a>多线程的基本操作</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在Linux中没有直接操作线程的接口让我们来进行操作，但是大佬们为我们在用户态封装了一套线程库来供我们方便使用。</p>
+<h2 id="熟悉常用接口"><a href="#熟悉常用接口" class="headerlink" title="熟悉常用接口"></a>熟悉常用接口</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在 Linux 中并没有提供直接操作线程的系统接口，这样的话，我们在书写多线程的时候是非常麻烦的一件事情，为了统一规范，提高代码的质量，大佬们在用户态为了我们提供了一套线程库方便我们进行使用。</p>
 <h4 id="线程的创建"><a href="#线程的创建" class="headerlink" title="线程的创建"></a>线程的创建</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_create</span><span class="params">(<span class="keyword">pthread_t</span> *thread, <span class="keyword">const</span> <span class="keyword">pthread_attr_t</span> *attr,<span class="keyword">void</span> *(*start_routine) (<span class="keyword">void</span> *), <span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"><span class="comment">// 一个线程创建后，默认属性为 joinable 属性，该属性的线程退出时需要被等待</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="线程的终止"><a href="#线程的终止" class="headerlink" title="线程的终止"></a>线程的终止</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 退出:</span></span><br><span class="line"><span class="keyword">return</span>                                <span class="comment">// return 退出,直接将返回值进行返回。</span></span><br><span class="line"><span class="keyword">void</span> pthread_exit(<span class="keyword">void</span> *retval);      <span class="comment">// exit 退出,将返回值作为参数传入,最后将需要被返回的值返回出去。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消:</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_cancel</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>; <span class="comment">// 取消一个指定的线程,不管是否进行完毕,都需要退出。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">pthread_t</span> pthread_self(<span class="keyword">void</span>);         <span class="comment">// 获取自身线程的 tid</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结：每个线程(joinable)退出的时候，都需要被等待，如果不等待退出的那块进程的资源还在内存中没有被释放，就会成为僵死线程</span></span><br><span class="line"><span class="comment">// 我们可以在终端进行查看，但是终端只显示主线程的状态，因此我们无法查看到普通线程僵死的状态，但是我们必须清楚这一点</span></span><br><span class="line"><span class="comment">// 主线程在return之后整个进程都会被退出，主线程退出之后其他线程依然还在工作，其他方式的退出不会引起这样的情况发生</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="线程的等待"><a href="#线程的等待" class="headerlink" title="线程的等待"></a>线程的等待</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_join</span><span class="params">(<span class="keyword">pthread_t</span> thread, <span class="keyword">void</span> **retval)</span></span>;</span><br><span class="line"><span class="comment">// 线程退出后(return, exit)，获取线程的返回值，并回收资源</span></span><br><span class="line"><span class="comment">// 线程取消后(cancle)，不一定能获取到它的返回值(有可能在执行过程中就被取消了)</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="线程的分离"><a href="#线程的分离" class="headerlink" title="线程的分离"></a>线程的分离</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;</span><br><span class="line"><span class="comment">// 将某个线程的 joinable 属性设置为 detach 属性，此属性的线程退出的时候，不需要被等待，自动释放资源</span></span><br></pre></td></tr></table></figure>
-
+<h4 id="线程的分离"><a href="#线程的分离" class="headerlink" title="线程的分离"></a>线程的分离</h4><pre><code class="cpp"><span class="function"><span class="keyword">int</span> <span class="title">pthread_detach</span><span class="params">(<span class="keyword">pthread_t</span> thread)</span></span>;
+<span class="comment">// 将某个线程的 joinable 属性设置为 detach 属性，此属性的线程退出的时候，不需要被等待，自动释放资源</span></code></pre>
 
       
 
@@ -343,7 +345,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程与多进程"><span class="toc-number">1.</span> <span class="toc-text">多线程与多进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#到底什么是线程？"><span class="toc-number">2.</span> <span class="toc-text">到底什么是线程？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pid-tid-tgid"><span class="toc-number">2.0.1.</span> <span class="toc-text">pid/tid/tgid</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程间的共享与独有"><span class="toc-number">3.</span> <span class="toc-text">线程间的共享与独有</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程的基本操作"><span class="toc-number">4.</span> <span class="toc-text">多线程的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的创建"><span class="toc-number">4.0.1.</span> <span class="toc-text">线程的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的终止"><span class="toc-number">4.0.2.</span> <span class="toc-text">线程的终止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的等待"><span class="toc-number">4.0.3.</span> <span class="toc-text">线程的等待</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的分离"><span class="toc-number">4.0.4.</span> <span class="toc-text">线程的分离</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程与多进程"><span class="toc-number">1.</span> <span class="toc-text">多线程与多进程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#多线程与多进程的区别-互补"><span class="toc-number">1.0.1.</span> <span class="toc-text">多线程与多进程的区别:(互补)</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#多线程的优点"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">多线程的优点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#多线程的缺点"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">多线程的缺点</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#到底什么是线程？"><span class="toc-number">2.</span> <span class="toc-text">到底什么是线程？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的-ID"><span class="toc-number">2.0.1.</span> <span class="toc-text">线程的 ID</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的共享与独有"><span class="toc-number">3.</span> <span class="toc-text">线程的共享与独有</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#熟悉常用接口"><span class="toc-number">4.</span> <span class="toc-text">熟悉常用接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的创建"><span class="toc-number">4.0.1.</span> <span class="toc-text">线程的创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的终止"><span class="toc-number">4.0.2.</span> <span class="toc-text">线程的终止</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的等待"><span class="toc-number">4.0.3.</span> <span class="toc-text">线程的等待</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#线程的分离"><span class="toc-number">4.0.4.</span> <span class="toc-text">线程的分离</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -475,6 +477,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
@@ -483,7 +489,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,15 +497,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -507,11 +505,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
+                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
