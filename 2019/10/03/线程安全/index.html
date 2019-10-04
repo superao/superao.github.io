@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004110127159.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004115124400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191004115237481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-04T15:57:23.475Z">
+<meta property="og:updated_time" content="2019-10-04T16:41:49.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线程安全">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 初始多线程之后，明白了什么是线程，如何操作线程的一些相关接口，那么我们平时在书写小程序的时候就可以写一些并发性的程序了，而不在是一些简单的串行化程序，并且并发性程序执行的效率是很高的，在我们实际开发中，大多数开发的程序也是并发性程序，而不是简单的串行化程序，因此，了解并发性程序的相关特性以及注意事项是作为开发人员必须掌握的一">
@@ -189,7 +189,7 @@
 <p><a href="https://github.com/superao/Linux/blob/master/%E4%BA%92%E6%96%A5%E9%94%81%E5%AE%9E%E7%8E%B0%E6%8A%A2%E7%A5%A8.c" target="_blank" rel="noopener">互斥锁的使用</a></p>
 <h6 id="死锁问题"><a href="#死锁问题" class="headerlink" title="死锁问题:"></a>死锁问题:</h6><p><a href="https://superao.github.io/2019/10/04/%E6%AD%BB%E9%94%81%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">死锁问题</a></p>
 <h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 同步实现线程安全时 <strong>利用多个线程对临界资源访问的时序合理性，即当满足条件时，线程进行访问操作，当不满足条件时，线程则挂起等待</strong>，通过线程对条件进行判断，从而可以保证线程安全，但是通常情况下，多个线程对条件进行判断时需要保证互斥，这样才能真正意义上保证线程之间的时序合理性。</p>
-<h5 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 条件变量实现同步时 <strong>通过向外界提供接口实现了线程的等待与唤醒功能</strong> ，从而实现了线程间的同步。虽然它的名字叫条件变量，但是它并没有条件判断的功能，<strong>条件判断(临界资源)需要我们用户自己进行判断</strong>。</p>
+<h5 id="条件变量"><a href="#条件变量" class="headerlink" title="条件变量"></a>条件变量</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 条件变量实现同步时 <strong>通过向外界提供接口实现了线程的等待与唤醒功能</strong> ，从而实现了线程间的同步。虽然它的名字叫条件变量，但是它并没有条件判断的功能，<strong>条件判断(临界资源)需要我们用户自己进行判断，一般需要搭配互斥锁一起使用</strong>。</p>
 <h5 id="条件变量接口"><a href="#条件变量接口" class="headerlink" title="条件变量接口"></a>条件变量接口</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 条件变量类型:</span></span><br><span class="line"><span class="keyword">pthread_cond_t</span>               <span class="comment">// 它是一个条件变量结构体，包含计数器，等待队列，程序唤醒等等信息</span></span><br><span class="line">pthread_cond_init;           <span class="comment">// 初始化条件变量资源</span></span><br><span class="line">pthread_cond_destroy;        <span class="comment">// 销毁条件变量资源</span></span><br><span class="line">pthread_cond_wait;           <span class="comment">// 线程等待(将 unlock, wait, lock 组合为原子操作,否则会出现死等的情况)</span></span><br><span class="line">pthread_cond_timewait;       <span class="comment">// 线程限时等待(不常用)</span></span><br><span class="line">pthread_cond_signal;         <span class="comment">// 唤醒至少一个线程</span></span><br><span class="line">pthread_cond_broadcast;      <span class="comment">// 唤醒全部线程</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>tips:</strong></p>
@@ -204,11 +204,11 @@
 <ul>
 <li>生产者与生产者:互斥</li>
 <li>消费者与消费者:互斥</li>
-<li>生产者与消费者:同步</li>
+<li>生产者与消费者:同步与互斥</li>
 <li>数据缓冲场所: 队列</li>
 </ul>
-<p><strong>总结: 一个场所，两种角色，三种关系</strong></p>
-<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结:"></a>3. 总结:</h2><p>// 说一些，条件变量相比互斥锁的好处，它的用途，再说一下我们的信号量与条件变量的区别，还有它们的关系。</p>
+<p><strong>总结: 一个场所，两种角色，三种关系</strong><br><a href="https://github.com/superao/Linux/blob/master/%E7%94%9F%E4%BA%A7%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B.cpp" target="_blank" rel="noopener">互斥锁与条件变量实现</a><br><a href="https://github.com/superao/Linux/blob/master/%E7%94%9F%E4%BA%A7%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B-%E4%BF%A1%E5%8F%B7%E9%87%8F.cpp" target="_blank" rel="noopener">信号量实现</a></p>
+<h2 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结:"></a>3. 总结:</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 互斥锁/条件变量/信号量都可以实现线程安全，但是它们在实现线程安全的时候是一些区别的。互斥锁实现线程安全主要是针对相同角色的线程，而条件变量实现线程安全主要是针对不同角色的线程; 条件变量在一定程度上弥补了互斥锁的缺陷(饥饿现象，CPU利用率低(空转))，条件变量在互斥锁的基础上，增加了等待与唤醒功能，即解决了饥饿现象，又提高了 CPU 资源的利用率，并且等待与唤醒功能还可以减少一个程序对 CPU 的使用率(等待)，对于有些程序来说是非常好的一件事情; 信号量的底层使用了条件变量，在条件变量的基础上增加了条件判断，因此，条件变量是外部进行判断，而信号量是内部进行判断。</p>
 
       
 
@@ -488,11 +488,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -516,15 +516,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
