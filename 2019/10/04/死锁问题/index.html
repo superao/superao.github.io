@@ -18,7 +18,9 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191007203117757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-05T13:19:20.074Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191008111108964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191008124146614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-05T16:26:24.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死锁问题">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
@@ -207,7 +209,12 @@
 <li><strong>环路等待条件</strong> – 对进程/线程所需要的资源种类进行分类，依次对资源类型进行排序，每次只允许每个进程/线程申请资源只能从头开始申请，这样就不会发生某个资源同时被多个进程/线程所申请，从而避免了环路等待。(常见于嵌入式操作系统，资源种类较少)</li>
 </ul>
 <p><strong>总结:</strong> 死锁的四个特征，除了不能破坏互斥条件外，其他的三个特征都可以进行破坏，但是破坏之后，在一定程度上会造成某些进程/线程不同程度的饥饿情况。</p>
-<h6 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h6><h6 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h6><h6 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h6>
+<h6 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 死锁的避免需要在每个进程/线程中加入进程/线程运行时所需要资源的描述信息，这样可以通过这些描述信息来进行判断当前资源的分配是否是安全的，从而可以避免死锁问题的产生。<br><strong>死锁避免的思路</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在每个进程/线程中加入大量的资源描述信息，1.每个进程/线程需要每个类型资源的最大数目(Max)，2.系统已经为其分配的数目(Allocation)，3.系统每个类型资源剩余的数目(Available)，4.每个进程/线程还需每个类型资源的数目(Need)。通过这些描述信息，系统会在所有的进程/线程中动态检查找出一个安全序列，资源分配只要按照这个安全序列进行分配就不会出现问题。这里的安全序列是指:**在序列P&lt;P1, P2, …,Pn&gt;中，如果Pi进程/线程想要执行，就需要等待P1 ~ Pi-1进程/线程结束了，将其所持有的全部资源释放掉后，Pi拿到自己所需要的资源进行执行，依次类推，直到所有的进程/线程全部执行完毕。<br><img src="https://img-blog.csdnimg.cn/20191008111108964.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="安全区域"></p>
+<h6 id="银行家算法"><a href="#银行家算法" class="headerlink" title="银行家算法:"></a>银行家算法:</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 银行家算法的目的是<strong>对资源分配进行检测是否可以找出来一个安全的序列，如果可以找出那么为其分配资源，如果不能找出，那么就不为其分配资源。</strong> </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 银行家算法数据结构: 矩阵</span></span><br><span class="line"><span class="comment">// m = 进程数量,  n = 资源数量.</span></span><br><span class="line"><span class="comment">// Max(总需求量): m * n矩阵, Max[i, j] = k, 表示第 i 个进程所需要的 j 类资源最多需要 k 个。</span></span><br><span class="line"><span class="comment">// Available(剩余空间量): Available[j] = k, 表示第 j 类资源剩余 k 个。</span></span><br><span class="line"><span class="comment">// Allocation(已分配量): m * n矩阵, Allocation[i, j] = k, 表示第 i 个进程已经分配 j 类资源 k 个。</span></span><br><span class="line"><span class="comment">// Need(需求量): m * n矩阵, Need[i, j] = k, 表示第 i 个进程所需要的 j 类资源还需要 k 个。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191008124146614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="银行家算法"><br><strong>总结流程:</strong><br>当某个进程/线程向系统请求资源的时候，先进行条件判断，如果请求的资源小于需要的资源，那么就去判断当前系统剩余的资源是否可以满足其分配，如果满足更新数据，调用安全检测算法，检测它与后续进程是否可以满足一个安全序列，如果可以满足，那么就进行分配，如果不满足，说明存在环路，可能会发生死锁现象，不分配资源。</p>
+<h6 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h6><h6 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h6>
       
 
       
@@ -345,7 +352,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-死锁问题"><span class="toc-number">1.</span> <span class="toc-text">1. 死锁问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-死锁模型"><span class="toc-number">2.</span> <span class="toc-text">2. 死锁模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-死锁特征"><span class="toc-number">3.</span> <span class="toc-text">3. 死锁特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-处理方法"><span class="toc-number">4.</span> <span class="toc-text">4. 处理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁预防"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">死锁预防</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁避免"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">死锁避免</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁检测"><span class="toc-number">4.0.0.0.3.</span> <span class="toc-text">死锁检测</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁恢复"><span class="toc-number">4.0.0.0.4.</span> <span class="toc-text">死锁恢复</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-死锁问题"><span class="toc-number">1.</span> <span class="toc-text">1. 死锁问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-死锁模型"><span class="toc-number">2.</span> <span class="toc-text">2. 死锁模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-死锁特征"><span class="toc-number">3.</span> <span class="toc-text">3. 死锁特征</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-处理方法"><span class="toc-number">4.</span> <span class="toc-text">4. 处理方法</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁预防"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">死锁预防</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁避免"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">死锁避免</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#银行家算法"><span class="toc-number">4.0.0.0.3.</span> <span class="toc-text">银行家算法:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁检测"><span class="toc-number">4.0.0.0.4.</span> <span class="toc-text">死锁检测</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#死锁恢复"><span class="toc-number">4.0.0.0.5.</span> <span class="toc-text">死锁恢复</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -473,15 +480,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,15 +508,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
