@@ -18,7 +18,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191007203117757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-05T12:18:32.202Z">
+<meta property="og:updated_time" content="2019-10-05T12:20:28.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死锁问题">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
@@ -182,8 +182,8 @@
 <li>集合P &lt;P1, P2, P3, …, Pn&gt; 包含系统中所有的线程/进程总和。</li>
 <li>集合R &lt;R1, R2, R3, …, Rn&gt; 包含系统中所有的资源总和。</li>
 <li>进程/线程请求资源时，Pn –&gt; Rn; 进程/线程获取到资源时，Rn –&gt; Pn;<br><img src="https://img-blog.csdnimg.cn/20191007203117757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="资源分配图"></li>
-<li><em>分析*</em>: </li>
 </ul>
+<p><strong>分析</strong>: </p>
 <ol>
 <li>图1中，P3进程/线程在获取到资源后进行执行，完毕后将它所持有的资源归还给系统，然后P2进程/线程获取到所需的全部资源后进行执行，完毕后进行释放，最后P1进程/线程获取到后进行执行，最后释放。 </li>
 <li>图2中，三个进程/线程之间都是自己持有某些资源，然后去请求其他所需资源，并且这些所需资源被其他线程所持有，从而导致它们之间的请求与持有形成一个环路，谁也无法得到自己需要的资源，谁也不释放自己的资源，最后相互等待，谁也无法执行下去。</li>
@@ -491,7 +491,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -499,7 +499,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
