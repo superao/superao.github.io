@@ -18,7 +18,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191007203117757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-05T12:08:44.190Z">
+<meta property="og:updated_time" content="2019-10-05T12:18:32.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死锁问题">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
@@ -176,7 +176,7 @@
       
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”</p>
 <a id="more"></a>
-<h2 id="1-死锁问题"><a href="#1-死锁问题" class="headerlink" title="1. 死锁问题"></a>1. 死锁问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在并发环境下，进程之间/线程之间由于资源分配不当，导致它们都无法获取到自己想要的那份资源，从而导致进程之间/线程之间相互等待，谁也无法执行下去的情况</strong>，我们称这样的问题为 <strong>“死锁问题”</strong>。比如:”在多线程环境下，某个线程持有一个资源(互斥锁A)，但是想要执行下去还需要另一种资源(互斥锁B)，但是这个资源(互斥锁B)被另一个线程所持有，并且同时这个线程还在请求上一个线程所持有的资源(互斥锁A)，从而相互等待谁也无法执行下去”，这种资源是非常广泛的，比如:”CPU, I/O, 内存, 互斥锁等”，这些都算我们这里所说的资源。</p>
+<h2 id="1-死锁问题"><a href="#1-死锁问题" class="headerlink" title="1. 死锁问题"></a>1. 死锁问题</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>在并发环境下，进程之间/线程之间由于资源分配不当，导致它们都无法获取到自己想要的那份资源，从而导致进程之间/线程之间相互等待，谁也无法执行下去的情况</strong>，我们称这样的问题为 <strong>“死锁问题”</strong>。比如:”在多线程环境下，某个线程持有一个资源(互斥锁A)，但是想要执行下去还需要另一种资源(互斥锁B)，但是这个资源(互斥锁B)被另一个线程所持有，并且同时这个线程还在请求上一个线程所持有的资源(互斥锁A)，从而相互等待谁也无法执行下去”，这里所说的资源是非常广泛的，比如:”CPU, I/O, 内存, 互斥锁等”，这些都算我们这里所说的资源。</p>
 <h2 id="2-死锁模型"><a href="#2-死锁模型" class="headerlink" title="2. 死锁模型"></a>2. 死锁模型</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了建立资源分配模型，我们使用 “有向图” 进行表示，这样，我们即容易储存数据，又可以直观的表示出资源分配模型，从而可以从不同的资源分配图中分析出 “死锁问题” 的模型。</p>
 <ul>
 <li>集合P &lt;P1, P2, P3, …, Pn&gt; 包含系统中所有的线程/进程总和。</li>
@@ -192,10 +192,10 @@
 <p><strong>总结</strong>:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>如果资源分配图中无环 ==&gt; 不会死锁; 如果资源分配图中有环，1.如果只有一个资源实例类型 ==&gt; 发生死锁，2.如果有多个资源实例化类型 ==&gt; 可能发生死锁</strong></p>
 <h2 id="3-死锁特征"><a href="#3-死锁特征" class="headerlink" title="3. 死锁特征"></a>3. 死锁特征</h2><p>从死锁资源分配模型图中总结出死锁问题具有以下四点特征:</p>
 <ul>
-<li>互斥条件: 在一个时间段内，一个资源只能被一个进程/线程所使用。</li>
-<li>不可剥夺条件: 在一个时间段内，一个进程/线程持有资源后，其他进程/线程不能剥夺该资源，只能等待自行释放。</li>
-<li>请求与保持条件: 一个进程持有某个资源，并且同时去请求其他的资源。</li>
-<li>环路等待条件: 在进程/线程等待集合P&lt;P1, P2, …, Pn&gt;中，P1等待P2的资源，P2等待P3的资源，…,Pn等待P1的资源，形成环路。 </li>
+<li><strong>互斥条件</strong>: 在一个时间段内，一个资源只能被一个进程/线程所使用。</li>
+<li><strong>不可剥夺条件</strong>: 在一个时间段内，一个进程/线程持有资源后，其他进程/线程不能剥夺该资源，只能等待自行释放。</li>
+<li><strong>请求与保持条件</strong>: 一个进程持有某个资源，并且同时去请求其他的资源。</li>
+<li><strong>环路等待条件</strong>: 在进程/线程等待集合P&lt;P1, P2, …, Pn&gt;中，P1等待P2所持有的资源，P2等待P3所持有的资源，…,Pn等待P1所持有的资源，持有与请求形成环路。 </li>
 </ul>
 <h2 id="4-处理方法"><a href="#4-处理方法" class="headerlink" title="4. 处理方法"></a>4. 处理方法</h2><h6 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h6><h6 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h6><h6 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h6><h6 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h6>
       
@@ -475,6 +475,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
@@ -483,15 +487,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,6 +496,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
