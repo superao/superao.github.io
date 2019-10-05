@@ -18,7 +18,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191007203117757.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-05T12:20:28.009Z">
+<meta property="og:updated_time" content="2019-10-05T13:19:20.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="死锁问题">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在程序开发过程中，有时候我们可能需要向系统申请某些资源来供程序使用，但是在并发环境下，系统如果对资源的分配处理不当的话，这样就会带来一系列程序无法运行的情况，因此本篇文章我们来总结一下 “死锁问题”">
@@ -194,10 +194,20 @@
 <ul>
 <li><strong>互斥条件</strong>: 在一个时间段内，一个资源只能被一个进程/线程所使用。</li>
 <li><strong>不可剥夺条件</strong>: 在一个时间段内，一个进程/线程持有资源后，其他进程/线程不能剥夺该资源，只能等待自行释放。</li>
-<li><strong>请求与保持条件</strong>: 一个进程持有某个资源，并且同时去请求其他的资源。</li>
+<li><strong>等待与保持条件</strong>: 一个进程持有某个资源，并且同时去请求等待其他的资源。</li>
 <li><strong>环路等待条件</strong>: 在进程/线程等待集合P&lt;P1, P2, …, Pn&gt;中，P1等待P2所持有的资源，P2等待P3所持有的资源，…,Pn等待P1所持有的资源，持有与请求形成环路。 </li>
 </ul>
-<h2 id="4-处理方法"><a href="#4-处理方法" class="headerlink" title="4. 处理方法"></a>4. 处理方法</h2><h6 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h6><h6 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h6><h6 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h6><h6 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h6>
+<p><strong>四个死锁特征是死锁的必要条件，并不是死锁的充分条件。</strong></p>
+<h2 id="4-处理方法"><a href="#4-处理方法" class="headerlink" title="4. 处理方法"></a>4. 处理方法</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 死锁问题的处理方式有两种: 1.站在用户自身角度考虑，不让系统进入死锁状态。2.站在操作系统角度考虑，系统可以进入死锁，进入死锁后，自行恢复。但是在当代操作系统中一般都忽视这个问题，需要用户自身保证系统不会进入死锁状态，因为操作系统进行死锁检测与恢复是需要对一个进程/线程加入大量的描述信息来进行判断，从而导致操作系统的效率大大下降，不能保证操作系统的高效性。</p>
+<h6 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 死锁的预防主要是从死锁的四个特征进行入手，只要破坏其中一个必要条件，死锁就不会产生，但是破坏不同的必要条件所带来的破坏性是不同的，因此，选择破坏时需要慎重选择。 </p>
+<ul>
+<li>互斥条件 – 可能会引发数据访问二义性，一般不能破坏。</li>
+<li>不可剥夺条件 – 当某个进程/线程请求其他资源时不能立即获得到资源时，自行释放自身所持有的资源。</li>
+<li>等待与保持条件 – 当某个进程/线程执行任务时不需要进行等待，将所有的资源都分配给它，它使用完毕后自行释放，再让下一个进行执行。</li>
+<li><strong>环路等待条件</strong> – 对进程/线程所需要的资源种类进行分类，依次对资源类型进行排序，每次只允许每个进程/线程申请资源只能从头开始申请，这样就不会发生某个资源同时被多个进程/线程所申请，从而避免了环路等待。(常见于嵌入式操作系统，资源种类较少)</li>
+</ul>
+<p><strong>总结:</strong> 死锁的四个特征，除了不能破坏互斥条件外，其他的三个特征都可以进行破坏，但是破坏之后，在一定程度上会造成某些进程/线程不同程度的饥饿情况。</p>
+<h6 id="死锁避免"><a href="#死锁避免" class="headerlink" title="死锁避免"></a>死锁避免</h6><h6 id="死锁检测"><a href="#死锁检测" class="headerlink" title="死锁检测"></a>死锁检测</h6><h6 id="死锁恢复"><a href="#死锁恢复" class="headerlink" title="死锁恢复"></a>死锁恢复</h6>
       
 
       
