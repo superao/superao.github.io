@@ -17,10 +17,12 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-07T12:20:40.354Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-07T16:37:16.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -187,7 +189,43 @@
 <h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在生活中，当我们进行购物的时候，我们需要和卖家交流商品的相关信息，这时候我们即可以利用电话进行交流，也可以利用文字进行交流，这些不同的交流工具就相当于不同的协议，约定我们之间用什么进行交流，实现信息交互。在网络中，不同的主机在数据交互的时候也需要制定一些特殊的约定来帮主机之间进行通信，而这些约定就是 “通信协议”，通信协议更好的帮助不同主机之间的通信。</p>
 <h6 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主机之间制定相关通信协议之后，那么就需要对相关的协议进行管理，如何更好的进行协议管理呐？还是刚开始的那个例子，在我们购买之后，卖家将商品交给快递公司，快递公司负责将商品送到我们手中，至于商品的运输方式是飞机，火车，汽车，…这些我们都是不需要关心的， 这些都是快递公司进行管理的。那么我们也可以将通信协议进行分层，从而让不同的机构去管理不同的协议，这样使我们的通信划分的更加细致，更加灵活(选择不同的协议)，更容易形成标准。</p>
 <ul>
-<li>OSI七层模型:<br>// 表格 </li>
+<li>OSI七层模型:<table>
+<thead>
+<tr>
+<th align="center">层级</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">应用层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">表示层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">会话层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">传输层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">网络层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">链路层</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">物理层</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+</li>
 <li>TCP/IP 五层模型:<table>
 <thead>
 <tr>
@@ -208,7 +246,7 @@
 </tr>
 <tr>
 <td align="center">网络层</td>
-<td align="center">负责地址管理与路由选择</td>
+<td align="center">负责地址管理与路由选择(IP地址-&gt;MAC地址)</td>
 <td align="center">IP协议/路由器</td>
 </tr>
 <tr>
@@ -218,14 +256,14 @@
 </tr>
 <tr>
 <td align="center">物理层</td>
-<td align="center">负责光电信号的传输</td>
+<td align="center">负责光电信号的传输(二进制-&gt;光电信号)</td>
 <td align="center">以太网协议/集线器</td>
 </tr>
 </tbody></table>
 </li>
 </ul>
 <h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完整数据的收发流程总结: 在每条数据的描述信息中加入: 该数据是由哪个IP地址(主机)上的哪个端口发送的，数据要到哪个IP地址上的哪个端口上被处理，并且使用了什么样的协议，这就是每条数据所需要包含的 “五元组”，即”源IP地址，源端口，目的IP地址，目的端口，协议类型”</p>
-<h6 id="数据封装与解析流程"><a href="#数据封装与解析流程" class="headerlink" title="数据封装与解析流程"></a>数据封装与解析流程</h6><p><img src alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据的封装与解析流程都是操作系统完成的，而将数据与这些额外信息组织起来进行保存的数据结构为 “socket 结构体”，传输层的协议都是在 socket结构体的基础上完成了端与端之间的传输。</p>
+<h6 id="数据封装与解析流程"><a href="#数据封装与解析流程" class="headerlink" title="数据封装与解析流程"></a>数据封装与解析流程</h6><p><img src="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据的封装与解析流程都是操作系统完成的，而将数据与这些额外信息组织起来进行保存的数据结构为 “socket 结构体”，传输层的协议都是在 socket结构体的基础上完成了端与端之间的传输。</p>
 <h6 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们将所有需要被发送的数据组织好之后，还需要注意一个问题。在不同的主机中，CPU对内存数据的存取顺序不同(字节序)，主要有以下两种存取顺序，如果不考虑存取顺序问题，那么我们发送的数据有可能会被对方解析为其他的数据，这样导致我们的通信没有真正完成，因此上规定了在网络中统一使用大端字节序来进行通信。</p>
 <ul>
 <li>大端字节序: 低地址存放高位</li>
@@ -233,9 +271,7 @@
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 大小端转化相关接口</span></span><br><span class="line"><span class="comment">// uint32_t htonl(uint32_t hostlong);</span></span><br><span class="line"><span class="comment">// uint16_t htons(uint16_t hostshort);    // 主机字节序转化为网络字节序</span></span><br><span class="line"><span class="comment">// uint32_t ntohl(uint32_t netlong);</span></span><br><span class="line"><span class="comment">// uint16_t ntohs(uint16_t netshort);     // 网络字节序转化为主机字节序</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="Socket结构体"><a href="#Socket结构体" class="headerlink" title="Socket结构体"></a>Socket结构体</h2><p>// 详解在使用过程中 Socket 的某些变量，结构体。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了更好的编写网络程序，我们需要对socket结构体更加深入的了解，从而清楚操作系统将数据如何进行组织。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>// 讲述现如今我们如何实现程序中的网络通信，—&gt; 使用 Socket相关API帮助我们 来进行通信</p>
-
+<h2 id="Socket结构体"><a href="#Socket结构体" class="headerlink" title="Socket结构体"></a>Socket结构体</h2>
       
 
       
@@ -382,7 +418,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -538,15 +574,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
