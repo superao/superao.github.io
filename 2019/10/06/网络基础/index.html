@@ -7,19 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Superao的博客</title>
+  <title>网络基础 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络基础">
+<meta property="og:url" content="http://yoursite.com/2019/10/06/网络基础/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
 <meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2019-10-07T09:26:01.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="网络基础">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -151,394 +152,226 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-网络基础" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网络基础
+    </h1>
+  
+
+        
+        <a href="/2019/10/06/网络基础/" class="archive-article-date">
+  	<time datetime="2019-10-07T00:37:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。</p>
+<a id="more"></a>
+<h2 id="网络发展背景"><a href="#网络发展背景" class="headerlink" title="网络发展背景"></a>网络发展背景</h2><p>// 早期计算机的使用   -&gt;    多个计算机之间合作     -&gt;       通过一些技术如果实现通信<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 计算机在早期主要用于计算某些实验数据，那时候，大多数的情况下计算机都是一种处于单机的工作方式。随着工业的发展，对数据的处理量不断的增大，单个人，单台计算机已经无法完成巨大的工作量的时候，这时候就需要多台计算机，多个人相互合作来完成某一个任务，这时候就需要将多台计算机用某些设备进行连接实现数据的交互，实现通信，这种设备就是 “交换机”，它主要用于两台主机之间的数据交互，这样实现了两台主机之间的交互，当多台主机之间实现数据交互的时候，交换机是无法识别出数据到底是从哪个设备到达哪个设备的，这时候为了解决这一问题，发明了一个新的设备 “路由器”，它主要用于多台主机之间的数据交换，并且路由器会自动进行路由选择，从而实现数据从源主机到目的主机之间最短路径的传输，当连接的主机数量增多时，就需要有多个路由器进行连接，并且这些路由器之间也需要连接到一起(路由器相当于一台主机)，当连接的范围半径小于几千米时，我们称它为 “局域网”，随着半径的增大就是 “广域网”。</p>
+<h2 id="地址与端口"><a href="#地址与端口" class="headerlink" title="地址与端口"></a>地址与端口</h2><p>// 讲述各种地址信息，端口信息，   -&gt;   它们与技术之间的联系<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在实现多台主机数据通信的时候，必须为每条数据增加描述信息，这样我们才能借用硬件设施帮助我们实现数据传输。每条数据的描述信息都需要包含以下信息: <strong>数据由哪台主机的哪个进程发送的，数据需要到达哪台主机的哪个进程上被处理</strong>，这些都是我们需要加入的<strong>部分描述信息</strong>。为了能够区分不同的主机，我们为每台主机设置了<strong>IP地址</strong>，为了能够区分不同的进程，我们为每台主机中的每个进程设置了<strong>端口</strong>。</p>
+<ul>
+<li>MAC 地址: 每台主机(路由器)都会有一个用于标记硬件设施的唯一标识符，方便路由器进行寻找主机。</li>
+<li>IP 地址(uint32_t): 在网络通信中，每台主机都有一个用于网络通信的唯一标识符，用于标识数据的发送与接受位置。</li>
+<li>端口(uint16_t): 在每台主机上都有一个用于标记进程的唯一标识符，方便操作系统寻找不同的进程。并且<strong>每个端口只能被一个进程所占用，但是一个进程可以占用多个端口，端口的范围:0 ~ 65535。</strong></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着网络的发展，为每台主机都分配一个 IP地址，导致32位 IP地址越来越不够用，随后就引入了 “动态地址分配(DHCP) / 网络地址转化(NAT)”技术，动态地址分配技术为每个上网的路由器分配一个 IP地址，多个主机通过连接到路由器上来进行数据的收发操作，然后网络地址转化技术通过主机上不同的 MAC地址为每个主机分配内部的 IP地址，从而将数据从路由器转发到不同的主机上，从而实现了不同主机之间的通信。这样其实并没有从根本上解决问题，为了防止后续地址还是不够用的情况，我们引入了128位IPv6地址结构，这样从根本上解决了32位IPv4地址结构不够用的情况。</p>
+<h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>// 以某个列子引申到通信协议的作用，  如果更好的管理协议: 协议分层</p>
+<h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>// 数据是如何进行收发的。在收发过程中需要注意:大小端问题。  加利福尼亚大学为 UNIX 操作系统开发了一个网络通信接口，告诉我们如何将这些五元组等信息组织起来的，是如何进行的，–&gt;Socket结构体来进行数据的组织的。</p>
+<h2 id="Socket结构体"><a href="#Socket结构体" class="headerlink" title="Socket结构体"></a>Socket结构体</h2><p>// 详解在使用过程中 Socket 的某些变量，结构体。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>// 讲述现如今我们如何实现程序中的网络通信，—&gt; 使用 Socket相关API帮助我们 来进行通信</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://img-blog.csdnimg.cn/20190823203748400.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/08/二叉搜索树的实现/" class="archive-article-date">
-  	<time datetime="2019-08-09T02:33:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/08/二叉搜索树的实现/">二叉搜索树(BST)</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">算法与数据结构(map set)</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/06/网络基础/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/动态规划/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:52:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/10/06/详解UDP协议/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          详解UDP协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/04/死锁问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">死锁问题</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/动态规划/">动态规划</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/重载，重定义，重写/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="网络基础" data-title="网络基础" data-url="http://yoursite.com/2019/10/06/网络基础/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/重载，重定义，重写/">重载,重定义,重写</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/隐式类型转化-整形提升/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/隐式类型转化-整形提升/">隐式类型转化---整形提升(32位)</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/虚函数与虚函数表/">虚函数与虚函数表</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/派生类的默认成员函数/">派生类(子类)的默认成员函数</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/继承/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/继承/">继承</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/多态/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/多态/">多态</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 多态</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/多继承-菱形继承/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:31:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/多继承-菱形继承/">多继承---菱形继承</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/Cpp的类型转化/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:30:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/Cpp的类型转化/">C/C++的类型转换</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/page/4/">4</a><a class="extend next" rel="next" href="/archives/page/4/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -562,8 +395,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
