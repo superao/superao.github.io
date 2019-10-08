@@ -19,7 +19,7 @@
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190915205456467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L215dmVzdA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-08T02:46:02.929Z">
+<meta property="og:updated_time" content="2019-10-08T02:48:58.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
@@ -192,7 +192,9 @@
 <h6 id="协议分层的优点"><a href="#协议分层的优点" class="headerlink" title="协议分层的优点:"></a>协议分层的优点:</h6><ul>
 <li>每层协议具有很强的独立性，各个协议不会相互影响，数据传输层次分明。</li>
 <li>上层协议不用管下层协议的实现方式，只需要调用接口即可，操作使用方便，灵活。</li>
-<li>容易形成标准，方便后期维护。<h6 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型:"></a>OSI七层模型:</h6><table>
+<li>容易形成标准，方便后期维护。</li>
+</ul>
+<h6 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型:"></a>OSI七层模型:</h6><table>
 <thead>
 <tr>
 <th align="center">层级</th>
@@ -227,44 +229,42 @@
 <td align="center">物理层</td>
 <td align="center">负责将二进制流转化为光电信号在物理介质上进行传输</td>
 </tr>
+</tbody></table>
+<h6 id="TCP-IP-五层模型"><a href="#TCP-IP-五层模型" class="headerlink" title="TCP/IP 五层模型:"></a>TCP/IP 五层模型:</h6><table>
+<thead>
 <tr>
-<td align="center">###### TCP/IP 五层模型:</td>
-<td align="center"></td>
+<th align="center">层级</th>
+<th align="center">作用</th>
+<th align="center">典型协议/典型设备</th>
 </tr>
-<tr>
-<td align="center">层级</td>
-<td align="center">作用</td>
-</tr>
-<tr>
-<td align="center">:-:</td>
-<td align="center">:-:</td>
-</tr>
-<tr>
+</thead>
+<tbody><tr>
 <td align="center">应用层</td>
 <td align="center">负责应用程序之间的各种数据沟通</td>
+<td align="center">HTTP, SSH, FTP, …</td>
 </tr>
 <tr>
 <td align="center">传输层</td>
 <td align="center">负责两台主机端口与端口之间的数据沟通</td>
+<td align="center">TCP, UDP, …</td>
 </tr>
 <tr>
 <td align="center">网络层</td>
 <td align="center">负责地址管理与路由选择(IP地址-&gt;MAC地址)</td>
+<td align="center">IP协议/路由器</td>
 </tr>
 <tr>
 <td align="center">链路层</td>
 <td align="center">负责建立相邻结点之间的数据链路，实现在不太可靠的物理介质上数据可靠传输</td>
+<td align="center">以太网协议/交换机</td>
 </tr>
 <tr>
 <td align="center">物理层</td>
 <td align="center">负责将二进制流转化为光电信号在物理介质上进行传输</td>
-</tr>
-<tr>
-<td align="center">###### TCP/IP模型与OSI模型的比较:</td>
-<td align="center"></td>
+<td align="center">以太网协议/集线器</td>
 </tr>
 </tbody></table>
-</li>
+<h6 id="TCP-IP模型与OSI模型的比较"><a href="#TCP-IP模型与OSI模型的比较" class="headerlink" title="TCP/IP模型与OSI模型的比较:"></a>TCP/IP模型与OSI模型的比较:</h6><ul>
 <li>两种模型在协议划分上都使用了层次结构，使通信标准更加清晰。</li>
 <li>OSI模型对网络通信只做了概念性的描述，由于模型过于复杂，技术不成熟，没有实现网络通信，实用性不高。而TCP/IP模型是先实现了网络通信，接口与实现混淆在一起，后期为了维护制定了通信协议，通信协议虽然没有OSI模型那么详细，但是实用性强，后期被普遍使用。</li>
 </ul>
@@ -437,7 +437,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层的优点"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">协议分层的优点:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">OSI七层模型:</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层的优点"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">协议分层的优点:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">OSI七层模型:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-IP-五层模型"><span class="toc-number">3.0.0.0.4.</span> <span class="toc-text">TCP/IP 五层模型:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-IP模型与OSI模型的比较"><span class="toc-number">3.0.0.0.5.</span> <span class="toc-text">TCP/IP模型与OSI模型的比较:</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -589,15 +589,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
