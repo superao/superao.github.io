@@ -18,7 +18,8 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-07T22:17:36.947Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190915205456467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L215dmVzdA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-08T02:46:02.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
@@ -188,8 +189,10 @@
 
 <h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在生活中，当我们进行购物的时候，我们需要和卖家交流商品的相关信息，这时候我们即可以利用电话进行交流，也可以利用文字进行交流，这些不同的交流工具就相当于不同的协议，约定我们之间用什么进行交流，实现信息交互。在网络中，不同的主机在数据交互的时候也需要制定一些特殊的约定来帮主机之间进行通信，而这些约定就是 “通信协议”，通信协议更好的帮助不同主机之间的通信。</p>
 <h6 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主机之间制定相关通信协议之后，那么就需要对相关的协议进行管理，如何更好的进行协议管理呐？还是刚开始的那个例子，在我们购买之后，卖家将商品交给快递公司，快递公司负责将商品送到我们手中，至于商品的运输方式是飞机，火车，汽车，…这些我们都是不需要关心的， 这些都是快递公司进行管理的。那么我们也可以将通信协议进行分层，从而让不同的机构去管理不同的协议，这样使我们的通信划分的更加细致，更加灵活(选择不同的协议)，更容易形成标准。</p>
-<ul>
-<li>OSI七层模型:<table>
+<h6 id="协议分层的优点"><a href="#协议分层的优点" class="headerlink" title="协议分层的优点:"></a>协议分层的优点:</h6><ul>
+<li>每层协议具有很强的独立性，各个协议不会相互影响，数据传输层次分明。</li>
+<li>上层协议不用管下层协议的实现方式，只需要调用接口即可，操作使用方便，灵活。</li>
+<li>容易形成标准，方便后期维护。<h6 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型:"></a>OSI七层模型:</h6><table>
 <thead>
 <tr>
 <th align="center">层级</th>
@@ -198,69 +201,72 @@
 </thead>
 <tbody><tr>
 <td align="center">应用层</td>
-<td align="center"></td>
+<td align="center">负责完成特定网络功能服务所需要的各种应用协议(FTP, 电子邮件协议)</td>
 </tr>
 <tr>
 <td align="center">表示层</td>
-<td align="center"></td>
+<td align="center">负责应用层传输下来的报文符合语法以及数据加密等操作</td>
 </tr>
 <tr>
 <td align="center">会话层</td>
-<td align="center"></td>
+<td align="center">负责不同主机之间的会话建立与管理</td>
 </tr>
 <tr>
 <td align="center">传输层</td>
-<td align="center"></td>
+<td align="center">负责总体数据的传输与控制，实现两台主机端口与端口之间的数据传输</td>
 </tr>
 <tr>
 <td align="center">网络层</td>
-<td align="center"></td>
+<td align="center">负责地址管路与路由选择</td>
 </tr>
 <tr>
 <td align="center">链路层</td>
-<td align="center"></td>
+<td align="center">负责在不太可靠物理介质上实现数据可靠传输</td>
 </tr>
 <tr>
 <td align="center">物理层</td>
+<td align="center">负责将二进制流转化为光电信号在物理介质上进行传输</td>
+</tr>
+<tr>
+<td align="center">###### TCP/IP 五层模型:</td>
 <td align="center"></td>
 </tr>
-</tbody></table>
-</li>
-<li>TCP/IP 五层模型:<table>
-<thead>
 <tr>
-<th align="center">层级</th>
-<th align="center">作用</th>
-<th align="center">典型协议/典型设备</th>
+<td align="center">层级</td>
+<td align="center">作用</td>
 </tr>
-</thead>
-<tbody><tr>
+<tr>
+<td align="center">:-:</td>
+<td align="center">:-:</td>
+</tr>
+<tr>
 <td align="center">应用层</td>
-<td align="center">负责应用程序之间的数据沟通</td>
-<td align="center">HTTP, SSH, FTP, …</td>
+<td align="center">负责应用程序之间的各种数据沟通</td>
 </tr>
 <tr>
 <td align="center">传输层</td>
 <td align="center">负责两台主机端口与端口之间的数据沟通</td>
-<td align="center">TCP, UDP, …</td>
 </tr>
 <tr>
 <td align="center">网络层</td>
 <td align="center">负责地址管理与路由选择(IP地址-&gt;MAC地址)</td>
-<td align="center">IP协议/路由器</td>
 </tr>
 <tr>
 <td align="center">链路层</td>
-<td align="center">负责相邻设备之间的数据传输(MAC地址)</td>
-<td align="center">以太网协议/交换机</td>
+<td align="center">负责建立相邻结点之间的数据链路，实现在不太可靠的物理介质上数据可靠传输</td>
 </tr>
 <tr>
 <td align="center">物理层</td>
-<td align="center">负责光电信号的传输(二进制-&gt;光电信号)</td>
-<td align="center">以太网协议/集线器</td>
+<td align="center">负责将二进制流转化为光电信号在物理介质上进行传输</td>
+</tr>
+<tr>
+<td align="center">###### TCP/IP模型与OSI模型的比较:</td>
+<td align="center"></td>
 </tr>
 </tbody></table>
 </li>
+<li>两种模型在协议划分上都使用了层次结构，使通信标准更加清晰。</li>
+<li>OSI模型对网络通信只做了概念性的描述，由于模型过于复杂，技术不成熟，没有实现网络通信，实用性不高。而TCP/IP模型是先实现了网络通信，接口与实现混淆在一起，后期为了维护制定了通信协议，通信协议虽然没有OSI模型那么详细，但是实用性强，后期被普遍使用。</li>
 </ul>
 <h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完整数据的收发流程总结: 在每条数据的描述信息中加入: 该数据是由哪个IP地址(主机)上的哪个端口发送的，数据要到哪个IP地址上的哪个端口上被处理，并且使用了什么样的协议，这就是每条数据所需要包含的 “五元组”，即”源IP地址，源端口，目的IP地址，目的端口，协议类型”</p>
 <h6 id="数据封装与解析流程"><a href="#数据封装与解析流程" class="headerlink" title="数据封装与解析流程"></a>数据封装与解析流程</h6><p><img src="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据的封装与解析流程都是操作系统完成的，而将数据与这些额外信息组织起来进行保存的数据结构为 “socket 结构体”，传输层的协议都是在 socket结构体的基础上完成了端与端之间的传输。</p>
@@ -274,13 +280,16 @@
 <h2 id="Socket结构体"><a href="#Socket结构体" class="headerlink" title="Socket结构体"></a>Socket结构体</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在通信过程中，每个进程在进行网络通信的时候都需要创建一个用于网络通信的socket结构体，该结构体中描述了各种各样用于网络通信的信息，作为用户来讲，其中我们最常用的就是socket地址信息，该结构体中描述了数据从哪个IP地址的哪个端口发往哪个IP地址的哪个端口。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// socket 地址结构体(通用地址结构)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">sa_family_t</span> sa_family;    <span class="comment">// 地址族</span></span><br><span class="line">  <span class="keyword">char</span> sa_data[<span class="number">14</span>];         <span class="comment">// 描述了IP地址与端口信息</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>这是socket地址的通用结构，但是这样的结构将IP地址与端口号混淆在一起(sa_date)，导致我们非常不方便进行操作，为了解决这样的问题，提出了下面更加实用结构体，该结构中将端口与IP地址区分开了，从而让地址信息更加的清晰。</p>
+<p>这是socket地址的通用结构，但是这样的结构将IP地址与端口号混淆在一起(sa_date)，导致我们非常不方便进行操作，为了解决这样的问题，提出了下面更加实用结构体，该结构中将端口与IP地址区分开了，从而让地址信息区分更加的清晰。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">sa_family_t</span> sa_family;    <span class="comment">// 地址族(IPv4/IPv6)</span></span><br><span class="line">  <span class="keyword">uint16_t</span> prot;            <span class="comment">// 端口号</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span>;</span>           <span class="comment">// 32 位IP地址</span></span><br><span class="line">  <span class="keyword">char</span> sin_zero[<span class="number">8</span>];         <span class="comment">// 预留位,为了使sockadrr_in的大小与sockaddr大小相同,方便相互转化</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>这里的struct in_addr定义如下，用来存放32位IP地址。</p>
+<p>struct in_addr定义如下，用来存放32位IP地址。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">in_addr_t</span> s_addr;         <span class="comment">// 32位 IPv4地址信息</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>通用结构体与实际中常用的结构体两者的大小是相同的，两者之间可以相互转化，因此在实际应用中我们主要使用第二种结构体来进行赋值相关信息。上述结构体主要是IPv4有关的常用地址结构，对于IPv6地址结构它有不同的结构体来进行表示，并且很多的socket接口使用的都是sockaddr地址结构，当想使用IPv6时需要将sockaddr转化为IPv6的地址结构。</p>
+<p>通用结构体与实际中常用的结构体两者的大小是相同的，两者之间可以相互转化，因此在实际应用中我们主要使用第二种结构体来赋值相关信息。上述所有的结构体主要是IPv4有关的常用地址结构。在socket函数接口中使用的也都是sockaddr地址结构。sockaddr本来想一起适配IPv4和IPv6地址，但是由于大小不够，因此出现了sockaddr_storage结构体，它可以适配目前所有的地址结构，实现了IPv4/IPv6混编，从而可以使用相同的接口实现不同地址信息的数据发送。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IPv4 / IPv6混编示意代码:</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span> <span class="title">addr</span>;</span></span><br><span class="line"><span class="built_in">memset</span>(&amp;addr, <span class="number">0</span>, <span class="keyword">sizeof</span>(struct sockaddr_storage));</span><br><span class="line"><span class="keyword">if</span> (isIPv6 == TRUE)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in6</span> *<span class="title">addr_v6</span> = (<span class="title">struct</span> <span class="title">sockaddr_in6</span> *)&amp;<span class="title">addr</span>;</span></span><br><span class="line">    addr_v6-&gt;sin6_family = AF_INET6;</span><br><span class="line">    addr_v6-&gt;sin6_port = <span class="number">1234</span>;</span><br><span class="line">    inet_pton(AF_INET6, “<span class="number">2001</span>:<span class="number">3211</span>::<span class="number">1</span>”, &amp;(addr_v6-&gt;sin6_addr));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    struct sockaddr_in *addr_v4 = (struct sockaddr_in *)&amp;addr;</span><br><span class="line">    addr_v4-&gt;sin_family = AF_INET;</span><br><span class="line">    addr_v4-&gt;sin_port = <span class="number">1234</span>;</span><br><span class="line">    inet_aton(“<span class="number">192.168</span><span class="number">.1</span><span class="number">.228</span>”, &amp;(addr_v4-&gt;sin_addr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sendto(sock, buf, len, <span class="number">0</span>, (struct sockaddr *)&amp;addr, <span class="keyword">sizeof</span>(struct sockaddr_storage));</span><br></pre></td></tr></table></figure>
+
+<p>地址结构之间的转化关系:<br><img src="https://img-blog.csdnimg.cn/20190915205456467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L215dmVzdA==,size_16,color_FFFFFF,t_70" alt></p>
 
       
 
@@ -428,7 +437,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层的优点"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">协议分层的优点:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">OSI七层模型:</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
                     </div>
                 </span>
             </div>
