@@ -7,22 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>派生类(子类)的默认成员函数 | Superao的博客</title>
+  <title>详解HTTP协议 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
-<meta name="keywords" content="C++ 继承">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在上篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="派生类(子类)的默认成员函数">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/派生类的默认成员函数/index.html">
+<meta property="og:title" content="详解HTTP协议">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/详解HTTP协议/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在上篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-21T03:30:28.376Z">
+<meta property="og:updated_time" content="2019-10-22T01:08:01.013Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="派生类(子类)的默认成员函数">
-<meta name="twitter:description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="详解HTTP协议">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在上篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -154,64 +152,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-派生类的默认成员函数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解HTTP协议" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      派生类(子类)的默认成员函数
+      详解HTTP协议
     </h1>
   
 
         
-        <a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/10/18/详解HTTP协议/" class="archive-article-date">
+  	<time datetime="2019-10-19T02:54:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h2><p>作用：构造函数用来进行对象的初始化工作。</p>
-<p>关于构造函数大致可以分为 4 种情况：</p>
-<ul>
-<li>基类自己生成，派生类自己生成</li>
-<li>基类自己生成，派生类自己实现</li>
-<li>基类自己实现，派生类自己生成</li>
-<li>基类自己实现，派生类自己实现</li>
-</ul>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们在上篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。</p>
 <a id="more"></a>
-<h6 id="总结如下："><a href="#总结如下：" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li><strong>不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数，那么自动调用将发生错误，需要我们手动调用，但是最好我们自己在初始化列表的时候自己手动调用自己需要的构造函数。</strong></li>
-<li>生成的默认构造函数：对于自定义成员变量，它会自己调用自己的构造函数，对于内置类型，它不会进行初始化，从而导致访问出现随机值</li>
-<li>初始化顺序：先初始化基类的部分，再初始化派生类的部分</li>
-</ol>
-<p><strong>最好的做法：自己实现自己调用，不要依赖编译器</strong></p>
-<h2 id="2-拷贝构造，赋值运算"><a href="#2-拷贝构造，赋值运算" class="headerlink" title="2.拷贝构造，赋值运算"></a>2.拷贝构造，赋值运算</h2><p>作用：用于获得和某个对象一模一样的对象。</p>
-<p>关于拷贝，赋值函数大致可以分为 4 种情况：</p>
+<h2 id="1-什么是协议？"><a href="#1-什么是协议？" class="headerlink" title="1. 什么是协议？"></a>1. 什么是协议？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 协议指的是：<strong>“通信双方对某些事情的约定规则”</strong>，比如：“同学A做10个俯卧撑，那么同学B就请同学A吃一顿饭”，如果同学A与同学B之间达成了这样的约定规则，主要在有效的时间内，同学A做10个俯卧撑，那么同学B就要遵守约定，请同学A吃一顿饭，虽然这个协议看起来非常的不靠谱，但是它很生动的体现了协议的作用。在网络中，主机A与主机B之间想要实现数据通信，那么它们两者之间就需要定制一个双方都可以接受的约定，从而来实现双方的数据通信。因此，制定良好的协议可以更加高效的帮助我们实现双方之间的数据通信。 </p>
+<h2 id="2-自定制协议"><a href="#2-自定制协议" class="headerlink" title="2. 自定制协议"></a>2. 自定制协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 自定制协议应用比较广泛，自定制协议就是双方为了实现数据通信我们自己所制定的协议。在自定制协议的时候我们也需要考虑很多的问题，比如：“数据如何可靠存储，数据如何高效传输，数据如何快速解析”等这些问题我们也是需要进行关注的。上述的这些问题我们总结为以下两点：</p>
 <ul>
-<li>派生类不写，编译器自动生成的拷贝构造，赋值会自动调用基类的拷贝构造。</li>
-<li><strong>派生类写了，那么必须自己手动的去调用基类的拷贝构造，不会自己去调用</strong></li>
+<li>序列化: 将数据对象按照指定的格式在内存中形成可以可靠存储或可靠传输的数据串</li>
+<li>反序列化: 将数据串按照指定的格式解析为不同的数据对象</li>
 </ul>
-<h6 id="总结如下：-1"><a href="#总结如下：-1" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li>对于编译器自己生成的：自定义类型，它会调用自己的拷贝构造，赋值运算；内置类型，它会进行一种 “ 浅拷贝 “，即按照字节拷贝。</li>
-<li>一般情况下，我们可以不去写，编译器默认生成，<strong><em>但是对于存在指针，数组等这种类型，我们必须自己实现，并且自己调用基类的函数（深拷贝），否则在析构的时候用一块内存会被析构两次，从而发生 “ 未定义行为 “。</em></strong></li>
-</ol>
-<h2 id="3-析构函数"><a href="#3-析构函数" class="headerlink" title="3.析构函数"></a>3.析构函数</h2><p>作用：析构函数用来进行对象的清理工作。</p>
-<h6 id="总结如下：-2"><a href="#总结如下：-2" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li>派生类的析构函数会自动的调用基类析构函数，从而完全的清理掉对象；<strong><em>我们不要主动去调用基类的析构函数，这样会违反函数调用栈帧，同时同一内存会被清理两次。</em></strong></li>
-<li>派生类先会调用自己的析构函数，再去调用基类的析构函数，这样满足函数栈帧。</li>
-<li><strong><em>我们最好将基类的析构函数定义为虚函数，以便构成多态，防止基类指针指向派生类时，最后清理工作不完全，导致内存泄漏。</em></strong></li>
-<li>最好不要在析构函数内抛出异常，从而打断正常的执行流，导致发生内存泄漏。</li>
-</ol>
-<h2 id="附：相关问题"><a href="#附：相关问题" class="headerlink" title="附：相关问题"></a>附：相关问题</h2><h6 id="1-设计不能被继承的类"><a href="#1-设计不能被继承的类" class="headerlink" title="1.设计不能被继承的类"></a>1.设计不能被继承的类</h6><ol>
-<li>将基类的构造函数私有化（C++98）</li>
-<li>将基类加上 final 关键字则该基类不能被继承（C++11）</li>
-</ol>
-<h6 id="2-派生类的切片问题"><a href="#2-派生类的切片问题" class="headerlink" title="2.派生类的切片问题"></a>2.派生类的切片问题</h6><p>我们将派生类对象赋值给基类对象，我们将这种赋值问题称之为切片问题，编译器是这样的进行处理：将子类中的父类部分 “ 切出来 “，再赋值给子类对象，如果是指针或者引用只指向父类的那部分。<strong>注：”切的时候 “，切的只是成员变量，不会切掉成员函数，成员函数存放在代码段，也切不调。</strong><br><img src="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在不同的情况下，我们可以通过选择不同的序列化方式，实现不同的作用。<br><a href="https://blog.csdn.net/sanyaoxu_2/article/details/79722431" target="_blank" rel="noopener">常见的几种序列化方式的区别</a></p>
+<h2 id="3-HTTP协议"><a href="#3-HTTP协议" class="headerlink" title="3. HTTP协议"></a>3. HTTP协议</h2>
       
 
       
@@ -250,7 +220,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
@@ -306,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/派生类的默认成员函数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/18/详解HTTP协议/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +290,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/虚函数与虚函数表/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/10/21/详解IP协议/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          虚函数与虚函数表
+          详解IP协议
         
       </div>
     </a>
   
   
-    <a href="/2019/08/07/继承/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">继承</div>
+    <a href="/2019/10/06/详解TCP协议/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解TCP协议</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -358,7 +328,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-构造函数"><span class="toc-number">1.</span> <span class="toc-text">1. 构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下："><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-拷贝构造，赋值运算"><span class="toc-number">2.</span> <span class="toc-text">2.拷贝构造，赋值运算</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-1"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-析构函数"><span class="toc-number">3.</span> <span class="toc-text">3.析构函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-2"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附：相关问题"><span class="toc-number">4.</span> <span class="toc-text">附：相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-设计不能被继承的类"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">1.设计不能被继承的类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-派生类的切片问题"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">2.派生类的切片问题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是协议？"><span class="toc-number">1.</span> <span class="toc-text">1. 什么是协议？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-自定制协议"><span class="toc-number">2.</span> <span class="toc-text">2. 自定制协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP协议"><span class="toc-number">3.</span> <span class="toc-text">3. HTTP协议</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -372,7 +342,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="派生类的默认成员函数" data-title="派生类(子类)的默认成员函数" data-url="http://yoursite.com/2019/08/07/派生类的默认成员函数/"></div>
+	<div class="ds-thread" data-thread-key="详解HTTP协议" data-title="详解HTTP协议" data-url="http://yoursite.com/2019/10/18/详解HTTP协议/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

@@ -7,22 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>派生类(子类)的默认成员函数 | Superao的博客</title>
+  <title>详解IP协议 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
-<meta name="keywords" content="C++ 继承">
+  <meta name="description" content="技术改变世界，阅读塑造人生">
+<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="派生类(子类)的默认成员函数">
-<meta property="og:url" content="http://yoursite.com/2019/08/07/派生类的默认成员函数/index.html">
+<meta property="og:title" content="详解IP协议">
+<meta property="og:url" content="http://yoursite.com/2019/10/21/详解IP协议/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
+<meta property="og:description" content="技术改变世界，阅读塑造人生">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-21T03:30:28.376Z">
+<meta property="og:updated_time" content="2019-10-21T11:19:34.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="派生类(子类)的默认成员函数">
-<meta name="twitter:description" content="1. 构造函数作用：构造函数用来进行对象的初始化工作。 关于构造函数大致可以分为 4 种情况：  基类自己生成，派生类自己生成 基类自己生成，派生类自己实现 基类自己实现，派生类自己生成 基类自己实现，派生类自己实现">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="详解IP协议">
+<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -154,64 +152,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-派生类的默认成员函数" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解IP协议" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      派生类(子类)的默认成员函数
+      详解IP协议
     </h1>
   
 
         
-        <a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
-  	<time datetime="2019-08-07T08:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
+        <a href="/2019/10/21/详解IP协议/" class="archive-article-date">
+  	<time datetime="2019-10-21T11:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1. 构造函数"></a>1. 构造函数</h2><p>作用：构造函数用来进行对象的初始化工作。</p>
-<p>关于构造函数大致可以分为 4 种情况：</p>
-<ul>
-<li>基类自己生成，派生类自己生成</li>
-<li>基类自己生成，派生类自己实现</li>
-<li>基类自己实现，派生类自己生成</li>
-<li>基类自己实现，派生类自己实现</li>
-</ul>
-<a id="more"></a>
-<h6 id="总结如下："><a href="#总结如下：" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li><strong>不管基类有没有自己实现构造函数，自己实现和编译器生成的派生类构造函数都会自动调用基类的默认构造函数（派生类初始化列表的时候），如果没有默认的构造函数，那么自动调用将发生错误，需要我们手动调用，但是最好我们自己在初始化列表的时候自己手动调用自己需要的构造函数。</strong></li>
-<li>生成的默认构造函数：对于自定义成员变量，它会自己调用自己的构造函数，对于内置类型，它不会进行初始化，从而导致访问出现随机值</li>
-<li>初始化顺序：先初始化基类的部分，再初始化派生类的部分</li>
-</ol>
-<p><strong>最好的做法：自己实现自己调用，不要依赖编译器</strong></p>
-<h2 id="2-拷贝构造，赋值运算"><a href="#2-拷贝构造，赋值运算" class="headerlink" title="2.拷贝构造，赋值运算"></a>2.拷贝构造，赋值运算</h2><p>作用：用于获得和某个对象一模一样的对象。</p>
-<p>关于拷贝，赋值函数大致可以分为 4 种情况：</p>
-<ul>
-<li>派生类不写，编译器自动生成的拷贝构造，赋值会自动调用基类的拷贝构造。</li>
-<li><strong>派生类写了，那么必须自己手动的去调用基类的拷贝构造，不会自己去调用</strong></li>
-</ul>
-<h6 id="总结如下：-1"><a href="#总结如下：-1" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li>对于编译器自己生成的：自定义类型，它会调用自己的拷贝构造，赋值运算；内置类型，它会进行一种 “ 浅拷贝 “，即按照字节拷贝。</li>
-<li>一般情况下，我们可以不去写，编译器默认生成，<strong><em>但是对于存在指针，数组等这种类型，我们必须自己实现，并且自己调用基类的函数（深拷贝），否则在析构的时候用一块内存会被析构两次，从而发生 “ 未定义行为 “。</em></strong></li>
-</ol>
-<h2 id="3-析构函数"><a href="#3-析构函数" class="headerlink" title="3.析构函数"></a>3.析构函数</h2><p>作用：析构函数用来进行对象的清理工作。</p>
-<h6 id="总结如下：-2"><a href="#总结如下：-2" class="headerlink" title="总结如下："></a>总结如下：</h6><ol>
-<li>派生类的析构函数会自动的调用基类析构函数，从而完全的清理掉对象；<strong><em>我们不要主动去调用基类的析构函数，这样会违反函数调用栈帧，同时同一内存会被清理两次。</em></strong></li>
-<li>派生类先会调用自己的析构函数，再去调用基类的析构函数，这样满足函数栈帧。</li>
-<li><strong><em>我们最好将基类的析构函数定义为虚函数，以便构成多态，防止基类指针指向派生类时，最后清理工作不完全，导致内存泄漏。</em></strong></li>
-<li>最好不要在析构函数内抛出异常，从而打断正常的执行流，导致发生内存泄漏。</li>
-</ol>
-<h2 id="附：相关问题"><a href="#附：相关问题" class="headerlink" title="附：相关问题"></a>附：相关问题</h2><h6 id="1-设计不能被继承的类"><a href="#1-设计不能被继承的类" class="headerlink" title="1.设计不能被继承的类"></a>1.设计不能被继承的类</h6><ol>
-<li>将基类的构造函数私有化（C++98）</li>
-<li>将基类加上 final 关键字则该基类不能被继承（C++11）</li>
-</ol>
-<h6 id="2-派生类的切片问题"><a href="#2-派生类的切片问题" class="headerlink" title="2.派生类的切片问题"></a>2.派生类的切片问题</h6><p>我们将派生类对象赋值给基类对象，我们将这种赋值问题称之为切片问题，编译器是这样的进行处理：将子类中的父类部分 “ 切出来 “，再赋值给子类对象，如果是指针或者引用只指向父类的那部分。<strong>注：”切的时候 “，切的只是成员变量，不会切掉成员函数，成员函数存放在代码段，也切不调。</strong><br><img src="https://img-blog.csdnimg.cn/20190801120125885.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-
+        
       
 
       
@@ -245,17 +206,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">C++ 继承</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -306,7 +256,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/07/派生类的默认成员函数/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/21/详解IP协议/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +270,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/07/虚函数与虚函数表/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          虚函数与虚函数表
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/07/继承/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">继承</div>
+    <a href="/2019/10/18/详解HTTP协议/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解HTTP协议</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -358,7 +299,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-构造函数"><span class="toc-number">1.</span> <span class="toc-text">1. 构造函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下："><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-拷贝构造，赋值运算"><span class="toc-number">2.</span> <span class="toc-text">2.拷贝构造，赋值运算</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-1"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-析构函数"><span class="toc-number">3.</span> <span class="toc-text">3.析构函数</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#总结如下：-2"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">总结如下：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附：相关问题"><span class="toc-number">4.</span> <span class="toc-text">附：相关问题</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#1-设计不能被继承的类"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">1.设计不能被继承的类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#2-派生类的切片问题"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">2.派生类的切片问题</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+                    目录，不存在的…
                     </div>
                 </span>
             </div>
@@ -372,7 +313,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="派生类的默认成员函数" data-title="派生类(子类)的默认成员函数" data-url="http://yoursite.com/2019/08/07/派生类的默认成员函数/"></div>
+	<div class="ds-thread" data-thread-key="详解IP协议" data-title="详解IP协议" data-url="http://yoursite.com/2019/10/21/详解IP协议/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
