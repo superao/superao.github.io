@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-24T13:05:08.435Z">
+<meta property="og:updated_time" content="2019-10-24T13:10:57.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解HTTP协议">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
@@ -194,7 +194,7 @@
 <li>服务器地址与端口: 标识我们将要访问的服务器和端口; 为了方便记忆，某些网站使用了域名</li>
 <li>相对路径: 标识此次请求所访问的服务器相对位置(服务器的某些路径我们是无法进行访问的)</li>
 <li>查询字符串: 查询字符串是一个个 Key = Value 的键值对(ie=UTF-8&amp;)，每个查询字符串之间用 &amp; 号进行间隔，每个键值对标记了我们所需要查询的内容</li>
-<li>片段标识符:</li>
+<li>片段标识符: 后续了解</li>
 </ul>
 <p>当我们需要查询的关键字出现特殊字符时，由于它与URL中的间隔字符无法进行区分，因此我们需要对关键字进行转义。<strong>将URL中的查询字符串中的每个需要被转义的字符进行转义，转义为两个十六进制的数字，并且在每个转移字符前面加上 % 号，这样每个需要被转移的字符都会被转义为 %xx，当进行需要解析时，将 % 号后面的两位数利用ASCII码表转化为相应的字符即可。</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL编码/解码实例:</span></span><br><span class="line"><span class="comment">// "+" -&gt; ASCII码为 43 -&gt; 0010 1011 -&gt; %2B</span></span><br><span class="line"><span class="comment">// "%2B" -&gt; 0010 1011 -&gt; 43 -&gt; "+"</span></span><br></pre></td></tr></table></figure>
@@ -313,8 +313,8 @@
 <li>长链接: 请求1 -&gt; 响应1，请求2 -&gt; 响应2，请求3 -&gt; 响应3，…</li>
 <li>管线化通信:请求1，请求2，请求3 -&gt; 响应1，响应2，响应3，…<strong>管线化通信方式大大节省了对端等待的时间，从而大大的提高了我们的通信效率</strong> </li>
 </ul>
-<p><strong>分块传输:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当客户端向服务器请求一个资源的时候，如果请求的资源是一个动态资源/资源过大时(事先不知道数据大小)，这时就需要设置 **Content-Type:chunk，表示当前资源使用分块传输，将资源划分为多个小块，然后依次将每一块进行传输。每块资源由长度行和数据体组成，最后以 0\r\n\r\n 组成。<br><img src="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
-<p><strong>Cookie/Session/Set-cookie的作用:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>HTTP协议是一种无状态标记协议，即对本次通信事件处理不做任何记录。</strong> 这种无状态标记协议在有的时候是非常不方便的，比如我们在购物的时候，每次向购物车中加入商品的时候都需要认证信息的话，这样是非常不合理的。为了方便用户操作，解决这样的问题，引入了Cookie技术。主要过程如下: <strong>当客户端向服务器发送请求时，服务器为每个一个客户端建立一个会话，不同的客户端在发送请求时会建立不同的会话，并且为每一个会话建立一个会话ID，服务器将每个会话ID储存在Session中进行管理，并且此时服务器向客户端响应数据时会设置Set-cookie，Set-cookie中储存了本次通信的会话ID和其他信息(secure)，客户端会将Set-cookie里面的信息储存到自己的Cookie中，当第二次请求时，客户端发送Cookie信息，服务器利用其中的会话ID找到对应的用户信息，从而解决HTTP协议的无状态标记，方便了我们的操作。</strong> 但是缺点就是: 不安全。<br><img src="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<p><strong>分块传输:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当客户端向服务器请求一个资源的时候，如果请求的资源是一个动态资源/资源过大时(事先不知道数据大小)，这时就需要设置 <strong>Content-Type:chunk，表示当前资源使用分块传输，将资源划分为多个小块，然后依次将每一块进行传输。每块资源由长度行和数据体组成，最后以 0\r\n\r\n 组成。</strong><br><img src="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<p><strong>Cookie/Session/Set-cookie的作用:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>HTTP协议是一种无状态标记协议，即对本次通信事件处理不做任何记录。</strong> 这种无状态标记协议在有的时候是非常不方便的，比如我们在购物的时候，每次向购物车中加入商品的时候都需要认证信息的话，这样是非常不合理的。为了方便用户操作，解决这样的问题，引入了Cookie技术。主要过程如下: <strong>当客户端向服务器发送请求时，服务器为每个一个客户端建立一个会话，不同的客户端在发送请求时会建立不同的会话，并且为每一个会话建立一个会话ID，服务器将每个会话ID储存在Session中进行管理，并且此时服务器向客户端响应数据时会设置Set-cookie(设置Cookie的各种信息)，Set-cookie中设置了本次通信的会话ID和其他信息(secure)，客户端会将Set-cookie里面的信息储存到自己的Cookie中，当第二次请求时，客户端发送Cookie信息，服务器利用其中的会话ID找到对应的用户信息，从而解决HTTP协议的无状态标记，方便了我们的操作。</strong> 但是缺点就是: 不安全。<br><img src="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 
       
 
@@ -598,7 +598,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +606,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,11 +618,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
