@@ -19,7 +19,7 @@
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191022101302631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-24T09:09:03.196Z">
+<meta property="og:updated_time" content="2019-10-24T09:14:24.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解HTTP协议">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
@@ -204,13 +204,71 @@
 <li>正文: 本次请求或者响应的数据信息</li>
 </ul>
 <p><img src="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>HTTP协议约定了通信双方的数据格式，双方在进行数据交流的时候，必须严格遵守，如果数据格式使用不正确或者是出现语法错误(协议检查)，那么将无法完成数据交互。当发送方发送数据时，先需要对所发送的信息进行封装，做以简单描述(类型，长度，设备版本，…)，最后将封装的数据包进行发送，当接受方接受到数据时，先根据协议中的首行以及头部信息对数据进行相应的解析，最后得到数据，从而实现了一次通信。首行与头部信息防止了数据在获取时出现粘连问题。</p>
-<h6 id="请求首行"><a href="#请求首行" class="headerlink" title="请求首行"></a>请求首行</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP请求方法共有9种，分别是: GET/POST/HEAD/PUT/DELETE/CONNECT/OPTIONS/TRACE/PATCH//，其中我们常用的只有一下几种，分别是: GET/POST/HEAD/PUT<br>|请求方法|功能|<br>|:-:|:-:|<br>|GET|客户端向服务器请求指定的页面信息，并返回指定的实体资源; GET也可以用来向服务器提交数据，提交的数据放在URL的查询字符串中|<br>|POST|客户端向服务器提交数据(表单，文件)，提交的数据放在正文中|<br>|HEAD|类似于GET请求方法，只不过只获取资源的头部信息|<br>|PUT|客户端向服务器提交数据用于更新指定文档内容|<br>|CONNECT|用于向代理服务器发送所需要连接的远程服务器的相关信息|<br><strong>方法之间的区别:</strong></p>
+<h6 id="请求首行"><a href="#请求首行" class="headerlink" title="请求首行"></a>请求首行</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP请求方法共有9种，分别是: GET/POST/HEAD/PUT/DELETE/CONNECT/OPTIONS/TRACE/PATCH//，其中我们常用的只有一下几种，分别是: GET/POST/HEAD/PUT</p>
+<table>
+<thead>
+<tr>
+<th align="center">请求方法</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">GET</td>
+<td align="center">客户端向服务器请求指定的页面信息，并返回指定的实体资源; GET也可以用来向服务器提交数据，提交的数据放在URL的查询字符串中</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">客户端向服务器提交数据(表单，文件)，提交的数据放在正文中</td>
+</tr>
+<tr>
+<td align="center">HEAD</td>
+<td align="center">类似于GET请求方法，只不过只获取资源的头部信息</td>
+</tr>
+<tr>
+<td align="center">PUT</td>
+<td align="center">客户端向服务器提交数据用于更新指定文档内容</td>
+</tr>
+<tr>
+<td align="center">CONNECT</td>
+<td align="center">用于向代理服务器发送所需要连接的远程服务器的相关信息</td>
+</tr>
+</tbody></table>
+<p><strong>方法之间的区别:</strong></p>
 <ol>
 <li>PUT与POST的区别: 虽然它们两者都是向服务器提交数据，但是还是有区别的，PUT方法是幂等的，即多次重复执行，它们最后所得到的效果是相同的。POST方法不是幂等的。在某些情况下，多次提交请求时，PUT只会创建一个资源实体(覆盖)，而POST会创建多个资源实体(不覆盖)，这在有些情况下是非常不合适的。因此上，PUT常用于修改指定文档内容(初次时也是创建)，而POST常用于创建文档内容。</li>
 <li>GET与POST的区别: GET主要用于向服务器请求实体资源，同时GET也可以通过URL向服务器提交少量信息(URL长度有限)，POST主要用于向服务器提交数据，并且提交的数据放在正文部分，相对而言较为安全。HTTP传输层基于TCP协议，浏览器在发送数据包的时候，GET只发送一次数据包，而POST会发送两次数据包，因为GET正文部分只有少量数据，而POST正文部分可能会有大量数据。</li>
 <li>CONNECT的作用: 当客户端想要访问某个服务器不能直接进行访问时，就需要一个代理服务器作为中间的数据代理，而CONNECT就是用于向代理服务器发送所需要连接的远程服务器的IP地址与端口，并且进行信息认证， 当通过认证，则代理服务器正确返回可以进行访问，如果没有认证成功，那么将无法进行访问。</li>
 </ol>
-<h6 id="响应首行"><a href="#响应首行" class="headerlink" title="响应首行"></a>响应首行</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在HTTP协议中，服务器通过响应状态码向客户端通知本次通信的状态，客户端通过响应首行中的状态码提取需要的头部信息，最后再将自己响应的数据发送给客户端，最后渲染成相应页面。<br>|分类|功能|<br>|:-:|:-:|<br>|1xx|信息，表示当前请求已经收到，还需进一步处理|<br>|2xx|成功，操作被成功接受且处理|<br>|3xx|重定向，需要进一步的操作以完成请求|<br>|4xx|客户端错误，当前请求出现语法错误/无法完成请求|<br>|5xx|服务器错误，服务器内部发送错误，无法进行处理|<br><strong>常见的响应状态码:</strong></p>
+<h6 id="响应首行"><a href="#响应首行" class="headerlink" title="响应首行"></a>响应首行</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在HTTP协议中，服务器通过响应状态码向客户端通知本次通信的状态，客户端通过响应首行中的状态码提取需要的头部信息，最后再将自己响应的数据发送给客户端，最后渲染成相应页面。</p>
+<table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1xx</td>
+<td align="center">信息，表示当前请求已经收到，还需进一步处理</td>
+</tr>
+<tr>
+<td align="center">2xx</td>
+<td align="center">成功，操作被成功接受且处理</td>
+</tr>
+<tr>
+<td align="center">3xx</td>
+<td align="center">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td align="center">4xx</td>
+<td align="center">客户端错误，当前请求出现语法错误/无法完成请求</td>
+</tr>
+<tr>
+<td align="center">5xx</td>
+<td align="center">服务器错误，服务器内部发送错误，无法进行处理</td>
+</tr>
+</tbody></table>
+<p><strong>常见的响应状态码:</strong></p>
 <ol>
 <li>1xx: 表示服务器收到了相应的请求，但是不能立刻返回处理结果时，此时就需要返回一个临时的响应(没有正文信息)，用来提示客户端，请求已经收到，但还需继续处理。如: 100: 继续</li>
 <li>200: 成功</li>
@@ -218,7 +276,36 @@
 <li>404: 请求的资源不存在, 400: 请求语法错误</li>
 <li>500: 服务器内部发生错误</li>
 </ol>
-<h6 id="头部信息"><a href="#头部信息" class="headerlink" title="头部信息"></a>头部信息</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP协议中的头部信息主要是本次对通信数据的做详细描述，并且头部信息是非常多的，我们主要介绍几种常用/常见的头部信息:<br>|名称|功能|<br>|:-:|:-:|<br>|Content-Length|标识正文长度信息|<br>|Content-Type|标识正文数据类型|<br>|Transfer-Encoding|表述文档编码方法|<br>|Location|标识重定向的位置|<br>|Connection|标识此次通信的连接方式(Keep-Alive/Close)|<br><strong>连接方式:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP在1.1版本之后引入了长连接方式(默认打开，可通过Connection进行关闭)，并且还引入了管线化的通信方式。</p>
+<h6 id="头部信息"><a href="#头部信息" class="headerlink" title="头部信息"></a>头部信息</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP协议中的头部信息主要是本次对通信数据的做详细描述，并且头部信息是非常多的，我们主要介绍几种常用/常见的头部信息:</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Content-Length</td>
+<td align="center">标识正文长度信息</td>
+</tr>
+<tr>
+<td align="center">Content-Type</td>
+<td align="center">标识正文数据类型</td>
+</tr>
+<tr>
+<td align="center">Transfer-Encoding</td>
+<td align="center">表述文档编码方法</td>
+</tr>
+<tr>
+<td align="center">Location</td>
+<td align="center">标识重定向的位置</td>
+</tr>
+<tr>
+<td align="center">Connection</td>
+<td align="center">标识此次通信的连接方式(Keep-Alive/Close)</td>
+</tr>
+</tbody></table>
+<p><strong>连接方式:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP在1.1版本之后引入了长连接方式(默认打开，可通过Connection进行关闭)，并且还引入了管线化的通信方式。</p>
 <p>Cookie/Session/Set-cookie:**HTTP是一种无状态的连接方式，即对本次通信事件处理不做任何记录。</p>
 <h6 id="抓包演示"><a href="#抓包演示" class="headerlink" title="抓包演示"></a>抓包演示</h6>
       
@@ -507,7 +594,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,11 +602,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -528,10 +619,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
               </li>
              
               <li class="article-tag-list-item">
