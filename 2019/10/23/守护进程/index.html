@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们启动一个操作系统之后，同时伴随着也有很多的服务程序随着启动，”操作系统内核 + 服务程序”组成了我们所有使用的完整功能，如果没有这些服务程序，那么我们所使用的操作系统功能是非常不完整的。这些所谓的服务本质上也是一个进程，只不过这些进程脱离了终端，我们也称这些进程为 “守护进程/精灵进程”，本篇我们来总结一些守护进程的相">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-29T05:41:38.999Z">
+<meta property="og:updated_time" content="2019-10-29T10:46:59.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="守护进程">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在我们启动一个操作系统之后，同时伴随着也有很多的服务程序随着启动，”操作系统内核 + 服务程序”组成了我们所有使用的完整功能，如果没有这些服务程序，那么我们所使用的操作系统功能是非常不完整的。这些所谓的服务本质上也是一个进程，只不过这些进程脱离了终端，我们也称这些进程为 “守护进程/精灵进程”，本篇我们来总结一些守护进程的相">
@@ -181,42 +181,35 @@
 
 <h2 id="守护进程"><a href="#守护进程" class="headerlink" title="守护进程"></a>守护进程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 守护进程是一种长期运行在后台的一种服务型程序，它相比于其他进程可以不受控制终端的影响，当系统启动时启动，系统关闭时关闭。常见的守护进程有: “ssh, bluetooth”等进程。通常可以利用命令 ps -ajx 来查看当前进程所受的控制终端，会话ID，组ID等信息。 </p>
 <h4 id="守护进程的适用场景"><a href="#守护进程的适用场景" class="headerlink" title="守护进程的适用场景"></a>守护进程的适用场景</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>运行在后台(注: 通常情况下，使用 &amp; 符号可以将程序运行在后台，但是它受控制终端的影响，当终端关闭时，它也会随之关闭)，不受控制终端的影响的进程</strong>，通常情况下，”服务器程序，木马” 等等这些场景下就需要守护进程来实现。</p>
-<h4 id="守护进程的模型"><a href="#守护进程的模型" class="headerlink" title="守护进程的模型"></a>守护进程的模型</h4><ol>
-<li><p>创建子进程，父进程退出</p>
-<ul>
+<h4 id="守护进程的模型"><a href="#守护进程的模型" class="headerlink" title="守护进程的模型"></a>守护进程的模型</h4><ul>
+<li><strong>创建子进程，父进程退出</strong><ul>
 <li>创建子进程，父进程直接退出，子进程变为孤儿进程，子进程的父进程变为 init 进程，从形式上脱离了当前终端的控制，但是还是随当前终端的关闭会关闭。</li>
 </ul>
 </li>
-<li><p>在子进程中创建新的会话</p>
-<ul>
+<li><strong>在子进程中创建新的会话</strong><ul>
 <li>子进程中创建新的会话，从而使子进程真正的从控制终端脱离，不受某个控制终端的影响。 </li>
 </ul>
 </li>
-<li><p>改变当前工作目录</p>
-<ul>
+<li><strong>改变当前工作目录</strong><ul>
 <li>改变当前工作路径，防止占用可以卸载的文件系统。</li>
 </ul>
 </li>
-<li><p>重置文件描述符掩码</p>
-<ul>
+<li><strong>重置文件描述符掩码</strong><ul>
 <li>防止由于权限不足，而无法使用新创建的文件夹/文件。 </li>
 </ul>
 </li>
-<li><p>关闭继承下来的文件描述符</p>
-<ul>
+<li><strong>关闭继承下来的文件描述符</strong><ul>
 <li>关闭继承下来无法使用的文件描述符，防止占用系统资源，比如：”标准输入，标准输出，标准错误”。</li>
 </ul>
 </li>
-<li><p>开始执行守护进程的核心工作</p>
-<ul>
+<li><strong>开始执行守护进程的核心工作</strong><ul>
 <li>循环执行守护进程的核心工作。</li>
 </ul>
 </li>
-<li><p>退出守护进程</p>
+<li><strong>退出守护进程</strong></li>
+</ul>
 <h4 id="守护进程代码模型"><a href="#守护进程代码模型" class="headerlink" title="守护进程代码模型"></a>守护进程代码模型</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 守护进程书写流程</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">// 创建子进程，父进程退出</span></span><br><span class="line">  <span class="keyword">pid_t</span> pid = fork();</span><br><span class="line">  <span class="keyword">if</span>(pid &lt; <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="string">"fork error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span>(pid != <span class="number">0</span>)                         <span class="comment">// 父进程直接退出</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 子进程中建立新的会话</span></span><br><span class="line">  setsid();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 改变当前工作目录</span></span><br><span class="line">  <span class="comment">// int chdir(const char *path);           将当前工作路径改变为指定的工作路径</span></span><br><span class="line">  <span class="keyword">int</span> ret = chdir(<span class="string">"/home/superao/testgit/GitHub/Linux"</span>);</span><br><span class="line">  <span class="keyword">if</span>(ret &lt; <span class="number">0</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">cerr</span> &lt;&lt; <span class="string">"chdir error"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置文件掩码</span></span><br><span class="line">  <span class="comment">// mode_t umask(mode_t mask);             设置文件权限创建掩码(777 - 所需权限 = 文件掩码)</span></span><br><span class="line">  umask(<span class="number">000</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 关闭继承下来的文件描述符  </span></span><br><span class="line">  <span class="comment">// POSIX 标准接口函数: 1. close(0), close(1), close(2)</span></span><br><span class="line">  close(<span class="number">0</span>);</span><br><span class="line">  open(<span class="string">"/dev/null"</span>, O_RDWR);</span><br><span class="line">  dup2(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">  dup2(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 守护进程的核心任务</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
 
       
 
@@ -479,11 +472,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -515,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
