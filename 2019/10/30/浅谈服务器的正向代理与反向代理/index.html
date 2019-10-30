@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>详解IP协议 | Superao的博客</title>
+  <title>浅谈服务器的正向代理与反向代理 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详解IP协议">
-<meta property="og:url" content="http://yoursite.com/2019/10/21/详解IP协议/index.html">
+<meta property="og:title" content="浅谈服务器的正向代理与反向代理">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/浅谈服务器的正向代理与反向代理/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-21T11:19:34.357Z">
+<meta property="og:updated_time" content="2019-10-30T10:07:41.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="详解IP协议">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="浅谈服务器的正向代理与反向代理">
+<meta name="twitter:description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,27 +152,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-详解IP协议" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-浅谈服务器的正向代理与反向代理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      详解IP协议
+      浅谈服务器的正向代理与反向代理
     </h1>
   
 
         
-        <a href="/2019/10/21/详解IP协议/" class="archive-article-date">
-  	<time datetime="2019-10-21T11:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-21</time>
+        <a href="/2019/10/30/浅谈服务器的正向代理与反向代理/" class="archive-article-date">
+  	<time datetime="2019-10-30T09:35:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="为什么要使用代理服务器？"><a href="#为什么要使用代理服务器？" class="headerlink" title="为什么要使用代理服务器？"></a>为什么要使用代理服务器？</h2><p>// 1. 具有缓存，提高访问速度<br>// 2. 防火墙的作用<br>// 3. 突破访问限制</p>
+<h2 id="正向代理服务器"><a href="#正向代理服务器" class="headerlink" title="正向代理服务器"></a>正向代理服务器</h2><p>// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。</p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>// 常见的作用</p>
+<ol>
+<li>翻墙(隐藏了客户端的各种信息，注意用户认证)</li>
+</ol>
+<h2 id="反向代理服务器"><a href="#反向代理服务器" class="headerlink" title="反向代理服务器"></a>反向代理服务器</h2><h4 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h4><p>// 1. 保护内网的安全性<br>// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服务器，教育网服务器))</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>// 先以图片的形式展现正向与反向的区别，再叙述一下两者的区别。以及组合起来所使用的方法。</p>
+
       
 
       
@@ -206,6 +214,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -256,7 +275,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/21/详解IP协议/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/30/浅谈服务器的正向代理与反向代理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,18 +289,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/23/守护进程/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/01/详解TCP协议/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          守护进程
+          详解TCP协议
         
       </div>
     </a>
   
   
-    <a href="/2019/10/18/详解HTTP协议/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">详解HTTP协议</div>
+    <a href="/2019/10/23/守护进程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">守护进程</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -308,7 +327,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要使用代理服务器？"><span class="toc-number">1.</span> <span class="toc-text">为什么要使用代理服务器？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正向代理服务器"><span class="toc-number">2.</span> <span class="toc-text">正向代理服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用"><span class="toc-number">2.0.1.</span> <span class="toc-text">应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#反向代理服务器"><span class="toc-number">3.</span> <span class="toc-text">反向代理服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#应用-1"><span class="toc-number">3.0.1.</span> <span class="toc-text">应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区别"><span class="toc-number">4.</span> <span class="toc-text">区别</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -322,7 +341,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="详解IP协议" data-title="详解IP协议" data-url="http://yoursite.com/2019/10/21/详解IP协议/"></div>
+	<div class="ds-thread" data-thread-key="浅谈服务器的正向代理与反向代理" data-title="浅谈服务器的正向代理与反向代理" data-url="http://yoursite.com/2019/10/30/浅谈服务器的正向代理与反向代理/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -436,6 +455,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -444,19 +467,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -472,15 +491,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
