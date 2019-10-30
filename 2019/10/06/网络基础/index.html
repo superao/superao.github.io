@@ -10,7 +10,7 @@
   <title>网络基础 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
-<meta name="keywords" content="Linux">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络基础">
 <meta property="og:url" content="http://yoursite.com/2019/10/06/网络基础/index.html">
@@ -19,7 +19,7 @@
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190915205456467.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L215dmVzdA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-08T02:48:58.809Z">
+<meta property="og:updated_time" content="2019-10-30T10:37:49.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络基础">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。">
@@ -177,24 +177,24 @@
       
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多台计算机之间要想实现通信就需要网络技术的相关支持，为了能够编写出多台主机之间可以进行的通信的程序，我们就需要对网络的相关知识有很好的理解，因此，本篇文章主要介绍网络相关的基础知识。</p>
 <a id="more"></a>
-<h2 id="网络发展背景"><a href="#网络发展背景" class="headerlink" title="网络发展背景"></a>网络发展背景</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 计算机在早期主要用于计算某些实验数据，那时候，大多数的情况下计算机都是一种处于单机的工作方式。随着工业的发展，对数据的处理量不断的增大，单个人，单台计算机已经无法完成巨大的工作量的时候，这时候就需要多台计算机，多个人相互合作来完成某一个任务，这时候就需要将多台计算机用某些设备进行连接实现数据的交互，实现通信，这种设备就是 “交换机”，它主要用于两台主机之间的数据交互，这样实现了两台主机之间的交互，当多台主机之间实现数据交互的时候，这时相邻的主机有多对，交换机是无法识别出数据到底是从哪个设备到达哪个设备的，这时候为了解决这一问题，发明了一个新的设备 “路由器”，它主要用于多台主机之间的数据交换，并且路由器会自动进行路由选择，从而实现数据从源主机到目的主机之间最短路径的传输，当连接的主机数量增多时，就需要有多个路由器进行连接，并且这些路由器之间也需要连接到一起(路由器相当于一台主机)，当连接的范围半径小于几千米时，我们称它为 “局域网”，随着半径的增大就是 “广域网”。</p>
+<h2 id="网络发展背景"><a href="#网络发展背景" class="headerlink" title="网络发展背景"></a>网络发展背景</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 计算机在早期主要用于计算某些实验数据，那时候，大多数的情况下计算机都是一种处于单机的工作方式。随着工业的发展，对数据的处理量不断的增大，单个人，单台计算机已经无法完成巨大的工作量的时候，这时候就需要多台计算机，多个人相互合作来完成某一个任务，这时候就需要将多台计算机用某些设备进行连接实现数据的交互，实现通信，这种设备就是 “交换机”，它主要用于两台主机之间的数据交互，这样实现了两台主机之间的交互，当多台主机之间实现数据交互的时候，这时相邻的主机有多对，交换机是无法识别出数据到底是从哪个设备到达哪个设备的，这时候为了解决这一问题，发明了一个新的设备 “路由器”，它主要用于多台主机之间的数据交换，并且路由器会自动进行路由选择，从而实现数据从源主机到目的主机之间最短路径的传输，当连接的主机数量增多时，就需要有多个路由器进行连接，并且这些路由器之间也需要连接到一起，当连接的范围半径小于几千米时，我们称它为 “局域网”，随着半径的增大就是 “广域网”。</p>
 <h2 id="地址与端口"><a href="#地址与端口" class="headerlink" title="地址与端口"></a>地址与端口</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在实现多台主机数据通信的时候，必须为每条数据增加描述信息，这样我们才能借用硬件设施帮助我们实现数据传输。每条数据的描述信息都需要包含以下信息: <strong>数据由哪台主机的哪个进程发送的，数据需要到达哪台主机的哪个进程上被处理</strong>，这些都是我们需要加入的<strong>部分描述信息</strong>。为了能够区分不同的主机，我们为每台主机设置了<strong>IP地址</strong>，为了能够区分不同的进程，我们为每台主机中的每个进程设置了<strong>端口</strong>。</p>
 <ul>
 <li>MAC 地址: 每台主机(路由器)都会有一个用于标记硬件设施的唯一标识符，方便路由器寻找所连接的相邻设备，一般由6个字节，48位进行表示，如: 00:0c:29:e9:5d:3b</li>
 <li>IP 地址(uint32_t): 在网络通信中，每台主机都有一个用于网络通信的唯一标识符，用于标识数据的发送与接受位置，通常使用 “点分十进制” 的字符串来进行表示，如: 192.168.246.129。</li>
 <li>端口(uint16_t): 在每台主机上都有一个用于标记进程的唯一标识符，方便操作系统寻找不同的进程。并且<strong>每个端口只能被一个进程所占用，但是一个进程可以占用多个端口，端口的范围:0 ~ 65535。</strong></li>
 </ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着网络的发展，为每台主机都分配一个 IP地址，导致32位 IP地址越来越不够用，随后就引入了 “动态地址分配(DHCP) / 网络地址转化(NAT)”技术，动态地址分配技术为每个上网的路由器分配一个 IP地址，多个主机通过连接到路由器上来进行数据的收发操作，然后网络地址转化技术通过主机上不同的 MAC地址路由器为每个主机分配内部的 IP地址，从而将数据从路由器转发到不同的主机上，从而实现了不同主机之间的通信。这样其实并没有从根本上解决问题，为了防止后续地址还是不够用的情况，我们引入了128位IPv6地址结构，这样从根本上解决了32位IPv4地址结构不够用的情况。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 随着网络的发展，为每台主机都分配一个IP地址会导致32位IP地址越来越不够用，随后引入了 “动态地址分配(DHCP) / 网络地址转化(NAT)”技术(技术实现原理后续总结)，动态地址分配技术为每个上网的路由器分配一个IP地址，不上网的路由器将不会分配IP地址，并且路由器会为每个主机分配内部局域网中内部的IP地址，通过将多个主机连接到路由器上，由路由器利用网络地址转化技术将数据统一的发送出去，因此不同的主机通过自己唯一的IP地址发送/接受数据实现了不同主机之间的通信。这样解决思路并没有从本质上解决问题，为了防止后续地址还是不够用的情况，最后引入了128位IPv6地址结构，这样从根本上解决了32位IPv4地址结构不够用的情况。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ip地址与字符串地址转化相关接口</span></span><br><span class="line"><span class="comment">// in_addr_t inet_addr(const char *cp);</span></span><br><span class="line"><span class="comment">// char *inet_ntoa(struct in_addr in);</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="通信协议"><a href="#通信协议" class="headerlink" title="通信协议"></a>通信协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在生活中，当我们进行购物的时候，我们需要和卖家交流商品的相关信息，这时候我们即可以利用电话进行交流，也可以利用文字进行交流，这些不同的交流工具就相当于不同的协议，约定我们之间用什么进行交流，实现信息交互。在网络中，不同的主机在数据交互的时候也需要制定一些特殊的约定来帮主机之间进行通信，而这些约定就是 “通信协议”，通信协议更好的帮助不同主机之间的通信。</p>
-<h6 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主机之间制定相关通信协议之后，那么就需要对相关的协议进行管理，如何更好的进行协议管理呐？还是刚开始的那个例子，在我们购买之后，卖家将商品交给快递公司，快递公司负责将商品送到我们手中，至于商品的运输方式是飞机，火车，汽车，…这些我们都是不需要关心的， 这些都是快递公司进行管理的。那么我们也可以将通信协议进行分层，从而让不同的机构去管理不同的协议，这样使我们的通信划分的更加细致，更加灵活(选择不同的协议)，更容易形成标准。</p>
-<h6 id="协议分层的优点"><a href="#协议分层的优点" class="headerlink" title="协议分层的优点:"></a>协议分层的优点:</h6><ul>
+<h4 id="协议分层"><a href="#协议分层" class="headerlink" title="协议分层"></a>协议分层</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 主机之间制定相关通信协议之后，那么就需要对相关的协议进行管理，如何更好的进行协议管理呐？还是刚开始的那个例子，在我们购买之后，卖家将商品交给快递公司，快递公司负责将商品送到我们手中，至于商品的运输方式是飞机，火车，汽车，…这些我们都是不需要关心的， 这些都是快递公司进行管理的。那么我们也可以将通信协议进行分层，从而让不同的机构去管理不同的协议，这样使我们的通信划分的更加细致，更加灵活(选择不同的协议)，更容易形成标准。</p>
+<h4 id="协议分层的优点"><a href="#协议分层的优点" class="headerlink" title="协议分层的优点:"></a>协议分层的优点:</h4><ul>
 <li>每层协议具有很强的独立性，各个协议不会相互影响，数据传输层次分明。</li>
 <li>上层协议不用管下层协议的实现方式，只需要调用接口即可，操作使用方便，灵活。</li>
 <li>容易形成标准，方便后期维护。</li>
 </ul>
-<h6 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型:"></a>OSI七层模型:</h6><table>
+<h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型:"></a>OSI七层模型:</h4><table>
 <thead>
 <tr>
 <th align="center">层级</th>
@@ -223,14 +223,14 @@
 </tr>
 <tr>
 <td align="center">链路层</td>
-<td align="center">负责在不太可靠物理介质上实现数据可靠传输</td>
+<td align="center">负责建立相邻结点之间的数据链路，实现在不太可靠的物理介质上数据可靠传输</td>
 </tr>
 <tr>
 <td align="center">物理层</td>
 <td align="center">负责将二进制流转化为光电信号在物理介质上进行传输</td>
 </tr>
 </tbody></table>
-<h6 id="TCP-IP-五层模型"><a href="#TCP-IP-五层模型" class="headerlink" title="TCP/IP 五层模型:"></a>TCP/IP 五层模型:</h6><table>
+<h4 id="TCP-IP-五层模型"><a href="#TCP-IP-五层模型" class="headerlink" title="TCP/IP 五层模型:"></a>TCP/IP 五层模型:</h4><table>
 <thead>
 <tr>
 <th align="center">层级</th>
@@ -250,12 +250,12 @@
 </tr>
 <tr>
 <td align="center">网络层</td>
-<td align="center">负责地址管理与路由选择(IP地址-&gt;MAC地址)</td>
+<td align="center">负责地址管理与路由选择</td>
 <td align="center">IP协议/路由器</td>
 </tr>
 <tr>
 <td align="center">链路层</td>
-<td align="center">负责建立相邻结点之间的数据链路，实现在不太可靠的物理介质上数据可靠传输</td>
+<td align="center">负责相邻设备之间数据的可靠传输</td>
 <td align="center">以太网协议/交换机</td>
 </tr>
 <tr>
@@ -264,13 +264,13 @@
 <td align="center">以太网协议/集线器</td>
 </tr>
 </tbody></table>
-<h6 id="TCP-IP模型与OSI模型的比较"><a href="#TCP-IP模型与OSI模型的比较" class="headerlink" title="TCP/IP模型与OSI模型的比较:"></a>TCP/IP模型与OSI模型的比较:</h6><ul>
+<h4 id="TCP-IP模型与OSI模型的比较"><a href="#TCP-IP模型与OSI模型的比较" class="headerlink" title="TCP/IP模型与OSI模型的比较:"></a>TCP/IP模型与OSI模型的比较:</h4><ul>
 <li>两种模型在协议划分上都使用了层次结构，使通信标准更加清晰。</li>
 <li>OSI模型对网络通信只做了概念性的描述，由于模型过于复杂，技术不成熟，没有实现网络通信，实用性不高。而TCP/IP模型是先实现了网络通信，接口与实现混淆在一起，后期为了维护制定了通信协议，通信协议虽然没有OSI模型那么详细，但是实用性强，后期被普遍使用。</li>
 </ul>
 <h2 id="数据传输"><a href="#数据传输" class="headerlink" title="数据传输"></a>数据传输</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 完整数据的收发流程总结: 在每条数据的描述信息中加入: 该数据是由哪个IP地址(主机)上的哪个端口发送的，数据要到哪个IP地址上的哪个端口上被处理，并且使用了什么样的协议，这就是每条数据所需要包含的 “五元组”，即”源IP地址，源端口，目的IP地址，目的端口，协议类型”</p>
-<h6 id="数据封装与解析流程"><a href="#数据封装与解析流程" class="headerlink" title="数据封装与解析流程"></a>数据封装与解析流程</h6><p><img src="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据的封装与解析流程都是操作系统完成的，而将数据与这些额外信息组织起来进行保存的数据结构为 “socket 结构体”，传输层的协议都是在 socket结构体的基础上完成了端与端之间的传输。</p>
-<h6 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们将所有需要被发送的数据组织好之后，还需要注意一个问题。在不同的主机中，CPU对内存数据的存取顺序不同(字节序)，主要有以下两种存取顺序，如果不考虑存取顺序问题，那么我们发送的数据有可能会被对方解析为其他的数据，这样导致我们的通信没有真正完成，因此上规定了在网络中统一使用大端字节序来进行通信。</p>
+<h4 id="数据封装与解析流程"><a href="#数据封装与解析流程" class="headerlink" title="数据封装与解析流程"></a>数据封装与解析流程</h4><p><img src="https://img-blog.csdnimg.cn/20191015123204577.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据的封装与解析流程都是操作系统完成的，而将数据与这些额外信息组织起来进行保存的数据结构为 “socket 结构体”，传输层的协议都是在 socket结构体的基础上完成了端与端之间的传输。</p>
+<h4 id="网络字节序"><a href="#网络字节序" class="headerlink" title="网络字节序"></a>网络字节序</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们将所有需要被发送的数据组织好之后，还需要注意一个问题。在不同的主机中，CPU对内存数据的存取顺序不同(字节序)，主要有以下两种存取顺序，如果不考虑存取顺序问题，那么我们发送的数据有可能会被对方解析为其他的数据，这样导致我们的通信没有真正完成，因此上规定了在网络中统一使用大端字节序来进行通信。</p>
 <ul>
 <li>大端字节序: 低地址存放高位</li>
 <li>小端字节序: 低地址存放低位 (X86)</li>
@@ -329,7 +329,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
@@ -437,7 +437,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#协议分层的优点"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">协议分层的优点:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">OSI七层模型:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-IP-五层模型"><span class="toc-number">3.0.0.0.4.</span> <span class="toc-text">TCP/IP 五层模型:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#TCP-IP模型与OSI模型的比较"><span class="toc-number">3.0.0.0.5.</span> <span class="toc-text">TCP/IP模型与OSI模型的比较:</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.0.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.0.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#网络发展背景"><span class="toc-number">1.</span> <span class="toc-text">网络发展背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#地址与端口"><span class="toc-number">2.</span> <span class="toc-text">地址与端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通信协议"><span class="toc-number">3.</span> <span class="toc-text">通信协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#协议分层"><span class="toc-number">3.0.1.</span> <span class="toc-text">协议分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#协议分层的优点"><span class="toc-number">3.0.2.</span> <span class="toc-text">协议分层的优点:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSI七层模型"><span class="toc-number">3.0.3.</span> <span class="toc-text">OSI七层模型:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-IP-五层模型"><span class="toc-number">3.0.4.</span> <span class="toc-text">TCP/IP 五层模型:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TCP-IP模型与OSI模型的比较"><span class="toc-number">3.0.5.</span> <span class="toc-text">TCP/IP模型与OSI模型的比较:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据传输"><span class="toc-number">4.</span> <span class="toc-text">数据传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据封装与解析流程"><span class="toc-number">4.0.1.</span> <span class="toc-text">数据封装与解析流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络字节序"><span class="toc-number">4.0.2.</span> <span class="toc-text">网络字节序</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket结构体"><span class="toc-number">5.</span> <span class="toc-text">Socket结构体</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -565,15 +565,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -582,10 +586,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,11 +601,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
