@@ -9,22 +9,22 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>详解HTTP协议 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络基础篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="详解HTTP协议">
 <meta property="og:url" content="http://yoursite.com/2019/10/18/详解HTTP协议/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络基础篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191022101302631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-24T13:10:57.198Z">
+<meta property="og:updated_time" content="2019-10-30T11:10:28.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解HTTP协议">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络基础篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191022101302631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -177,7 +177,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们在总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络基础篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。</p>
 <a id="more"></a>
 <h2 id="1-什么是协议？"><a href="#1-什么是协议？" class="headerlink" title="1. 什么是协议？"></a>1. 什么是协议？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 协议指的是：<strong>“通信双方对某些事情的约定规则”</strong>，比如：“同学A做10个俯卧撑，那么同学B就请同学A吃一顿饭”，如果同学A与同学B之间达成了这样的约定规则，主要在有效的时间内，同学A做10个俯卧撑，那么同学B就要遵守约定，请同学A吃一顿饭，虽然这个约定看起来非常的不靠谱，但是它很生动的体现了约定在其中的作用，双方在约定好之后必须严格遵守，我们将这种约定就称之为 “协议”。在网络中，主机A与主机B之间想要实现数据通信，那么它们两者之间也需要定制一个双方都可以接受的约定，从而来实现双方的数据通信。因此，制定良好的协议可以更加高效的帮助我们实现双方之间的数据通信。 </p>
 <h2 id="2-自定制协议"><a href="#2-自定制协议" class="headerlink" title="2. 自定制协议"></a>2. 自定制协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 自定制协议就是双方为了实现数据通信我们自己所制定的相关约定(数据加密等)。双方只要按照制定的约定达到了数据通信的目的我们就可以将此约定称之为 “自定制协议”。为了使我们自己写的协议更加高效的进行通信，在自定制协议的时候需要关注多种方面的问题，比如: “数据如何高效存储，数据如何高效传输，数据如何快速解析” 等这些问题都是我们在制定协议的时候需要关注的问题。我们将上述的问题称归纳为 “数据的序列化/反序列化”，选择不同的序列化方式，对于数据的传输，解析效率是不相同的，在不同的场景下，我们需要选择合理的序列化方式进行数据转化。</p>
