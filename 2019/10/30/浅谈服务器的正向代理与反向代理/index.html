@@ -9,18 +9,21 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>浅谈服务器的正向代理与反向代理 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络通信中有大部分通信是建立在客户端与服务端之间的通信，通常情况下，我们可以直接请求服务器IP地址，但是有些时候我们不能直接请求服务器，而是请求代理服务器，让代理服务器帮助我们去请求目标服务器，为了更加清楚的了解代理服务器，本篇文章主要总结代理服务器的相关知识点。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈服务器的正向代理与反向代理">
 <meta property="og:url" content="http://yoursite.com/2019/10/30/浅谈服务器的正向代理与反向代理/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络通信中有大部分通信是建立在客户端与服务端之间的通信，通常情况下，我们可以直接请求服务器IP地址，但是有些时候我们不能直接请求服务器，而是请求代理服务器，让代理服务器帮助我们去请求目标服务器，为了更加清楚的了解代理服务器，本篇文章主要总结代理服务器的相关知识点。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-30T10:07:41.728Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191031110316283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2019103111022840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-10-31T03:52:04.619Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈服务器的正向代理与反向代理">
-<meta name="twitter:description" content="为什么要使用代理服务器？// 1. 具有缓存，提高访问速度// 2. 防火墙的作用// 3. 突破访问限制 正向代理服务器// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。 应用// 常见的作用  翻墙(隐藏了客户端的各种信息，注意用户认证)  反向代理服务器应用// 1. 保护内网的安全性// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络通信中有大部分通信是建立在客户端与服务端之间的通信，通常情况下，我们可以直接请求服务器IP地址，但是有些时候我们不能直接请求服务器，而是请求代理服务器，让代理服务器帮助我们去请求目标服务器，为了更加清楚的了解代理服务器，本篇文章主要总结代理服务器的相关知识点。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191031110316283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -172,14 +175,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="为什么要使用代理服务器？"><a href="#为什么要使用代理服务器？" class="headerlink" title="为什么要使用代理服务器？"></a>为什么要使用代理服务器？</h2><p>// 1. 具有缓存，提高访问速度<br>// 2. 防火墙的作用<br>// 3. 突破访问限制</p>
-<h2 id="正向代理服务器"><a href="#正向代理服务器" class="headerlink" title="正向代理服务器"></a>正向代理服务器</h2><p>// 利用例子先引述现实生活中的例子，在由现实生活中的例子引述到服务器上。</p>
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>// 常见的作用</p>
-<ol>
-<li>翻墙(隐藏了客户端的各种信息，注意用户认证)</li>
-</ol>
-<h2 id="反向代理服务器"><a href="#反向代理服务器" class="headerlink" title="反向代理服务器"></a>反向代理服务器</h2><h4 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h4><p>// 1. 保护内网的安全性<br>// 2. 负载均衡(多台代理服务器可以将我们的请求压力分摊多台服务器上(公网代理服务器，教育网服务器))</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>// 先以图片的形式展现正向与反向的区别，再叙述一下两者的区别。以及组合起来所使用的方法。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络通信中有大部分通信是建立在客户端与服务端之间的通信，通常情况下，我们可以直接请求服务器IP地址，但是有些时候我们不能直接请求服务器，而是请求代理服务器，让代理服务器帮助我们去请求目标服务器，为了更加清楚的了解代理服务器，本篇文章主要总结代理服务器的相关知识点。</p>
+<a id="more"></a>
+<h2 id="为什么要使用代理服务器？"><a href="#为什么要使用代理服务器？" class="headerlink" title="为什么要使用代理服务器？"></a>为什么要使用代理服务器？</h2><p><strong>代理服务器有以下几个优点:</strong></p>
+<ul>
+<li>具有缓存，提高访问速度<ul>
+<li>当我们请求某个服务器资源的时候，有时候响应比较慢。因此，我们可以在请求中间过程加入一些代理服务器，在代理服务器中的磁盘中储存一些访问比较频繁的资源，当我们下次进行访问的时候可以直接利用代理服务器中的磁盘缓存的资源帮助我们更快的访问某个资源。</li>
+</ul>
+</li>
+<li>具有防火墙的作用<ul>
+<li>在网络安全中，为了使某些服务器资源不会被恶意攻击，我们可以在客户端与服务器之间加入一些代理服务器，让客户端每次去请求代理服务器，然后代理服务器去请求真正的服务器资源，但是在此过程中，客户端并不知道它所请求的服务器为代理服务器，因此，代理服务器起到了防火墙的功能，保护了真正的服务器资源。</li>
+</ul>
+</li>
+<li>突破某些服务的访问限制<ul>
+<li>当我们访问外国某些网站的时候是不被允许访问的，在网络关口上禁止了我们访问外国网站，如果执意想要访问就需要代理服务器来帮助我们访问，我们需要先将请求发送到我们可以访问的外国服务器上，再让它将请求转发到目的服务器上，从而我们可以间接的访问到了外网。</li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述是我们代理服务器最常见的几种用途，下面我们将详细说明不同类型的代理服务器的工作原理以及最常用的几种用途。</p>
+<h2 id="正向代理服务器"><a href="#正向代理服务器" class="headerlink" title="正向代理服务器"></a>正向代理服务器</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们平时生活中，如果我们想要国外的某个东西，但是自己又不方便过去直接去买，那么这时我们大部分人的做法就是当自己的某个朋友去国外的时候，帮助自己捎带一份回来给自己，在整个获得物品的过程中，中间的这个朋友就起到了代理了作用。类比到我们代理服务器上也是同样的道理，当客户端无法直接请求某个服务器的时候，那么此时就需要一个代理服务器作为中间的桥梁，先请求代理服务器，让代理服务器帮助我们访问目标服务器，最后将数据转交给我们，这样的代理方式称之为 “正向代理”。<br><img src="https://img-blog.csdnimg.cn/20191031110316283.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="正向代理服务器"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 虽然代理服务器可以很好的帮我们访问目的服务器，但是这是有风险的，有时候会有恶意攻击去请求代理服务器，当代理服务器无法识别，同样的进行访问时服务器就会遭到破坏，因此目的服务器对代理服务器进行授权时也需要多加小心。 </p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
+<li>突破访问限制(“翻墙”)<ul>
+<li>我们可以借助某些代理服务器帮助我们访问访问受限的服务器。</li>
+</ul>
+</li>
+<li>防火墙作用<ul>
+<li>在访问目的服务器的过程中，加入一些代理服务器作为中间媒介，帮助过滤掉某些恶意请求，保护目的服务器。</li>
+</ul>
+</li>
+<li>提高响应速度<ul>
+<li>将访问频繁的资源加入到代理服务器的磁盘中，可以提高资源的响应速度。<h2 id="反向代理服务器"><a href="#反向代理服务器" class="headerlink" title="反向代理服务器"></a>反向代理服务器</h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在悬疑，犯罪类电影中，有这样的一个场景，当警察想要抓住某个犯罪集团的幕后指使者时，最先抓住的都是那些被操控的小虾小鱼，而那些小鱼小虾在电影中只是起到了保护幕后指使者的作用，本身并没有多少价值，但是警察起初却误认为自己已经抓住了幕后人物。这样的场景类比到我们所说的代理服务器上，那些小鱼小虾就相当于代理服务器，客户端每次去请求代理服务器，而代理服务器则在真正的服务器机群中查找资源，最后返回所要的资源给代理服务器，代理服务器最后返回给客户端。在此过程中客户端并不知道自己访问的服务器是伪目的服务器，误以为访问的就是真正的目的服务器。这样的代理方式称之为 “反向代理”。<br><img src="https://img-blog.csdnimg.cn/2019103111022840.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="反向代理服务器"><h4 id="应用-1"><a href="#应用-1" class="headerlink" title="应用"></a>应用</h4></li>
+</ul>
+</li>
+<li>保护内网的安全性<ul>
+<li>借助代理服务器作为目标靶，从而保护了真正的服务器机群。</li>
+</ul>
+</li>
+<li>负载均衡<ul>
+<li>设置不同类型的代理服务器，不同类型的用户去请求相应的服务器，从而可以缓解大量用户去请求相同服务器所造成的请求阻塞问题。比如：对于学校的服务器来说，可以设置公网代理服务器，教育网代理服务器，对于公网用户来讲，请求公网代理服务器，对于教育网用户来讲，请求教育网代理服务器，从而即保护了内网又缓解了不同用户请求相同的服务器所造成请求阻塞的问题。 </li>
+</ul>
+</li>
+<li>提高响应速度<ul>
+<li>将访问频繁的资源加入到代理服务器的磁盘中，可以提高资源的响应速度。</li>
+</ul>
+</li>
+</ul>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 正向与反向代理服务器在有些地方具有相同的作用，但是它们还是有区别的。<strong>对于正向代理服务器来说，它代理的是客户端，站在目的服务器角度来看，它隐藏了客户端的真实IP等相关信息，因此，代理授权时需要考虑安全性问题。 对于反向代理服务器来说，它代理的是服务器，站在客户端角度来看，保护了真正的服务器，提高安全性。</strong></p>
 
       
 
@@ -495,11 +536,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
