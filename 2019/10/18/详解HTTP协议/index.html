@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-10-30T11:10:28.585Z">
+<meta property="og:updated_time" content="2019-11-01T07:17:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="详解HTTP协议">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络基础篇总结完 TCP/IP 五层模型之后，本篇主要总结一下应用层的协议以及应用层中的知名协议 - HTTP协议。">
@@ -185,7 +185,6 @@
 <li>序列化: 将数据对象按照指定的格式在内存中形成可以可靠存储或可靠传输的数据串</li>
 <li>反序列化: 将数据串按照指定的格式解析为不同的数据对象</li>
 </ul>
-<p><a href="https://blog.csdn.net/sanyaoxu_2/article/details/79722431" target="_blank" rel="noopener">常见的几种序列化方式的区别</a></p>
 <h2 id="3-HTTP协议"><a href="#3-HTTP协议" class="headerlink" title="3. HTTP协议"></a>3. HTTP协议</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP协议(Hypertext transfer protocol)”超文本传输”协议，<strong>超文本字面之意就是 “超级文本” 的意思，即 “超链接 + 普通文本，利用超链接的方式将不同位置的信息与本文本的信息组合成为一个大文本”，这个组合而成的大文本就是 “超文本”。</strong>最常见的超文本文件就是HTML文件，该文件通常由服务器发送给客户端，最后渲染到我们的浏览器上。</p>
 <h4 id="认识URL"><a href="#认识URL" class="headerlink" title="认识URL:"></a>认识URL:</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当我们进行网页浏览/搜索的时候，通常通过一个网址(URL)向服务器发送一个请求，最后服务器向我们响应相应的数据，而URL(Uniform Resource Locator)就是统一资源定位符，在网络中，它唯一标识了某一种资源。完整的URL由很多部分组成，每个部分都有不同的作用，一个完整的URL如下图所示:<br><img src="https://img-blog.csdnimg.cn/20191022101302631.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="完整的URL"><br>我们从图片可以得出: </p>
 <ul>
@@ -196,7 +195,7 @@
 <li>查询字符串: 查询字符串是一个个 Key = Value 的键值对(ie=UTF-8&amp;)，每个查询字符串之间用 &amp; 号进行间隔，每个键值对标记了我们所需要查询的内容</li>
 <li>片段标识符: 后续了解</li>
 </ul>
-<p>当我们需要查询的关键字出现特殊字符时，由于它与URL中的间隔字符无法进行区分，因此我们需要对关键字进行转义。<strong>将URL中的查询字符串中的每个需要被转义的字符进行转义，转义为两个十六进制的数字，并且在每个转移字符前面加上 % 号，这样每个需要被转移的字符都会被转义为 %xx，当进行需要解析时，将 % 号后面的两位数利用ASCII码表转化为相应的字符即可。</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当我们需要查询的关键字出现特殊字符时，由于它与URL中的间隔字符无法进行区分，因此我们需要对关键字进行转义。<strong>将URL中的查询字符串中的每个需要被转义的字符进行转义，转义为两个十六进制的数字，并且在每个转移字符前面加上 % 号，这样每个需要被转移的字符都会被转义为 %xx，当进行需要解析时，将 % 号后面的两位数利用ASCII码表转化为相应的字符即可。</strong></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// URL编码/解码实例:</span></span><br><span class="line"><span class="comment">// "+" -&gt; ASCII码为 43 -&gt; 0010 1011 -&gt; %2B</span></span><br><span class="line"><span class="comment">// "%2B" -&gt; 0010 1011 -&gt; 43 -&gt; "+"</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="HTTP协议格式"><a href="#HTTP协议格式" class="headerlink" title="HTTP协议格式"></a>HTTP协议格式</h3><ul>
@@ -205,7 +204,7 @@
 <li>空行: 作为一种标识符，间隔头部与正文信息</li>
 <li>正文: 本次请求或者响应的数据信息</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>HTTP协议约定了通信双方的数据格式，双方在进行数据交流的时候，必须严格遵守，如果数据格式使用不正确或者是出现语法错误(协议检查)，那么将无法完成数据交互。当发送方发送数据时，先需要对所发送的信息进行封装，做以简单描述(类型，长度，设备版本，…)，最后将封装的数据包进行发送，当接受方接受到数据时，先根据协议中的首行以及头部信息对数据进行相应的解析，最后得到数据，从而实现了一次通信。首行与头部信息防止了数据在获取时出现粘连问题。</p>
+<p><img src="https://img-blog.csdnimg.cn/20191023225248960.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP协议约定了通信双方的数据格式，双方在进行数据交流的时候，必须严格遵守，如果数据格式使用不正确或者是出现语法错误(协议检查)，那么将无法完成数据交互。当发送方发送数据时，先需要对所发送的信息进行封装，做以简单描述(类型，长度，设备版本，…)，最后将封装的数据包进行发送，当接受方接受到数据时，先根据协议中的首行以及头部信息对数据进行相应的解析，最后得到数据，从而实现了一次通信。首行与头部信息防止了数据在获取时出现粘连问题。</p>
 <h3 id="请求首行"><a href="#请求首行" class="headerlink" title="请求首行"></a>请求首行</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HTTP请求方法共有9种，分别是: GET/POST/HEAD/PUT/DELETE/CONNECT/OPTIONS/TRACE/PATCH//，其中我们常用的只有一下几种，分别是: GET/POST/HEAD/PUT</p>
 <table>
 <thead>
@@ -237,9 +236,9 @@
 </tbody></table>
 <p><strong>方法之间的区别:</strong></p>
 <ol>
-<li>PUT与POST的区别: 虽然它们两者都是向服务器提交数据，但是还是有区别的，PUT方法是幂等的，即多次重复执行，它们最后所得到的效果是相同的。POST方法不是幂等的。在某些情况下，多次提交请求时，PUT只会创建一个资源实体(覆盖)，而POST会创建多个资源实体(不覆盖)，这在有些情况下是非常不合适的。因此上，PUT常用于修改指定文档内容(初次时也是创建)，而POST常用于创建文档内容。</li>
-<li>GET与POST的区别: GET主要用于向服务器请求实体资源，同时GET也可以通过URL向服务器提交少量信息(URL长度有限)，POST主要用于向服务器提交数据，并且提交的数据放在正文部分，相对而言较为安全。HTTP传输层基于TCP协议，浏览器在发送数据包的时候，GET只发送一次数据包，而POST会发送两次数据包，因为GET正文部分只有少量数据，而POST正文部分可能会有大量数据。</li>
-<li>CONNECT的作用: 当客户端想要访问某个服务器不能直接进行访问时，就需要一个代理服务器作为中间的数据代理，而CONNECT就是用于向代理服务器发送所需要连接的远程服务器的IP地址与端口，并且进行信息认证， 当通过认证，则代理服务器正确返回可以进行访问，如果没有认证成功，那么将无法进行访问。</li>
+<li><strong>PUT与POST的区别</strong>: 虽然它们两者都是向服务器提交数据，但是还是有区别的，PUT方法是幂等的，即多次重复执行，它们最后所得到的效果是相同的。POST方法不是幂等的。在某些情况下，多次提交请求时，PUT只会创建一个资源实体(覆盖)，而POST会创建多个资源实体(不覆盖)，这在有些情况下是非常不合适的。因此上，PUT常用于修改指定文档内容(初次时也是创建)，而POST常用于创建文档内容。</li>
+<li><strong>GET与POST的区别</strong>: GET主要用于向服务器请求实体资源，同时GET也可以通过URL向服务器提交少量信息(URL长度有限)，POST主要用于向服务器提交数据，并且提交的数据放在正文部分，相对而言较为安全。HTTP传输层基于TCP协议，浏览器在发送数据包的时候，GET只发送一次数据包，而POST会发送两次数据包，因为GET正文部分只有少量数据，而POST正文部分可能会有大量数据。</li>
+<li><strong>CONNECT的作用</strong>: 当客户端想要访问某个服务器不能直接进行访问时，就需要一个代理服务器作为中间的数据代理，而CONNECT就是用于向代理服务器发送所需要连接的远程服务器的IP地址与端口，并且进行信息认证， 当通过认证，则代理服务器正确返回可以进行访问，如果没有认证成功，那么将无法进行访问。</li>
 </ol>
 <h3 id="响应首行"><a href="#响应首行" class="headerlink" title="响应首行"></a>响应首行</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在HTTP协议中，服务器通过响应状态码向客户端通知本次通信的状态，客户端通过响应首行中的状态码提取需要的头部信息，最后再将自己响应的数据发送给客户端，最后渲染成相应页面。</p>
 <table>
@@ -315,7 +314,7 @@
 </ul>
 <p><strong>分块传输:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当客户端向服务器请求一个资源的时候，如果请求的资源是一个动态资源/资源过大时(事先不知道数据大小)，这时就需要设置 <strong>Content-Type:chunk，表示当前资源使用分块传输，将资源划分为多个小块，然后依次将每一块进行传输。每块资源由长度行和数据体组成，最后以 0\r\n\r\n 组成。</strong><br><img src="https://img-blog.csdnimg.cn/20191024203747640.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <p><strong>Cookie/Session/Set-cookie的作用:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>HTTP协议是一种无状态标记协议，即对本次通信事件处理不做任何记录。</strong> 这种无状态标记协议在有的时候是非常不方便的，比如我们在购物的时候，每次向购物车中加入商品的时候都需要认证信息的话，这样是非常不合理的。为了方便用户操作，解决这样的问题，引入了Cookie技术。主要过程如下: <strong>当客户端向服务器发送请求时，服务器为每个一个客户端建立一个会话，不同的客户端在发送请求时会建立不同的会话，并且为每一个会话建立一个会话ID，服务器将每个会话ID储存在Session中进行管理，并且此时服务器向客户端响应数据时会设置Set-cookie(设置Cookie的各种信息)，Set-cookie中设置了本次通信的会话ID和其他信息(secure)，客户端会将Set-cookie里面的信息储存到自己的Cookie中，当第二次请求时，客户端发送Cookie信息，服务器利用其中的会话ID找到对应的用户信息，从而解决HTTP协议的无状态标记，方便了我们的操作。</strong> 但是缺点就是: 不安全。<br><img src="https://img-blog.csdnimg.cn/20191024205549206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
-
+<h2 id="4-HTTP协议版本区别"><a href="#4-HTTP协议版本区别" class="headerlink" title="4. HTTP协议版本区别"></a>4. HTTP协议版本区别</h2>
       
 
       
@@ -462,7 +461,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是协议？"><span class="toc-number">1.</span> <span class="toc-text">1. 什么是协议？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-自定制协议"><span class="toc-number">2.</span> <span class="toc-text">2. 自定制协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP协议"><span class="toc-number">3.</span> <span class="toc-text">3. HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#认识URL"><span class="toc-number">3.0.1.</span> <span class="toc-text">认识URL:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP协议格式"><span class="toc-number">3.1.</span> <span class="toc-text">HTTP协议格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求首行"><span class="toc-number">3.2.</span> <span class="toc-text">请求首行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应首行"><span class="toc-number">3.3.</span> <span class="toc-text">响应首行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头部信息"><span class="toc-number">3.4.</span> <span class="toc-text">头部信息</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-什么是协议？"><span class="toc-number">1.</span> <span class="toc-text">1. 什么是协议？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-自定制协议"><span class="toc-number">2.</span> <span class="toc-text">2. 自定制协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-HTTP协议"><span class="toc-number">3.</span> <span class="toc-text">3. HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#认识URL"><span class="toc-number">3.0.1.</span> <span class="toc-text">认识URL:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP协议格式"><span class="toc-number">3.1.</span> <span class="toc-text">HTTP协议格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#请求首行"><span class="toc-number">3.2.</span> <span class="toc-text">请求首行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#响应首行"><span class="toc-number">3.3.</span> <span class="toc-text">响应首行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#头部信息"><span class="toc-number">3.4.</span> <span class="toc-text">头部信息</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-HTTP协议版本区别"><span class="toc-number">4.</span> <span class="toc-text">4. HTTP协议版本区别</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -594,11 +593,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,35 +613,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
             
             <div class="clearfix"></div>

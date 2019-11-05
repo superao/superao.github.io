@@ -7,19 +7,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: RAII C++ | Superao的博客</title>
+  <title>详解计算机之间如何实现数据的发送 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/tags/RAII-C/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在前面的博客中我们总结了网络基础的相关知识并且也简单的介绍了 TCP/IP 五层模型中每一层的功能，在本篇博客中，我们详细介绍 TCP/IP 五层模型中的部分协议，以及在通信过程中所使用到的技术。">
+<meta name="keywords" content="网络基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解计算机之间如何实现数据的发送">
+<meta property="og:url" content="http://yoursite.com/2019/11/03/详解计算机之间如何实现数据的发送/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在前面的博客中我们总结了网络基础的相关知识并且也简单的介绍了 TCP/IP 五层模型中每一层的功能，在本篇博客中，我们详细介绍 TCP/IP 五层模型中的部分协议，以及在通信过程中所使用到的技术。">
 <meta property="og:locale" content="中文">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191105121206576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191105121259141.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191105121335436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191105121446289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191105172525870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-11-05T09:31:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="详解计算机之间如何实现数据的发送">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在前面的博客中我们总结了网络基础的相关知识并且也简单的介绍了 TCP/IP 五层模型中每一层的功能，在本篇博客中，我们详细介绍 TCP/IP 五层模型中的部分协议，以及在通信过程中所使用到的技术。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191105121206576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -151,60 +158,235 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-详解计算机之间如何实现数据的发送" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/13/智能指针/" class="archive-article-date">
-  	<time datetime="2019-09-14T05:21:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-13</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/13/智能指针/">智能指针</a>
+    <h1 class="article-title" itemprop="name">
+      详解计算机之间如何实现数据的发送
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/03/详解计算机之间如何实现数据的发送/" class="archive-article-date">
+  	<time datetime="2019-11-03T08:43:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在前面的博客中我们总结了网络基础的相关知识并且也简单的介绍了 TCP/IP 五层模型中每一层的功能，在本篇博客中，我们详细介绍 TCP/IP 五层模型中的部分协议，以及在通信过程中所使用到的技术。</p>
+<a id="more"></a>
+<h2 id="1-物理层"><a href="#1-物理层" class="headerlink" title="1. 物理层"></a>1. 物理层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们从题目本身开始说起，天各一方的计算机之间是如何进行通信的呐? 我们都知道实现通信的前提条件就是必须有一种物理介质帮助我们实现物理通路，只有实现物理通路之后，我们才能谈到关于通信的其他东西，常见用来连接通路的物理介质有 “光纤，双绞线，电磁波” 等，当物理通路形成之后，我们需要将数据转化为相应的 0 / 1 的物理信号进行发送，这样就实现计算机之间通信最基础的东西。当然在实现通路时也做了很多的规定。<br><img src="https://img-blog.csdnimg.cn/20191105121206576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<h2 id="2-链路层"><a href="#2-链路层" class="headerlink" title="2. 链路层"></a>2. 链路层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 物理层所实现的通路为通信数据建立了一条用于传输的物理介质，传输的只有 0 / 1 物理信号，但是这样的一串物理信号我们是看不懂的，我们拿到之后该如何解析这样的信号呐? 只有接受方解析后的数据与发送方的数据保持一致我们才能算实现了真正意义上的通信。那么这时就出现了 “以太网协议”。以太网协议对我们所传输的数据做出了标准，规定了多少位 0 / 1 构成一个完整的一条数据，这样的话，我们就可以很容易的解析出所发送的 0 / 1 数据串。</p>
+<h4 id="以太网协议"><a href="#以太网协议" class="headerlink" title="以太网协议"></a>以太网协议</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 以太网协议所传输的帧数据由两部分构成: “描述信息 + 数据” ，通常它的数据大小为 46 ~ 1500(MTU) 个字节，通常最大传输数据量是由 MTU 来决定的，不同的网络设备中的最大传输单元(MTU)是不同的，但是这是可以设置的。因此，当我们接受到某条数据时，这条数据有可能是其他设备传输过来的数据，数据大小超过了 MTU，这时路由器就需要对数据进行分段操作，将每一小段的数据依次传输到别的设备上。数据帧的格式如下:<br><img src="https://img-blog.csdnimg.cn/20191105121259141.png" alt><br>上述就是帧数据的格式，格式中主要包含以下几点信息:</p>
+<ul>
+<li>源 Mac: 标识该数据由那个交换机发送的(Mac地址稍后介绍)</li>
+<li>目的 Mac: 标识该数据由那个交换机接受</li>
+<li>协议类型: 上层协议类型，进行数据分用的时候需要上层协议类型。主要有三种类型IP, ARP, RARP协议</li>
+<li>CRC帧尾: 检测数据大小是否正确</li>
+</ul>
+<h4 id="ARP-地址解析-协议与广播"><a href="#ARP-地址解析-协议与广播" class="headerlink" title="ARP(地址解析)协议与广播"></a>ARP(地址解析)协议与广播</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>ARP协议是一个介于网络层与链路层之间的一种协议</strong>。在链路层中我们提到了以太网协议，以太网帧数据格式中包含了源Mac，目的Mac，但是我们在编写网络程序的时候并没有涉及到Mac地址，我们只是用到了IP地址。那我们如何利用IP地址实现通信的呐? 这时我们就需要ARP协议将IP地址转化为用于相邻设备传输的Mac地址。<br><img src="https://img-blog.csdnimg.cn/20191105121335436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 假如计算机A想对计算机B发送一条信息，我们如何确保我们准确的将信息发送到计算机B上了呐? 我们也有可能将信息发送到其他计算机上。为了解决数据不错发的问题，我们利用路由器的<strong>广播功能</strong>，向计算机B所在的 “<strong>子网</strong>“中发送一条ARP数据包，在ARP数据包中包括了计算机B的IP地址，这条数据包可以被计算机B所在子网的所有主机都收到，其他计算机收到该信息包发现不是自己的，直接丢弃，计算机B收到之后发现是自己的，将自己的Mac地址填充进去，回传给计算机A，这时计算机A就知道了计算机B的Mac地址，从而准确的将数据发送给计算机B。从而实现了将IP地址转化为Mac的地址的功能，从而数据在相邻设备之间不断发送，最后到达对端主机。<strong>上述就是ARP协议的工作流程，为了高效快速的找到IP地址与Mac地址之间的转化关系，每台主机中都有一张ARP缓存表，这个缓存表中包含了大量的IP地址与Mac地址的对应关系，由于目前IP地址是动态分配的，需要随时更新，所以它的生命周期一般比较短暂</strong>(20分钟左右)。<br><img src="https://img-blog.csdnimg.cn/20191105121446289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>这就是ARP协议的报文格式，我们可以根据报文的格式更加深刻来理解ARP的工作流程。</p>
+<h2 id="3-网络层"><a href="#3-网络层" class="headerlink" title="3. 网络层"></a>3. 网络层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在链路层我们提到了”子网，IP地址”等相关概念，我们需要对IP地址有足够的了解，才能知道子网是什么东西。IP地址由两部分组成: “网络号 + 主机号”，将主机IP地址和它对应的子网掩码进行与运算得到的为网络号，具有相同网络号的主机属于同一个局域网，这个局域网也称之为 “子网”，我们所使用的互联网也是由成千上万个不同的子网构成的，不同的子网划分将在详解IP协议文章中详细介绍。<strong>当我们发送一条数据的时候需要得知 “源主机IP地址，目的主机IP地址”，这样才能从整体上了解到本条数据是由哪到哪，然后当数据组织好之后交给网卡，网卡交给所连接的上层路由器设备，每台路由器设备上都有一张路由表，该表标识自己与哪些IP地址的路由器/主机相连，从而路由器根据自己的路由表查找目的IP地址，先查找目的IP地址是否在本局域网中，如果在，那么利用对应的网卡设备将数据发送到对应的设备上，如果不在本局域网，那么利用相应的网卡设备将数据转交给上层网关设备，由上层网关设备继续进行相似的寻找，直到找到对应的主机。</strong>在上述的路由选择过程中，ARP协议 + 以太网协议利用IP协议中的IP地址实现了相邻设备之间的数据转发，而路由器实现整体的路由选择过程。这样就<strong>实现了主机与主机之间的通信。</strong><br><img src="https://img-blog.csdnimg.cn/20191105172525870.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<h4 id="ICMP-控制报文-协议"><a href="#ICMP-控制报文-协议" class="headerlink" title="ICMP(控制报文)协议"></a>ICMP(控制报文)协议</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ICMP协议是一个处于网络层的一种协议。在网络层中，我虽然知道数据是哪个主机发送到哪个主机上的，但是为了高效传输数据，我们在发送数据之前需要先对两台主机之间的链路进行一次检测，而这次链路通路的检测就是由ICMP协议来进行完成的。因此，<strong>ICMP协议的作用就是用来检测网络通信故障和链路追踪</strong>。</p>
+<p>最典型的应用:</p>
+<ul>
+<li>ping: 用来检测源IP地址与目的IP地址之间的链路是否有问题，是否可达以及网络延迟的状况。</li>
+<li>traceroute: 通过发送探测数据包来实现对链路信息的收集，从而可以获取到每个所经过的路由器IP地址。(利用报文中TTL的个数的变化，当TTL = 0时，报文就向源IP地址回传，从而可以遍历到每个所经过的路由器)</li>
+</ul>
+<h2 id="4-传输层"><a href="#4-传输层" class="headerlink" title="4. 传输层"></a>4. 传输层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络层我们知道了数据如何在主机与主机之间进行传输，但是我们主机接受到数据之后，不知道该数据交给哪个进程去处理，随便交付给一个进程是非常的不合适的，因此，我们就需要知道对端主机的某个进程的端口号，这样我们才能精确将数据发送到对端的某个进程上，因此在<strong>传输层实现数据端与端之间的传输</strong>。为了实现数据的可靠传输，同时在传输层某些协议中加入了大量的描述信息，因而在传输层实现了数据的可靠传输。通常在编程流程中，我们在传输层一次性的对IP地址与端口进行赋值。</p>
+<h2 id="5-应用层"><a href="#5-应用层" class="headerlink" title="5. 应用层"></a>5. 应用层</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 应用层是最接近我们用户的一层，<strong>在应用层我们为了实现某个功能对我们的程序中的数据规定成各种各样的格式，方便我们高效传输以及高效解析，同时还可以在该层对程序中的数据进行加密操作。</strong>比如：”HTTP协议，FTP协议”等这些都是在应用层中为了实现某个功能所制定的协议。</p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通过上述对每一层的详细描述以及相关技术的介绍，我们对TCP/IP五层协议有更加深刻的理解，对于上层中的某些重要协议我们将在后续文章中详细介绍，方便更加深刻的理解。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://img-blog.csdnimg.cn/20190823203748400.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">RAII C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/03/详解计算机之间如何实现数据的发送/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2019/11/05/DNS域名解析流程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          DNS域名解析流程
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2019/11/01/NAT网络地址转化技术/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NAT网络地址转化技术</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-物理层"><span class="toc-number">1.</span> <span class="toc-text">1. 物理层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-链路层"><span class="toc-number">2.</span> <span class="toc-text">2. 链路层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#以太网协议"><span class="toc-number">2.0.1.</span> <span class="toc-text">以太网协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARP-地址解析-协议与广播"><span class="toc-number">2.0.2.</span> <span class="toc-text">ARP(地址解析)协议与广播</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-网络层"><span class="toc-number">3.</span> <span class="toc-text">3. 网络层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ICMP-控制报文-协议"><span class="toc-number">3.0.1.</span> <span class="toc-text">ICMP(控制报文)协议</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-传输层"><span class="toc-number">4.</span> <span class="toc-text">4. 传输层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-应用层"><span class="toc-number">5.</span> <span class="toc-text">5. 应用层</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">6.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="详解计算机之间如何实现数据的发送" data-title="详解计算机之间如何实现数据的发送" data-url="http://yoursite.com/2019/11/03/详解计算机之间如何实现数据的发送/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -227,9 +409,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -297,11 +479,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -313,35 +499,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
             
             <div class="clearfix"></div>

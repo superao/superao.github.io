@@ -9,19 +9,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>C/C++的类型转换 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 本篇文章主要总结 C/C++ 语言的类型转化">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C&#x2F;C++的类型转换">
 <meta property="og:url" content="http://yoursite.com/2019/08/07/Cpp的类型转化/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 本篇文章主要总结 C/C++ 语言的类型转化">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-09-14T15:33:58.488Z">
+<meta property="og:updated_time" content="2019-11-05T10:16:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++的类型转换">
-<meta name="twitter:description" content="C/C++语言类型转化的总结:C语言的类型转换 隐式类型转换：算术转化，类型转化，整形提升，… 显式类型转换：(目标类型)1int a = (int)&apos;a&apos;;    // C 中所有显示类型转化。    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 本篇文章主要总结 C/C++ 语言的类型转化">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190805120532267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -174,14 +174,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="C-C-语言类型转化的总结"><a href="#C-C-语言类型转化的总结" class="headerlink" title="C/C++语言类型转化的总结:"></a>C/C++语言类型转化的总结:</h1><h4 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h4><ul>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 本篇文章主要总结 C/C++ 语言的类型转化</p>
+<a id="more"></a>
+
+<h4 id="C语言的类型转换"><a href="#C语言的类型转换" class="headerlink" title="C语言的类型转换"></a>C语言的类型转换</h4><ul>
 <li>隐式类型转换：算术转化，类型转化，整形提升，…</li>
 <li>显式类型转换：(目标类型)<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = (<span class="keyword">int</span>)<span class="string">'a'</span>;    <span class="comment">// C 中所有显示类型转化。</span></span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C语言的类型转化确实可以满足我们日常的使用，但是它所有的类型转化都是相同的格式，因此上，非常的不规范，有时候不加注释，我们是比较难看懂某些代码的，因此上，C++语言为了规范管理我们的类型转化，它提出了四种类型转换的关键字，每个关键字都有它不同的转换作用，这样可以更好的，规范的实现类型转化，进而让代码更加规范，方便他人阅读，方便后期维护**</p>
-<a id="more"></a>
+<!-- more -->
 
 <h4 id="C-强制类型转换"><a href="#C-强制类型转换" class="headerlink" title="C++强制类型转换"></a>C++强制类型转换</h4><ul>
 <li><strong>static_cast</strong></li>
@@ -327,7 +330,7 @@
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          多继承---菱形继承
+          多继承-菱形继承
         
       </div>
     </a>
@@ -361,7 +364,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-C-语言类型转化的总结"><span class="toc-number">1.</span> <span class="toc-text">C/C++语言类型转化的总结:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#C语言的类型转换"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">C语言的类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C-强制类型转换"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">C++强制类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议："><span class="toc-number">1.0.0.3.</span> <span class="toc-text">建议：</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#C语言的类型转换"><span class="toc-number">1.</span> <span class="toc-text">C语言的类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#C-强制类型转换"><span class="toc-number">2.</span> <span class="toc-text">C++强制类型转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#建议："><span class="toc-number">3.</span> <span class="toc-text">建议：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -493,11 +496,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">算法与数据结构(map set)</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -509,35 +516,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 多态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">C++ 继承</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">RAII C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">STL容器(内存管理)</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++ 泛型 适配器模式的应用</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
             
             <div class="clearfix"></div>
