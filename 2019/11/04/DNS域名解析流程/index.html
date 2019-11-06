@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-05T11:54:41.757Z">
+<meta property="og:updated_time" content="2019-11-06T04:51:13.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNS域名解析流程">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。">
@@ -165,7 +165,7 @@
 
         
         <a href="/2019/11/04/DNS域名解析流程/" class="archive-article-date">
-  	<time datetime="2019-11-05T07:44:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
+  	<time datetime="2019-11-04T15:44:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
 </a>
         
       </header>
@@ -174,10 +174,39 @@
       
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。</p>
 <a id="more"></a>
-<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>// 主要介绍什么是域名？ 域名的作用？ </p>
-<h2 id="域名的划分"><a href="#域名的划分" class="headerlink" title="域名的划分"></a>域名的划分</h2><p>// 按照性质划分的域名，    按照地区划分的域名    常见的域名是什么？</p>
-<h2 id="域名服务器的划分"><a href="#域名服务器的划分" class="headerlink" title="域名服务器的划分"></a>域名服务器的划分</h2><p>// 域名服务器的等级以及主要解析什么样的域名</p>
-<h2 id="域名的解析流程"><a href="#域名的解析流程" class="headerlink" title="域名的解析流程"></a>域名的解析流程</h2><p>// 域名的解析流程：主机中的hosts文件在哪里修改？  迭代式解析，递归是解析？</p>
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><ul>
+<li>域名: 域名是一串由点分割的名字，这些名字标识了互联网上某个主机群或者服务器群。</li>
+<li>域名的作用: 可以更加方便查找某个服务器资源。</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 一般情况下，我们访问的都是某个公司的代理服务器，让代理服务器去帮助我们寻找真正所请求的资源，并且<strong>通常一个域名和多个IP地址进行映射，当我们想要访问某个资源的时候，这些IP地址将被轮询的解析出来，供不同的用户去请求资源。当我们请求某个资源的时候，此时一个域名进行解析只能对应一个IP地址。</strong> 因此，域名系统利用这种机制高效的帮助我们寻找某个服务器资源。</p>
+<h2 id="域名等级"><a href="#域名等级" class="headerlink" title="域名等级"></a>域名等级</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在理论条件下，域名等级可以有无数多个，上层域名依次解析下层域名，直到解析完毕为止。但是通常情况下，由于域名解析服务器的数量和性能的问题，一个域名最多只能被解析 2 ~ 3 层。因此上，我们常见的域名等级划分为：“顶级域名”，“二级域名”，“三级域名”。下面是一个常见域名的等级划分：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// baike.baidu.com</span></span><br><span class="line"><span class="comment">// .com: 顶级域名</span></span><br><span class="line"><span class="comment">// .baidu.com: 二级域名</span></span><br><span class="line"><span class="comment">// .baike.baidu.com: 三级域名</span></span><br><span class="line"><span class="comment">// 理论情况下，上层域名可以解析出无数多个下层域名，实际情况下，由于域名解析服务器的问题，只能解析出有限个域名。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="域名服务器的划分"><a href="#域名服务器的划分" class="headerlink" title="域名服务器的划分"></a>域名服务器的划分</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 域名解析服务器的作用就是用来解析各种域名，但是由于所有的域名都由一些服务器来解析，这是非常不合理的，因此上对于不同等级的域名需要不同的域名解析服务器来进行完成，从而对域名服务器做出了划分，域名服务器的等级如下：</p>
+<ul>
+<li>根域名服务器：解析顶级域名</li>
+<li>二级域名服务器：解析二级域名</li>
+<li>三级域名服务器：解析三级域名</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 全世界共有 13 个根域名服务器分布在世界各地，然后向其他权威机构授权，作为其他等级的域名服务器，这样不但解决了某些服务器的高压力问题，还在一定程度上进行了容灾处理。从而保证我们域名解析更加高效。</p>
+<h2 id="域名的解析流程"><a href="#域名的解析流程" class="headerlink" title="域名的解析流程"></a>域名的解析流程</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当我们输入“baike.baidu.com”域名之后，它有两种解析流程，分别如下：</p>
+<ul>
+<li><strong>迭代查询</strong>：迭代查询是DNS服务器的一种查询模式，在该模式下，当DNS服务器收到客户端的请求时，先查看本地是否有该域名的相关信息，如果有直接返回，如果没有则向客户端响应一个其他能够查询的地方，然后客户端继续向所提供的位置发起请求，持续此过程，直到查询到指定域名的相关信息为止。<ul>
+<li>查看浏览器是否有缓存</li>
+<li>查看本机Hosts文件</li>
+<li>请求本地域名服务器</li>
+<li>请求根域名服务器，根域名服务响应一个其他位置，继续请求，直到找到域名的相关信息。</li>
+</ul>
+</li>
+<li><strong>递归查询</strong>：递归查询也是DNS服务器的一种查询模式，在该模式下，当DNS服务器收到客户端的请求时，先查看本地是否有该域名的相关信息，如果有直接返回，如果没有则就去其他位置进行查找，直到找到该域名的相关信息为止，最后向客户端响应一个准确结果。<ul>
+<li>查看浏览器是否有缓存</li>
+<li>查看本机Hosts文件</li>
+<li>请求本地域名服务器</li>
+<li>请求根域名服务器，根域名自行进行查找，但会域名相关信息。 </li>
+</ul>
+</li>
+</ul>
+<p>递归查询与迭代查询的区别：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当客户端请求DNS服务器之后，如果能直接返回准确结果的为递归查询，如果不能直接返回准确结果的为迭代查询。 </p>
 
       
 
@@ -287,11 +316,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/05/page/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/06/详解UDP协议/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          test
+          详解UDP协议
         
       </div>
     </a>
@@ -325,7 +354,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名"><span class="toc-number">1.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名的划分"><span class="toc-number">2.</span> <span class="toc-text">域名的划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名服务器的划分"><span class="toc-number">3.</span> <span class="toc-text">域名服务器的划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名的解析流程"><span class="toc-number">4.</span> <span class="toc-text">域名的解析流程</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#域名"><span class="toc-number">1.</span> <span class="toc-text">域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名等级"><span class="toc-number">2.</span> <span class="toc-text">域名等级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名服务器的划分"><span class="toc-number">3.</span> <span class="toc-text">域名服务器的划分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#域名的解析流程"><span class="toc-number">4.</span> <span class="toc-text">域名的解析流程</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -449,7 +478,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -457,15 +486,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -473,7 +494,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
