@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-06T04:59:47.515Z">
+<meta property="og:updated_time" content="2019-11-06T05:05:39.880Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNS域名解析流程">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。">
@@ -182,7 +182,7 @@
 <h2 id="2-域名等级"><a href="#2-域名等级" class="headerlink" title="2. 域名等级"></a>2. 域名等级</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在理论条件下，域名等级可以有无数多个，上层域名依次解析下层域名，直到解析完毕为止。但是通常情况下，由于域名解析服务器的数量和性能的问题，一个域名最多只能被解析 2 ~ 3 层。因此上，我们常见的域名等级划分为：“顶级域名”，“二级域名”，“三级域名”。下面是一个常见域名的等级划分：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// baike.baidu.com</span></span><br><span class="line"><span class="comment">// .com: 顶级域名</span></span><br><span class="line"><span class="comment">// .baidu.com: 二级域名</span></span><br><span class="line"><span class="comment">// .baike.baidu.com: 三级域名</span></span><br><span class="line"><span class="comment">// 理论情况下，上层域名可以解析出无数多个下层域名，实际情况下，由于域名解析服务器的问题，只能解析出有限个域名。</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="3-域名服务器的划分"><a href="#3-域名服务器的划分" class="headerlink" title="3. 域名服务器的划分"></a>3. 域名服务器的划分</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 域名解析服务器的作用就是用来解析各种域名，但是由于所有的域名都由一些服务器来解析，这是非常不合理的，因此上对于不同等级的域名需要不同的域名解析服务器来进行完成，从而对域名服务器做出了划分，域名服务器的等级如下：</p>
+<h2 id="3-域名服务器的划分"><a href="#3-域名服务器的划分" class="headerlink" title="3. 域名服务器的划分"></a>3. 域名服务器的划分</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 域名解析服务器的作用就是用来解析各种域名，如果所有的域名都由一些服务器来解析，这是非常不合理的，因此上对于不同等级的域名需要不同的域名解析服务器来进行完成，从而对域名服务器做出了划分，域名服务器的等级如下：</p>
 <ul>
 <li>根域名服务器：解析顶级域名</li>
 <li>二级域名服务器：解析二级域名</li>
@@ -193,7 +193,7 @@
 <ul>
 <li><strong>迭代查询</strong>：迭代查询是DNS服务器的一种查询模式，在该模式下，当DNS服务器收到客户端的请求时，服务器先查看本地是否有该域名的相关信息，如果有直接返回，如果没有则向客户端响应一个其他能够查询的地方，然后客户端继续向所提供的位置发起请求，持续此过程，直到查询到指定域名的相关信息为止。<ul>
 <li>查看浏览器是否有缓存</li>
-<li>查看本机Hosts文件(实质上是查看是否对该域名做了指定IP地址映射关系)</li>
+<li>查看本机Hosts文件(实质上是查看是否对该域名做了指定IP地址映射关系，Linux: /etc/hosts/，Win:C:\Windows\System32\drivers\etc\hosts)</li>
 <li>请求本地域名服务器(实质上是查看本地服务器是否有该域名的缓存信息)</li>
 <li>请求根域名服务器，根域名服务响应一个其他位置，继续请求，直到找到域名的相关信息并返回</li>
 </ul>
@@ -478,19 +478,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
