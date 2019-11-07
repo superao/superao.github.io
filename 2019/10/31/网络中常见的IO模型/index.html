@@ -9,18 +9,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>网络中常见的I/O模型 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络中常见的I&#x2F;O模型">
 <meta property="og:url" content="http://yoursite.com/2019/10/31/网络中常见的IO模型/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-01T06:09:03.000Z">
+<meta property="og:updated_time" content="2019-11-07T03:14:40.060Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -172,7 +172,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。</p>
+<a id="more"></a>
+
+<h2 id="I-O模式"><a href="#I-O模式" class="headerlink" title="I/O模式"></a>I/O模式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I/O指得就是读写操作，读写操作的本质如下：</p>
+<ul>
+<li><strong>读操作： 将数据从内核缓冲区拷贝到用户所指定的位置</strong></li>
+<li><strong>写操作： 将数据从用户指定的位置拷贝到内核缓冲区中</strong></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是我们经常说的真正的读写操作，读写操作并不是将数据直接发送出去或者直接接受到某个数据，而是与内核缓冲区进行的交互操作。 </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  因此，一个完整的I/O操作主要由两部分构成：</p>
+<ul>
+<li><strong>检测内核缓冲区，等待满足条件</strong></li>
+<li><strong>条件满足后，进行数据拷贝操作</strong></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I/O模式并不是只有阻塞与非阻塞两种，所有的I/O模式有以下几种：</p>
+<ul>
+<li>阻塞I/O</li>
+<li>非阻塞I/O </li>
+<li>信号转接I/O</li>
+<li>异步I/O</li>
+<li>多路转接I/O </li>
+</ul>
+<h2 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h2><p>// 详细说一下，阻塞读怎么回事？   阻塞写是怎么回事？<br>// 同时还是在说一下 中断时时候，数据只搞了一部分怎么办？两个都要说。</p>
+<h2 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h2><p>// 详细说一下，非阻塞读是怎么回事？  非阻塞写是怎么回事？</p>
+<p>// 详细说一下 阻塞I/O与非阻塞I/O的区别<br>// 详细说一下 阻塞I/O与非阻塞I/O的模式设置<br>// </p>
+<h2 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I/O"></a>信号驱动I/O</h2><h2 id="异步I-O"><a href="#异步I-O" class="headerlink" title="异步I/O"></a>异步I/O</h2>
       
 
       
@@ -206,6 +231,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -308,7 +344,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O模式"><span class="toc-number">1.</span> <span class="toc-text">I/O模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞I-O"><span class="toc-number">2.</span> <span class="toc-text">阻塞I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞I-O"><span class="toc-number">3.</span> <span class="toc-text">非阻塞I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号驱动I-O"><span class="toc-number">4.</span> <span class="toc-text">信号驱动I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步I-O"><span class="toc-number">5.</span> <span class="toc-text">异步I/O</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -436,10 +472,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
@@ -452,11 +484,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
