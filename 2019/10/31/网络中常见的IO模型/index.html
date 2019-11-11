@@ -9,23 +9,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>网络中常见的I/O模型 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络中常见的I&#x2F;O模型">
 <meta property="og:url" content="http://yoursite.com/2019/10/31/网络中常见的IO模型/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230507590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019110723054130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230605345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230628211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-11T10:10:42.202Z">
+<meta property="og:updated_time" content="2019-11-11T16:01:56.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -178,27 +178,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。</p>
 <a id="more"></a>
-<h2 id="I-O模式"><a href="#I-O模式" class="headerlink" title="I/O模式"></a>I/O模式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在大多数情况下，I/O是文件的相关操作，一个文件要想从硬件设备，网络设备中获取某个数据时就需要进行I/O操作，而I/O操作就是与内核中的缓冲区进行交互（无法直接与物理设备进行交互），因此上每个文件都需要有自己的I/O模型，这样才能和内核中的缓冲区进行高效的交互。读写操作的本质如下：</p>
+
+<h2 id="I-O模式"><a href="#I-O模式" class="headerlink" title="I/O模式"></a>I/O模式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Linux 下一切皆文件，并且内核使用一个结构体（struct file）来对当前文件的信息进行描述，我们可以借助这些信息来对当前文件进行操作。当用户想要在物理设备上读取一个数据的时候，由于用户无法直接操作物理设备接口，这些都由操作系统自行完成，因此，我们所接触到的都是操作系统缓冲区，所以<strong>站在用户角度来讲，进行一次I/O操作就是与内核中的缓冲区进行交互。为了用户能够高效的与内核中的缓冲区进行交互，结构体中描述信息中描述了当前文件的状态（unsigned int f_flags），每一个文件的状态默认情况下是阻塞的，当然也可以设置为非阻塞等</strong>。I/O操作的本质如下：</p>
 <ul>
-<li><strong>读操作：将数据从内核缓冲区拷贝到用户所指定的位置</strong></li>
-<li><strong>写操作：将数据从用户指定的位置拷贝到内核缓冲区中</strong></li>
+<li>读操作：将数据从内核缓冲区拷贝到用户所指定的位置</li>
+<li>写操作：将数据从用户指定的位置拷贝到内核缓冲区中</li>
 </ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是我们经常说的真正的读写操作，读写操作并不是将数据直接发送出去或者直接接受到某个数据，而是与内核缓冲区进行的交互操作，而真正进行发送与接受都是由操作系统来自行完成的。因此，一个完整的I/O操作主要由两部分构成：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是对于用户来讲实质性的I/O操作，而一个完整的I/O操作由以下两部分构成：（以 read 函数为例）</p>
 <ul>
-<li><strong>检测内核缓冲区，等待满足条件</strong></li>
-<li><strong>条件满足后，进行数据拷贝操作</strong></li>
+<li>等待缓冲区有数据可读</li>
+<li>条件满足后，将数据从内核缓冲区拷贝到用户指定的位置</li>
 </ul>
-<p>I/O模式并不是只有阻塞与非阻塞两种，网络中常见的I/O模式有以下几种：<br><strong>阻塞I/O，非阻塞I/O，信号转接I/O，异步I/O，多路转接I/O</strong> </p>
-<h2 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 阻塞I/O是指当用户调用某个函数（read, recv, send ,..）与内核中的缓冲区进行交互时，如果条件不满足，就一直挂起等待，直到条件满足时，进行操作调用返回。<strong>默认情况下，socket, 普通文件都是阻塞I/O模式。</strong><br><img src="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
+<p>实质性的I/O模式我们已经有了更加深刻的理解，但是网络中I/O模式并不是只有阻塞与非阻塞两种，网络中常见的I/O模式有以下几种：<br><em>阻塞I/O，非阻塞I/O，信号转接I/O，异步I/O，多路转接I/O</em> </p>
+<h2 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 阻塞I/O是指当用户调用某个函数（read, recv, send ,..）与内核中的缓冲区进行交互时，如果条件不满足，就一直挂起等待，直到条件满足时，进行操作调用返回。<strong>默认情况下，socket, 普通文件的状态标志位都是阻塞I/O模式。</strong><br><img src="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <h4 id="阻塞模式下"><a href="#阻塞模式下" class="headerlink" title="阻塞模式下"></a>阻塞模式下</h4><p><strong>读操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在阻塞模式下，recv, read, recvform等这些函数的行为：当发起调用的时候，如果内核缓冲区中没有数据时，那么就会一直进行等待，如果有数据时就会进行操作后返回，而且如果从内核缓冲区中读到数据小于所指定的数据长度时（有可能会被打断），它们也不会一直等待下去，而是立刻返回。因此，<strong>当我们读取数据的时候需要循环进行读取，因为，在我们读取一次数据之后，并不能保证我们读到数据就是我们所指定的数据长度，因而读完一次数据之后需要进行长度判断，再来决定是否下一次还需要继续读取数据</strong><br><strong>注意</strong>：recv 中有一个MSG_WAITALL的参数（recv(sockfd, buf, buf_size, MSG_WAITALL)），正常情况下这里的WAITALL是可以读全buf_size长度的，它的性能会比recv循环读取性能更加高效一点。</p>
 <p><strong>写操作</strong>：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在阻塞模式下，write, send, sendto等这些函数的行为：当发起调用的时候会一直进行等待直到数据全部拷贝到内核缓冲区才进行返回（有可能会被打断）。这一点与读操作是有区别的，因为对于读操作来说，我们并不知道它的数据量有多少，所以不能一直等待，如果一直等待，有可能会一直等下去。但是写操作不一样，我们事先是知道数据量有多大，因此上我们可以一直等待，直到数据写完。不过写操作也有可能会被打断，造成一次只写了一部分，所以写操作也需要考虑循环写入，通常情况下，调用一次写操作就可以成功。</p>
 <h2 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 非阻塞I/O是指当用户调用某个函数时，如果条件不满足时直接进行返回。使用非阻塞I/O时，我们一般循环调用，进行判断，程序可以在条件不满足时干一些其他的事情，而不是一直进行等待。这种I/O模式有一个缺点就是CPU的使用率比较高。<br><img src="https://img-blog.csdnimg.cn/20191107230507590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <h4 id="非阻塞模式下"><a href="#非阻塞模式下" class="headerlink" title="非阻塞模式下"></a>非阻塞模式下</h4><p><strong>读操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在非阻塞模式下，read, recv等这些函数的行为：当发起调用的时候，如果内核缓冲区没有数据那么将直接返回。如果有数据那么有多少就读多少，因此对于非阻塞操作也需要进行循环操作，防止数据一次没有读取完毕。 </p>
 <p><strong>写操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在非阻塞模式下，write, send等这些函数的行为：当发起调用的时候，如果内核缓冲区没有空间时那么将直接返回。如果有空间时那么有多少空间就写入多少数据，这样可能会导致数据只写入了一部分的情况，因此也需要循环进行操作，防止数据漏写的情况发生。</p>
 <p><strong>阻塞与非阻塞的区别:</strong> 在发起某次调用时，如果条件不满足时是否能够立即返回。不管是阻塞还是非阻塞，在进行读写操作的时候最好利用返回值循环进行判断检测当前数据是否是预期的大小，防止数据不完整的情况发生。</p>
-<h4 id="两种I-O模式的设置"><a href="#两种I-O模式的设置" class="headerlink" title="两种I/O模式的设置"></a>两种I/O模式的设置</h4><p>Socket 的设置：</p>
+<h4 id="阻塞与非阻塞I-O模式的设置"><a href="#阻塞与非阻塞I-O模式的设置" class="headerlink" title="阻塞与非阻塞I/O模式的设置"></a>阻塞与非阻塞I/O模式的设置</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>将一个阻塞模式的函数设置为非阻塞模式方法就是将被操作的文件描述符中的状态标记置为 “非阻塞” 模式，当然不同的函数有不同的设置方法。函数对该文件的状态信息进行判断从而使函数对该文件进行I/O操作的时候就会使用非阻塞机制来进行数据拷贝等工作</strong>。<br>Socket 的设置：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一: fcntl设置; 用F_GETFL获取flags, 用F_SETFL设置flags|O_NONBLOCK;</span></span><br><span class="line"><span class="comment">// 方法二: recv, send系列的参数(临时将sockfd设置为非阻塞模式, 无论原有是阻塞还是非阻塞)</span></span><br></pre></td></tr></table></figure>
 
 <p>普通文件的设置</p>
@@ -206,7 +207,7 @@
 
 <h2 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I/O"></a>信号驱动I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 信号驱动I/O是指当用户发起调用时，先在内核中注册一个信号事件，注册完毕后立即返回（不阻塞），当I/O条件满足时，触发信号打断当前的操作，在信号处理函数中进行数据拷贝。<br><img src="https://img-blog.csdnimg.cn/2019110723054130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <h2 id="异步I-O"><a href="#异步I-O" class="headerlink" title="异步I/O"></a>异步I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 异步I/O是指当用户发起调用时，直接进行返回（不阻塞），此时返回的只是调用成功的标志并不是结果，等待内核完成数据拷贝后才进行结果返回。这种I/O模式最大的好处就是可以直接拿到最后结果。<br><img src="https://img-blog.csdnimg.cn/20191107230605345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br><strong>同步</strong>：为了完成某个功能而发起一个调用，如果当前不满足条件时，那么将阻塞当前进程，直到条件满足，处理任务。<br><strong>异步</strong>：为了完成某个功能而发起一个调用，如果当前不满足条件时，不会阻塞当前进程，而是让内核去完成任务。<br><strong>异步与同步的区别</strong>：当发起某个调用后，当条件不满足时是否会阻塞当前进程，并且该任务是否由自身来完成。</p>
-<h2 id="多路转接I-O"><a href="#多路转接I-O" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O是指将大量的文件描述符添加到内核中，然后操作系统对这些事件进行监控，如果哪个事件就绪（满足条件）就将哪个事件返回给用户，从而使用户可以直接对就绪事件进行操作。<strong>在网络编程中，如果用户只对就绪的事件进行操作，就不会发生程序执行流阻塞的情况，从而可以实现在单进程/线程的情况下实现并发操作。</strong> 假如在Tcp服务器编程中，如果不是只对就绪事件进行操作，那么程序有可能就会卡死。(accept, recv)<br><img src="https://img-blog.csdnimg.cn/20191107230628211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O的具体实现有以下三种：select, poll, epoll。它们在网络编程中有非常大的作用，主要用在大量事件总线中只有少量活跃事件的情况，当然不一定只适用于网络编程，其他相似的情景下也是可以使用的。对于三种实现模型将后续进行详细总结。</p>
+<h2 id="多路转接I-O"><a href="#多路转接I-O" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h2><p>q<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O是指将大量的文件描述符添加到内核中，然后操作系统对这些事件进行监控，如果哪个事件就绪（满足条件）就将哪个事件返回给用户，从而使用户可以直接对就绪事件进行操作。<strong>在网络编程中，如果用户只对就绪的事件进行操作，就不会发生程序执行流阻塞的情况，从而可以实现在单进程/线程的情况下实现并发操作。</strong> 假如在Tcp服务器编程中，如果不是只对就绪事件进行操作，那么程序有可能就会卡死。(accept, recv)<br><img src="https://img-blog.csdnimg.cn/20191107230628211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O的具体实现有以下三种：select, poll, epoll。它们在网络编程中有非常大的作用，主要用在大量事件总线中只有少量活跃事件的情况，当然不一定只适用于网络编程，其他相似的情景下也是可以使用的。对于三种实现模型将后续进行详细总结。</p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是网络中常见的几种I/O模式，但是I/O模型不仅仅只有这些，<em>上述的I/O模式都可以被划分以下一个/多个小部分</em>：<strong>阻塞</strong>，<strong>非阻塞</strong>，<strong>异步</strong>，<strong>同步</strong>。我们理解了这些概念之后才能更好的理解我们网络中的常见I/O模型。</p>
 
       
@@ -355,7 +356,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O模式"><span class="toc-number">1.</span> <span class="toc-text">I/O模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞I-O"><span class="toc-number">2.</span> <span class="toc-text">阻塞I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞模式下"><span class="toc-number">2.0.1.</span> <span class="toc-text">阻塞模式下</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞I-O"><span class="toc-number">3.</span> <span class="toc-text">非阻塞I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#非阻塞模式下"><span class="toc-number">3.0.1.</span> <span class="toc-text">非阻塞模式下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#两种I-O模式的设置"><span class="toc-number">3.0.2.</span> <span class="toc-text">两种I/O模式的设置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号驱动I-O"><span class="toc-number">4.</span> <span class="toc-text">信号驱动I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步I-O"><span class="toc-number">5.</span> <span class="toc-text">异步I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多路转接I-O"><span class="toc-number">6.</span> <span class="toc-text">多路转接I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">7.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-O模式"><span class="toc-number">1.</span> <span class="toc-text">I/O模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#阻塞I-O"><span class="toc-number">2.</span> <span class="toc-text">阻塞I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞模式下"><span class="toc-number">2.0.1.</span> <span class="toc-text">阻塞模式下</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#非阻塞I-O"><span class="toc-number">3.</span> <span class="toc-text">非阻塞I/O</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#非阻塞模式下"><span class="toc-number">3.0.1.</span> <span class="toc-text">非阻塞模式下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#阻塞与非阻塞I-O模式的设置"><span class="toc-number">3.0.2.</span> <span class="toc-text">阻塞与非阻塞I/O模式的设置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#信号驱动I-O"><span class="toc-number">4.</span> <span class="toc-text">信号驱动I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步I-O"><span class="toc-number">5.</span> <span class="toc-text">异步I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多路转接I-O"><span class="toc-number">6.</span> <span class="toc-text">多路转接I/O</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">7.</span> <span class="toc-text">总结：</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -479,6 +480,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -487,15 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -503,7 +504,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
