@@ -9,23 +9,23 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>网络中常见的I/O模型 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络中常见的I&#x2F;O模型">
 <meta property="og:url" content="http://yoursite.com/2019/10/31/网络中常见的IO模型/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230507590.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/2019110723054130.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230605345.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191107230628211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-07T15:41:02.683Z">
+<meta property="og:updated_time" content="2019-11-11T10:10:42.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191107230431121.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -178,9 +178,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 为了更加清楚到了解到网络中某些接口的工作流程，本篇文章主要总结一下网络中的I/O模式，使我们更加了解某些函数在不同情况下所发生的行为。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，我对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和区分。</p>
 <a id="more"></a>
-
 <h2 id="I-O模式"><a href="#I-O模式" class="headerlink" title="I/O模式"></a>I/O模式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在大多数情况下，I/O是文件的相关操作，一个文件要想从硬件设备，网络设备中获取某个数据时就需要进行I/O操作，而I/O操作就是与内核中的缓冲区进行交互（无法直接与物理设备进行交互），因此上每个文件都需要有自己的I/O模型，这样才能和内核中的缓冲区进行高效的交互。读写操作的本质如下：</p>
 <ul>
 <li><strong>读操作：将数据从内核缓冲区拷贝到用户所指定的位置</strong></li>
@@ -480,7 +479,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -488,11 +487,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,10 +504,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
