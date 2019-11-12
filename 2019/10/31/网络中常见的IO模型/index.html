@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112165106546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164508937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164629200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-12T10:26:11.783Z">
+<meta property="og:updated_time" content="2019-11-12T10:33:33.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，这次对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
@@ -220,7 +220,7 @@
 <h4 id="非阻塞I-O-1"><a href="#非阻塞I-O-1" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h4><p>优点：条件不满足时，不会阻塞当前进程。<br>缺点：由于需要轮询判断条件，CPU 使用率比较高。<br>解决方案：在轮询的时候，让进程隔断时间去进行判断。</p>
 <h4 id="信号驱动I-O-1"><a href="#信号驱动I-O-1" class="headerlink" title="信号驱动I/O"></a>信号驱动I/O</h4><p>优点：在等待数据的时候，不会阻塞，也不需要轮询去判断条件，当满足条件时直接调用信号回调函数进行处理。</p>
 <h4 id="异步I-O-1"><a href="#异步I-O-1" class="headerlink" title="异步I/O"></a>异步I/O</h4><p>优点：真正意义上不会阻塞当前进程，等待数据，数据拷贝（同步I/O 在进行数据拷贝时，程序会阻塞在当前拷贝过程中）等等都有内核完成了，对于实现高并发至关重要。</p>
-<h4 id="多路转接I-O-1"><a href="#多路转接I-O-1" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h4><p>优点：在单线程/进程环境下，可以同时处理多个请求，不会阻塞程序。（其他用途将在 select 模型中总结）<br>缺点：有些多路转接模型会随着事件数量的上升而效率低下。</p>
+<h4 id="多路转接I-O-1"><a href="#多路转接I-O-1" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h4><p>优点：在单线程/进程环境下，可以同时处理多个请求，不会阻塞程序。（其他用途将在 select 模型中总结）<br>缺点：有些多路转接模型会随着事件数量的上升而效率低下；流程控制较难，多路转接需要两个系统调用（selecti(监控)，recvfrom(IO)），而阻塞只需要一个系统调用（recvfrom）。</p>
 
       
 
@@ -492,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -512,11 +512,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
