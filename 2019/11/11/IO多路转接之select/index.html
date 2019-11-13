@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-13T03:16:42.219Z">
+<meta property="og:updated_time" content="2019-11-13T04:10:55.664Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之select">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
@@ -206,18 +206,18 @@
 <li>进程调用select指示内核监控所有事件。</li>
 <li>进程依次处理所有已经就绪的事件。</li>
 </ol>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述总结中我们已经知道了select的使用场景，以及如何使用select去监控大量事件，但是我们只是知道如何使用是远远不够的，因此，我们还需要知道select是如何实现对大量事件进行监控，事件就绪后返回给用户的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; select 的作用是监听大量事件，select 能够监控的大量事件的原因是它的工作流程依靠驱动程序，驱动程序用来操作物理设备（网卡，磁盘，键盘等），每个驱动程序中都有一个 poll 函数，这个 poll 函数用来检测当前设备是否有可用资源（可读/可写）。驱动设备通常有等待队列，用来实现调用所需的阻塞操作（默认），当然也可以设置为非阻塞操作。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述总结中我们已经知道了select的使用场景，以及如何使用select去监控大量事件，但是我们只是知道如何使用是远远不够的，因此，我们还需要知道select是如何实现对大量事件进行监控，事件就绪后返回给用户的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; select 的作用是监听大量事件，select 能够监控的大量事件的原因是它的工作流程依靠驱动程序，驱动程序用来操作物理设备（网卡，磁盘，键盘等），每个驱动程序中都有一个 poll 函数，这个 poll 函数用来检测当前设备是否有可用资源（可读/可写）。驱动设备通常有等待队列，用来实现调用所需的阻塞操作（默认），当然也有为非阻塞操作。</p>
 <p><strong>实现流程：</strong></p>
 <ol>
 <li>select 先将 fd_set 从用户态拷贝到内核态中。</li>
-<li>select 遍历整个 fd_set，依次调用每个文件 fd 所对应的驱动程序中的 poll 函数，（如：“通常情况下，fd = 1时，对应的物理设备就是键盘”）而 poll 函数会先将调用 select 的进程插入到该设备的等待队列中，当有接受到某一个数据的时候/将数据在磁盘上填充完毕的时候，这时将进程唤醒。</li>
+<li>select 遍历整个 fd_set，依次调用每个文件 fd 所对应的驱动程序中的 poll 函数，（如：“通常情况下，fd = 1时，对应的物理设备就是键盘”）而每个 poll 函数会先将调用 select 的进程插入到本设备的等待队列中，当有接受到某一个数据的时候/将数据在磁盘上填充完毕的时候，这时将调用进程唤醒。</li>
 <li>poll 函数返回时会返回一个描述读写操作就绪的 mask 掩码，根据这个 mask 掩码给 fd_set 赋值，从而使 fd_set 全部为就绪事件。</li>
-<li>遍历整个 fd_set 后，如果没有返回一个 mask 掩码，那么调用 schedule_timeout 使调用 select 的进程进入睡眠，当设备驱动发生自身资源可读写后，会唤醒等待队列上睡眠的进程。如果超过一定的超时时间（schedule_timeout指定），还是没人唤醒，则调用 select 的进程会自动被唤醒，进而重新遍历fd，判断有没有就绪的fd。</li>
+<li>遍历整个 fd_set 后，如果没有返回一个 mask 掩码，那么调用 schedule_timeout 使调用 select 的进程进入睡眠，当设备驱动发生自身资源可读写后，会唤醒自身等待队列上睡眠的进程。如果超过一定的超时时间（schedule_timeout指定），还是没人唤醒，则调用 select 的进程会自动被唤醒。</li>
 <li>将 fd_set 从内核空间拷贝到用户空间。</li>
 <li>用户调用 revc 等函数将已就绪事件依次遍历将数据从内核缓冲区拷贝到指定的位置。</li>
 </ol>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 一般情况下，进程是阻塞在所有监测的文件对应的设备等待队列上的，因此在 timeout 时间内，只要任意个设备变为可操作，都会立即唤醒该进程，从而继续往下执行。这就实现了 select 的当有一个文件描述符可操作时 就立即唤醒执行的基本原理。 </p>
-<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>// 分析 select 的缺点以及它在什么情况下使用是最好的。（比如对于实时响应的程序） 缺点比如什么每个都要添加事件集合，事件每次都需要重新设置等等。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>一般情况下，用户进程是阻塞（可以将 timeout 设置为 0，使用非阻塞模式）在所有监测的文件对应的设备等待队列上的（select功能），因此在 timeout 时间内，只要任意个设备变为可操作，都会立即唤醒该进程，从而继续往下执行。这就实现了 select 的当有一个文件描述符可操作时 就立即唤醒执行的基本原理</strong>。</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>优点：posix 标准，可以跨平台使用。<br>缺点：每次都需要用户重新添加事件，将事件从用户态拷贝到内核态，开销较大；select 轮询遍历整个集合，它的效率会随着事件数量的增加而减少；select 所监视的事件是有数量上限的，默认大小为 FD_SETSIZE = 1024（使用32个整数的32位表示 fd，即32 * 32 = 1024）；</p>
 
       
 
