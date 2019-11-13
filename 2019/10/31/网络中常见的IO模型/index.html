@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112165106546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164508937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164629200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-12T10:33:33.452Z">
+<meta property="og:updated_time" content="2019-11-13T00:52:21.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，这次对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
@@ -192,11 +192,11 @@
 <li>条件满足后，将数据从内核缓冲区拷贝到用户指定的位置</li>
 </ul>
 <p>实质性的I/O模式我们已经有了更加深刻的理解，但是网络中I/O模式并不是只有阻塞与非阻塞两种，网络中常见的I/O模式有以下几种：<br><em>阻塞I/O，非阻塞I/O，信号转接I/O，异步I/O，多路转接I/O</em> </p>
-<h2 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 阻塞I/O是指当用户调用某个函数（read, recv, send ,..）与内核中的缓冲区进行交互时，如果条件不满足，就一直挂起等待，直到条件满足时，进行数据拷贝调用返回。<strong>默认情况下，socket, 普通文件的状态标志位都是阻塞I/O模式。</strong></p>
+<h2 id="阻塞I-O"><a href="#阻塞I-O" class="headerlink" title="阻塞I/O"></a>阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 阻塞I/O是指当用户调用某个函数（read, recv, send ,..）向内核缓冲区请求数据时，如果条件不满足，就一直挂起等待，直到条件满足时，进行数据拷贝调用返回。<strong>默认情况下，socket, 普通文件的状态标志位都是阻塞I/O模式。</strong></p>
 <p><img src="https://img-blog.csdnimg.cn/20191112164247494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <h4 id="阻塞模式下"><a href="#阻塞模式下" class="headerlink" title="阻塞模式下"></a>阻塞模式下</h4><p><strong>读操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在阻塞模式下，recv, read, recvform等这些函数的行为：当发起调用的时候，如果内核缓冲区中没有数据时，那么就会一直进行等待，如果有数据时就会进行操作后返回，而且如果从内核缓冲区中读到数据小于所指定的数据长度时（有可能会被打断），它们也不会一直等待下去，而是立刻返回。因此，当我们读取数据的时候需要循环进行读取，因为，在我们读取一次数据之后，并不能保证我们读到数据就是我们所指定的数据长度，因而读完一次数据之后需要进行长度判断，再来决定是否下一次还需要继续读取数据<br><strong>注意</strong>：recv 函数中有一个MSG_WAITALL的参数（recv(sockfd, buf, buf_size, MSG_WAITALL)），正常情况下这里的MSG_WAITALL是可以读全buf_size长度的，它的性能会比recv循环读取性能更加高效一点。</p>
 <p><strong>写操作</strong>：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在阻塞模式下，write, send, sendto等这些函数的行为：当发起调用的时候会一直进行等待直到数据全部拷贝到内核缓冲区才进行返回（有可能会被打断）。这一点与读操作是有区别的，因为对于读操作来说，我们并不知道它的数据量有多少，所以不能一直等待，如果一直等待，有可能会一直等下去。但是写操作不一样，我们事先是知道数据量有多大，因此上我们可以一直等待，直到数据写完。不过写操作也有可能会被打断，造成一次只写了一部分，所以写操作也需要考虑循环写入，通常情况下，调用一次写操作就可以成功。</p>
-<h2 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 非阻塞I/O是指当用户调用某个函数与内核中的缓冲区进行交互时，如果条件不满足时直接进行返回，如果条件满足直接进行数据拷贝调用返回。使用非阻塞I/O时，我们一般循环调用，进行判断，通常这种方式称之为“轮询”，程序可以在条件不满足时干一些其他的事情，而不是一直进行等待。</p>
+<h2 id="非阻塞I-O"><a href="#非阻塞I-O" class="headerlink" title="非阻塞I/O"></a>非阻塞I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 非阻塞I/O是指当用户调用某个函数向内核缓冲区请求数据时，如果条件不满足时直接进行返回，如果条件满足直接进行数据拷贝调用返回。使用非阻塞I/O时，我们一般循环调用，进行判断，通常这种方式称之为“轮询”，程序可以在条件不满足时干一些其他的事情，而不是一直进行等待。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191112164400912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <h4 id="非阻塞模式下"><a href="#非阻塞模式下" class="headerlink" title="非阻塞模式下"></a>非阻塞模式下</h4><p><strong>读操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在非阻塞模式下，read, recv等这些函数的行为：当发起调用的时候，如果内核缓冲区没有数据那么将直接返回。如果有数据那么有多少就读多少，因此对于非阻塞操作也需要进行循环操作，防止数据一次没有读取完毕。 </p>
 <p><strong>写操作</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在非阻塞模式下，write, send等这些函数的行为：当发起调用的时候，如果内核缓冲区没有空间时那么将直接返回。如果有空间时那么有多少空间就写入多少数据，这样可能会导致数据只写入了一部分的情况，因此也需要循环进行操作，防止数据漏写的情况发生。</p>
@@ -207,12 +207,12 @@
 <p>普通文件的设置</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一: open时，使用O_NONBLOCK;</span></span><br><span class="line"><span class="comment">// 方法二: fcntl设置，使用F_SETFL, flags|O_NONBLOCK;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I/O"></a>信号驱动I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 信号驱动I/O是指当用户发起调用时，先在内核中注册一个信号事件，注册完毕后立即返回（不阻塞），当I/O条件满足时，触发信号打断当前的操作，然后在信号处理函数中进行数据拷贝等操作。</p>
+<h2 id="信号驱动I-O"><a href="#信号驱动I-O" class="headerlink" title="信号驱动I/O"></a>信号驱动I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 信号驱动I/O是指当用户发起调用向内核缓冲区请求数据时，先在内核中注册一个信号事件，注册完毕后立即返回（不阻塞），当I/O条件满足时，触发信号打断当前的操作，然后在信号处理函数中进行数据拷贝等操作。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191112165106546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
-<h2 id="异步I-O"><a href="#异步I-O" class="headerlink" title="异步I/O"></a>异步I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 异步I/O是指当用户发起调用时，直接进行返回，不阻塞当前进程，然后等待内核完成数据拷贝后向进程发送一个操作完成的信号。</p>
+<h2 id="异步I-O"><a href="#异步I-O" class="headerlink" title="异步I/O"></a>异步I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 异步I/O是指当用户发起调用向内核缓冲区请求数据时，先直接进行返回，不阻塞当前进程，然后等待条件满足内核完成数据拷贝后向进程发送一个操作完成的信号。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191112164508937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <p><strong>同步</strong>：为了完成某个功能而发起一个调用，如果当前不满足条件时，那么将阻塞当前进程，直到条件满足，处理任务。<br><strong>异步</strong>：为了完成某个功能而发起一个调用，如果当前不满足条件时，不会阻塞当前进程，而是让内核去完成任务，最后发送一个信号告知操作完成。<br><strong>异步与同步的区别</strong>：当发起某个调用后，当条件不满足时是否会阻塞当前进程，并且该任务是否由自身来完成。</p>
-<h2 id="多路转接I-O"><a href="#多路转接I-O" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O是指将大量需要被操作的文件描述符添加到内核中，然后内核轮询对这些事件进行监控，如果哪个事件就绪（满足条件）就将哪个事件返回给用户，然后用户直接操作就绪事件。如：“select, poll, epoll”，后续博客详细介绍。</p>
+<h2 id="多路转接I-O"><a href="#多路转接I-O" class="headerlink" title="多路转接I/O"></a>多路转接I/O</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接I/O是指当大量文件描述符向内核缓冲区请求数据时，将大量需要被操作的文件描述符添加到内核中，然后内核轮询对这些事件进行监控，如果哪个事件就绪（满足条件）就将哪个事件返回给用户，然后用户直接操作就绪事件。如：“select, poll, epoll”，后续博客详细介绍。</p>
 <p><img src="https://img-blog.csdnimg.cn/20191112164629200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
 <p><strong>当用户进程调用 select 之后，当前进程会发生阻塞（select），与此同时，系统内核会对所有的 socket 进行监控，当有一个 socket 准备好时，select 就会向用户返回，从而用户调用 recvfrom 将数据从内核拷贝到指定的位置。一般情况下，我们将 socket IO 设置为非阻塞模式，但是，用户的进程其实还是一直被阻塞的。只不过进程是被 select 这个函数阻塞的，而不是被socket IO给阻塞。我们也可以使用不同的多路转接I/O模型（epoll），也可以将函数设置为非阻塞模型（timeout = 0）。</strong></p>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是网络中常见的几种I/O模型，这些I/O模型在不同的场景下各有优缺点，因次，最后我们将这些I/O的优缺点加以总结：</p>

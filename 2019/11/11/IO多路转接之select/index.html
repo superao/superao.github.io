@@ -9,18 +9,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>IO多路转接之select | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IO多路转接之select">
 <meta property="og:url" content="http://yoursite.com/2019/11/11/IO多路转接之select/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-11T09:59:40.846Z">
+<meta property="og:updated_time" content="2019-11-13T00:48:36.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之select">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -172,7 +172,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。</p>
+<a id="more"></a>
+<h2 id="多路转接"><a href="#多路转接" class="headerlink" title="多路转接"></a>多路转接</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 多路转接就是当大量文件描述符请求数据时，先将大量的文件文件描述符加载到内核中，让内核对这些文件描述符进行监控，然后有就绪事件时返回给用户，从而让用户拿着就绪事件进行操作，多路转接模型主要适用于以下几个常见的场景：</p>
+<ol>
+<li>在大量事件总线中只有少量活跃事件的情况下使用多路转接模型</li>
+<li>在一个服务器程序中既要处理监听套接字，又要处理客户端套接字时使用多路转接模型（当然也可以使用多进程/线程）</li>
+<li>在一个服务器程序中既要处理UDP，又要处理TCP时使用多路转接模型</li>
+<li>在一个服务器程序中当要处理多个服务/协议时使用多路转接模型</li>
+</ol>
+<p>上述就是常见的多路转接模型的常见场景，其中有些场景我们也可以使用多进程/线程来达到同样的效果，但是多进程/线程它们耗费的系统资源较高，因此一般情况下，我们使用多路转接模型来进行相关的处理。</p>
+<h2 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h2><p>// 函数中各个参数的作用，以及各个参数的各种情况的分析。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>// 这里写一下 select 的工作流程（轮询）等等</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>// 分析 select 的缺点以及它在什么情况下使用是最好的。（比如对于实时响应的程序）</p>
+
       
 
       
@@ -206,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -308,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#多路转接"><span class="toc-number">1.</span> <span class="toc-text">多路转接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#select函数"><span class="toc-number">2.</span> <span class="toc-text">select函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">3.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点分析"><span class="toc-number">4.</span> <span class="toc-text">优缺点分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
