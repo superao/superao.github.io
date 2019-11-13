@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-13T00:48:36.481Z">
+<meta property="og:updated_time" content="2019-11-13T01:49:04.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之select">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。">
@@ -182,7 +182,24 @@
 <li>在一个服务器程序中当要处理多个服务/协议时使用多路转接模型</li>
 </ol>
 <p>上述就是常见的多路转接模型的常见场景，其中有些场景我们也可以使用多进程/线程来达到同样的效果，但是多进程/线程它们耗费的系统资源较高，因此一般情况下，我们使用多路转接模型来进行相关的处理。</p>
-<h2 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h2><p>// 函数中各个参数的作用，以及各个参数的各种情况的分析。</p>
+<h2 id="select函数"><a href="#select函数" class="headerlink" title="select函数"></a>select函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 进程调用该函数指示内核一次监控多个文件描述符（事件），当多个事件中有一个事件/多个事件就绪时或者阻塞时间超时时唤醒当前进程进行相关操作。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件</span></span><br><span class="line"><span class="comment">// #include &lt;sys/time.h&gt;</span></span><br><span class="line"><span class="comment">// #include &lt;sys/types.h&gt;</span></span><br><span class="line"><span class="comment">// #include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment">// 函数原型</span></span><br><span class="line"><span class="comment">// int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);</span></span><br><span class="line"><span class="comment">// 事件设置(宏)</span></span><br><span class="line"><span class="comment">// void FD_CLR(int fd, fd_set *set);            将 fd 从 set 中删除</span></span><br><span class="line"><span class="comment">// int  FD_ISSET(int fd, fd_set *set);          判断 fd 是否存在 set 中</span></span><br><span class="line"><span class="comment">// void FD_SET(int fd, fd_set *set);            将 fd 添加到 set 中</span></span><br><span class="line"><span class="comment">// void FD_ZERO(fd_set *set);                   清空 set 中的数据</span></span><br></pre></td></tr></table></figure>
+
+<p>函数参数：</p>
+<ol>
+<li>nfds：表示内核所遍历的文件描述符的区间大小，一般传入“最大文件符 + 1”。</li>
+<li>fd_set：它是一个结构体，可以理解为一个集合，这个集合本质上是一个位图，位图下标的每一位就相当于是一个文件描述符，因此我们可以利用位图来对当前文件的状态进行标记，从而判断事件是否就绪。</li>
+<li>readfds：可读事件集合，writefds：可写事件集合，exceptfds：异常事件集合。当不关心当前事件时传入 NULL，当关心某个事件时先创建一个事件集合，在将所关心的文件描述符利用事件事件设置宏添加到集合中。</li>
+<li>struct timeval：它是一个结构体，用来设置 select 的阻塞与非阻塞模式以及阻塞时间的长短。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// struct timeval &#123;</span></span><br><span class="line"><span class="comment">// long    tv_sec;        秒 </span></span><br><span class="line"><span class="comment">// long    tv_usec;       毫秒</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"><span class="comment">// 1. tv_sec 和 tv_usec 设置为非 0，表示当前阻塞时间的长短。</span></span><br><span class="line"><span class="comment">// 2. tv_sec 和 tv_usex 设置为 0，表示使用非阻塞模式。</span></span><br><span class="line"><span class="comment">// 3. timeout 传入 NULL，表示使用阻塞模式。</span></span><br></pre></td></tr></table></figure>
+
+<p>返回值：</p>
+<ol>
+<li>返回值大于 0 时，表示当前事件就绪的个数，我们利用这个个数来对就绪事件依次进行处理。</li>
+<li>返回值小于 0 时，表示当前监控出错了，利用 error 全局变量来查看错误原因。</li>
+<li>返回值等于 0 时，表示当前监控等待超时，在等待时间内并没有一个事件就绪，从而导致等待超时。</li>
+</ol>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>// 这里写一下 select 的工作流程（轮询）等等</p>
 <h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>// 分析 select 的缺点以及它在什么情况下使用是最好的。（比如对于实时响应的程序）</p>
 
@@ -456,7 +473,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -464,19 +481,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
