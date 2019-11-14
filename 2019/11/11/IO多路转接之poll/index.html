@@ -9,18 +9,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>IO多路转接之poll | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IO多路转接之poll">
 <meta property="og:url" content="http://yoursite.com/2019/11/11/IO多路转接之poll/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-12T13:40:02.040Z">
+<meta property="og:updated_time" content="2019-11-14T11:45:23.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之poll">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -172,7 +172,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。</p>
+<a id="more"></a>
+
+<h2 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 进程调用 poll 函数指示内核对所添加的事件进行监控，当有事件就绪时将就绪事件返回给用户，从而让进程调用函数进行相关IO操作。 </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int poll(struct pollfd *fds, nfds_t nfds, int timeout); </span></span><br><span class="line"><span class="comment">// struct pollfd </span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   int fd; </span></span><br><span class="line"><span class="comment">//   short events;</span></span><br><span class="line"><span class="comment">//   short revents;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明：</strong></p>
+<ol>
+<li>struct pollfd：它是一个结构体，结构体的具体成员变量如下，其中 fd 表示所关心文件的文件描述符句柄，events 表示该文件所关心的事件，revents 表示该文件所关心的事件中有那些事件已经就绪了。</li>
+<li>fds：通常情况下，它传入一个struct pollfd的数组，这个数组中全部是被监控的文件所对应的文件描述符以及事件信息。</li>
+<li>nfds：由于一般情况下fds为一个数组，那么这个参数就是用来表示数组的长度。</li>
+<li>timeout：表示阻塞时间的长短，当timeout = 0时，表示使用非阻塞模式。（单位为毫秒）</li>
+</ol>
+<p><strong>返回值：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 返回值一共有三种情况，它的返回值情况与 select 是一致的，大于 0 表示就绪事件个数，等于 0 表示阻塞超时，小于 0 表示函数调用出现错误。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>当函数成功调用返回后，我们需要依次遍历 fds 中的每个元素，然后利用每个元素中的 revents 与所关心的事件进行“与”操作（实质上该事件所对应的比特位与整个位图进行“与”操作）来判断当前事件是否发生，如果发生则进行相关操作，如果没有发生，那么则继续处理下一个。</strong></p>
+<p><strong>常见事件标志：</strong><br>|事件标记|事件解释|<br>|:-:|:-:|<br>|POLLIN|有普通数据可读|<br>|POLLPRI|有优先数据可读（Tcp带外数据）|<br>|POLLOUT|写数据时不会阻塞|<br>|POLLERR|指定文件描述符发生错误|<br>|POLLHUP|指定文件描述符挂起（休眠）|<br>|POLLNVAL|指定文件描述符没有打开|</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是常见的合法事件，前三个是 events 的合法事件，其中前两个最常用，第三个偶尔会用到，后三个是 revent 中会出现的事件，表明当前文件描述符的错误情况（异常事件），用来表明异常情况。 它与 select 不同，select 需要手动去监听事件的异常情况，而 poll 不用手动去监听，直接返回在 revents 中。</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; poll 多路转接模型的原理与 select 的实现原理是相似的，它们两者都是轮询遍历整个事件集合，只不过 select 利用一个位图来表示事件集合，它有事件最大上限，而 poll 是利用动态开辟的空间来管理事件集合，并且将所有事件封装到了一个结构体中进行管理，操作更加方便灵活，而且事件数量没有最大上限。</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>缺点：poll 不能跨平台。poll 只解决了 select 的结点问题，在一定程度上简化了事件添加的操作（将三个集合封装成一个），其他问题并没有解决。（轮询遍历导致的效率，反反复复的事件拷贝）</p>
+
       
 
       
@@ -319,7 +337,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#poll函数"><span class="toc-number">1.</span> <span class="toc-text">poll函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">2.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点分析"><span class="toc-number">3.</span> <span class="toc-text">优缺点分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -443,10 +461,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
@@ -455,7 +469,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -464,10 +486,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
