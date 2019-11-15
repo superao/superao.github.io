@@ -9,18 +9,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>IO多路转接之epoll | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IO多路转接之epoll">
 <meta property="og:url" content="http://yoursite.com/2019/11/11/IO多路转接之epoll/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-11T10:00:33.269Z">
+<meta property="og:updated_time" content="2019-11-15T09:16:03.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之epoll">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -172,7 +172,67 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。</p>
+<a id="more"></a>
+<h2 id="函数介绍"><a href="#函数介绍" class="headerlink" title="函数介绍"></a>函数介绍</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; epoll 多路转接共有三个函数分别进行事件的创建，添加，监控等相关操作，三个函数分别如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int epoll_create(int size);                     创建 epoll.</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数与返回值说明：</strong></p>
+<ol>
+<li>size：表示事件的个数，<em>但是自从 linux 2.6.8 内核之后这个参数就被忽略了。</em></li>
+<li>返回值：<strong>函数调用成功时，返回一个 epoll 的操作句柄，该操作句柄用于后续两个函数的参数。这操作句柄实质上就是一个文件描述符，最后我们使用完毕后需要将文件描述符关闭，防止系统资源耗尽的情况发生。</strong></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);     事件控制</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数与返回值说明：</strong></p>
+<ol>
+<li>epfd：epoll 的操作句柄，用来标识当前操作哪一个 epoll。</li>
+<li>op：用于事件控制（添加事件：EPOLL_CTL_ADD，修改事件：EPOLL_CTL_MOD，删除事件：EPOLL_CTL_DEL）。</li>
+<li>fd：用户需要被监控的文件描述符（请求）。</li>
+<li>返回值：0：成功，-1：失败，并且置换 errno。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// struct epoll_event &#123;</span></span><br><span class="line"><span class="comment">//   uint32_t     events;     用户关心事件(利用宏进行标记，与 poll 中的含义一样)</span></span><br><span class="line"><span class="comment">//   epoll_data_t data;       用户数据 </span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// typedef union epoll_data &#123;</span></span><br><span class="line"><span class="comment">//   void  *ptr;</span></span><br><span class="line"><span class="comment">//   int  fd;            // 最常用的变量</span></span><br><span class="line"><span class="comment">//   uint32_t  u32;</span></span><br><span class="line"><span class="comment">//   uint64_t  u64;</span></span><br><span class="line"><span class="comment">// &#125; epoll_data_t;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// struct date</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   int date;           // 额外数据</span></span><br><span class="line"><span class="comment">//   int fd;             // 文件描述符</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>epoll_event 结构体用于标识对传入的文件描述符所关心的事件，其中 events 表示用户所关心的事件类型，常见的事件见下面列表，date 表示事件的额外信息，比如：“额外信息中最常使用的就是 fd，它用来表示该事件的文件描述符” 如果我们想要在额外信息中加入其他数据时，这时就需要利用 ptr，但是它是一个联合体，因此，在加入额外信息的时候需要把文件描述符加上，文件描述符方便识别不同的请求。（ptr 就可以指向上述类似于 date 的结构）</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">事件标志</th>
+<th align="center">标志解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">EPOLLIN</td>
+<td align="center">可读事件</td>
+</tr>
+<tr>
+<td align="center">EPOLLOUT</td>
+<td align="center">可写事件</td>
+</tr>
+<tr>
+<td align="center">EPOLLERR</td>
+<td align="center">异常事件</td>
+</tr>
+<tr>
+<td align="center">EPOLLET</td>
+<td align="center">边缘触发（默认情况为水平触发）</td>
+</tr>
+</tbody></table>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);     事件监控</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>参数与返回值说明：</strong></p>
+<ol>
+<li>epfd：epoll 的操作句柄，用来标识当前操作哪一个 epoll。</li>
+<li>events: 事件集合（数组），<strong>输入输出型参数，作为输入添加对请求关心的事件，作为输出返回就绪事件列表。</strong></li>
+<li>maxevents：表示数组的大小。</li>
+<li>timeout：阻塞时间（负数：阻塞等待，0：非阻塞，正数：限时阻塞）</li>
+<li>返回值：-1：函数调用出错，0：等待超时，正数：就绪事件个数。</li>
+</ol>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>//  epoll 的实现原理。并且与 select 的原理进行比对，  epoll 是如何解决 select 的效率等相关问题。</p>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><p>// 使用 epoll 的流程是什么？</p>
+<h2 id="工作方式（水平，-边缘触发）"><a href="#工作方式（水平，-边缘触发）" class="headerlink" title="工作方式（水平， 边缘触发）"></a>工作方式（水平， 边缘触发）</h2><p>// 详细介绍 水平触发，  边缘触发，以及边缘触发的常用流程（非阻塞）。</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>缺点：<br>优点：</p>
+
       
 
       
@@ -206,6 +266,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -308,7 +379,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">2.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制"><span class="toc-number">3.</span> <span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作方式（水平，-边缘触发）"><span class="toc-number">4.</span> <span class="toc-text">工作方式（水平， 边缘触发）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点分析"><span class="toc-number">5.</span> <span class="toc-text">优缺点分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -436,15 +507,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -453,10 +528,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
