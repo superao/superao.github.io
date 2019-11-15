@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-14T11:50:08.651Z">
+<meta property="og:updated_time" content="2019-11-15T02:55:21.546Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之poll">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。">
@@ -176,7 +176,7 @@
 <a id="more"></a>
 
 <h2 id="poll函数"><a href="#poll函数" class="headerlink" title="poll函数"></a>poll函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 进程调用 poll 函数指示内核对所添加的事件进行监控，当有事件就绪时将就绪事件返回给用户，从而让进程调用函数进行相关IO操作。 </p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int poll(struct pollfd *fds, nfds_t nfds, int timeout); </span></span><br><span class="line"><span class="comment">// struct pollfd </span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   int fd; </span></span><br><span class="line"><span class="comment">//   short events;</span></span><br><span class="line"><span class="comment">//   short revents;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int poll(struct pollfd *fds, nfds_t nfds, int timeout); </span></span><br><span class="line"><span class="comment">// struct pollfd </span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   int fd; </span></span><br><span class="line"><span class="comment">//   short events;          // 相当于一个 16 位的位图，每一位标记了一个事件</span></span><br><span class="line"><span class="comment">//   short revents;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>参数说明：</strong></p>
 <ol>
@@ -221,7 +221,8 @@
 </tbody></table>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述就是常见的合法事件，前三个是 events 的合法事件，其中前两个最常用，第三个偶尔会用到，后三个是 revent 中才会出现的事件，表明当前文件描述符的错误情况（异常事件），用来表明异常情况。 它与 select 不同，select 需要手动去监听事件的异常情况，而 poll 不用手动去监听，直接返回在 revents 中。</p>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; poll 多路转接模型的原理与 select 的实现原理是相似的，它们两者都是轮询遍历整个事件集合，只不过 select 利用一个位图来表示事件集合，它有事件最大上限，而 poll 是利用动态开辟的空间来管理事件集合，并且将所有事件封装到了一个结构体中进行管理，操作更加方便灵活，而且事件数量没有最大上限。（具体实现流程可以参照 select）</p>
-<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>缺点：poll 不能跨平台。poll 只解决了 select 的结点问题，在一定程度上简化了事件添加的操作（将三个集合封装成一个），其他问题并没有解决。（轮询遍历导致的效率，反反复复的事件拷贝）</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>优点：poll 在一定程度上简化了事件添加的操作（将三个事件集合（fd_set）封装为一个事件结构（pollfd））。 poll 在添加事件的时候只需要向事件数组中添加一次事件，这是因为 select 的就绪事件是根据 mask 掩码来对 fd_set 赋值，而 poll 事件是否就绪专门有一个位图来进行表示，没有破坏掉用户所关心的事件，因此只需要向数组中添加一次事件结合。（事件拷贝发生在 poll 函数上，因此内核态与用户态的拷贝还是每次都存在的）<br>缺点：poll 不能跨平台。poll 在本质上并没有解决 select 的一些问题，只是在一定程度上简化了操作。（轮询遍历导致的效率。反反复复的事件拷贝）</p>
+<p>代码实现：<a href="https://github.com/superao/Linux/blob/master/tcp_poll.cpp" target="_blank" rel="noopener">poll实现的Tcp服务器</a> </p>
 
       
 
@@ -497,11 +498,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
