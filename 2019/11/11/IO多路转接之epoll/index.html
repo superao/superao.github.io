@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-15T09:16:03.842Z">
+<meta property="og:updated_time" content="2019-11-16T05:59:57.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之epoll">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
@@ -229,9 +229,14 @@
 <li>返回值：-1：函数调用出错，0：等待超时，正数：就绪事件个数。</li>
 </ol>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>//  epoll 的实现原理。并且与 select 的原理进行比对，  epoll 是如何解决 select 的效率等相关问题。</p>
-<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><p>// 使用 epoll 的流程是什么？</p>
-<h2 id="工作方式（水平，-边缘触发）"><a href="#工作方式（水平，-边缘触发）" class="headerlink" title="工作方式（水平， 边缘触发）"></a>工作方式（水平， 边缘触发）</h2><p>// 详细介绍 水平触发，  边缘触发，以及边缘触发的常用流程（非阻塞）。</p>
-<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>缺点：<br>优点：</p>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><ol>
+<li>调用 epoll_create 在内核中创建一个 eventpoll 结构体，并返回一个操作句柄。</li>
+<li>创建 struct epoll_event 结构体（数组），利用 epoll_ctl 向结构体中添加所关心的事件。</li>
+<li>调用 epoll_wait 对大量描述符进行监控。</li>
+<li>对 epoll_wait 所返回的就绪事件进行相应的操作。 </li>
+</ol>
+<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; epoll 的事件触发方式有两种，一种是水平触发（默认），一种是边缘触发，它们两者的工作模式分别如下：<br><strong>LT模式（水平触发）</strong>：当 epoll_wait 检测到某一个关心的事件就绪后那么将会通知应用进程，如果应用程序忽略了本次通知，下次依然检测到数据时还是继续会通知应用进程。一般情况下，缓冲区中有一个低水位标记，当缓冲区中的数据大于该低水位标记时就会触发事件。<br><strong>ET模式（边缘触发）</strong>：当 epoll_wait 检测到某一个关心的事件就绪后那么将会通知应用进程，如果应用进程忽略了本次通知，下次检测到数据时不会再次通知应用进程了。通常在这种模式下，我们需要循环的去处理这个就绪事件的数据，如果一次没有处理完毕，那么下次将不会触发数据了，数据就会遗留在缓冲区中，除非有新的数据到来才会再次触发事件。</p>
+<h2 id="优缺点分析"><a href="#优缺点分析" class="headerlink" title="优缺点分析"></a>优缺点分析</h2><p>缺点：不能跨平台使用；流程控制相较于 select 和 poll 较为复杂。<br><strong>优点：</strong>epoll 监控的效率问题不会随着描述符的增多而降低；epoll 不用每次将事件从用户态拷贝到内核态，只需要拷贝一次，减少了IO操作的时间；epoll 不用轮询遍历整个事件去判断当前事件是否就绪，而是直接判断双向链表是否为空来判断是否有就绪事件。</p>
 
       
 
@@ -379,7 +384,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">2.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制"><span class="toc-number">3.</span> <span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作方式（水平，-边缘触发）"><span class="toc-number">4.</span> <span class="toc-text">工作方式（水平， 边缘触发）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点分析"><span class="toc-number">5.</span> <span class="toc-text">优缺点分析</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#函数介绍"><span class="toc-number">1.</span> <span class="toc-text">函数介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本原理"><span class="toc-number">2.</span> <span class="toc-text">基本原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制"><span class="toc-number">3.</span> <span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工作方式"><span class="toc-number">4.</span> <span class="toc-text">工作方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优缺点分析"><span class="toc-number">5.</span> <span class="toc-text">优缺点分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -503,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -523,11 +528,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
