@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-16T06:20:22.007Z">
+<meta property="og:updated_time" content="2019-11-16T06:36:37.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IO多路转接之epoll">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。">
@@ -228,7 +228,7 @@
 <li>timeout：阻塞时间（负数：阻塞等待，0：非阻塞，正数：限时阻塞）</li>
 <li>返回值：-1：函数调用出错，0：等待超时，正数：就绪事件个数。</li>
 </ol>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在之前我们了解了 select 和 poll 的工作原理，但是它们是有很多的缺点的，现在我们来看看 epoll 的实现是如何解决这些缺点问题的。 epoll 的实现原理如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>epoll 利用 epoll_create 接口指示内核建立一个 eventpoll 结构体，该结构体中有两个非常关键的信息，一个是红黑树，一个是双向链表，红黑树用来管理用户所添加的事件，双向链表用来将已就绪事件进行管理起来。当用户调用 epoll_ctl 的时候，将用户态的事件全部拷贝到内核态中，此过程只进行一次，由于 select 和 poll 它们是在进行监控是时候才将事件从用户态拷贝到内核态，因此没进行监控一次就需要拷贝一次，而 epoll 是将事件拷贝与监控封装成两步，先将事件拷贝到内核态中，当进行监控的时候在去拿，这样就减少了用户态与内核态之间的多次拷贝问题，然后将每个事件添加到红黑树中，由于红黑树对结点的查找，添加，删除效率都是非常高的，因此开销不是很大，最后 epoll_wait 调用，对事件进行监控，在对事件进行监控的时候，epoll 不像 select 和 poll 那样对事件进行轮询遍历进行判断当前事件是否就绪，而对每个事件建立一个事件回调函数，当事件发生时，调用回调函数，利用回调函数将每个就绪事件加入到双向链表中，最后在进行监控的时候只需要判断当前链表是否为空即可，最后将就绪事件返回到用户态。</strong> </p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在之前我们了解了 select 和 poll 的工作原理，但是它们是有很多的缺点的，现在我们来看看 epoll 的实现是如何解决这些缺点问题的。 epoll 的实现原理如下：<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>epoll 利用 epoll_create 接口指示内核建立一个 eventpoll 结构体，该结构体中有两个非常关键的信息，一个是红黑树，一个是双向链表，红黑树用来管理用户所添加的事件，双向链表用来将已就绪事件进行管理起来。当用户调用 epoll_ctl 的时候，将用户态的事件全部拷贝到内核态中，此过程只进行一次，由于 select 和 poll 它们是在进行监控是时候才将事件从用户态拷贝到内核态，因此每进行监控一次就需要拷贝一次，而 epoll 是将事件拷贝与监控封装成两步，先将事件拷贝到内核态中，当进行监控的时候在去拿，这样就减少了用户态与内核态之间的多次拷贝问题，然后将每个事件添加到红黑树中，由于红黑树对结点的查找，添加，删除效率都是非常高的，因此开销不是很大，最后 epoll_wait 调用，对事件进行监控，在对事件进行监控的时候，epoll 不像 select 和 poll 那样将进程挂在每一个事件的等待队列上，对事件进行轮询遍历进行判断当前事件是否就绪，而是将进程只挂一次（一个等待对列）并且对每个事件建立一个事件回调函数，当事件发生时，调用回调函数并且唤醒进程，利用回调函数将每个就绪事件加入到双向链表中，如果没有事件发生，调用 schedule_timeout 限时睡眠，最后在进行监控的时候只需要判断当前链表是否为空即可，最后将就绪事件返回到用户态。</strong> </p>
 <h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><ol>
 <li>调用 epoll_create 在内核中创建一个 eventpoll 结构体，并返回一个操作句柄。</li>
 <li>创建 struct epoll_event 结构体（数组），利用 epoll_ctl 向结构体中添加所关心的事件。</li>
@@ -512,15 +512,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -529,10 +533,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
