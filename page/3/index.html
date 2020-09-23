@@ -173,7 +173,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 智能指针并没有我们想象的那么神奇，它本质上就是一个 “高级点的对象”，我们知道有的编程语言中有 “垃圾回收机制”，比如：Java语言。这种垃圾回收机制就是解决了对象的生命周期结束后，自动的将资源进行回收的一种机制，从而避免了由于某些原因而导致的资源泄漏问题。在C++语言中，虽然没有垃圾回收机制，但是我们利用其他方法解决某些资源回收，该思想我们可以扩展到很多地方，我们的智能指针只是其中的一种体现而已。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何实现的，并学习一下智能指针实现的思想。</p>
         
       
 
@@ -982,15 +982,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1011,10 +1015,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
             
             <div class="clearfix"></div>

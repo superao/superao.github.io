@@ -9,19 +9,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>智能指针 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针并没有我们想象的那么神奇，它本质上就是一个 “高级点的对象”，我们知道有的编程语言中有 “垃圾回收机制”，比如：Java语言。这种垃圾回收机制就是解决了对象的生命周期结束后，自动的将资源进行回收的一种机制，从而避免了由于某些原因而导致的资源泄漏问题。在C++语言中，虽然没有垃圾回收机制，但是我们利用其他方法解决某些资">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="智能指针">
 <meta property="og:url" content="http://yoursite.com/2019/09/13/智能指针/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针并没有我们想象的那么神奇，它本质上就是一个 “高级点的对象”，我们知道有的编程语言中有 “垃圾回收机制”，比如：Java语言。这种垃圾回收机制就是解决了对象的生命周期结束后，自动的将资源进行回收的一种机制，从而避免了由于某些原因而导致的资源泄漏问题。在C++语言中，虽然没有垃圾回收机制，但是我们利用其他方法解决某些资">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-09-23T07:33:26.800Z">
+<meta property="og:updated_time" content="2020-09-23T12:43:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能指针">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针并没有我们想象的那么神奇，它本质上就是一个 “高级点的对象”，我们知道有的编程语言中有 “垃圾回收机制”，比如：Java语言。这种垃圾回收机制就是解决了对象的生命周期结束后，自动的将资源进行回收的一种机制，从而避免了由于某些原因而导致的资源泄漏问题。在C++语言中，虽然没有垃圾回收机制，但是我们利用其他方法解决某些资">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -174,25 +174,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 智能指针并没有我们想象的那么神奇，它本质上就是一个 “高级点的对象”，我们知道有的编程语言中有 “垃圾回收机制”，比如：Java语言。这种垃圾回收机制就是解决了对象的生命周期结束后，自动的将资源进行回收的一种机制，从而避免了由于某些原因而导致的资源泄漏问题。在C++语言中，虽然没有垃圾回收机制，但是我们利用其他方法解决某些资源回收，该思想我们可以扩展到很多地方，我们的智能指针只是其中的一种体现而已。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何实现的，并学习一下智能指针实现的思想。</p>
 <a id="more"></a>
-<h2 id="RAII"><a href="#RAII" class="headerlink" title="RAII"></a>RAII</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RAII 机制字面意思上理解就是 “资源获取就是初始化” ，通俗点说: <strong>当我们获取到某一份资源的时候就进行初始化</strong>，这是 RAII 机制的思想，那么在我们 C++ 语言中，我们如何去实现这种思想，这也是我们需要考虑的一个问题? 大佬们经过深思熟虑之后，发现可以利用 C++ 语言中的对象来实现 RAII 机制。当然其他面向对象的语言也是可以利用对象来实现 RAII 机制。</p>
-<h5 id="C-语言实现-RAII-机制"><a href="#C-语言实现-RAII-机制" class="headerlink" title="C++语言实现 RAII 机制"></a>C++语言实现 RAII 机制</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象能实现 RAII 机制的 "资源获取就是初始化" 原因如下：</span></span><br><span class="line"><span class="comment">// 由于我们需要做到资源获取立即进行初始化，对于这种情况，我们只能依靠对象的构造函数来完成。这也是构造函数的特殊性。</span></span><br><span class="line"><span class="comment">// 只有我们的构造函数能在创建对象的时候一并将其初始化，平时我们所写的代码大多数都不算是在创建的时候就进行初始化。</span></span><br><span class="line">   <span class="keyword">int</span> a = <span class="number">10</span>; <span class="comment">// 这里其实并不是创建的时候就进行了初始化，而是创建的时候有一个默认值，然后将其赋值为 10.</span></span><br><span class="line">   <span class="keyword">int</span> a;      <span class="comment">// 声明 + 定义</span></span><br><span class="line">   a = <span class="number">10</span>;     <span class="comment">// 这两行代码和上面的一行代码是等价的。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 补充: extern int a; 这才表示 a 的声明(a 是另一个文件的全局数据,我们在本文件中进行使用就需要进行声明)</span></span><br></pre></td></tr></table></figure>
 
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>资源利用对象的构造函数实现了 RAII 机制的 “资源获取就是初始化” ，同时这也意味着我们将资源交付给对象进行剩余步骤的管理，某一个对象，在构造函数的时候申请资源并对资源进行初始化(RAII)，在对象的生命周期内，我们可以利用资源做各种各样的操作，在对象生命周期结束时，利用析构函数将资源进行销毁。 总的来说，RAII 机制借用对象的构造函数实现了资源获取立即初始化过程，对象完成了资源的使用，销毁过程。</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shared_ptr</span>&lt;Date&gt; sp(<span class="keyword">new</span> Date) <span class="comment">// RAII 机制的体现</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="RAII-机制的使用场景"><a href="#RAII-机制的使用场景" class="headerlink" title="RAII 机制的使用场景"></a>RAII 机制的使用场景</h5><ul>
-<li>管理内存，文件描述符，套接字描述符，避免死锁(守护锁)等等这些情况。</li>
-<li>RAII 和 对象一起实现了我们资源的自动化管理，避免了资源泄漏的情况发生。</li>
+<h2 id="先从RAII机制说起"><a href="#先从RAII机制说起" class="headerlink" title="先从RAII机制说起"></a>先从RAII机制说起</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RAII 机制是C++用来管理资源，避免资源泄漏的一种常见用法，RAII管理资源的主要思想就是：<strong>借用对象来完成对资源的管理，在对象构造的时候就对资源进行初始化，在对象析构的时候就对资源进行释放/销毁，在对象的生命周期中能够保证对资源的有效访问</strong>。RAII机制的好处就是：</p>
+<ul>
+<li>它不需要显示的申请资源和释放资源，它会自动申请和释放，在一定程度上可以避免了资源泄漏。</li>
+<li>它的使用方式与常规的使用方式是一样的，比如：普通指针与智能指针（RAII机制实现）。</li>
 </ul>
-<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 智能指针本质上还是一个类的对象，它使用的时候和普通指针是一样的，由于它可以自动的管理资源的申请和释放，所以，我们称该对象为 “智能指针”。智能指针由两部分构成: <strong>1.RAII 部分 + 2.像指针一样</strong>。因此上，我们只要实现这两个部分，我们就可以实现出一个智能指针。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.实现 RAII 部分</span></span><br><span class="line"><span class="comment">// 利用构造函数来实现资源获取立即初始化</span></span><br><span class="line"><span class="comment">// 2.实现 像指针一样 部分</span></span><br><span class="line"><span class="comment">// 重载 "-&gt;", "*" 运算符</span></span><br></pre></td></tr></table></figure>
+<h5 id="C-实现RAII-机制"><a href="#C-实现RAII-机制" class="headerlink" title="C++实现RAII 机制"></a>C++实现RAII 机制</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ptr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Ptr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 申请资源</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 为外界提供对资源的操作</span></span><br><span class="line"></span><br><span class="line">	~Ptr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 释放资源</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">// 需要被管理的资源</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h4 id="auto-ptr"><a href="#auto-ptr" class="headerlink" title="auto_ptr"></a>auto_ptr</h4><p><a href="https://github.com/superao/C-/blob/master/auto_ptr.cpp" target="_blank" rel="noopener">auto_ptr代码实现</a><br>总结: <strong>auto_ptr在解决拷贝构造，赋值构造的时候采用管理权转移的思路，导致了原来的指针悬空问题，从而有可能会导致野指针的访问</strong></p>
-<h4 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h4><p><a href="https://github.com/superao/C-/blob/master/unique_ptr.cpp" target="_blank" rel="noopener">unique_ptr代码实现</a><br>总结: <strong>unique_ptr 为了解决 auto_ptr 的问题，它将拷贝构造，赋值构造设置为 delete,不让允许用户让某个空间被多个对象访问和管理，但是本质上还是没有解决问题，只是回避了一些问题</strong></p>
-<h4 id="shared-ptr"><a href="#shared-ptr" class="headerlink" title="shared_ptr"></a>shared_ptr</h4><p><a href="https://github.com/superao/C-/blob/master/shared_ptr.cpp" target="_blank" rel="noopener">shared_ptr代码实现</a><br>总结: <strong>shared_ptr 采用引用计数的思路，解决了拷贝构造，赋值构造的问题，从而从根本上解决了一个空间被多个对象访问和管理的问题，当我们的引用计数减为 0 时，再进行析构，释放资源。当多个线程同时访问引用计数时，我们需要进行加锁，否则会导致数据二义性</strong></p>
+<h5 id="RAII-机制的适用场景"><a href="#RAII-机制的适用场景" class="headerlink" title="RAII 机制的适用场景"></a>RAII 机制的适用场景</h5><ul>
+<li>管理内存，文件描述符，套接字等情况。</li>
+</ul>
+<h2 id="再谈智能指针"><a href="#再谈智能指针" class="headerlink" title="再谈智能指针"></a>再谈智能指针</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过上述对 RAII 机制的理解，现在从 RAII 的视角去看，智能指针其实就是一个类的对象，只不过该对象使用的时候和普通指针是一样的，不同的是它可以自动的管理资源的申请和释放，而普通指针需要手动申请和释放，所以我们称该它为 “智能指针”。简单来说，智能指针由两部分构成: <strong>RAII 机制 + 像指针一样的使用方式</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">智能指针:</span><br><span class="line">	RAII机制:  构造函数 + 析构函数;</span><br><span class="line">    像指针一样: 重载运算符 <span class="string">"-&gt;"</span>, <span class="string">"*"</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模拟实现标准库中的智能指针"><a href="#模拟实现标准库中的智能指针" class="headerlink" title="模拟实现标准库中的智能指针"></a>模拟实现标准库中的智能指针</h2><h4 id="1-auto-ptr：-代码实现"><a href="#1-auto-ptr：-代码实现" class="headerlink" title="1. auto_ptr： 代码实现"></a>1. auto_ptr： <a href="https://github.com/superao/C-/blob/master/auto_ptr.cpp" target="_blank" rel="noopener">代码实现</a></h4><blockquote>
+<p>实现思想：auto_ptr 在解决拷贝构造，赋值构造的时候采用管理权转移的思路</p>
+<p>存在问题：导致了原来的指针悬空问题，从而有可能会导致野指针的访问</p>
+</blockquote>
+<h4 id="2-unique-ptr"><a href="#2-unique-ptr" class="headerlink" title="2. unique_ptr"></a>2. unique_ptr</h4><p><a href="https://github.com/superao/C-/blob/master/unique_ptr.cpp" target="_blank" rel="noopener">unique_ptr代码实现</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实现思想: <span class="built_in">unique_ptr</span> 为了解决 <span class="built_in">auto_ptr</span> 的问题，它将拷贝构造，赋值构造设置为 <span class="keyword">delete</span>,不让允许用户让		某个空间被多个对象访问和管理</span><br><span class="line">存在问题: 但是本质上还是没有解决问题，只是回避了一些问题**</span><br></pre></td></tr></table></figure>
+
+<p>总结: <strong>unique_ptr 为了解决 auto_ptr 的问题，它将拷贝构造，赋值构造设置为 delete,不让允许用户让某个空间被多个对象访问和管理，但是本质上还是没有解决问题，只是回避了一些问题</strong></p>
+<h4 id="3-shared-ptr"><a href="#3-shared-ptr" class="headerlink" title="3. shared_ptr"></a>3. shared_ptr</h4><p><a href="https://github.com/superao/C-/blob/master/shared_ptr.cpp" target="_blank" rel="noopener">shared_ptr代码实现</a><br>总结: <strong>shared_ptr 采用引用计数的思路，解决了拷贝构造，赋值构造的问题，从而从根本上解决了一个空间被多个对象访问和管理的问题，当我们的引用计数减为 0 时，再进行析构，释放资源。当多个线程同时访问引用计数时，我们需要进行加锁，否则会导致数据二义性</strong></p>
 <h4 id="shared-ptr-的循环引用"><a href="#shared-ptr-的循环引用" class="headerlink" title="shared_ptr 的循环引用"></a>shared_ptr 的循环引用</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shared_ptr 在某些场景下，它会发生一些错误，导致我们本应该释放的内存没有被释放，从而导致了我们内存泄漏问题。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _prev;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _next;</span><br><span class="line">    <span class="keyword">int</span> _date;</span><br><span class="line">    </span><br><span class="line">    ~ListNode()&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"~ListNode()"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp1;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp2;</span><br><span class="line">  sp1-&gt;_next = sp2;</span><br><span class="line">  sp2-&gt;_prev = sp1;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -344,7 +350,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RAII"><span class="toc-number">1.</span> <span class="toc-text">RAII</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#C-语言实现-RAII-机制"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">C++语言实现 RAII 机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RAII-机制的使用场景"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">RAII 机制的使用场景</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#智能指针"><span class="toc-number">2.</span> <span class="toc-text">智能指针</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#auto-ptr"><span class="toc-number">2.0.1.</span> <span class="toc-text">auto_ptr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#unique-ptr"><span class="toc-number">2.0.2.</span> <span class="toc-text">unique_ptr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shared-ptr"><span class="toc-number">2.0.3.</span> <span class="toc-text">shared_ptr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shared-ptr-的循环引用"><span class="toc-number">2.0.4.</span> <span class="toc-text">shared_ptr 的循环引用</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先从RAII机制说起"><span class="toc-number">1.</span> <span class="toc-text">先从RAII机制说起</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#C-实现RAII-机制"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">C++实现RAII 机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RAII-机制的适用场景"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">RAII 机制的适用场景</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再谈智能指针"><span class="toc-number">2.</span> <span class="toc-text">再谈智能指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模拟实现标准库中的智能指针"><span class="toc-number">3.</span> <span class="toc-text">模拟实现标准库中的智能指针</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-auto-ptr：-代码实现"><span class="toc-number">3.0.1.</span> <span class="toc-text">1. auto_ptr： 代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-unique-ptr"><span class="toc-number">3.0.2.</span> <span class="toc-text">2. unique_ptr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-shared-ptr"><span class="toc-number">3.0.3.</span> <span class="toc-text">3. shared_ptr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shared-ptr-的循环引用"><span class="toc-number">3.0.4.</span> <span class="toc-text">shared_ptr 的循环引用</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -468,15 +474,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -497,10 +507,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
             
             <div class="clearfix"></div>
