@@ -18,7 +18,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-09-24T06:36:04.000Z">
+<meta property="og:updated_time" content="2020-09-24T09:31:01.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能指针">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
@@ -213,7 +213,7 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>			// 双向链表的结点结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _prev;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _next;</span><br><span class="line">    <span class="keyword">int</span> _date;</span><br><span class="line">    </span><br><span class="line">    ~ListNode()&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"~ListNode()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp1;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp2;</span><br><span class="line">  sp1-&gt;_next = sp2;</span><br><span class="line">  sp2-&gt;_prev = sp1;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="循环引用问题"><br><strong>解决方案：</strong><a href="https://github.com/superao/C-/blob/master/shared_ptr_question.cpp" target="_blank" rel="noopener">代码实现</a></p>
-<p> 只要每个结点中的前驱指针和后驱指针在引用前后结点的时候，指针可以管理这个资源，但是不增加这个这个资源的引用计数就可以解决这个问题。比如：让sp1，sp2 的 prev，next 可以管理前后结点的资源，但是不增加引用计数的个数，这样 shared_ptr 在后续释放自身结点的时候就可以直接释放掉，不需要等待别人释放完成后，自己才能释放。这样的需求可以利用库中提供的 weak_ptr 来完成，<strong>weak_ptr 的功能是对一个资源进行管理，但是不增加这个资源的引用计数，它在使用过程中必须由 weak_ptr 或者 shared_ptr 来进行构造和赋值，通常情况下与 shared_ptr 搭配使用来解决 shared_ptr 的循环引用问题。</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 只要每个结点中的前驱指针和后驱指针在引用前后结点的时候，指针可以管理这个资源，但是不增加这个这个资源的引用计数就可以解决这个问题。比如：让sp1，sp2 的 prev，next 可以管理前后结点的资源，但是不增加引用计数的个数，这样 shared_ptr 在后续释放自身结点的时候就可以直接释放掉，不需要等待别人释放完成后，自己才能释放。这样的需求可以利用库中提供的 weak_ptr 来完成，<strong>weak_ptr 的功能是对一个资源进行管理，但是不增加这个资源的引用计数，它在使用过程中必须由 weak_ptr 或者 shared_ptr 来进行构造和赋值，通常情况下与 shared_ptr 搭配使用来解决 shared_ptr 的循环引用问题。</strong></p>
 
       
 
@@ -323,11 +323,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/19/空间配置器/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/09/19/STL之分配器/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          空间配置器
+          STL之分配器
         
       </div>
     </a>
@@ -485,11 +485,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -501,11 +501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,11 +513,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>

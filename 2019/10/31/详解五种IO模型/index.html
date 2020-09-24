@@ -7,13 +7,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>网络中常见的I/O模型 | Superao的博客</title>
+  <title>详解五种I/O模型 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，这次对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络中常见的I&#x2F;O模型">
-<meta property="og:url" content="http://yoursite.com/2019/10/31/网络中常见的IO模型/index.html">
+<meta property="og:title" content="详解五种I&#x2F;O模型">
+<meta property="og:url" content="http://yoursite.com/2019/10/31/详解五种IO模型/index.html">
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，这次对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta property="og:locale" content="中文">
@@ -22,9 +22,9 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112165106546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164508937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20191112164629200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-11-13T00:52:21.323Z">
+<meta property="og:updated_time" content="2020-09-24T10:13:27.179Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络中常见的I&#x2F;O模型">
+<meta name="twitter:title" content="详解五种I&#x2F;O模型">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 在网络编程中，有些函数是阻塞的，有些函数是非阻塞的，它们在不同的场景下需要使用不同的模式，为了更加深刻的理解不同模式下函数的工作方式，这次对 “阻塞，非阻塞，异步，同步” 这些IO进行总结和加以区分。">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20191112164247494.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
   
@@ -158,19 +158,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-网络中常见的IO模型" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解五种IO模型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      网络中常见的I/O模型
+      详解五种I/O模型
     </h1>
   
 
         
-        <a href="/2019/10/31/网络中常见的IO模型/" class="archive-article-date">
+        <a href="/2019/10/31/详解五种IO模型/" class="archive-article-date">
   	<time datetime="2019-10-31T15:06:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-31</time>
 </a>
         
@@ -316,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/31/网络中常见的IO模型/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/31/详解五种IO模型/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -382,7 +382,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="网络中常见的IO模型" data-title="网络中常见的I/O模型" data-url="http://yoursite.com/2019/10/31/网络中常见的IO模型/"></div>
+	<div class="ds-thread" data-thread-key="详解五种IO模型" data-title="详解五种I/O模型" data-url="http://yoursite.com/2019/10/31/详解五种IO模型/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -492,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -508,11 +508,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -520,11 +520,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
             
             <div class="clearfix"></div>
