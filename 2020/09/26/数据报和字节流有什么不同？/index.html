@@ -7,25 +7,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>海量数据处理 | Superao的博客</title>
+  <title>数据报和字节流有什么不同？ | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海量数据处">
-<meta name="keywords" content="数据结构">
+  <meta name="description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="海量数据处理">
-<meta property="og:url" content="http://yoursite.com/2019/09/09/海量数据处理/index.html">
+<meta property="og:title" content="数据报和字节流有什么不同？">
+<meta property="og:url" content="http://yoursite.com/2020/09/26/数据报和字节流有什么不同？/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海量数据处">
+<meta property="og:description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190909175845166.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/201909100950253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190910132950967.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-09-24T10:14:59.108Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20200926131644996.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2020-09-27T03:19:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="海量数据处理">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海量数据处">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190909175845166.png">
+<meta name="twitter:title" content="数据报和字节流有什么不同？">
+<meta name="twitter:description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200926131644996.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -157,68 +154,55 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-海量数据处理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-数据报和字节流有什么不同？" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      海量数据处理
+      数据报和字节流有什么不同？
     </h1>
   
 
         
-        <a href="/2019/09/09/海量数据处理/" class="archive-article-date">
-  	<time datetime="2019-09-08T16:31:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-09</time>
+        <a href="/2020/09/26/数据报和字节流有什么不同？/" class="archive-article-date">
+  	<time datetime="2020-09-26T14:21:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希结构我们平时大多数使用于查找某个数据在不在之类的问题，因为在查找方面它的效率是非常非常快的一种数据结构，如果数据量较小的话，我们直接利用我们STL中的容器进行解决就好了，但是如果我们的数据量特别大的时候，那么这时候我们就需要我们一些由哈希思想改进的一些数据结构来完成，如位图，布隆过滤器，哈希切分等等这些操作了，海量数据处理的时候我们使用这些东西可以快速的帮助我们完成我们的任务，这也是哈希最常见的一些应用了。</p>
+        <p>谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？</p>
 <a id="more"></a>
 
-<h2 id="数据的大小"><a href="#数据的大小" class="headerlink" title="数据的大小"></a>数据的大小</h2><ul>
-<li>1B = 8bit    1KB = 1024B    1MB = 1024KB    1G = 1024MB</li>
-<li>1G = 1024 * 1024 * 1024 = 1073741824B(字节) = 10亿7千万字节<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过我们的运算，我们发现 <strong>1G的内存最多储存10亿7千万字节的数据</strong> ，我们粗略的计算一下，如果我们的计算机有4G内存的话，操作系统用掉1G内存，那么此时我们就只剩下3G内存了，如果数据量太大的话，我们内存中根本放不下我们的数据，更不用进行查找之类的一些操作了，因此上，在这种情况下，我们可以利用我们的位图进行解决。</li>
+<h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p><strong>1. 从水流的角度去理解字节流</strong></p>
+<p>流是一个比较抽象的概念，抽象的东西往往不好理解，但是只要能为抽象的东西在现实中找到一个对应的实体，那么抽象的东西也就比较好理解了。如果一下子不明白什么是流？，那么我们先想想什么是<strong><em>水流</em></strong>？你可以将水管中流动的水看成水流，水流它最大的特点就是：<strong><em>连续不断，并且没有边界</em></strong>。如何理解这里的没有边界呢？假如同样是运输一车水，如果你借用水管以水流的形式去运输水，此时如果不借助其他容器仅靠水管你是无法知道当前已经传输了多少水，但是如果你采用水桶的形式去运输水，你就可以很明确的知道当前已经运输了多少水，因为每一桶的容量是确定的，这里的桶就可以理解为是水的一种边界。</p>
+<p>这里将水流的特点类比到字节流上道理是一样的。<strong>当以字节流的形式传输数据的时候，数据与数据之间也是没有边界的</strong>。比如：以网络通信来说，如果采用TCP协议通信（字节流），当应用层调用read进行一次数据读取时，我们是没有办法知道这一次read到底读取了几个TCP数据，为什么呢？因为TCP报文的数据与数据之间是没有边界的，由于没有边界，一次read出来的数据可能有好几个TCP数据。当然同理，当应用层调用一次 send 发送数据时，我们也是无法确认当前发送了几个TCP数据，因为调用send发送数据时，本质上只是将数据放到了TCP的发送缓冲区中，并没有真正的发送出去，而真正的发送时机会由系统自行选择，等到真正发送时此时缓冲区中可能已经存放了好几个TCP数据，因此调用send也是无法保证发送的就是一个TCP数据。</p>
+<p><strong>2. 字节流特点总结</strong></p>
+<ul>
+<li>从数据本身去看待字节流时，数据与数据之间是没有边界的，应用层无法区分下层的数据边界。</li>
+<li>从编程角度去看待字节流时，发送端执行的写操作与接收端执行的读操作之间没有任何数量关系。</li>
 </ul>
-<h2 id="位图"><a href="#位图" class="headerlink" title="位图"></a>位图</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位图是一种利用哈希的思想，将数据(数字)与比特位之间建立一一映射的一种数据结构，我们可以利用这种映射关系从而对我们的比特位进行标记，根据这种标记可以查找我们的数据在不在问题了，这样解决了一部分海量数据的问题，在此基础上位图还附带了一些其他的功能。</p>
-<h6 id="位图的所有功能"><a href="#位图的所有功能" class="headerlink" title="位图的所有功能:"></a>位图的所有功能:</h6><ul>
-<li><strong>查找：将所有的数据映射到对应的比特位上，进行查找的时候，如果该数据对应的比特位为 1，那么说明存在，反之不在。</strong></li>
-<li><strong>去重：将所有的数据在映射到对应的比特位上时，如果发现对应的位置已经为 1，那么将不做任何处理，继续映射下一个数据。</strong></li>
-<li><strong>排序：将所有的数据映射到对应位置后，依次遍历每个比特位，然后输出每个对应的数据，这样就一定程度上完成了排序。</strong></li>
+<p><strong>3. 实验代码</strong></p>
+<p><a href="https://github.com/superao/Linux/blob/master/tcp.cpp" target="_blank" rel="noopener">TCP的字节流</a></p>
+<h2 id="数据报"><a href="#数据报" class="headerlink" title="数据报"></a>数据报</h2><p><strong>1. 从现实通信场景去理解数据报</strong></p>
+<p>数据报相较于字节流是比较好理解的，因为在日常生活中的绝大多数通信中，都是以一个完整的报文作为通信单位来进行通信的。比如：早期的电报在通信的时候是以一个完整的报文来进行通信，现在的邮件也是以一个完整的包裹来进行通信等等。这种以数据整体为单位的传输形式在传输数据时，有一个最大的特点就是：<strong>“每个数据报在传输过程中是不能被拆分的，并且数据报与数据报之间存在边界（不同的数据报可以区分）”</strong>，这其实就是数据报传输数据的特点。我们继续以网络通信来说，如果采用UDP协议通信（数据报），当应用层调用一次read读取数据时，它一定只读取了一个UDP数据，因为UDP数据在调用send发送数据的时候，它会立即将此数据封装成一个数据包发送过去（UDP不会将数据先暂存在缓冲区，最后发送，而是直接发送），当接受方接受到数据时需要立即调用read去读取数据，此时读取的就是一个UDP数据包。如果UDP数据包过大，用户缓冲区较小，UDP会最大程度的将UDP数据交付给应用层，然后将剩下的数据直接丢弃。如果应用层没有及时处理此次发送的UDP数据包，那么将会丢包现象。（UDP需要先丢掉旧的数据包，然后在缓冲区中接受新的数据包，这种现象一般发生在处理较慢的服务器身上）</p>
+<p><strong>2. 数据报特点总结</strong></p>
+<ul>
+<li>从数据本身去看待数据报时，数据与数据之间是存在边界的，应用层可以区分下层的数据边界。</li>
+<li>从编程角度去看待数据报时，发送端执行的写操作与接受端执行的读操作的次数是一一对应的。</li>
 </ul>
-<h6 id="位图的常用场景"><a href="#位图的常用场景" class="headerlink" title="位图的常用场景:"></a>位图的常用场景:</h6><ul>
-<li>海量，无重复，无符号数据 <strong>查找</strong> 在不在的场景</li>
-<li>查找两个数据的交集，并集等场景</li>
+<p><strong>3. 实验代码</strong></p>
+<p><a href="https://github.com/superao/Linux/blob/master/udp.cpp" target="_blank" rel="noopener">UDP的数据报</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>1. 字节流与数据报的异同（数据角度）</strong></p>
+<ul>
+<li>相同点：两者都是传输数据的传输形式，只不过字节流是将数据拆开来传输，而数据报是以整体来传输。</li>
+<li>不同点：字节流在传输时，数据与数据之间没有边界，而数据报传输时是有边界的。</li>
 </ul>
-<p><a href="https://github.com/superao/C-/blob/master/bitmap.cpp" target="_blank" rel="noopener">位图的实现</a></p>
-<h6 id="代码实现过程中一些小问题的总结："><a href="#代码实现过程中一些小问题的总结：" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><ul>
-<li>位图开辟空间的大小取决于此堆数据所能表示的最大范围 </li>
-<li><strong>在位图中有些位置的 1 可能会被解释为负数的符号位，这样导致在统计 1 个数的时候，”除2” 和 “右移一位” 会有差别。</strong></li>
-<li>使用无符号数据类型或使用右移操作符，都可以保证统计个数不会出错。<br><img src="https://img-blog.csdnimg.cn/20190909175845166.png" alt></li>
-</ul>
-<h2 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在我们实现位图之后，我们发现了一个情况，它的数据类型必须是整形，这样对我们其他类型的数据非常的不友好，而且我们使用其他类型的数据场景也是非常多的，为了解决这一问题，我们可以利用 <strong>哈希函数 + 位图</strong> 来帮助我们进行解决，这种数据结构为 <strong>布隆过滤器</strong>。 哈希函数将不同类型的数据转化为特定的下标地址，位图在相应的地址下标进行标记，从而使我们处理数据时更加方便。<br><img src="https://img-blog.csdnimg.cn/201909100950253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></p>
-<h6 id="布隆过滤器的缺点"><a href="#布隆过滤器的缺点" class="headerlink" title="布隆过滤器的缺点"></a>布隆过滤器的缺点</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希函数在映射位置的时候都会引起一种数据冲突的现象，虽然这种情况比较小，但是数据量太大的话就 <strong>导致了我们原来不存在的数据，在进行判断的时候判断为它存在，使我们的存在的判断不精确，但是不存在的判断使非常精确的，即不在精确，在不精确</strong></p>
-<h6 id="误判"><a href="#误判" class="headerlink" title="误判"></a>误判</h6><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 从理论上讲，这个误判是一定存在的，我们需要解决的是在一定的数据量中如何降低我们的误判率，我们唯一的入手点就是哈希函数，随着数据量的增加，我们需要 <strong>通过多个哈希函数将一个数据映射到多个位置上</strong> ，这样的话，在一定程度上大大降低了我们的误判率。<br><img src="https://img-blog.csdnimg.cn/20190910102308253.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="布隆过滤器"><br><a href="https://github.com/superao/C-/blob/master/BloomFilter.cpp" target="_blank" rel="noopener">布隆过滤器的实现</a></p>
-<h6 id="代码实现过程中一些小问题的总结：-1"><a href="#代码实现过程中一些小问题的总结：-1" class="headerlink" title="代码实现过程中一些小问题的总结："></a>代码实现过程中一些小问题的总结：</h6><ul>
-<li>布隆过滤器严格来说是没有删除操作的，因为去掉某个地方的标记，可能会影响到其他值的查找，因此一般是没有删除操作的。</li>
-<li>如果非要实现删除的操作，那么只能使用计数的方式，对每个数据的次数进行标记，但是这样的做法是以牺牲空间为代价的。数据重复的次数越多，每个值需要的比特位越多。<br><a href="https://github.com/superao/C-/blob/master/BloomFilter_double.cpp" target="_blank" rel="noopener">有数据重复的布隆过滤器</a></li>
-</ul>
-<h2 id="哈希切割-平均切割"><a href="#哈希切割-平均切割" class="headerlink" title="哈希切割/平均切割"></a>哈希切割/平均切割</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 我们虽然可以将有些数据从磁盘中读取，然后用一个/多个比特位进行标记状态，但是如果数据量太大的话，我们用一个比特位都放不下，那么这时候位图/布隆过滤器就解决不了这种问题，因此上，我们这时候就需要使用哈希切分来帮助我们完成各种操作。</p>
-<h2 id="平均切分的作用："><a href="#平均切分的作用：" class="headerlink" title="平均切分的作用："></a>平均切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 平均切分是将一个非常大的文件切割为几个小文件的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以处理任何大小的海量数据，不管有多大的数据都可以进行处理。</p>
-<h2 id="哈希切分的作用："><a href="#哈希切分的作用：" class="headerlink" title="哈希切分的作用："></a>哈希切分的作用：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 哈希切分是利用哈希函数将一个非常大的文件中相同的数据切割到同一个文件中的一种思路，然后对每个小的文件进行相关操作，通过这种方式可以海量数据的大文件进行分类。( <strong>通常用于文件的分类 / 将相同的东西放到同一个文件中</strong> )</p>
-<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>我们在进行海量数据处理的时候，我们应该根据数据的情况以及处理要求来进行选择如何切分，对于大多数数据我们一般采用平均切分，当需要对文件进行分类的时候，我们一般才使用哈希切分，我们适场景而定</strong> </p>
-<h2 id="海量数据习题："><a href="#海量数据习题：" class="headerlink" title="海量数据习题："></a>海量数据习题：</h2><ul>
-<li>给一个超过100G大小的log file, log中存着IP地址, 设计算法找到出现次数最多的IP地址？ 与上题条件相同，如何找到top K的IP？ </li>
-<li>给定100亿个整数，设计算法找到只出现一次的整数？</li>
-<li>给两个文件，分别有100亿个整数，我们只有1G内存，如何找到两个文件交集？</li>
-<li>1个文件有100亿个int，1G内存，设计算法找到出现次数不超过2次的所有整数？(次数 &lt;= 2 : 3种状态，利用 2 个比特位或者两张位图)</li>
-<li>给两个文件，分别有100亿个query，我们只有1G内存，如何找到两个文件交集？分别给出精确算法和近似算法？<br><img src="https://img-blog.csdnimg.cn/20190910132950967.PNG?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt></li>
-</ul>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在海量数据处理的过程中，由于数据量太大，直接进行某些数据的相关操作代价太大，我们可以先判断一下某些数据在不在再进行一些其他操作，这样可以提高我们的效率，因此上，<strong>位图和布隆过滤器的主要用途就是非常快的进行查找，标记，删除(位图)这些操作，它们的时间复杂度为O(1)</strong> ，在海量数据处理的过程中，我们进行其他的操作还是需要将数据进行分割在进行处理。 </p>
+<p><strong>2. 一图胜千言（编程角度）</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20200926131644996.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt></p>
 
       
 
@@ -258,7 +242,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
@@ -314,7 +298,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/09/海量数据处理/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/26/数据报和字节流有什么不同？/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -328,18 +312,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/13/智能指针/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          智能指针
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/06/初始多线程/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">初始多线程</div>
+    <a href="/2020/09/22/动态绑定与静态绑定/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态绑定与静态绑定</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -366,7 +341,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据的大小"><span class="toc-number">1.</span> <span class="toc-text">数据的大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#位图"><span class="toc-number">2.</span> <span class="toc-text">位图</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的所有功能"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">位图的所有功能:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#位图的常用场景"><span class="toc-number">2.0.0.0.2.</span> <span class="toc-text">位图的常用场景:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结："><span class="toc-number">2.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#布隆过滤器"><span class="toc-number">3.</span> <span class="toc-text">布隆过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#布隆过滤器的缺点"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">布隆过滤器的缺点</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#误判"><span class="toc-number">3.0.0.0.2.</span> <span class="toc-text">误判</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#代码实现过程中一些小问题的总结：-1"><span class="toc-number">3.0.0.0.3.</span> <span class="toc-text">代码实现过程中一些小问题的总结：</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希切割-平均切割"><span class="toc-number">4.</span> <span class="toc-text">哈希切割/平均切割</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平均切分的作用："><span class="toc-number">5.</span> <span class="toc-text">平均切分的作用：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#哈希切分的作用："><span class="toc-number">6.</span> <span class="toc-text">哈希切分的作用：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#小结："><span class="toc-number">6.0.1.</span> <span class="toc-text">小结：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#海量数据习题："><span class="toc-number">7.</span> <span class="toc-text">海量数据习题：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">8.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字节流"><span class="toc-number">1.</span> <span class="toc-text">字节流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据报"><span class="toc-number">2.</span> <span class="toc-text">数据报</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -380,7 +355,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="海量数据处理" data-title="海量数据处理" data-url="http://yoursite.com/2019/09/09/海量数据处理/"></div>
+	<div class="ds-thread" data-thread-key="数据报和字节流有什么不同？" data-title="数据报和字节流有什么不同？" data-url="http://yoursite.com/2020/09/26/数据报和字节流有什么不同？/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
