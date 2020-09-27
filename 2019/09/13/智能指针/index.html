@@ -18,7 +18,7 @@
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2020-09-24T09:31:01.468Z">
+<meta property="og:updated_time" content="2020-09-27T03:29:20.504Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="智能指针">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 智能指针是什么呢？它可以被看成是一个“指针“，因为它可以像指针一样去使用，并且还具有与指针相同的功能，但是它不仅仅只有这些特性，它还可以在一定程度上预防程序发生“内存泄漏”等问题，并且它不需要像普通指针那样自己手动去申请内存和释放内存。本篇文章将揭开智能指针的神秘面纱，总结一些关于智能指针的相关知识点，探究一下智能指针是如何">
@@ -184,7 +184,7 @@
 </ul>
 <h5 id="C-实现RAII-机制"><a href="#C-实现RAII-机制" class="headerlink" title="C++实现RAII 机制"></a>C++实现RAII 机制</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ptr</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Ptr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 申请资源</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 为外界提供对资源的操作</span></span><br><span class="line"></span><br><span class="line">	~Ptr()</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">// 释放资源</span></span><br><span class="line">	&#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="comment">// 需要被管理的资源</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<h5 id="RAII-机制的适用场景"><a href="#RAII-机制的适用场景" class="headerlink" title="RAII 机制的适用场景"></a>RAII 机制的适用场景</h5><p>RAII 机制可用来管理<strong><em>内存，文件描述符，套接字，锁</em></strong>等情况，RAII 机制的好处就是在对象生命周期结束后，会自动释放资源，不会因为个人疏忽的原因导致资源没有被释放的情况发生。</p>
+<h5 id="RAII-机制的适用场景"><a href="#RAII-机制的适用场景" class="headerlink" title="RAII 机制的适用场景"></a>RAII 机制的适用场景</h5><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RAII 机制可用来管理<strong><em>内存，文件描述符，套接字，锁</em></strong>等情况，RAII 机制的好处就是在对象生命周期结束后，会自动释放资源，不会因为个人疏忽的原因导致资源没有被释放的情况发生。</p>
 <h2 id="再谈智能指针"><a href="#再谈智能指针" class="headerlink" title="再谈智能指针"></a>再谈智能指针</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 经过上述对 RAII 机制的理解，现在从 RAII 的视角去看，智能指针其实就是一个类的对象，只不过该对象使用的时候和普通指针是一样的，不同的是它可以自动的管理资源的申请和释放，而普通指针需要手动申请和释放，所以我们称该它为 “智能指针”。简单来说，智能指针由两部分构成: <strong>RAII 机制 + 像指针一样的使用方式</strong>。</p>
 <blockquote>
 <p>智能指针：</p>
@@ -199,17 +199,17 @@
 <p>存在问题：unique_ptr具有与auto_ptr一样的问题，都不能用于一份资源需要被多个对象管理的场景，但是它相较于auto_ptr较好的一点是：unique_ptr禁止了各种形式的拷贝，避免了auto_ptr中存在的“指        针悬空”的问题。</p>
 <p>拷贝构造，拷贝赋值的实现思想：禁止了拷贝构造，拷贝赋值，一份资源只能被一个对象管理。</p>
 </blockquote>
-<p>上述两种形式的智能指针都只能用于一份资源被一个对象管理的场景，不能用于一份资源被多个对象管理的场景，在C++11中，为了解决上述存在的问题，引入了shared_ptr智能指针来解决一份资源不能被多个对象管理的问题。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上述两种形式的智能指针都只能用于一份资源被一个对象管理的场景，不能用于一份资源被多个对象管理的场景，在C++11中，为了解决上述存在的问题，引入了shared_ptr智能指针来解决一份资源不能被多个对象管理的问题。</p>
 <h4 id="3-shared-ptr：代码实现"><a href="#3-shared-ptr：代码实现" class="headerlink" title="3. shared_ptr：代码实现"></a>3. shared_ptr：<a href="https://github.com/superao/C-/blob/master/review/shared_ptr.cpp" target="_blank" rel="noopener">代码实现</a></h4><blockquote>
 <p>实现思想：shared_ptr采用 ”引用计数“ 的方式来解决其他两个智能指针中一份资源不能被多个对象共同管理的问题。shared_ptr在内部为每一个资源都维护了一个计数器，这个计数器用来表示当前这个资源有多少个对象共同管理着。当对象发生拷贝时，计数器加1，表示有新对象来共享管理这份资源，当对象析构时，计数器减1，表示当前析构的对象不在管理这个资源。只有当计数器变为0时，才将这个资源进行释放，否则其他管理这份资源的对象都会变成野指针。</p>
 <p>存在问题：解决了一份资源被多个对象管理的场景，但是存在某些线程安全问题。</p>
 </blockquote>
-<h4 id="shared-ptr线程安全："><a href="#shared-ptr线程安全：" class="headerlink" title="shared_ptr线程安全："></a>shared_ptr线程安全：</h4><p>shared_ptr智能指针的线程安全分为两大类：<strong><em>自身引用计数的线程安全</em></strong> + <strong><em>通过shared_ptr去操作资源时的线程安全</em></strong>，通过测试程序以及对shared_ptr的理解，可得出以下结论：</p>
+<h4 id="shared-ptr线程安全："><a href="#shared-ptr线程安全：" class="headerlink" title="shared_ptr线程安全："></a>shared_ptr线程安全：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shared_ptr智能指针的线程安全分为两大类：<strong><em>自身引用计数的线程安全</em></strong> + <strong><em>通过shared_ptr去操作资源时的线程安全</em></strong>，通过测试程序以及对shared_ptr的理解，可得出以下结论：</p>
 <ul>
 <li>自身的引用计数是线程安全的，不需要采用同步/互斥的手段去保证引用计数的线程安全。</li>
 <li>通过shared_ptr去操作资源时不是线程安全的，需要加锁才能对shared_ptr进行读写操作。</li>
 </ul>
-<h4 id="shared-ptr循环引用问题："><a href="#shared-ptr循环引用问题：" class="headerlink" title="shared_ptr循环引用问题："></a>shared_ptr循环引用问题：</h4><p>shared_ptr智能指针在某些场景下存在循环引用问题，这里的循环引用问题主要说的是：由于某些因素使得两个shared_ptr相互引用，最终这两个shared_ptr在释放的时候会因为相互引用的问题导致两个shared_ptr都没有办法释放掉自己手中的资源，比如：下面的程序就是一个典型的例子。</p>
+<h4 id="shared-ptr循环引用问题："><a href="#shared-ptr循环引用问题：" class="headerlink" title="shared_ptr循环引用问题："></a>shared_ptr循环引用问题：</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; shared_ptr智能指针在某些场景下存在循环引用问题，这里的循环引用问题主要说的是：由于某些因素使得两个shared_ptr相互引用，最终这两个shared_ptr在释放的时候会因为相互引用的问题导致两个shared_ptr都没有办法释放掉自己手中的资源，比如：下面的程序就是一个典型的例子。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>			// 双向链表的结点结构</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _prev;</span><br><span class="line">    <span class="built_in">shared_ptr</span>&lt;ListNode&gt; _next;</span><br><span class="line">    <span class="keyword">int</span> _date;</span><br><span class="line">    </span><br><span class="line">    ~ListNode()&#123; <span class="built_in">cout</span> &lt;&lt; <span class="string">"~ListNode()"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp1;</span><br><span class="line">  <span class="built_in">shared_ptr</span>&lt;ListNode&gt; sp2;</span><br><span class="line">  sp1-&gt;_next = sp2;</span><br><span class="line">  sp2-&gt;_prev = sp1;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="https://img-blog.csdnimg.cn/20190916200802774.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70" alt="循环引用问题"><br><strong>解决方案：</strong><a href="https://github.com/superao/C-/blob/master/shared_ptr_question.cpp" target="_blank" rel="noopener">代码实现</a></p>
@@ -489,23 +489,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -514,6 +506,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">

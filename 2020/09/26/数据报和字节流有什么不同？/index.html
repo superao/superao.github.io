@@ -9,19 +9,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>数据报和字节流有什么不同？ | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
 <meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据报和字节流有什么不同？">
 <meta property="og:url" content="http://yoursite.com/2020/09/26/数据报和字节流有什么不同？/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200926131644996.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
-<meta property="og:updated_time" content="2020-09-27T03:19:58.000Z">
+<meta property="og:updated_time" content="2020-09-27T03:27:12.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据报和字节流有什么不同？">
-<meta name="twitter:description" content="谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200926131644996.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
@@ -174,12 +174,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 谈起计算机网络，大家一定都知道TCP协议和UDP协议，这两个传输协议是大多数人最常用的两个协议，这两个传输协议各自有各自的特点，TCP协议以字节流的形式来传输数据，UDP协议以数据报的形式来传输数据，那么字节流传输和数据报传输有什么区别呐？</p>
 <a id="more"></a>
 
 <h2 id="字节流"><a href="#字节流" class="headerlink" title="字节流"></a>字节流</h2><p><strong>1. 从水流的角度去理解字节流</strong></p>
-<p>流是一个比较抽象的概念，抽象的东西往往不好理解，但是只要能为抽象的东西在现实中找到一个对应的实体，那么抽象的东西也就比较好理解了。如果一下子不明白什么是流？，那么我们先想想什么是<strong><em>水流</em></strong>？你可以将水管中流动的水看成水流，水流它最大的特点就是：<strong><em>连续不断，并且没有边界</em></strong>。如何理解这里的没有边界呢？假如同样是运输一车水，如果你借用水管以水流的形式去运输水，此时如果不借助其他容器仅靠水管你是无法知道当前已经传输了多少水，但是如果你采用水桶的形式去运输水，你就可以很明确的知道当前已经运输了多少水，因为每一桶的容量是确定的，这里的桶就可以理解为是水的一种边界。</p>
-<p>这里将水流的特点类比到字节流上道理是一样的。<strong>当以字节流的形式传输数据的时候，数据与数据之间也是没有边界的</strong>。比如：以网络通信来说，如果采用TCP协议通信（字节流），当应用层调用read进行一次数据读取时，我们是没有办法知道这一次read到底读取了几个TCP数据，为什么呢？因为TCP报文的数据与数据之间是没有边界的，由于没有边界，一次read出来的数据可能有好几个TCP数据。当然同理，当应用层调用一次 send 发送数据时，我们也是无法确认当前发送了几个TCP数据，因为调用send发送数据时，本质上只是将数据放到了TCP的发送缓冲区中，并没有真正的发送出去，而真正的发送时机会由系统自行选择，等到真正发送时此时缓冲区中可能已经存放了好几个TCP数据，因此调用send也是无法保证发送的就是一个TCP数据。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 流是一个比较抽象的概念，抽象的东西往往不好理解，但是只要能为抽象的东西在现实中找到一个对应的实体，那么抽象的东西也就比较好理解了。如果一下子不明白什么是流？，那么我们先想想什么是<strong><em>水流</em></strong>？你可以将水管中流动的水看成水流，水流它最大的特点就是：<strong><em>连续不断，并且没有边界</em></strong>。如何理解这里的没有边界呢？假如同样是运输一车水，如果你借用水管以水流的形式去运输水，此时如果不借助其他容器仅靠水管你是无法知道当前已经传输了多少水，但是如果你采用水桶的形式去运输水，你就可以很明确的知道当前已经运输了多少水，因为每一桶的容量是确定的，这里的桶就可以理解为是水的一种边界。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里将水流的特点类比到字节流上道理是一样的。<strong>当以字节流的形式传输数据的时候，数据与数据之间也是没有边界的</strong>。比如：以网络通信来说，如果采用TCP协议通信（字节流），当应用层调用read进行一次数据读取时，我们是没有办法知道这一次read到底读取了几个TCP数据，为什么呢？因为TCP报文的数据与数据之间是没有边界的，由于没有边界，一次read出来的数据可能有好几个TCP数据。当然同理，当应用层调用一次 send 发送数据时，我们也是无法确认当前发送了几个TCP数据，因为调用send发送数据时，本质上只是将数据放到了TCP的发送缓冲区中，并没有真正的发送出去，而真正的发送时机会由系统自行选择，等到真正发送时此时缓冲区中可能已经存放了好几个TCP数据，因此调用send也是无法保证发送的就是一个TCP数据。</p>
 <p><strong>2. 字节流特点总结</strong></p>
 <ul>
 <li>从数据本身去看待字节流时，数据与数据之间是没有边界的，应用层无法区分下层的数据边界。</li>
@@ -188,7 +188,7 @@
 <p><strong>3. 实验代码</strong></p>
 <p><a href="https://github.com/superao/Linux/blob/master/tcp.cpp" target="_blank" rel="noopener">TCP的字节流</a></p>
 <h2 id="数据报"><a href="#数据报" class="headerlink" title="数据报"></a>数据报</h2><p><strong>1. 从现实通信场景去理解数据报</strong></p>
-<p>数据报相较于字节流是比较好理解的，因为在日常生活中的绝大多数通信中，都是以一个完整的报文作为通信单位来进行通信的。比如：早期的电报在通信的时候是以一个完整的报文来进行通信，现在的邮件也是以一个完整的包裹来进行通信等等。这种以数据整体为单位的传输形式在传输数据时，有一个最大的特点就是：<strong>“每个数据报在传输过程中是不能被拆分的，并且数据报与数据报之间存在边界（不同的数据报可以区分）”</strong>，这其实就是数据报传输数据的特点。我们继续以网络通信来说，如果采用UDP协议通信（数据报），当应用层调用一次read读取数据时，它一定只读取了一个UDP数据，因为UDP数据在调用send发送数据的时候，它会立即将此数据封装成一个数据包发送过去（UDP不会将数据先暂存在缓冲区，最后发送，而是直接发送），当接受方接受到数据时需要立即调用read去读取数据，此时读取的就是一个UDP数据包。如果UDP数据包过大，用户缓冲区较小，UDP会最大程度的将UDP数据交付给应用层，然后将剩下的数据直接丢弃。如果应用层没有及时处理此次发送的UDP数据包，那么将会丢包现象。（UDP需要先丢掉旧的数据包，然后在缓冲区中接受新的数据包，这种现象一般发生在处理较慢的服务器身上）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 数据报相较于字节流是比较好理解的，因为在日常生活中的绝大多数通信中，都是以一个完整的报文作为通信单位来进行通信的。比如：早期的电报在通信的时候是以一个完整的报文来进行通信，现在的邮件也是以一个完整的包裹来进行通信等等。这种以数据整体为单位的传输形式在传输数据时，有一个最大的特点就是：<strong>“每个数据报在传输过程中是不能被拆分的，并且数据报与数据报之间存在边界（不同的数据报可以区分）”</strong>，这其实就是数据报传输数据的特点。我们继续以网络通信来说，如果采用UDP协议通信（数据报），当应用层调用一次read读取数据时，它一定只读取了一个UDP数据，因为UDP数据在调用send发送数据的时候，它会立即将此数据封装成一个数据包发送过去（UDP不会将数据先暂存在缓冲区，最后发送，而是直接发送），当接受方接受到数据时需要立即调用read去读取数据，此时读取的就是一个UDP数据包。如果UDP数据包过大，用户缓冲区较小，UDP会最大程度的将UDP数据交付给应用层，然后将剩下的数据直接丢弃。如果应用层没有及时处理此次发送的UDP数据包，那么将会丢包现象。（UDP需要先丢掉旧的数据包，然后在缓冲区中接受新的数据包，这种现象一般发生在处理较慢的服务器身上）</p>
 <p><strong>2. 数据报特点总结</strong></p>
 <ul>
 <li>从数据本身去看待数据报时，数据与数据之间是存在边界的，应用层可以区分下层的数据边界。</li>
@@ -469,23 +469,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,6 +486,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
