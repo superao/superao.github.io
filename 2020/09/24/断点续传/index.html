@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2020-09-28T01:46:36.359Z">
+<meta property="og:updated_time" content="2020-09-28T01:54:25.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="断点续传">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
@@ -203,12 +203,12 @@
 <blockquote>
 <p>含义：用来表示当前服务器是否支持断点续传功能，其值代表范围请求的单位。</p>
 <p>语法：Accept-Ranges: bytes  /  Accept-Ranges: none</p>
-<p>示例：Accept-Ranges: bytes     表示支持断点续传，且范围请求的单位是字节。<br>      Accept-Ranges: none     表示不支持断点续传（服务器不支持时，也可以不设置该头部信息）。</p>
+<p>示例：Accept-Ranges: bytes    表示支持断点续传，且范围请求的单位是字节。<br>      Accept-Ranges: none     表示不支持断点续传（服务器不支持时，也可以不设置该头部信息）。</p>
 </blockquote>
 <p><strong>Content-Range</strong></p>
 <blockquote>
 <p>含义：用来表示当前传输的数据在整个文件中的位置。</p>
-<p>语法：Content-Range: unit range-start-range-end/size<br>    Content-Range: unit range-start-range-end/*<br>    Content-Range: unit <em>/size<br>    说明：size 表示整个文件的大小，</em> 表示未知。</p>
+<p>语法：Content-Range: unit range-start-range-end/size<br>      Content-Range: unit range-start-range-end/*<br>    Content-Range: unit <em>/size<br>    说明：size 表示整个文件的大小，</em> 表示未知。</p>
 <p>示例：Content-Range: bytes 20-100/675       表示当前传输的数据在整个文件的 20 到 100 字节处。</p>
 </blockquote>
 <p><strong>Content-Length</strong></p>
