@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>适配器模式 | Superao的博客</title>
+  <title>断点续传 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 对于适配器我想我们在生活中见过各种各样的适配器，比如电源适配器，LED适配器等各种各样的适配器，它们的作用就是将某一种信号转化为另外一种信号的一种工具，方便两者信号之间可以进行交流，这就是生活当中的适配器。在我们代码的世界里也是存在类似于这样的适配器，比如：我们现在想要调用一个第三方库的某些接口，但是发现该库的接口和我们现在">
-<meta name="keywords" content="设计模式">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="适配器模式">
-<meta property="og:url" content="http://yoursite.com/2019/08/23/适配器模式/index.html">
+<meta property="og:title" content="断点续传">
+<meta property="og:url" content="http://yoursite.com/2020/09/24/断点续传/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 对于适配器我想我们在生活中见过各种各样的适配器，比如电源适配器，LED适配器等各种各样的适配器，它们的作用就是将某一种信号转化为另外一种信号的一种工具，方便两者信号之间可以进行交流，这就是生活当中的适配器。在我们代码的世界里也是存在类似于这样的适配器，比如：我们现在想要调用一个第三方库的某些接口，但是发现该库的接口和我们现在">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-09-21T03:33:16.000Z">
+<meta property="og:updated_time" content="2020-09-28T01:23:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="适配器模式">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 对于适配器我想我们在生活中见过各种各样的适配器，比如电源适配器，LED适配器等各种各样的适配器，它们的作用就是将某一种信号转化为另外一种信号的一种工具，方便两者信号之间可以进行交流，这就是生活当中的适配器。在我们代码的世界里也是存在类似于这样的适配器，比如：我们现在想要调用一个第三方库的某些接口，但是发现该库的接口和我们现在">
+<meta name="twitter:title" content="断点续传">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,40 +152,101 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-适配器模式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-断点续传" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      适配器模式
+      断点续传
     </h1>
   
 
         
-        <a href="/2019/08/23/适配器模式/" class="archive-article-date">
-  	<time datetime="2019-08-23T15:25:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
+        <a href="/2020/09/24/断点续传/" class="archive-article-date">
+  	<time datetime="2020-09-24T14:21:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对于适配器我想我们在生活中见过各种各样的适配器，比如电源适配器，LED适配器等各种各样的适配器，它们的作用就是将某一种信号转化为另外一种信号的一种工具，方便两者信号之间可以进行交流，这就是生活当中的适配器。在我们代码的世界里也是存在类似于这样的适配器，比如：我们现在想要调用一个第三方库的某些接口，但是发现该库的接口和我们现在所使用的某些接口是有很大区别的，这时候我们就要利用适配器模式的设计思想来写出一个可以 “转化接口” 的东西来帮助我们可以使用第三方库。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。</p>
 <a id="more"></a>
 
-<h2 id="适配器模式的两种实现方式"><a href="#适配器模式的两种实现方式" class="headerlink" title="适配器模式的两种实现方式"></a>适配器模式的两种实现方式</h2><ul>
-<li><strong>对象适配器</strong>(推荐使用)</li>
-<li><strong>类适配器</strong></li>
+<h2 id="什么是断点续传？"><a href="#什么是断点续传？" class="headerlink" title="什么是断点续传？"></a>什么是断点续传？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在以前，人们还没有高速带宽的时候，由于带宽的限制，当时从互联网上下载一首歌都是比较慢的，那时如果在下载过程中出现网络中断的情况，那是一件非常让人头疼的事情，因为在网络重新连接后需要重新从头下载文件。后来，为了解决这种问题引入了断点续传机制，断点续传机制引入之后，<strong>当发生断网的情况时，在网络重连之后不会从头开始重新下载数据，而是从网络中断的地方开始下载数据，避免了下载过的数据再次下载的情况发生，</strong>这就是断点续传机制。断点续传的好处就是：</p>
+<ul>
+<li>提高了用户体验，避免了下载过的数据再次下载的情况发生。</li>
+<li>提高了服务器的访问效率，在一定程度上减少了服务器的压力。</li>
 </ul>
-<h4 id="对象适配器"><a href="#对象适配器" class="headerlink" title="对象适配器"></a>对象适配器</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 对象适配器是通过把被适配类作为适配器的一个成员变量(组合)来进行一系列的相关操作，最后在目标类的接口中通过调用组合成员的函数加上转换细节，实现接口之间的一种转化关系。我们以电源适配器(220v-22v)为例进行模拟实现：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 220V 电压</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Power220</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetPower</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="keyword">return</span> <span class="number">220</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所需22V电压</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Power22</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">InPower</span><span class="params">(<span class="keyword">int</span> power)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> power;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适配器(转化)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> :</span> <span class="keyword">public</span> Power22</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">protected</span>:</span><br><span class="line">    <span class="comment">// 组合</span></span><br><span class="line">    Power220* p220;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">Inpower</span><span class="params">(<span class="keyword">int</span> power)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      p220-&gt;GetPower();</span><br><span class="line">      power /= <span class="number">10</span>;</span><br><span class="line">      <span class="keyword">return</span> power;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在使用适配器的时候我们即可以将电压转化为 22 V又可以使电压保持原有 220 V不变，这样使用起来非常灵活</span></span><br></pre></td></tr></table></figure>
+<h2 id="断点续传是如何工作的？"><a href="#断点续传是如何工作的？" class="headerlink" title="断点续传是如何工作的？"></a>断点续传是如何工作的？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从传输角度来看，断点续传和普通的文件下载没有本质的区别，只不过断点续传相较于普通的文件下载多了一些额外的信息，这些额外的信息用于数据传输双方的“交流”，如何理解这里的交流呢？这里我们就以文件下载来说明，假设 A 主机要给 B 主机发送 1000 字节大小的文件，假设 A 已经给 B 传输了 600 字节的数据了，但是此时由于某些原因，A 与 B 之间的网络中断了，无法继续进行传输，当网络重新连接之后，按照正常逻辑，此时 B 会向 A 发送一个报文说：“我已经接受了 600 字节的数据了，你能将剩下的数据传输给我吗？”，此时 A 有两种可能的回复，第一种回复说：“我没有办法给你剩下的 400 字节数据，我从头开始给你发送吧”，第二种回复说：“没有问题，我将接下来剩下的 400 字节数据传输给你”。如果 A 主机回复第一种报文，则表明它不支持断点续传，需要从头重新传输，如果回复第二种报文，则表示支持断点续传，只要传输剩下的数据即可。通信双方可以借用这种方式的交流来得知对方数据传输的进展情况，依靠交流实现了数据的范围传输，从而实现断点续传。</p>
+<ul>
+<li>对于支持断点续传的客户端来说，它需要能够发送指定范围的请求报文，并且还需要将接受到的各个范围的数据最终组装成一个完整的数据。</li>
+<li>对于支持断点续传的服务器来说，它需要能够为客户端发送指定范围的文件数据。</li>
+</ul>
+<h2 id="断点续传需要哪些额外的信息？"><a href="#断点续传需要哪些额外的信息？" class="headerlink" title="断点续传需要哪些额外的信息？"></a>断点续传需要哪些额外的信息？</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在<strong>HTTP 1.1</strong>版本中定义了关于断点续传的一些相关信息，客户端与服务器之间可通过这些相关信息来进行“交流”，通过交流来得知通信双方是否支持断点续传，以及实现断点续传功能的相关细节。下面将有关断点续传功能的头部信息列举出来。</p>
+<h4 id="请求头部"><a href="#请求头部" class="headerlink" title="请求头部"></a>请求头部</h4><p><strong>Range</strong></p>
+<blockquote>
+<p>含义：用来告知服务器应该返回文件的哪一部分内容。</p>
+<p>语法：Range: <unit>=<range-start>-</range-start></unit></p>
+<p>​            Range: <unit>=<range-start>-<range-end></range-end></range-start></unit></p>
+<p>​            Range: <unit>=<range-start>-<range-end>, <range-start>-<range-end>   多重范围</range-end></range-start></range-end></range-start></unit></p>
+<p>​            说明：unit 表示范围所采用的单位，range-start 表示范围的开始，range-end 表示范围的结束，                               如果 range-end 不存在，则表示此范围一直延续到文件结束。</p>
+<p>示例：Range: bytes=5000-9000                      表示范围从 5000 到 9000 之间的字节数据。</p>
+<p>​            Range: bytes=200-500, 900-1200       表示范围从 200 到 500，900 到 1200 之间的字节数据。</p>
+<p>相关状态码：</p>
+<p>​        206：如果服务器响应的是范围数据，则需要使用 206 返回。</p>
+<p>​        416：如果请求的范围不合法，那么服务器将返回 416 状态码，表示客户端错误。</p>
+<p>​        200：如果服务器忽略Range字段，返回了整个文件，此时就需要返回 200 状态码。</p>
+</blockquote>
+<p><strong>If-Range</strong></p>
+<blockquote>
+<p>含义：用于使 Range 请求字段在某些情况下生效，只有字段中的值条件满足时，Range 字段才会生效，                   同时服务器响应 206 状态码，并且返回相应范围的数据，如果条件不满足，则 Range 字段不会生                   效，此时服务器响应 200 状态码，并返回完整的请求资源。（通常情况下，字段中的值是 Last-                   Modified 中的时间值，以确保自从上次中断后，下载的资源没有发生改变）</p>
+<p>语法：If-Range: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT</second></minute></hour></year></month></day></day-name></p>
+<p>示例：If-Range: Wed, 21 Oct 2015 07:28:00 GMT</p>
+</blockquote>
+<h4 id="响应头部"><a href="#响应头部" class="headerlink" title="响应头部"></a>响应头部</h4><p><strong>Accept-Ranges</strong></p>
+<blockquote>
+<p>含义：用来表示当前服务器是否支持断点续传功能，其值代表范围请求的单位。</p>
+<p>语法：Accept-Ranges: bytes  /  Accept-Ranges: none</p>
+<p>示例：Accept-Ranges: bytes     表示支持断点续传，且范围请求的单位是字节。</p>
+<p>​            Accept-Ranges: none     表示不支持断点续传（服务器不支持时，也可以不设置该头部信息）。</p>
+</blockquote>
+<p><strong>Content-Range</strong></p>
+<blockquote>
+<p>含义：用来表示当前传输的数据在整个文件中的位置。</p>
+<p>语法：Content-Range: <unit> <range-start>-<range-end>/<size></size></range-end></range-start></unit></p>
+<p>​            Content-Range: <unit> <range-start>-<range-end>/*</range-end></range-start></unit></p>
+<p>​            Content-Range: <unit> */<size></size></unit></p>
+<p>​            说明：size 表示整个文件的大小，* 表示未知。</p>
+<p>示例：Content-Range: bytes 20-100/675       表示当前传输的数据在整个文件的 20 到 100 字节处。</p>
+</blockquote>
+<p><strong>Content-Length</strong></p>
+<blockquote>
+<p>含义：用来表示当前数据主体的大小</p>
+<p>语法：Content-Length: <length></length></p>
+<p>说明：在设置断点续传响应报文时，应该设置当前范围数据主体的大小，而不是整个文件数据的大小。</p>
+</blockquote>
+<p><strong>Last-Modified</strong></p>
+<blockquote>
+<p>含义：用来表明源服务器中指定资源的最后修改日期和时间，通常用来判断客户端接受到的资源与源服                   务器中的最新资源是否一致。在进行断点续传的时候，如果断点之前的Last-Modified与断点之后                   的不一致，那么表明服务器资源已经被更新过，需要重新传输，不能再进行续传。</p>
+<p>语法：Last-Modified: <day-name>, <day> <month> <year> <hour>:<minute>:<second> GMT</second></minute></hour></year></month></day></day-name></p>
+<p>示例：Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT </p>
+</blockquote>
+<h2 id="断点续传的编码步骤"><a href="#断点续传的编码步骤" class="headerlink" title="断点续传的编码步骤"></a>断点续传的编码步骤</h2><h4 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h4><ol>
+<li>客户端向服务器发送请求报文，请求文件下载功能。</li>
+<li>客户端解析服务器传送的响应报文，查看服务器是否支持断点续传功能。</li>
+<li>当网络重连之后，客户端向服务器发送断点续传请求报文（范围请求报文）。</li>
+<li>客户端解析服务器发送的断点续传响应报文，最终将所有报文组装成一个完整的数据。</li>
+</ol>
+<h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><ol>
+<li>服务器向客户端发送对应文件的响应报文，并在头部信息中告知对方自己支持断点续传功能。</li>
+<li>服务器解析客户端发送的断点续传请求报文，检测对应文件内容是否已经发生改变，如果没有，则将对应的文件指针偏移到指定位置，然后将文件内容响应给客户端，反之从头传输文件内容。</li>
+</ol>
+<h2 id="验证服务器断点续传"><a href="#验证服务器断点续传" class="headerlink" title="验证服务器断点续传"></a>验证服务器断点续传</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;借用 curl 工具对百度首页进行范围请求，然后打印出完整的通信过程，对其中涉及到断点续传功能的字段使用 <strong>**</strong> 号进行标记，便于我们去理解断点续传的工作流程。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[superao@localhost ~]$ curl --head --range <span class="number">0</span><span class="number">-10</span> -v http:<span class="comment">//www.baidu.com</span></span><br><span class="line">* About to connect() to www.baidu.com port 80 (#0)</span><br><span class="line">*   Trying <span class="number">39.156</span><span class="number">.66</span><span class="number">.14</span>...</span><br><span class="line">* Connected to www.baidu.com (<span class="number">39.156</span><span class="number">.66</span><span class="number">.14</span>) port <span class="number">80</span> (#<span class="number">0</span>)</span><br><span class="line">&gt; HEAD / HTTP/<span class="number">1.1</span>					(HTTP/<span class="number">1.1</span>版本之后支持断点续传)</span><br><span class="line">&gt; Range: bytes=<span class="number">0</span><span class="number">-10</span>									**</span><br><span class="line">&gt; User-Agent: curl/<span class="number">7.29</span><span class="number">.0</span></span><br><span class="line">&gt; Host: www.baidu.com</span><br><span class="line">&gt; Accept: *<span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; </span></span><br><span class="line"><span class="comment">&lt; HTTP/1.1 206 Partial Content		(范围请求响应成功时返回206状态码)</span></span><br><span class="line"><span class="comment">HTTP/1.1 206 Partial Content						**</span></span><br><span class="line"><span class="comment">&lt; Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform</span></span><br><span class="line"><span class="comment">Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform</span></span><br><span class="line"><span class="comment">&lt; Connection: keep-alive</span></span><br><span class="line"><span class="comment">Connection: keep-alive</span></span><br><span class="line"><span class="comment">&lt; Content-Length: 11</span></span><br><span class="line"><span class="comment">Content-Length: 11									**</span></span><br><span class="line"><span class="comment">&lt; Content-Range: bytes 0-10/277</span></span><br><span class="line"><span class="comment">Content-Range: bytes 0-10/277						**</span></span><br><span class="line"><span class="comment">&lt; Content-Type: text/html</span></span><br><span class="line"><span class="comment">Content-Type: text/html</span></span><br><span class="line"><span class="comment">&lt; Date: Mon, 28 Sep 2020 01:05:23 GMT</span></span><br><span class="line"><span class="comment">Date: Mon, 28 Sep 2020 01:05:23 GMT</span></span><br><span class="line"><span class="comment">&lt; Etag: "575e1f60-115"</span></span><br><span class="line"><span class="comment">Etag: "575e1f60-115"</span></span><br><span class="line"><span class="comment">&lt; Last-Modified: Mon, 13 Jun 2016 02:50:08 GMT		</span></span><br><span class="line"><span class="comment">Last-Modified: Mon, 13 Jun 2016 02:50:08 GMT		**</span></span><br><span class="line"><span class="comment">&lt; Pragma: no-cache</span></span><br><span class="line"><span class="comment">Pragma: no-cache</span></span><br><span class="line"><span class="comment">&lt; Server: bfe/1.0.8.18</span></span><br><span class="line"><span class="comment">Server: bfe/1.0.8.18</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&lt; </span></span><br><span class="line"><span class="comment">* Connection #0 to host www.baidu.com left intact</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="类适配器"><a href="#类适配器" class="headerlink" title="类适配器"></a>类适配器</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 类适配器是利用 <strong>多继承</strong> 的方式来实现的一种适配模式，分别继承了目标类的接口和被适配类的实现，最后加上了转化细节，这样的适配模式是静态的，因此我们不太提倡使用这种适配模式</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 220V 电压</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Power220</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetPower</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">      <span class="keyword">return</span> <span class="number">220</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 所需22V电压</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Power22</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">int</span> <span class="title">InPower</span><span class="params">(<span class="keyword">int</span> power)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> power;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 适配器</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> :</span> <span class="keyword">public</span> Power22, <span class="keyword">protected</span> Power220</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">InPower</span><span class="params">(<span class="keyword">int</span> power)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      GetPower();</span><br><span class="line">      power /= <span class="number">10</span>;</span><br><span class="line">      <span class="keyword">return</span> power;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// public 继承它原有的接口，protected 继承了某些细节实现，这样我们可以重写 22V 的接口从而实现了不同电压之间的转化</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通过上述的实现角度我们发现， <strong>对象适配器是通过组合来是实现的，而类适配器是通过继承来实现的，当然，它们两者都必须有重写的支撑，否则实现不了适配器的。对象适配器体现了一种松耦合的关系使用起来更加的灵活，而类适配器体现了一种紧耦合的关系使用起来不方便，这同时也体现了继承是一种静态的代码复用，不像组合想使用就使用不想使用就不使用。</strong></p>
 
       
 
@@ -225,7 +286,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
         		</li>
       		
 		</ul>
@@ -281,7 +342,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/23/适配器模式/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/09/24/断点续传/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -295,18 +356,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/24/组合与继承/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/09/26/数据报和字节流有什么不同？/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          组合与继承
+          数据报和字节流有什么不同？
         
       </div>
     </a>
   
   
-    <a href="/2019/08/21/单例模式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">单例模式</div>
+    <a href="/2020/09/22/动态绑定与静态绑定/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">动态绑定与静态绑定</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -333,7 +394,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#适配器模式的两种实现方式"><span class="toc-number">1.</span> <span class="toc-text">适配器模式的两种实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象适配器"><span class="toc-number">1.0.1.</span> <span class="toc-text">对象适配器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类适配器"><span class="toc-number">1.0.2.</span> <span class="toc-text">类适配器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结："><span class="toc-number">2.</span> <span class="toc-text">总结：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是断点续传？"><span class="toc-number">1.</span> <span class="toc-text">什么是断点续传？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断点续传是如何工作的？"><span class="toc-number">2.</span> <span class="toc-text">断点续传是如何工作的？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断点续传需要哪些额外的信息？"><span class="toc-number">3.</span> <span class="toc-text">断点续传需要哪些额外的信息？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#请求头部"><span class="toc-number">3.0.1.</span> <span class="toc-text">请求头部</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#响应头部"><span class="toc-number">3.0.2.</span> <span class="toc-text">响应头部</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#断点续传的编码步骤"><span class="toc-number">4.</span> <span class="toc-text">断点续传的编码步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#客户端"><span class="toc-number">4.0.1.</span> <span class="toc-text">客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器"><span class="toc-number">4.0.2.</span> <span class="toc-text">服务器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证服务器断点续传"><span class="toc-number">5.</span> <span class="toc-text">验证服务器断点续传</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -347,7 +408,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="适配器模式" data-title="适配器模式" data-url="http://yoursite.com/2019/08/23/适配器模式/"></div>
+	<div class="ds-thread" data-thread-key="断点续传" data-title="断点续传" data-url="http://yoursite.com/2020/09/24/断点续传/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
