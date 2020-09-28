@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Superao的博客">
 <meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2020-09-28T01:40:35.462Z">
+<meta property="og:updated_time" content="2020-09-28T01:46:36.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="断点续传">
 <meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;断点续传是一种非常高效的数据传输功能，目前大多数浏览器都支持断点续传功能，断点续传适用场景非常多，常见于“文件下载，视频/音频跳转播放”等场景，为什么断点续传相较于普通的数据传输来说更加高效，断点续传是如何实现的呢？本篇文章将总结一下断点续传的相关知识点。">
@@ -189,19 +189,13 @@
 <h4 id="请求头部"><a href="#请求头部" class="headerlink" title="请求头部"></a>请求头部</h4><p><strong>Range</strong></p>
 <blockquote>
 <p>含义：用来告知服务器应该返回文件的哪一部分内容。</p>
-<p>语法：Range: unit=range-start-</p>
-<p>Range: unit=range-start-range-end</p>
-<p>Range: unit=range-start-range-end, range-start-range-end   多重范围</p>
-<p>说明：unit 表示范围所采用的单位，range-start 表示范围的开始，range-end 表示范围的结束，                               如果 range-end 不存在，则表示此范围一直延续到文件结束。</p>
-<p>示例：Range: bytes=5000-9000                      表示范围从 5000 到 9000 之间的字节数据。</p>
-<pre><code>Range: bytes=200-500, 900-1200       表示范围从 200 到 500，900 到 1200 之间的字节数据。</code></pre><p>相关状态码：</p>
-<p>206：如果服务器响应的是范围数据，则需要使用 206 返回。</p>
-<p>416：如果请求的范围不合法，那么服务器将返回 416 状态码，表示客户端错误。</p>
-<p>200：如果服务器忽略Range字段，返回了整个文件，此时就需要返回 200 状态码。</p>
+<p>语法：Range: unit=range-start-<br>Range: unit=range-start-range-end<br>Range: unit=range-start-range-end, range-start-range-end   多重范围</p>
+<p>说明：unit 表示范围所采用的单位，range-start 表示范围的开始，range-end 表示范围的结束，如果 range-end 不存在，则表示此范围一直延续到文件结束。</p>
+<p>示例：Range: bytes=5000-9000                      表示范围从 5000 到 9000 之间的字节数据。<br>      Range: bytes=200-500, 900-1200       表示范围从 200 到 500，900 到 1200 之间的字节数据。<br>相关状态码：<br>206：如果服务器响应的是范围数据，则需要使用 206 返回。<br>416：如果请求的范围不合法，那么服务器将返回 416 状态码，表示客户端错误。<br>200：如果服务器忽略Range字段，返回了整个文件，此时就需要返回 200 状态码。</p>
 </blockquote>
 <p><strong>If-Range</strong></p>
 <blockquote>
-<p>含义：用于使 Range 请求字段在某些情况下生效，只有字段中的值条件满足时，Range 字段才会生效，                   同时服务器响应 206 状态码，并且返回相应范围的数据，如果条件不满足，则 Range 字段不会生                   效，此时服务器响应 200 状态码，并返回完整的请求资源。（通常情况下，字段中的值是 Last-                   Modified 中的时间值，以确保自从上次中断后，下载的资源没有发生改变）</p>
+<p>含义：用于使 Range 请求字段在某些情况下生效，只有字段中的值条件满足时，Range 字段才会生效，同时服务器响应 206 状态码，并且返回相应范围的数据，如果条件不满足，则 Range 字段不会生效，此时服务器响应 200 状态码，并返回完整的请求资源。（通常情况下，字段中的值是 Last-Modified 中的时间值，以确保自从上次中断后，下载的资源没有发生改变）</p>
 <p>语法：If-Range: day-name, day month year hour:minute:second GMT</p>
 <p>示例：If-Range: Wed, 21 Oct 2015 07:28:00 GMT</p>
 </blockquote>
@@ -209,18 +203,13 @@
 <blockquote>
 <p>含义：用来表示当前服务器是否支持断点续传功能，其值代表范围请求的单位。</p>
 <p>语法：Accept-Ranges: bytes  /  Accept-Ranges: none</p>
-<p>示例：Accept-Ranges: bytes     表示支持断点续传，且范围请求的单位是字节。</p>
-<p>​            Accept-Ranges: none     表示不支持断点续传（服务器不支持时，也可以不设置该头部信息）。</p>
+<p>示例：Accept-Ranges: bytes     表示支持断点续传，且范围请求的单位是字节。<br>      Accept-Ranges: none     表示不支持断点续传（服务器不支持时，也可以不设置该头部信息）。</p>
 </blockquote>
 <p><strong>Content-Range</strong></p>
 <blockquote>
 <p>含义：用来表示当前传输的数据在整个文件中的位置。</p>
-<p>语法：Content-Range: unit range-start-range-end/size</p>
-<pre><code>Content-Range: unit range-start-range-end/*
-
-Content-Range: unit */size
-
-说明：size 表示整个文件的大小，* 表示未知。</code></pre><p>示例：Content-Range: bytes 20-100/675       表示当前传输的数据在整个文件的 20 到 100 字节处。</p>
+<p>语法：Content-Range: unit range-start-range-end/size<br>    Content-Range: unit range-start-range-end/*<br>    Content-Range: unit <em>/size<br>    说明：size 表示整个文件的大小，</em> 表示未知。</p>
+<p>示例：Content-Range: bytes 20-100/675       表示当前传输的数据在整个文件的 20 到 100 字节处。</p>
 </blockquote>
 <p><strong>Content-Length</strong></p>
 <blockquote>
@@ -522,11 +511,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color5">网络基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -542,11 +531,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
