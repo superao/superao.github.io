@@ -7,19 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: C++ | Superao的博客</title>
+  <title>lambda表达式 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Superao的博客">
-<meta property="og:url" content="http://yoursite.com/tags/C/index.html">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在 C++11 语法中，C++ 引入了一个使用起来特别方便的东西：lambda 表达式，它不但可以像函数一样去使用，还可以当作参数传递给其他模板函数供其使用，本篇文章我们将总结一下 lambda 表达式的相关知识点及其注意事项。">
+<meta name="keywords" content="C++11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="lambda表达式">
+<meta property="og:url" content="http://yoursite.com/2020/10/04/lambda表达式/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在 C++11 语法中，C++ 引入了一个使用起来特别方便的东西：lambda 表达式，它不但可以像函数一样去使用，还可以当作参数传递给其他模板函数供其使用，本篇文章我们将总结一下 lambda 表达式的相关知识点及其注意事项。">
 <meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2020-10-04T08:14:33.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Superao的博客">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="lambda表达式">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在 C++11 语法中，C++ 引入了一个使用起来特别方便的东西：lambda 表达式，它不但可以像函数一样去使用，还可以当作参数传递给其他模板函数供其使用，本篇文章我们将总结一下 lambda 表达式的相关知识点及其注意事项。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -151,415 +152,259 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-lambda表达式" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      lambda表达式
+    </h1>
+  
+
+        
+        <a href="/2020/10/04/lambda表达式/" class="archive-article-date">
+  	<time datetime="2020-10-04T04:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-04</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 C++11 语法中，C++ 引入了一个使用起来特别方便的东西：lambda 表达式，它不但可以像函数一样去使用，还可以当作参数传递给其他模板函数供其使用，本篇文章我们将总结一下 lambda 表达式的相关知识点及其注意事项。</p>
+<a id="more"></a>
+
+<h2 id="引入场景"><a href="#引入场景" class="headerlink" title="引入场景"></a>引入场景</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 C++98 语法中，如果我们想要给一组数字进行排序，我们第一时间想到的就是 std::sort() 函数，该函数既可以排升序（默认），也可以排降序，在排降序时需要借助第三个参数来实现（仿函数）。这里多提一点仿函数是什么东西？<strong>仿函数本质上是一个类的对象，这个类比较特殊，在该类中只实现了operator()函数，除了该函数以外再没有其他的成员。由于这个对象在使用的时候可以像普通函数一样来使用，因此称该对象为仿函数 / 函数对象。</strong></p>
+<p><strong>例程：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">array</span>[] = &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">4</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 默认升序</span></span><br><span class="line">	sort(<span class="built_in">array</span>, <span class="built_in">array</span> + <span class="keyword">sizeof</span>(<span class="built_in">array</span>) / <span class="keyword">sizeof</span>(<span class="built_in">array</span>[<span class="number">0</span>]));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 添加第三个参数(仿函数)来实现降序</span></span><br><span class="line">	sort(<span class="built_in">array</span>, <span class="built_in">array</span> + <span class="keyword">sizeof</span>(<span class="built_in">array</span>) / <span class="keyword">sizeof</span>(<span class="built_in">array</span>[<span class="number">0</span>]), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在 C++ 中，对于内置类型我们可以借用标准库提供的一些仿函数来实现我们想要的需求，但是对于自定义类型，标准库并没有为我们提供相应的仿函数，同时它也提供不了，这时候就需要我们自己动手来实现仿函数，满足我们场景中的一些具体需求，比如：下面的商品类。</p>
+<p><strong>例程：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 商品类</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Goods</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">string</span> _name;			<span class="comment">// 名称</span></span><br><span class="line">	<span class="keyword">double</span> _price;			<span class="comment">// 价格</span></span><br><span class="line">	<span class="built_in">string</span> _sales;			<span class="comment">// 销量</span></span><br><span class="line">	<span class="comment">// ...					其他属性</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 价格比较</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PriceCompare</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> Goods&amp; gl, <span class="keyword">const</span> Goods&amp; gr)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gl._price &lt;= gr._price;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销量比较</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesCompare</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">const</span> Goods&amp; gl, <span class="keyword">const</span> Goods&amp; gr)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> gl._sales &lt;= gr._sales;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...  其他属性的比较方式</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Goods gds[] = &#123; &#123; <span class="string">"苹果"</span>, <span class="number">2.1</span>, <span class="number">80</span>&#125;,  &#123;<span class="string">"菠萝"</span>, <span class="number">1.5</span>, <span class="number">120</span>&#125;, &#123;<span class="string">"橘子"</span>, <span class="number">1</span>, <span class="number">100</span>&#125; &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需求：价格比较</span></span><br><span class="line"> 	sort(gds, gds+<span class="keyword">sizeof</span>(gds) / <span class="keyword">sizeof</span>(gds[<span class="number">0</span>]), PriceCompare());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需求：销量比较</span></span><br><span class="line">    sort(gds, gds+<span class="keyword">sizeof</span>(gds) / <span class="keyword">sizeof</span>(gds[<span class="number">0</span>]), SalesCompare());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他需求</span></span><br><span class="line">    </span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于这样的场景，如果我们为了商品的一个属性去实现一个类的话，那么这种类将会是非常多并且杂乱无章的，最主要的是代码的可读性也不是很强，如果我们想要知道这里调用的仿函数的作用是什么的话，我们还需要翻到上面去寻找这个对应的仿函数，看看这个仿函数是怎么实现的，然后再回来继续看后续的逻辑，这样是非常不方便的。因此，为了简化代码复杂性以及提高代码可读性，C++ 引入了 lambda 表达式。当然 lambda 表达式的应用场景有很多，不光只有这里的一种场景，还有其他非常方便的场景。</p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><h4 id="表达式语法"><a href="#表达式语法" class="headerlink" title="表达式语法"></a>表达式语法</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">语法格式: [capture-<span class="built_in">list</span>] (parameters) <span class="keyword">mutable</span> -&gt;<span class="keyword">return</span>-type &#123; statement &#125;;</span><br><span class="line"><span class="comment">// 中间三部分在某些情况下可以省略，即[]&#123;&#125;;</span></span><br></pre></td></tr></table></figure>
+
+<p>各部分说明：</p>
+<ul>
+<li><p>[capture-list]：<strong>捕捉列表</strong>，它可以捕捉当前作用域以及包含当前作用域的作用域中所有的变量，也就说，我们在当前行能够访问的变量都可以被捕捉到（除了全局变量以外），这些变量被捕捉到以后用来供后续的 lambda 表达式来使用。</p>
+</li>
+<li><p>(parameters)：<strong>参数列表</strong>，它与普通函数的参数列表是一致的，如果没有参数传递时，则可以省略。</p>
+</li>
+<li><p>mutable： <strong>取消常量性</strong>，默认情况下，lambda 表达式捕捉的变量类型是 const 类型，mutable 可以取消其常量性，并且使用 mutable 时，参数列表不能省略，即使参数为空。 </p>
+</li>
+<li><p>-&gt;return-type：<strong>返回值类型</strong>，它可以省略，编译器会自动推导返回值类型。</p>
+</li>
+<li><p>{ statement }：<strong>函数体</strong>。</p>
+</li>
+</ul>
+<p>捕捉方式说明：</p>
+<ul>
+<li>[var]：表示以值传递的方式捕捉特定变量 var。</li>
+<li>[=]：表示以值传递的方式捕捉所有能捕捉到的变量（包括this）。</li>
+<li>[&amp;var]：表示以引用传递的方式捕捉特定变量 var。</li>
+<li>[&amp;]：表示以引用传递的方式捕捉所有能捕捉到的变量（包括this）。</li>
+<li><strong>注意</strong>：对于同一个变量来说，不能以重复的类型再次进行捕捉，即[=, a]，[&amp;, &amp;a]等，也不能对同一个变量进行多次捕捉，即[a, &amp;a]等，但是对于同一个变量，这些情况是允许的，即[=, &amp;a]，[&amp;, a]等。 </li>
+</ul>
+<p><strong>例程：</strong>基本使用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 最简单的lambda表达式，无意义</span></span><br><span class="line">    []&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略返回值类型，没有调用</span></span><br><span class="line">    <span class="keyword">int</span> num1 = <span class="number">10</span>, num2 = <span class="number">20</span>;</span><br><span class="line">    [=]()&#123;<span class="keyword">return</span> num1 + num2;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 省略返回值类型和参数类型，没有调用</span></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>;</span><br><span class="line">    [=]&#123;<span class="keyword">return</span> a + b;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// lambda实现两数相乘</span></span><br><span class="line">    <span class="keyword">int</span> muti = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">auto</span> fun = [=, &amp;muti]() -&gt;<span class="keyword">int</span> &#123;<span class="keyword">return</span> muti = num1 * num2;&#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; fun() &lt;&lt; <span class="built_in">endl</span>;       <span class="comment">// 调用</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// lambda对传入的参数做处理</span></span><br><span class="line">    <span class="keyword">int</span> data = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">auto</span> fun1 = [data](<span class="keyword">int</span> n)<span class="keyword">mutable</span> -&gt;<span class="keyword">int</span> </span><br><span class="line">    &#123;</span><br><span class="line">        data += n;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; fun1(<span class="number">200</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// lambda对捕捉到的值进行修改</span></span><br><span class="line">    <span class="built_in">string</span> str = <span class="string">"hello"</span>;</span><br><span class="line">    <span class="keyword">auto</span> fun2 = [&amp;str]&#123;</span><br><span class="line">        str = <span class="string">"world"</span>;</span><br><span class="line">        <span class="keyword">return</span> str;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    fun2();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambda表达式的一些基本使用在上面的例程中已经可以看到了，它与仿函数一样都可以<strong>像函数一样</strong>去使用，其实它的应用场景与仿函数的应用场景也是类似的，只不过它相较于仿函数来说，它可以降低代码复杂性，提高代码可读性。比如：当需要使用时，直接就在使用行的上一行定义出来，然后在下一行直接使用即可，这样代码可读性较强，而不用像仿函数那样需要写出来一个类，然后使用对象去调用。</p>
+<p><strong>例程：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继续以 "商品" 为例子</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Goods gds[] = &#123; &#123; <span class="string">"苹果"</span>, <span class="number">2.1</span>, <span class="number">80</span>&#125;,  &#123;<span class="string">"菠萝"</span>, <span class="number">1.5</span>, <span class="number">120</span>&#125;, &#123;<span class="string">"橘子"</span>, <span class="number">1</span>, <span class="number">100</span>&#125; &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需求：价格比较</span></span><br><span class="line">    <span class="keyword">auto</span> fun = [](<span class="keyword">const</span> Goods&amp; gl, <span class="keyword">const</span> Goods&amp; gr)&#123;<span class="keyword">return</span> gl._price &lt;= gr._price;&#125;;</span><br><span class="line"> 	sort(gds, gds+<span class="keyword">sizeof</span>(gds) / <span class="keyword">sizeof</span>(gds[<span class="number">0</span>]), fun());</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 需求：销量比较</span></span><br><span class="line">    <span class="keyword">auto</span> fun1 = [](<span class="keyword">const</span> Goods&amp; gl, <span class="keyword">const</span> Goods&amp; gr)&#123;<span class="keyword">return</span> gl._sales &lt;= gr._sales;&#125;;</span><br><span class="line">    sort(gds, gds+<span class="keyword">sizeof</span>(gds) / <span class="keyword">sizeof</span>(gds[<span class="number">0</span>]), fun1());</span><br><span class="line">    </span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 以lambda表达式来实现，明显可读性更高</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="lambda表达式的实现原理"><a href="#lambda表达式的实现原理" class="headerlink" title="lambda表达式的实现原理"></a>lambda表达式的实现原理</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实际上，编译器对 lambda 表达式的处理方式，完全就是按照仿函数的方式去处理的，也就说：<strong>如果我们定义了 lambda 表达式，那么编译器会自动生成一个类，并且在该类中重载 operator() 函数。</strong></p>
+<p><strong>验证代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;typeinfo&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> add = [](<span class="keyword">int</span> a, <span class="keyword">int</span> b) -&gt;<span class="keyword">int</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="comment">// lambda表达式</span></span><br><span class="line">	<span class="keyword">int</span> sum = add(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查看类型</span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="keyword">typeid</span>(add).name() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="comment">// 输出结果: class &lt;lambda_50ae388710befce81d3ce456d286b99b&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 汇编代码</span></span><br><span class="line"><span class="comment">// lambda表达式</span></span><br><span class="line"><span class="keyword">int</span> sum = add(<span class="number">10</span>, <span class="number">20</span>);</span><br><span class="line"><span class="number">002</span>C561E  push        <span class="number">14</span>h  </span><br><span class="line"><span class="number">002</span>C5620  push        <span class="number">0</span>Ah  </span><br><span class="line"><span class="number">002</span>C5622  mov         ecx,<span class="number">2</span>D0323h  </span><br><span class="line"><span class="number">002</span>C5627  call        &lt;lambda_50ae388710befce81d3ce456d286b99b&gt;::<span class="keyword">operator</span>() (<span class="number">02</span>C3220h) </span><br><span class="line"><span class="number">002</span>C562C  mov         dword ptr [sum3],eax</span><br></pre></td></tr></table></figure>
+
+<h4 id="lambda表达式与仿函数的异同"><a href="#lambda表达式与仿函数的异同" class="headerlink" title="lambda表达式与仿函数的异同"></a>lambda表达式与仿函数的异同</h4><p><strong>相同点：</strong></p>
+<ul>
+<li>lambda表达式与仿函数一样，它们不能像函数指针那样相互赋值（不同类的对象之间不能相互赋值）。</li>
+</ul>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>lambda表达式可以赋值给相同类型的函数指针（编译器层面做了语法转化），而仿函数不行。</li>
+<li>lambda表达式的底层实现是依靠仿函数来实现的。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lambda表达式和仿函数的作用都是为了能够更好的去使用函数模板，它们两个的使用场景是非常相似的，只不过在相同的场景下，使用lambda表达式代码可读性较强一点。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="https://img-blog.csdnimg.cn/20190823203748400.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/09/22/动态绑定与静态绑定/" class="archive-article-date">
-  	<time datetime="2020-09-22T08:24:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/09/22/动态绑定与静态绑定/">动态绑定与静态绑定</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C++11</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/13/智能指针/" class="archive-article-date">
-  	<time datetime="2019-09-13T14:21:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/13/智能指针/">智能指针</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/10/04/lambda表达式/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/24/适配map和set容器/" class="archive-article-date">
-  	<time datetime="2019-08-24T11:23:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/09/26/数据报和字节流有什么不同？/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">数据报和字节流有什么不同？</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/24/适配map和set容器/">红黑树适配 set/map 容器</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入场景"><span class="toc-number">1.</span> <span class="toc-text">引入场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lambda-表达式"><span class="toc-number">2.</span> <span class="toc-text">lambda 表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#表达式语法"><span class="toc-number">2.0.1.</span> <span class="toc-text">表达式语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#应用场景"><span class="toc-number">2.0.2.</span> <span class="toc-text">应用场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式的实现原理"><span class="toc-number">2.0.3.</span> <span class="toc-text">lambda表达式的实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lambda表达式与仿函数的异同"><span class="toc-number">2.0.4.</span> <span class="toc-text">lambda表达式与仿函数的异同</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/24/组合与继承/" class="archive-article-date">
-  	<time datetime="2019-08-23T19:54:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-24</time>
-</a>
-        </div>
-    	 
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="lambda表达式" data-title="lambda表达式" data-url="http://yoursite.com/2020/10/04/lambda表达式/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/24/组合与继承/">组合与继承</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/重载重写重定义/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:33:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/重载重写重定义/">重载/重写/重定义，它们有什么不同？</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/整形提升/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:32:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/整形提升/">整形提升</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/虚函数与虚函数表/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:32:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/虚函数与虚函数表/">虚函数与虚函数表</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/派生类的默认成员函数/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:32:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/派生类的默认成员函数/">派生类的默认成员函数详解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/继承/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:31:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/继承/">继承</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/07/多态/" class="archive-article-date">
-  	<time datetime="2019-08-06T17:31:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/07/多态/">多态</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/tags/C/page/2/">2</a><a class="extend next" rel="next" href="/tags/C/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -583,9 +428,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
