@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Cpp11常用新特性 | Superao的博客</title>
+  <title>C++11初始化列表 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。">
+  <meta name="description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++11在原来C++98的基础了增加了很多新的东西，比如：初始化列表。在以前C++98版本中，C++程序员想要对一个变量或者对象初始化时需要思考三种初始化的方式（大括号，小括号，赋值符），有的可能需要使用大括号来赋初值，比如：数组，有的可能需要小括号来赋初值，比如：对象调用构造函数。这显然是非常麻烦的，因此，为了解决上述的问">
 <meta name="keywords" content="C++11">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Cpp11常用新特性">
-<meta property="og:url" content="http://yoursite.com/2019/09/28/Cpp11常用新特性/index.html">
+<meta property="og:title" content="C++11初始化列表">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/Cpp11初始化列表/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。">
+<meta property="og:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++11在原来C++98的基础了增加了很多新的东西，比如：初始化列表。在以前C++98版本中，C++程序员想要对一个变量或者对象初始化时需要思考三种初始化的方式（大括号，小括号，赋值符），有的可能需要使用大括号来赋初值，比如：数组，有的可能需要小括号来赋初值，比如：对象调用构造函数。这显然是非常麻烦的，因此，为了解决上述的问">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-03T03:06:55.000Z">
+<meta property="og:updated_time" content="2020-10-05T09:33:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cpp11常用新特性">
-<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。">
+<meta name="twitter:title" content="C++11初始化列表">
+<meta name="twitter:description" content="&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;C++11在原来C++98的基础了增加了很多新的东西，比如：初始化列表。在以前C++98版本中，C++程序员想要对一个变量或者对象初始化时需要思考三种初始化的方式（大括号，小括号，赋值符），有的可能需要使用大括号来赋初值，比如：数组，有的可能需要小括号来赋初值，比如：对象调用构造函数。这显然是非常麻烦的，因此，为了解决上述的问">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,19 +152,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Cpp11常用新特性" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Cpp11初始化列表" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Cpp11常用新特性
+      C++11初始化列表
     </h1>
   
 
         
-        <a href="/2019/09/28/Cpp11常用新特性/" class="archive-article-date">
+        <a href="/2019/09/28/Cpp11初始化列表/" class="archive-article-date">
   	<time datetime="2019-09-28T10:24:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-28</time>
 </a>
         
@@ -172,56 +172,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C++11 版本在原来 C++98 的基础上，增加了很多新的特性，有些特性在我们平时就已经使用过很多次了，但是有些新的特性我们没有使用过，并且新特性在一些小的地方提升了性能，大多数的新特性的增加就是为了我们更加方便的使用它，因此，我们学习一些新的特性，方便我们以后提高开发速度。</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C++11在原来C++98的基础了增加了很多新的东西，比如：初始化列表。在以前C++98版本中，C++程序员想要对一个变量或者对象初始化时需要思考三种初始化的方式（大括号，小括号，赋值符），有的可能需要使用大括号来赋初值，比如：数组，有的可能需要小括号来赋初值，比如：对象调用构造函数。这显然是非常麻烦的，因此，为了解决上述的问题，C++11中引入了一种 “统一的初始化方式” 来进行初始化，即大括号。下面我们来看看这种统一的初始化方式是怎么实现的。</p>
 <a id="more"></a>
-<h2 id="1-列表初始化"><a href="#1-列表初始化" class="headerlink" title="1.列表初始化"></a>1.列表初始化</h2><p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; C++98 中我们可以使用出初始化列表来初始化我们的数组，对于自定义类型我们是无法使用初始化列表来进行初始化的，因此在 C++11 中扩大了初始化列表的使用范围，这样我们 <strong>既可以用初始化列表来初始化我们的内置类型又可以来初始化我们的自定义类型。</strong> </p>
-<h6 id="初始化列表的版本支持"><a href="#初始化列表的版本支持" class="headerlink" title="初始化列表的版本支持"></a>初始化列表的版本支持</h6><table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">内置类型</th>
-<th align="center">自定义类型</th>
-<th align="center">标准容器</th>
-<th align="center">数组</th>
-<th align="center">动态数组</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">C++98</td>
-<td align="center">不可以</td>
-<td align="center">不可以</td>
-<td align="center">不可以</td>
-<td align="center"><strong>可以</strong></td>
-<td align="center">不可以</td>
-</tr>
-<tr>
-<td align="center">C++11</td>
-<td align="center">可以</td>
-<td align="center">可以</td>
-<td align="center">可以</td>
-<td align="center">可以</td>
-<td align="center">可以</td>
-</tr>
-</tbody></table>
-<p>数组，动态数组可以认为它是内置类型; 标准容器可以认为它是自定义类型，为了更加清楚的了解 C++11 的扩充范围，我们将其划分的更加细致，并且在 C++11 中使用初始化列表的时候可以不需要使用等号。</p>
-<h6 id="单个对象初始化列表的实现"><a href="#单个对象初始化列表的实现" class="headerlink" title="单个对象初始化列表的实现"></a>单个对象初始化列表的实现</h6><ul>
-<li>标准库中默认支持单个对象的初始化列表，<strong>它和单参数的类型强转原理是相同的，但是还是有点区别的</strong></li>
-</ul>
-<h6 id="多个对象初始化列表的实现"><a href="#多个对象初始化列表的实现" class="headerlink" title="多个对象初始化列表的实现"></a>多个对象初始化列表的实现</h6><ul>
-<li>内置类型，自定义非容器类: 编译器默认支持</li>
-<li>容器类: 实现 initializer_list 接口的构造函数(如下:)</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 模拟实现vector的初始化列表</span></span><br><span class="line">Vector(<span class="keyword">const</span> <span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt;&amp; <span class="built_in">list</span>)</span><br><span class="line">  :_start(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="built_in">list</span>.size()])</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; e : <span class="built_in">list</span>)</span><br><span class="line">  &#123;</span><br><span class="line">    _start[index++] = e;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initializer_list类中有三个成员，分别为 begin(), end(), size();</span></span><br><span class="line"><span class="comment">// begin(): 返回列表的第一个元素的地址</span></span><br><span class="line"><span class="comment">// end(): 返回列表的最后一个元素的下一个位置的地址</span></span><br><span class="line"><span class="comment">// size(): 返回列表的所有元素的个数</span></span><br></pre></td></tr></table></figure>
 
-<p>容器类的初始化列表的支持我们可以理解为先将我们需要初始化的数据放到一个容器类(initializer_list)中，然后我们利用它的 迭代器/范围for 将元素一个一个通过自己赋值给所需要的容器上，这样的话，我们就可以支持了容器的列表初始化了。<br><a href="https://github.com/superao/C-/blob/master/Cpp11.cpp" target="_blank" rel="noopener">初始化列表练习</a></p>
-<h2 id="2-类型推导"><a href="#2-类型推导" class="headerlink" title="2. 类型推导"></a>2. 类型推导</h2><ul>
-<li>编译时期类型推导(auto)，编译时期就可以确定类型。</li>
-<li>运行时期类型推导(decltype)，运行之后才可以确定类型，但是大大降低了程序的效率。</li>
+<h2 id="初始化列表（大括号）"><a href="#初始化列表（大括号）" class="headerlink" title="初始化列表（大括号）"></a>初始化列表（大括号）</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们在了解初始化列表是怎么实现的之前，我们先看看初始化列表是怎么用的，下面是初始化列表的常见使用方法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;complex&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">array</span>[] &#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">10</span> &#125;;	               <span class="comment">// 初始化普通数组</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vint&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span> &#125;;                 <span class="comment">// 初始化容器</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; vstr&#123; <span class="string">"hello"</span>, <span class="string">"world"</span>, <span class="string">"nihao!"</span> &#125;; <span class="comment">// 初始化容器</span></span><br><span class="line">	<span class="keyword">complex</span>&lt;<span class="keyword">double</span>&gt; com&#123; <span class="number">1.2</span>, <span class="number">3.4</span> &#125;;                   <span class="comment">// 初始化复数</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化后的结果(通过调试窗口观察): </span></span><br><span class="line"><span class="comment">// array[0]:1, array[1]:3, array[2]:5, 依次类推</span></span><br><span class="line"><span class="comment">// vint[0]:1, vint[1]:2, vint[2]:3, 依次类推</span></span><br><span class="line"><span class="comment">// vstr[0]:"hello", vstr[1]:"world", vstr[2]:"nihao!"</span></span><br><span class="line"><span class="comment">// com:1.2000000000000000+i*3.3999999999999999, 1.2为实部, 3.4为虚部</span></span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过上述的测试用例可以看出，同样是使用大括号来初始化对象，但是它们的效果并不是一致的，对于前三个来说，效果是一致的，而对于最后一个，它的效果与其他三个是不一致的。其实后面的原理是这样的，当编译器看到 {n1, n2, n3, …} 这一串列表时，它会自动生成一个 initializer_list<t>，这是C++11标准库新增的一个类，依靠这个类和编译器的底层支持两者共同的作用实现了初始化列表。下面我们先来看看 initializer_list 是个什么东西，然后回过头来看看为什么是这样的现象。</t></p>
+<h2 id="initializer-list"><a href="#initializer-list" class="headerlink" title="initializer_list"></a>initializer_list</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initializer_list 你可以将它理解为是某一个特定类型的数组，只不过这个数组中的每个元素是 const 类型，这其实就是 initializer_list 的底层实现，它的底层实现就是一个 array 数组来实现的，当然为了好理解你也可以将它理解为是：“一包东西”，即里面存放了很多类型一致的元素。</p>
+<p><strong>initializer list的部分源码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> _<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">class</span> <span class="title">initializer_list</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="keyword">typedef</span> _E 		value_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> _E&amp; 	reference;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> _E&amp; 	const_reference;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">size_t</span> 		size_type;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> _E* 	iterator;         </span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">const</span> _E* 	const_iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	iterator			_M_array;         <span class="comment">// 数组的起始指针</span></span><br><span class="line">	size_type			_M_len;           <span class="comment">// 数组的长度</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// The compiler can call a private constructor.   编译器可以调用此版本的构造函数</span></span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">initializer_list</span><span class="params">(const_iterator __a, size_type __l)</span></span></span><br><span class="line">		: _M_array(__a), _M_len(__l) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	<span class="function"><span class="keyword">constexpr</span> <span class="title">initializer_list</span><span class="params">()</span> <span class="keyword">noexcept</span>            <span class="comment">//public的构造函数版本</span></span></span><br><span class="line">		: _M_array(0), _M_len(0) &#123; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 其他相关成员函数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过上述标准库的源代码，证实了我们之前所说的结论，即 initializer_list 的底层实现就是借用 array 数组来完成的，但是需要注意一点的是 initializer_list 不能直接当作一个类去实例化对象，因为 initializer_list 只有两个构造函数，一个构造函数是私有化的，这个构造函数只有编译器遇到 { n1, n2, n3, … } 时，编译器会自己去调用私有的构造函数，而另一个构造函数虽然是公有的，但是它是无参构造函数，并且默认将指针置为 nullptr，实例化 出的对象没有意义。因此，对于 initializer_list 来说，它一般不能当作单独的类去实例化对象，它最常用的使用方式是：<strong>充当某些函数的参数，比如：构造函数等</strong>，这些函数借用 initializer_list 可以实现我们开篇所说的 “列表初始化”。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其实编译器对 {n1, n2, n3, …} 的处理方式不光只有一种（可以从刚开始使用时的例子看出），它的处理方式有两种，主要有以下两种：</p>
+<ul>
+<li>该对象或变量具有参数类型为 initializer_list 的构造函数。</li>
+<li>该对象或变量没有参数类型为 initializer_list 的构造函数。</li>
 </ul>
-<p>编译时期的类型推导的两点用途: 1.变量表达式求值的类型推导; 2.迭代器类型(迭代器类型太长，可以减少书写)<br>运行时期的类型推导的两点用途: 1.常量表达式求值的类型推导; 2.函数返回值类型的推导<br><a href="https://github.com/superao/C-/blob/master/type.cpp" target="_blank" rel="noopener">类型推导练习(借助typeinfo库进行测试)</a></p>
-<h2 id="3-委派构造函数"><a href="#3-委派构造函数" class="headerlink" title="3. 委派构造函数"></a>3. 委派构造函数</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在 C++98 中当我们对类进行不同需求的初始化的时候，利用不同的构造函数来帮助我们完成，但是这些重载的构造函数中，有大量的重复代码，因为它们初始化的内容是相同的，因此，为了解决这一问题，在 C++11 中，利用 <strong>“一个基准函数”</strong> 解决了这一问题。<br><strong>解决思路:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在构造函数中设置一个基准构造函数，专门用来初始化相似的部分，然后再重载不同需求的构造函数，让不同的构造函数来调用这个基准构造函数，初始化相同的部分，不同的部分自行进行初始化。 这个基准函数称之为 “目标构造函数”，调用它的构造函数称之为 “委派构造函数”。 <strong>注意：目标构造函数与委派构造函数不要相互调用，这样会导致循环压栈，导致栈溢出。</strong><br><a href="https://github.com/superao/C-/blob/master/%E5%A7%94%E6%B4%BE%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.cpp" target="_blank" rel="noopener">委派构造函数练习</a></p>
-<h2 id="4-右值引用"><a href="#4-右值引用" class="headerlink" title="4. 右值引用"></a>4. 右值引用</h2><p><a href>右值引用</a></p>
-<h2 id="5-lambda-表达式"><a href="#5-lambda-表达式" class="headerlink" title="5. lambda 表达式"></a>5. lambda 表达式</h2><p><a href>lambda 表达式</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于第一种来说，编译器在对象初始化时遇到 {n1, n2, n3, …} 时，它会自动生成一个 initializer_list<t> 对象，然后将它作为一个整体传递给相应的构造函数，然后构造函数接受后在进行相应的处理完成初始化。</t></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对于第二种来说，由于没有参数类型为 initializer_list 的构造函数，因此在传递的时候不能将它作为一整包传递过去，所以编译器在传递的时候需要将它拆分为一个个元素，然后将这一个个元素依次传递过去，如果 {n1, n2, n3, …} 中的元素个数与构造函数的参数个数不匹配将有可能发生编译错误。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面我们自己写一些类来验证一下我们上述所说的是否正确，具体代码如下：</p>
+<p><strong>例程：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现 initializer_list 构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Array</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Array(<span class="built_in">initializer_list</span>&lt;<span class="keyword">int</span>&gt; initlist)</span><br><span class="line">	&#123;</span><br><span class="line">		_size = initlist.size();</span><br><span class="line">		_array = <span class="keyword">new</span> <span class="keyword">int</span>[_size];</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span>&amp; e : initlist)</span><br><span class="line">		&#123;</span><br><span class="line">			_array[index++] = e;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; _size; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; _array[i] &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span>* _array;</span><br><span class="line">	<span class="keyword">int</span> _size;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不实现 initializer_list 构造函数</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	Test(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span><br><span class="line">	&#123;</span><br><span class="line">		_a = a;</span><br><span class="line">		_b = b;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; _a &lt;&lt; <span class="string">" : "</span> &lt;&lt; _b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">	<span class="keyword">int</span> _a;</span><br><span class="line">	<span class="keyword">int</span> _b;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Array arr&#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">3</span> &#125;;</span><br><span class="line">	arr.Print();              <span class="comment">// 1 2 5 10 1 3</span></span><br><span class="line"></span><br><span class="line">	Array arr1&#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> &#125;;</span><br><span class="line">	arr1.Print();             <span class="comment">// 1 3 5</span></span><br><span class="line">	<span class="comment">// 可初始化任意多个元素</span></span><br><span class="line"></span><br><span class="line">	Test test&#123; <span class="number">1</span>, <span class="number">2</span> &#125;;</span><br><span class="line">	test.Print();             <span class="comment">// 1 : 2</span></span><br><span class="line"></span><br><span class="line">	Test test1&#123; <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> &#125;;    <span class="comment">// 编译错误</span></span><br><span class="line">    Test test2&#123; <span class="number">1</span> &#125;;          <span class="comment">// 编译错误</span></span><br><span class="line">	<span class="comment">// 只能传递与构造函数参数相匹配的个数</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在我们回过头再去看看为什么同样是使用大括号初始化对象，前三者效果是一样的，而只有最后一个是不一样，现在我们就可以清晰的解释了，原因是：第一种类型是内置类型，编译器对内置类型的数组做了特殊处理，第二种类型是vector，在C++11版本中vector增加了参数类型为initializer_list的构造函数（在C++11版本中为很多容器，函数增加了参数类型为 initializer_list 的函数版本，可以说一次很大的变革），最后是由于complex中没有参数类型为 initializer_list 的构造函数，因此最后一种的效果与前三种是不同的。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最后，我们再对初始化列表来进行一个整体的简略总结。经过上述的说明，我们知道<strong>初始化列表的实现是依靠编译器的支持以及 initializer_list 类两个的共同作用实现的，而 initializer_list 类底层又是由 array 数组实现的。</strong>现在我们应该对C++11中的初始化列表有一个清晰的了解。</p>
 
       
 
@@ -317,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/28/Cpp11常用新特性/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/28/Cpp11初始化列表/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -369,7 +344,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-列表初始化"><span class="toc-number">1.</span> <span class="toc-text">1.列表初始化</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#初始化列表的版本支持"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">初始化列表的版本支持</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#单个对象初始化列表的实现"><span class="toc-number">1.0.0.0.2.</span> <span class="toc-text">单个对象初始化列表的实现</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#多个对象初始化列表的实现"><span class="toc-number">1.0.0.0.3.</span> <span class="toc-text">多个对象初始化列表的实现</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-类型推导"><span class="toc-number">2.</span> <span class="toc-text">2. 类型推导</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-委派构造函数"><span class="toc-number">3.</span> <span class="toc-text">3. 委派构造函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-右值引用"><span class="toc-number">4.</span> <span class="toc-text">4. 右值引用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-lambda-表达式"><span class="toc-number">5.</span> <span class="toc-text">5. lambda 表达式</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化列表（大括号）"><span class="toc-number">1.</span> <span class="toc-text">初始化列表（大括号）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#initializer-list"><span class="toc-number">2.</span> <span class="toc-text">initializer_list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -383,7 +358,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Cpp11常用新特性" data-title="Cpp11常用新特性" data-url="http://yoursite.com/2019/09/28/Cpp11常用新特性/"></div>
+	<div class="ds-thread" data-thread-key="Cpp11初始化列表" data-title="C++11初始化列表" data-url="http://yoursite.com/2019/09/28/Cpp11初始化列表/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -509,7 +484,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,7 +492,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
