@@ -7,20 +7,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>NAT网络地址转化技术 | Superao的博客</title>
+  <title>详解Tcp协议-快速打开 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="TCP快速打开（TCP Fast Open，TFO）是对TCP的一种简化握手过程的拓展，它的主要作用是为了提高两端点间连接的打开速度。简而言之，就是为了提高连接再次建立的速度。即在三次握手建立成功之后，如果由于某些原因导致客户端中断了，那么在下次连接重新建立的时候就不需要再从三次握手开始，而是直接向服务器发送客户端的数据并且在发送数据的时候携带上客户端的SYN请求信息以及客户端的cookie信息，">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NAT网络地址转化技术">
-<meta property="og:url" content="http://yoursite.com/2019/11/01/NAT网络地址转化技术/index.html">
+<meta property="og:title" content="详解Tcp协议-快速打开">
+<meta property="og:url" content="http://yoursite.com/2020/04/12/详解TCP协议-快速打开/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="TCP快速打开（TCP Fast Open，TFO）是对TCP的一种简化握手过程的拓展，它的主要作用是为了提高两端点间连接的打开速度。简而言之，就是为了提高连接再次建立的速度。即在三次握手建立成功之后，如果由于某些原因导致客户端中断了，那么在下次连接重新建立的时候就不需要再从三次握手开始，而是直接向服务器发送客户端的数据并且在发送数据的时候携带上客户端的SYN请求信息以及客户端的cookie信息，">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-11-02T03:18:45.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201110224330276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201110224335958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2020-11-10T14:46:21.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NAT网络地址转化技术">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="详解Tcp协议-快速打开">
+<meta name="twitter:description" content="TCP快速打开（TCP Fast Open，TFO）是对TCP的一种简化握手过程的拓展，它的主要作用是为了提高两端点间连接的打开速度。简而言之，就是为了提高连接再次建立的速度。即在三次握手建立成功之后，如果由于某些原因导致客户端中断了，那么在下次连接重新建立的时候就不需要再从三次握手开始，而是直接向服务器发送客户端的数据并且在发送数据的时候携带上客户端的SYN请求信息以及客户端的cookie信息，">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201110224330276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,27 +155,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-NAT网络地址转化技术" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解TCP协议-快速打开" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      NAT网络地址转化技术
+      详解Tcp协议-快速打开
     </h1>
   
 
         
-        <a href="/2019/11/01/NAT网络地址转化技术/" class="archive-article-date">
-  	<time datetime="2019-11-01T12:18:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+        <a href="/2020/04/12/详解TCP协议-快速打开/" class="archive-article-date">
+  	<time datetime="2020-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>TCP快速打开（TCP Fast Open，TFO）是对TCP的一种简化握手过程的拓展，它的主要作用是为了提高两端点间连接的打开速度。简而言之，就是为了提高连接再次建立的速度。即在三次握手建立成功之后，如果由于某些原因导致客户端中断了，那么在下次连接重新建立的时候就不需要再从三次握手开始，而是直接向服务器发送客户端的数据并且在发送数据的时候携带上客户端的SYN请求信息以及客户端的cookie信息，下面我们来详细的看一下TCP的快速打开是怎么工作的。</p>
+<a id="more"></a>
+
+<h2 id="TCP-Fast-Open-原理"><a href="#TCP-Fast-Open-原理" class="headerlink" title="TCP Fast Open 原理"></a>TCP Fast Open 原理</h2><p><strong>三次握手</strong></p>
+<p>在前面的文章中，我们详细的介绍了TCP的三次握手过程，现在我们再来看看开始了TCP Fast Open选项的三次握手过程是怎么样的，具体过程见下图：</p>
+<img src="https://img-blog.csdnimg.cn/20201110224330276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;">
+
+<p>开启Tcp快速打开后的三次握手请求过程：</p>
+<ol>
+<li>客户端发送SYN数据包，该数据包包含Fast Open选项，且该选项的Cookie为空，这表明客户端请求Fast Open Cookie。</li>
+<li>支持TCP Fast Open的服务器生成Cookie，并将其置于SYN-ACK数据包中的Fast Open选项中以发回客户端。</li>
+<li>客户端收到SYN-ACK后，缓存Fast Open选项中的Cookie，用于下次重新建立连接时使用。</li>
+</ol>
+<p><strong>重新建立连接</strong></p>
+<p>上述是开启了Tcp Fast Open选项的三次握手建立连接的过程，其中服务器向客户端发送了Cookie信息，下面我们来看看这个Cookie信息有什么作用：</p>
+<img src="https://img-blog.csdnimg.cn/20201110224335958.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center" style="zoom:80%;">
+
+<p>现在我们来看看为什么Tcp Fast Open可以在重新连接的时候比传统的连接建立更快，它重新建立建立的过程如下：</p>
+<ol>
+<li>客户端发送SYN数据包，该数据包包含应用层数据以及此前记录的Cookie信息。</li>
+<li>支持TCP Fast Open的服务器会对收到Cookie进行校验：如果Cookie有效，服务器将在SYN-ACK数据包中对SYN和应用层数据进行确认，服务器随后将应用层数据递送给相应的应用程序。如果Cookie检测无效，那么服务器将丢弃SYN数据包中包含的数据，并且其随后发出的SYN-ACK数据包将仅确认SYN的对应序列号。</li>
+<li>客户端将发送ACK确认服务器发回的SYN以及数据，但如果客户端在初始的SYN数据包中发送的数据未被确认，则客户端将重新发送数据。（简单来说就是Cookie验证失败，则进行正常的三次握手）</li>
+<li>此后连接已经重新建立，双方开始传输数据。</li>
+</ol>
+<p>注：服务器返回的Cookie信息是被加密并且有一定时间限制的，如果超出时间限制，则认为该Cookie无效。</p>
+<p>TFO之所以比普通的三次握手快就是因为它在初次发送SYN请求的时候时候就可以携带应用层数据，而普通的三次握手需要在连接建立完成之后才能发送应用层数据，因此TFO在连接重新建立的时候比普通的方式更加高效。</p>
+<h2 id="在-Linux-上开启TCP-Fast-Open"><a href="#在-Linux-上开启TCP-Fast-Open" class="headerlink" title="在 Linux 上开启TCP Fast Open"></a>在 Linux 上开启TCP Fast Open</h2><blockquote>
+<p>系统要求：Linux 3.7以上</p>
+<p>开启方法：在 /etc/sysctl.conf 中添加 net.ipv4.tcp_fastopen = 3 </p>
+<p>0：表示关闭</p>
+<p>1：表示作为客户端可以使用TFO</p>
+<p>2：表示作为服务器可以使用TFO</p>
+<p>3：表示无论作为客户端还是服务器都可以使用TFO</p>
+</blockquote>
+
       
 
       
@@ -206,6 +243,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -256,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/01/NAT网络地址转化技术/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/12/详解TCP协议-快速打开/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,18 +318,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/03/详解计算机之间如何实现数据的发送/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          详解计算机之间如何实现数据的发送
+          服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法
         
       </div>
     </a>
   
   
-    <a href="/2019/11/01/详解TCP协议/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">详解TCP协议</div>
+    <a href="/2020/04/05/详解TCP协议-关闭连接/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解Tcp协议-关闭连接</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -308,7 +356,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-Fast-Open-原理"><span class="toc-number">1.</span> <span class="toc-text">TCP Fast Open 原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在-Linux-上开启TCP-Fast-Open"><span class="toc-number">2.</span> <span class="toc-text">在 Linux 上开启TCP Fast Open</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -322,7 +370,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="NAT网络地址转化技术" data-title="NAT网络地址转化技术" data-url="http://yoursite.com/2019/11/01/NAT网络地址转化技术/"></div>
+	<div class="ds-thread" data-thread-key="详解TCP协议-快速打开" data-title="详解Tcp协议-快速打开" data-url="http://yoursite.com/2020/04/12/详解TCP协议-快速打开/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -432,11 +480,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,15 +504,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

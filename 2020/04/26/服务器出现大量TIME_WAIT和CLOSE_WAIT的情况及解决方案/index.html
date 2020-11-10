@@ -7,20 +7,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>详解IP协议 | Superao的博客</title>
+  <title>服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="服务器端出现大量的TIME_WAIT状态和CLOSE_WAIT状态的场景是比较常见的，因此本篇文章我们来简单的分析一下为什么服务器端会出现大量的TIME_WAIT状态和CLOSE_WAIT状态以及如何解决这些问题。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详解IP协议">
-<meta property="og:url" content="http://yoursite.com/2019/11/21/详解IP协议/index.html">
+<meta property="og:title" content="服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法">
+<meta property="og:url" content="http://yoursite.com/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="服务器端出现大量的TIME_WAIT状态和CLOSE_WAIT状态的场景是比较常见的，因此本篇文章我们来简单的分析一下为什么服务器端会出现大量的TIME_WAIT状态和CLOSE_WAIT状态以及如何解决这些问题。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-30T10:09:28.000Z">
+<meta property="og:updated_time" content="2020-10-18T08:29:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="详解IP协议">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法">
+<meta name="twitter:description" content="服务器端出现大量的TIME_WAIT状态和CLOSE_WAIT状态的场景是比较常见的，因此本篇文章我们来简单的分析一下为什么服务器端会出现大量的TIME_WAIT状态和CLOSE_WAIT状态以及如何解决这些问题。">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,27 +152,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-详解IP协议" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      详解IP协议
+      服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法
     </h1>
   
 
         
-        <a href="/2019/11/21/详解IP协议/" class="archive-article-date">
-  	<time datetime="2019-11-20T20:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
+        <a href="/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/" class="archive-article-date">
+  	<time datetime="2020-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>服务器端出现大量的TIME_WAIT状态和CLOSE_WAIT状态的场景是比较常见的，因此本篇文章我们来简单的分析一下为什么服务器端会出现大量的TIME_WAIT状态和CLOSE_WAIT状态以及如何解决这些问题。</p>
+<a id="more"></a>
+
+<h2 id="TIME-WAIT状态"><a href="#TIME-WAIT状态" class="headerlink" title="TIME_WAIT状态"></a>TIME_WAIT状态</h2><p><strong>产生大量TIME_WAIT状态的原因：</strong></p>
+<p>首先，我们从四次挥手的过程中可以得知，当主动关闭方接受到对方发来的FIN包时，此时它会从FIN_WAIT2状态转变为TIME_WAIT状态，这个状态的持续时间在RFC文档中规定为 2 分钟，那么说明主动关闭方的这个TIME_WAIT状态在 2 分钟之内是不能消失的。因此一般只有高并发的短连接服务器才会出现大量的TIME_WAIT状态，比如：典型的爬虫服务器，这种服务器虽然表面上称之为服务器，但是本质上它充当的就是一个”客户端“的角色。这种高并发的短连接服务器有一个特点就是：每次完成一个任务之后，它会主动的关闭该连接，然后去处理下一个任务，而每次主动关闭一个连接服务器就会出现一个TIME_WAIT状态，如果在短时间内，并发量比较大那么就会出现大量的TIME_WAIT状态，由于处于TIME_WAIT状态的端口不能立即被使用，那么将会导致这种服务器的端口资源很快会被耗尽，因为一台主机上的可用端口范围只有 1000 ~ 65535，因此处理大量的TIME_WAIT状态是非常必要的。</p>
+<p><strong>如何解决大量的TIME_WAIT状态：</strong></p>
+<p>解决TIME_WAIT状态的方法一般有两种形式，第一种形式就是使用setsockopt()函数来使得该端口可以进行复用，这种方法一般适用于绑定端口是已知的情况下。第二种就是修改TCP的配置文件，这种方式适用于绑定端口是未知的（系统会自动绑定某个端口）的情况下。修改内容如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysctl.conf增加如下内容:</span><br><span class="line"><span class="comment">// 表示是否允许将TIME-WAIT sockets重新用于新的TCP连接，默认为0，表示关闭。</span></span><br><span class="line">net.ipv4.tcp_tw_reuse = <span class="number">1</span> </span><br><span class="line"><span class="comment">// 表示是否开启TCP连接中TIME-WAIT sockets的快速回收，默认为0，表示关闭。 </span></span><br><span class="line">net.ipv4.tcp_tw_recycle = <span class="number">1</span></span><br><span class="line"><span class="comment">// 表示如果套接字由本端要求关闭，这个参数决定了它保持在FIN-WAIT-2状态的时间。</span></span><br><span class="line">net.ipv4.tcp_fin_timeout = <span class="number">30</span> </span><br><span class="line"><span class="comment">// 表示用于向外连接的端口范围，默认情况下为: 32768 ~ 60999，改为 1024 ~ 65000 提高并发数。</span></span><br><span class="line">net.ipv4.ip_local_port_range = <span class="number">1024</span> <span class="number">65000</span></span><br><span class="line"><span class="comment">// 表示系统同时保持TIME_WAIT套接字的最大数量。</span></span><br><span class="line">net.ipv4.tcp_max_tw_buckets = <span class="number">10000</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">// 重新加载该文件</span></span><br><span class="line">sysctl -p /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="CLOSE-WAIT状态"><a href="#CLOSE-WAIT状态" class="headerlink" title="CLOSE_WAIT状态"></a>CLOSE_WAIT状态</h2><p><strong>产生大量CLOSE_WAIT状态的原因：</strong></p>
+<p>同样的道理，我们依然可以从四次挥手的过程中可以得知，当被动关闭方接受到FIN包之后，被动关闭方的状态就会从ESTABLISHED状态转变为CLOSE_WAIT状态，如果此时被动关闭方一直不发送FIN包，那么它就会一直处于CLOSE_WAIT状态，这就是CLOSE_WAIT状态产生的原因。一般情况下，如果服务器端出现大量的CLOSE_WAIT状态那么说明服务器是一直没有调用close()函数来关闭该连接的，出现这种情况的原因一般是有两种的：第一种就是服务器处理逻辑有问题，导致最终没有调用到close()，这种情况下会出现大量的CLOSE_WAIT状态，而第二种就是由于客户端异常关闭了，但是服务器端没有进行对异常事件的捕获，而导致服务器端出现了大量的CLOSE_WAIT状态，<strong>总的来说，服务器端出现大量的CLOSE_WAIT状态的原因都是因为服务器的代码写的有问题。</strong></p>
+<p><strong>如何解决大量的CLOSE_WAIT状态：</strong></p>
+<p>如果是上述的第一种问题，那么就看看服务器的处理逻辑是哪里出现了问题。如果是上述的第二种问题，那么就需要为服务器增加一些处理异常断开的功能模块，对于处理这种异常断开一般有两种方式：第一种就是增加对EPOLLRDHUP事件的监听，如果该事件发生了，那么说明对方异常断开，此时就需要调用close()关闭该连接，这种方式不具有普遍性，因为有些系统并不一定会触发EPOLLRDHUP事件。第二种方式就是通过read返回值来进行判断，它具有普遍性，如果read返回值为 0，则表示对方正常关闭了，如果read返回值为  -1，并且 errno 不是EAGAIN和EINTR，则说明对方异常关闭了。值得一提的是在有些系统中，对方正常关闭和异常关闭read都会返回 0，其实这也是合理的，因为不管是正常关闭还是异常关闭，我们最后都需要调用close()函数来释放掉该连接。 </p>
+
       
 
       
@@ -206,6 +219,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -256,7 +280,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/21/详解IP协议/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,8 +304,8 @@
     </a>
   
   
-    <a href="/2019/11/11/IO多路转接之epoll/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">IO多路转接之epoll</div>
+    <a href="/2020/04/12/详解TCP协议-快速打开/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解Tcp协议-快速打开</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -308,7 +332,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TIME-WAIT状态"><span class="toc-number">1.</span> <span class="toc-text">TIME_WAIT状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLOSE-WAIT状态"><span class="toc-number">2.</span> <span class="toc-text">CLOSE_WAIT状态</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -322,7 +346,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="详解IP协议" data-title="详解IP协议" data-url="http://yoursite.com/2019/11/21/详解IP协议/"></div>
+	<div class="ds-thread" data-thread-key="服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案" data-title="服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法" data-url="http://yoursite.com/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -432,11 +456,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +468,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,15 +480,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

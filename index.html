@@ -449,89 +449,27 @@
 
 
   
-    <article id="post-详解IP协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/21/详解IP协议/">详解IP协议</a>
+      <a class="article-title" href="/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/">服务器出现大量TIME_WAIT和CLOSE_WAIT的原因及解决方法</a>
     </h1>
   
 
         
-        <a href="/2019/11/21/详解IP协议/" class="archive-article-date">
-  	<time datetime="2019-11-20T20:19:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-21</time>
+        <a href="/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/" class="archive-article-date">
+  	<time datetime="2020-04-25T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/21/详解IP协议/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-IO多路转接之epoll" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/11/IO多路转接之epoll/">IO多路转接之epoll</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/11/IO多路转接之epoll/" class="archive-article-date">
-  	<time datetime="2019-11-11T10:00:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; select 与 poll 多路转接模型在监控大量事件的时候有很多的缺点，当请求量过大时有很多的效率问题，因此，为了实现高并发的程序我们需要学习一种更加高效的多路转接模型，本篇文章我们总结 epoll 多路转接模型。</p>
+        <p>服务器端出现大量的TIME_WAIT状态和CLOSE_WAIT状态的场景是比较常见的，因此本篇文章我们来简单的分析一下为什么服务器端会出现大量的TIME_WAIT状态和CLOSE_WAIT状态以及如何解决这些问题。</p>
         
       
 
@@ -555,7 +493,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/11/IO多路转接之epoll/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/26/服务器出现大量TIME_WAIT和CLOSE_WAIT的情况及解决方案/">展开全文 >></a>
         </p>
       
 
@@ -585,27 +523,27 @@
 
 
   
-    <article id="post-IO多路转接之poll" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-详解TCP协议-快速打开" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/11/IO多路转接之poll/">IO多路转接之poll</a>
+      <a class="article-title" href="/2020/04/12/详解TCP协议-快速打开/">详解Tcp协议-快速打开</a>
     </h1>
   
 
         
-        <a href="/2019/11/11/IO多路转接之poll/" class="archive-article-date">
-  	<time datetime="2019-11-11T10:00:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
+        <a href="/2020/04/12/详解TCP协议-快速打开/" class="archive-article-date">
+  	<time datetime="2020-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 上篇文章总结了 select 的相关知识点，由于 select 有很多的缺点，比如：“事件数量有限制，效率会随着事件数量的上升而下降，事件每次都需要从用户态拷贝到内核态”等等这样的问题，所以我们又学习了 poll 多路转接模型，本篇文章主要总结 poll 多路转接模型。</p>
+        <p>TCP快速打开（TCP Fast Open，TFO）是对TCP的一种简化握手过程的拓展，它的主要作用是为了提高两端点间连接的打开速度。简而言之，就是为了提高连接再次建立的速度。即在三次握手建立成功之后，如果由于某些原因导致客户端中断了，那么在下次连接重新建立的时候就不需要再从三次握手开始，而是直接向服务器发送客户端的数据并且在发送数据的时候携带上客户端的SYN请求信息以及客户端的cookie信息，下面我们来详细的看一下TCP的快速打开是怎么工作的。</p>
         
       
 
@@ -629,7 +567,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/11/IO多路转接之poll/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/12/详解TCP协议-快速打开/">展开全文 >></a>
         </p>
       
 
@@ -659,27 +597,27 @@
 
 
   
-    <article id="post-IO多路转接之select" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-详解TCP协议-关闭连接" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/11/IO多路转接之select/">IO多路转接之select</a>
+      <a class="article-title" href="/2020/04/05/详解TCP协议-关闭连接/">详解Tcp协议-关闭连接</a>
     </h1>
   
 
         
-        <a href="/2019/11/11/IO多路转接之select/" class="archive-article-date">
-  	<time datetime="2019-11-11T09:59:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
+        <a href="/2020/04/05/详解TCP协议-关闭连接/" class="archive-article-date">
+  	<time datetime="2020-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学习完 select 多路转接模型之后，没有深刻的理解 select 多路转接模型的工作原理，本篇文章是为了更好的掌握和理解多路转接模型，从而能在代码中灵活应用。</p>
+        <p>前面我们简单介绍了TCP协议连接建立的过程，对于一个面向连接的协议来说，它既然有连接建立的过程，那么最后一定就会有关闭连接的过程，本篇文章我们来看看TCP协议关闭连接的过程。</p>
         
       
 
@@ -703,7 +641,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/11/IO多路转接之select/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/05/详解TCP协议-关闭连接/">展开全文 >></a>
         </p>
       
 
@@ -733,89 +671,27 @@
 
 
   
-    <article id="post-详解UDP协议" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-详解TCP协议-连接建立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/06/详解UDP协议/">详解UDP协议</a>
+      <a class="article-title" href="/2020/04/01/详解TCP协议-连接建立/">详解Tcp协议-连接建立</a>
     </h1>
   
 
         
-        <a href="/2019/11/06/详解UDP协议/" class="archive-article-date">
-  	<time datetime="2019-11-06T10:59:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-06</time>
+        <a href="/2020/04/01/详解TCP协议-连接建立/" class="archive-article-date">
+  	<time datetime="2020-03-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/06/详解UDP协议/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-DNS域名解析流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/DNS域名解析流程/">DNS域名解析流程</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/04/DNS域名解析流程/" class="archive-article-date">
-  	<time datetime="2019-11-04T15:44:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 通常情况下，当我们需要向某一个服务器请求资源的时候需要知道服务器的IP地址等相关信息，但是服务器太多想要记住它们的IP地址是非常困难的，因此这时候就引入了域名，我们可以借助某一个域名来访问服务器，从而非常方便的获取到某一个资源。本片文章我们来详细介绍域名以及域名的解析流程。</p>
+        <p>前面我们简单总结了TCP协议的头部信息，TCP功能的实现是离不开TCP各种各样的头部信息，总结完TCP头部信息之后，我们再来看看TCP的面向连接，TCP的面向连接为后续实现可靠传输，流量控制等一系列功能都提供了基石，本篇文章我们继续接着总结一下TCP面向连接的过程。</p>
         
       
 
@@ -839,7 +715,155 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/04/DNS域名解析流程/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/04/01/详解TCP协议-连接建立/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Cpp异常总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/21/Cpp异常总结/">C++异常体系总结</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/21/Cpp异常总结/" class="archive-article-date">
+  	<time datetime="2020-03-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在学习C++异常之前，我们在编码的过程中会遇到一件让人很头疼的问题，就是如何处理函数中的错误，一般情况下的处理方式就是采用if/else语句来返回不同的状态码来表示不同的错误，这种方法不但错误信息不够明确，而且对于有些导致程序退出的错误也是没有办法进行解决的。学习完异常我们可以使用异常来更好的处理某些错误信息，本篇文章我们来总结一下C++的异常知识。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">C++</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/21/Cpp异常总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-详解TCP协议-TCP头部结构" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/15/详解TCP协议-TCP头部结构/">详解Tcp协议-Tcp头部结构</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/15/详解TCP协议-TCP头部结构/" class="archive-article-date">
+  	<time datetime="2020-03-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>TCP协议是TCP/IP协议栈中位于传输层的一个典型协议，由于TCP协议更加的靠近应用层，因此明白TCP协议的工作原理对我们平时在应用层开发是有很大帮助的。本篇文章将先从TCP的报文结构开始谈TCP的工作原理。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/15/详解TCP协议-TCP头部结构/">展开全文 >></a>
         </p>
       
 
@@ -958,11 +982,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -970,11 +994,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -982,15 +1006,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

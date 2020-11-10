@@ -7,20 +7,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>详解TCP协议 | Superao的博客</title>
+  <title>详解Tcp协议-关闭连接 | Superao的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="技术改变世界，阅读塑造人生">
-<meta name="keywords" content="Cpp, 计算机基础, Liunx, 后台开发, 计算机网络, 操作系统, 数据库">
+  <meta name="description" content="前面我们简单介绍了TCP协议连接建立的过程，对于一个面向连接的协议来说，它既然有连接建立的过程，那么最后一定就会有关闭连接的过程，本篇文章我们来看看TCP协议关闭连接的过程。">
+<meta name="keywords" content="网络基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="详解TCP协议">
-<meta property="og:url" content="http://yoursite.com/2019/11/01/详解TCP协议/index.html">
+<meta property="og:title" content="详解Tcp协议-关闭连接">
+<meta property="og:url" content="http://yoursite.com/2020/04/05/详解TCP协议-关闭连接/index.html">
 <meta property="og:site_name" content="Superao的博客">
-<meta property="og:description" content="技术改变世界，阅读塑造人生">
+<meta property="og:description" content="前面我们简单介绍了TCP协议连接建立的过程，对于一个面向连接的协议来说，它既然有连接建立的过程，那么最后一定就会有关闭连接的过程，本篇文章我们来看看TCP协议关闭连接的过程。">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2019-10-30T10:08:28.000Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20201110224241546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/202011102242376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
+<meta property="og:updated_time" content="2020-11-10T14:43:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="详解TCP协议">
-<meta name="twitter:description" content="技术改变世界，阅读塑造人生">
+<meta name="twitter:title" content="详解Tcp协议-关闭连接">
+<meta name="twitter:description" content="前面我们简单介绍了TCP协议连接建立的过程，对于一个面向连接的协议来说，它既然有连接建立的过程，那么最后一定就会有关闭连接的过程，本篇文章我们来看看TCP协议关闭连接的过程。">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20201110224241546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center">
   
     <link rel="alternative" href="/atom.xml" title="Superao的博客" type="application/atom+xml">
   
@@ -152,27 +155,73 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-详解TCP协议" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-详解TCP协议-关闭连接" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      详解TCP协议
+      详解Tcp协议-关闭连接
     </h1>
   
 
         
-        <a href="/2019/11/01/详解TCP协议/" class="archive-article-date">
-  	<time datetime="2019-11-01T11:00:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-01</time>
+        <a href="/2020/04/05/详解TCP协议-关闭连接/" class="archive-article-date">
+  	<time datetime="2020-04-04T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>前面我们简单介绍了TCP协议连接建立的过程，对于一个面向连接的协议来说，它既然有连接建立的过程，那么最后一定就会有关闭连接的过程，本篇文章我们来看看TCP协议关闭连接的过程。</p>
+<a id="more"></a>
+
+<h2 id="关闭连接"><a href="#关闭连接" class="headerlink" title="关闭连接"></a>关闭连接</h2><p><strong>关闭连接的初步认识：</strong></p>
+<p>TCP协议一般在通信之前需要先建立连接，连接建立完成之后才能进行通信双方的数据交互，当通信双方数据交互完毕后需要关闭该连接，释放掉该连接所占有的系统资源，这是使用TCP协议的完整流程。前面我们说过了建立连接的过程，现在我们看看关闭连接的过程。我们继续以访问百度首页的例子来说，先访问百度首页访问完毕之后直接退出，我们看看我们都抓到了什么包：</p>
+<p><img src="https://img-blog.csdnimg.cn/20201110224241546.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt></p>
+<p>上述就是四次挥手的流程图，下面来简述一下四次挥手的流程：</p>
+<ol>
+<li>服务器向客户端发送一个ACK，FIN包，该包的ACK用来确认上一个客户端发送的数据包，该包的包序为 14918。这个包中还有一个标识位FIN，它用来表示服务器主动关闭该连接，这种主动发送FIN包的一方称为“主动关闭方”。</li>
+<li>客户端向服务器发送一个ACK包，用来确认服务器所发送的FIN包。</li>
+<li>客户端发送完ACK包之后，再向服务器发送一个FIN，ACK包，用来表示客户端向服务器请求关闭连接，这种被动发送FIN包的一方称为“被动发送方”。</li>
+<li>最后服务器向客户端发送一个ACK包，用来确认客户端所发送的FIN包。</li>
+</ol>
+<p>下面我们再来看看TCP四次挥手的状态转移过程：</p>
+<ol>
+<li>服务器主动发送FIN包，发送完毕之后，从ESTABLISHED状态进入到FIN_WAIT1状态。</li>
+<li>客户端接受到FIN包之后，从ESTABLISHED状态进入到CLOSE_WAIT状态，然后向服务器发送ACK包之后，进行等待等待客户端发送完数据之后发送FIN包进行关闭。</li>
+<li>客户端数据发送完毕之后，调用close() / shutdown()函数向服务器发送FIN包，FIN包发送完毕之后，客户端从CLOSE_WAIT状态进入到LAST_ACK状态。</li>
+<li>服务器接受到FIN包之后，从FIN_WAIT2进入到TIME_WAIT状态，处于TIME_WAIT状态的服务器等待两个MSL后自动进入到CLOSED状态。</li>
+<li>客户端接受到最后一个ACK之后，从LAST_ACK状态进入到CLOSED状态，此时四次挥手完毕，连接关闭完成。</li>
+</ol>
+<p>上述就是完整的四次挥手释放连接的过程，其中释放连接的目的就是为了通信双方能够释放掉该连接所占用的系统资源，如果一个连接使用完毕后长时间不释放，那么该连接会长时间占用着系统资源，这种情况在编写服务器程序的时候是绝对不允许的。</p>
+<p><strong>关闭连接的再思考：</strong></p>
+<p>关闭连接的过程为什么需要四次，不可以把中间的两步结合在一起发送吗?</p>
+<p>答案是绝对不可以将中间的两步结合在一起进行发送的。因为TCP是全双工的，所谓全双工指的就是：”在同一个时间段内，它是允许两个方向同时传输数据的（如下图）“，因此连接在关闭的时候也是需要被独立关闭的。</p>
+<img src="https://img-blog.csdnimg.cn/202011102242376.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzQxMTM2NQ==,size_16,color_FFFFFF,t_70#pic_center" alt="全双工通信" style="zoom:80%;">
+
+<p>服务器向客户端发送FIN包表示的是：它的数据已经发送完毕了，它不在继续发送数据了，因此它会关闭 2 号方向的数据流。此时客户端接受到FIN之后，发送ACK包给服务器，表示它自己不在 2 号数据流中读取数据了，但是此时客户端并不一定已经发送完自己想要发送给服务器的数据了，因此在发送的时候不能将FIN包和ACK包一起发送给服务器，只有当客户端真正的发送完自己的数据之后，才会发送FIN包给服务器，最后服务器向客户端进行一次回应。<strong>在关闭连接的过程中，如果只关闭了其中某一个方向上的数据流时，此时我们把这个状态称之为”半关闭状态“。</strong>一般在编程时，我们判断对方是否关闭的方法是：read系统调用是否返回 0。</p>
+<p>稍微再提一下这种半关闭程序，socket网络编程接口中可通过shutdown函数来提供对半关闭的支持，这种使用半关闭的应用程序非常少见。</p>
+<h2 id="TIME-WAIT状态"><a href="#TIME-WAIT状态" class="headerlink" title="TIME_WAIT状态"></a>TIME_WAIT状态</h2><p><strong>如何理解TIME_WAIT状态？</strong></p>
+<p>从上面的四次挥手流程图中可以看出来服务器发送ACK之后并没有立即进入到CLOSED状态，而是进入了TIME_WAIT状态，当服务器进入TIME_WAIT状态之后需要等待 2 个MSL（MSL：一个报文段的最大生存时间，一般情况下MSL为 1 分钟）的时间才能自动进入到CLOSED状态。为什么需要TIME_WAIT状态，它有什么作用吗？它主要有以下两种作用：</p>
+<ol>
+<li>为了可靠的终止TCP连接。</li>
+<li>为了保护主动关闭方的端口。</li>
+</ol>
+<p>第一点非常好理解，试想一下这样的场景：假如服务器最后发送的一个ACK丢失了，此时客户端由于没有收到最后一个ACK，它会重传最后一个FIN包，此时如果没有TIME_WAIT状态的话，那么服务器是无法收到这个重传的FIN包的，因为服务器已经处于关闭状态了，这样就会导致客户端并没有完整的关闭连接，所以TCP为了防止这种情况的发生就设置了TIME_WAIT状态，它的目的就是为了防止最后一个ACK包丢失的情况发生，如果有TIME_WAIT状态存在，那么即使丢失了最后一个ACK包，服务器依然会重传最后一个ACK包，因此设置TIME_WAIT状态的目的在一定程序上说是为了回复重传的FIN包，但是这不是最主要的原因，因为处于LAST_ACK状态的客户端在等待一段时间后，如果没有最后一次ACK，那么它会自动进行到CLOSED状态。其实本质上不要最后一个ACK包也是没有关系的，因为如果处于LAST_ACK状态，那么表明已经发送了FIN包，既然已经发送了FIN包，那么表明应用层已经调用close()等函数释放了系统资源，所以最后一个ACK包存在的意义只是为了保证断开连接的完整性。</p>
+<p>第二点也是比较好理解的，假设没有这个TIME_WAIT的状态，那么该端口有可能会被新的连接立即使用，但是由于网络传输是有延迟的，并且这个延迟的大小是不确定的，因此在这个新连接中就有可能收到属于原连接中的一些报文（迟到的报文），这显示是不合理的事情。因此TIME_WAIT状态的目的就是为了保护该端口，防止新的连接立即使用该端口。</p>
+<p><strong>如何避免TIME_WAIT所带来的影响？</strong></p>
+<p>当然，有时候我们希望该端口能立即被使用，比如：服务器重启。此时就不希望进行TIME_WAIT状态的时间等待，那么我们就可以通过setsockopt()函数来强制设置端口复用，设置之后就可以立即使用处于TIME_WAIT状态的端口。</p>
+<h2 id="CLOSE-WAIT状态"><a href="#CLOSE-WAIT状态" class="headerlink" title="CLOSE_WAIT状态"></a>CLOSE_WAIT状态</h2><p><strong>如何理解CLOSE_WAIT状态？</strong></p>
+<p>CLOSED_WAIT状态只会出现在被动关闭方，以上述的例子来说，客户端会出现CLOSED_WAIT状态。在正常情况下，CLOSED_WAIT出现的时间比较短暂，因为只有被动接受方接受到了FIN包之后才会立马从ESTABLISHED状态进入到CLOSED_WAIT状态，此时被动关闭方会迅速发送完自己缓冲区中的还没有发送完的数据，发送完毕之后，被动关闭方也会发送FIN包，此时状态从CLOSED_WAIT状态会立马变为LAST_ACK状态，处于LAST_ACK状态的被动关闭方，不管最后有没有接受到最后一个ACK都会最终变为CLOSED状态。如果站在应用层的角度来看上述过程就是：被动关闭方先接受到可读事件，然后进行正常数据读取的时候发现对方close()了，此时被动关闭方所处的状态就是CLOSE_WAIT状态，此时被动关闭方会迅速发送自己想要发送给对方的数据，发送完毕后调用close()，close()调用完毕后，整个过程就结束了。</p>
+<p><strong>大量CLOSE_WAIT状态的危害</strong></p>
+<p>在正常的情况下，CLOSE_WAIT状态不会带来什么危害，但是对于异常情况来说，CLOSE_WAIT状态会带来危害。我们试想一下这样的场景：假设客户端在通信的时候突然异常退出了，此时服务器如果没有编写处理异常事件的逻辑时就会出现问题。如果客户端异常退出了，此时服务器端会触发异常事件，但是由于服务器没有编写捕获和处理异常事件的逻辑，那么对于服务器来说就相当于没有事件发生一样，依然等待事件的发生。如果站在传输层来看这个过程的话，就是客户端发送FIN包之后，服务器接受到FIN包之后就没有后续了，此时服务器端会一直处于CLOSE_WAIT状态，由于CLOSE_WAIT状态不会自动进入到CLOSED状态，那么说明该连接会一直存在，相应的该连接所对应的资源也会一直存在，如果服务器端出现过多的CLOSE_WAIT状态的话，服务器的资源不一会就会被耗尽，导致宕机，因此我们平时在编写服务器程序的时候需要编写处理异常事件的逻辑，这样就可以避免这种情况的发生。</p>
+<p><strong>总的来说，TIME_WAIT状态对服务器的影响有限，LAST_WAIT对服务器的影响是可以避免的。</strong></p>
+<h2 id="写在末尾"><a href="#写在末尾" class="headerlink" title="写在末尾"></a>写在末尾</h2><p>为什么我们平时在抓包的过程中，抓到的都是某个标志位 + ACK标志位的报文却很少抓到某个单独标志位的报文，这是什么情况？比如：上述抓到的是FIN + ACK包，而不是单独的FIN包。</p>
+<p>首先RFC文档中明确规定了，除了第一个握手报文SYN除外，其它所有报文必须和ACK一起发送，这样做也是有它的道理的，<strong>因为TCP作为一个可靠传输协议，其可靠性就是依赖于收到对方的数据，ACK对方，这样对方才可以释放缓存的数据。由于TCP报文是在IP网络上传输，丢包是家常便饭，因此接收方要抓住一切的机会，把消息告诉给发送方，最方便的方式就是，任何我方发送的TCP报文，都要捎带着ACK状态位。</strong></p>
+
       
 
       
@@ -206,6 +255,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">网络基础</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -256,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/01/详解TCP协议/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/05/详解TCP协议-关闭连接/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -270,18 +330,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/01/NAT网络地址转化技术/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/12/详解TCP协议-快速打开/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          NAT网络地址转化技术
+          详解Tcp协议-快速打开
         
       </div>
     </a>
   
   
-    <a href="/2019/10/31/浏览器输入URL之后发生了什么？/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">浏览器输入URL之后发生了什么？</div>
+    <a href="/2020/04/01/详解TCP协议-连接建立/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解Tcp协议-连接建立</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -308,7 +368,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关闭连接"><span class="toc-number">1.</span> <span class="toc-text">关闭连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TIME-WAIT状态"><span class="toc-number">2.</span> <span class="toc-text">TIME_WAIT状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLOSE-WAIT状态"><span class="toc-number">3.</span> <span class="toc-text">CLOSE_WAIT状态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在末尾"><span class="toc-number">4.</span> <span class="toc-text">写在末尾</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -322,7 +382,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="详解TCP协议" data-title="详解TCP协议" data-url="http://yoursite.com/2019/11/01/详解TCP协议/"></div>
+	<div class="ds-thread" data-thread-key="详解TCP协议-关闭连接" data-title="详解Tcp协议-关闭连接" data-url="http://yoursite.com/2020/04/05/详解TCP协议-关闭连接/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -432,11 +492,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
+                <a href="javascript:void(0)" class="js-tag color4">C++</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">C++</a>
+                <a href="javascript:void(0)" class="js-tag color1">C++11</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -444,11 +504,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
+                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+                <a href="javascript:void(0)" class="js-tag color4">Markdown</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -456,15 +516,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存管理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
